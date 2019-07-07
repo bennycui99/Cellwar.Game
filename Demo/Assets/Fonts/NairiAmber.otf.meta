@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: a028243d1e47e22459b3f74a027d8e1f
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Nairi Amber
+  fontNames:
+  - Nairi Amber
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 775720a965029a249885d6d06b937bdb, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
