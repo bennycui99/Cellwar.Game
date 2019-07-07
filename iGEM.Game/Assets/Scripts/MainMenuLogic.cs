@@ -32,14 +32,12 @@ public class MainMenuLogic : MonoBehaviour {
     /// </summary>
     private void FlushUI() {
         foreach( Transform menu in transform.Find( "Menu" ) ) {
-            menu.gameObject.SetActive(false);
+            menu.gameObject.SetActive( false );
         }
     }
 
     private void SwitchTo( MenuStates states ) {
-        foreach( var child in transform ) {
-            transform.Find( "Menu/" + states.ToString() ).gameObject.SetActive( true );
-        }
+        transform.Find( "Menu/" + states.ToString() ).gameObject.SetActive( true );
     }
 
     void Switch( MenuStates state ) {
