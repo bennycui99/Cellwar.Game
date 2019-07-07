@@ -1,107 +1,92 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainMenuLogic : MonoBehaviour
-{
-    enum menustate
-    {
-        Main,
-        Stage,
+public class MainMenuLogic : MonoBehaviour {
+    enum MenuStates {
+        MainMenu,
+        StageSelect,
         Options,
     }
+
     [SerializeField]
-    GameObject BackButton;
+    GameObject m_BackButton;
     [SerializeField]
-    GameObject Mainmenu;
+    GameObject m_Mainmenu;
     [SerializeField]
-    GameObject StageSelect;
+    GameObject m_StageSelect;
     [SerializeField]
-    GameObject Options;
-    menustate state;
+    GameObject m_Options;
+
     // Start is called before the first frame update
-    void Start()
-    {
-        state = menustate.Main;
+    void Start() {
     }
-    void LoadStage(string stage)
-    {
-        Debug.Log("Try to load scene: " + stage);
-        SceneManager.LoadScene(stage);
-    }
-    void SwitchoutMainmenu(string target)
-    {
-        //Input an empty string to switch back to mainmenu
-        switch (target)
-        {
-            case "Main":
-                Debug.Log("Back to Main");
-                if (state == menustate.Options)
-                {
-                    Options.SetActive(false); 
-                }
-                else if (state == menustate.Stage)
-                {
-                    StageSelect.SetActive(false);
-                }
-                Mainmenu.SetActive(true);
-                BackButton.SetActive(false);
-                state = menustate.Main;
-                break;
-            case "Stage":
-                Mainmenu.SetActive(false);
-                StageSelect.SetActive(true);
-                BackButton.SetActive(true);
-                state = menustate.Stage;
-                break;
-            case "Options":
-                Mainmenu.SetActive(false);
-                Options.SetActive(true);
-                BackButton.SetActive(true);
-                state = menustate.Options;
-                break;
+
+    #region STATE_SWITCH
+
+    /// <summary>
+    /// inactive all children of Menu, but leave Menu active.
+    /// </summary>
+    private void FlushUI() {
+        foreach( Transform menu in transform.Find( "Menu" ) ) {
+            menu.gameObject.SetActive(false);
         }
     }
 
-    //OnClick Functions
-    public void OnStartClicked()
-    {
-        SwitchoutMainmenu("Stage");
+    private void SwitchTo( MenuStates states ) {
+        foreach( var child in transform ) {
+            transform.Find( "Menu/" + states.ToString() ).gameObject.SetActive( true );
+        }
     }
-    public void OnOptionClicked()
-    {
-        Debug.Log("Options clicked(unimplemented)");
-        SwitchoutMainmenu("Options");
+
+    void Switch( MenuStates state ) {
+        FlushUI();
+        SwitchTo( state );
     }
-    public void OnQuitClicked()
-    {
-        Debug.Log("Quit");
+
+    #endregion
+
+    #region STAGE
+    void LoadStage( string stage ) {
+        Debug.Log( "Try to load scene: " + stage );
+
+        SceneManager.LoadScene( stage );
+    }
+    #endregion
+
+    #region EVENTS
+    public void OnStartClicked() {
+        Switch( MenuStates.StageSelect );
+    }
+    public void OnOptionClicked() {
+        Debug.Log( "Options clicked(unimplemented)" );
+        Switch( MenuStates.Options );
+    }
+    public void OnQuitClicked() {
+        Debug.Log( "Quit" );
         Application.Quit();
     }
-    public void OnTutorialSelected()
-    {
-        Debug.Log("Tutorial Selected");
-        LoadStage("SampleScene");
+    public void OnTutorialSelected() {
+        Debug.Log( "Tutorial Selected" );
+        LoadStage( "SampleScene" );
     }
-    public void OnStage_1Selected()
-    {
-        Debug.Log("Stage_1 Selected");
-        LoadStage("DemoScene");
+    public void OnStage_1Selected() {
+        Debug.Log( "Stage_1 Selected" );
+        LoadStage( "DemoScene" );
     }
-    public void OnStage_2Selected()
-    {
-        Debug.Log("Stage_2 Selected");
+    public void OnStage_2Selected() {
+        Debug.Log( "Stage_2 Selected" );
         //SceneManager.LoadScene("DemoScene");
     }
-    public void OnStage_3Selected()
-    {
-        Debug.Log("Stage_3 Selected");
+    public void OnStage_3Selected() {
+        Debug.Log( "Stage_3 Selected" );
         //SceneManager.LoadScene("DemoScene");
     }
-    public void OnBackClicked()
-    {
-        SwitchoutMainmenu("Main");
+    public void OnBackClicked() {
+        Switch( MenuStates.MainMenu );
     }
+    #endregion
 }
