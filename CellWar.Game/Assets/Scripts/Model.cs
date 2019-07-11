@@ -81,8 +81,10 @@ namespace CellWar.Model.Skill {
         public enum Type { 
             Coding,     // 编辑基因
             Regulatory  // 调控基因
-        }
-        public enum CodingType{//似乎属于effect class
+        }/// <summary>
+         /// 似乎属于effect class
+         /// </summary>
+        public enum CodingType{
             ChangeStrainProperty,//改变strain的某个属性值
             ChangeGeneProperty,
             ChangeSubstance//减少block上的某个物质的量
