@@ -4,7 +4,7 @@ using CellWar.Model.Substance;
 using System;
 
 /// <summary>
-/// ��ŵ�ͼ��ص�Model
+/// 存放地图相关的Model
 /// </summary>
 namespace CellWar.Model.Map {
     public class Block {
@@ -14,22 +14,22 @@ namespace CellWar.Model.Map {
         }
         public Type BlockType { get; set; }
         /// <summary>
-        /// �˿�����
+        /// 人口上限
         /// </summary>
         public int Capacity { get; set; }
 
         /// <summary>
-        /// �����ڴ��ڵ�����ϸ��
+        /// 各自内存在的所有细菌
         /// </summary>
         public List<Substance.Strain> Strains { get; set; } = new List<Strain>();
 
         /// <summary>
-        /// ������Դ��
+        /// 公共资源库
         /// </summary>
         public List<Substance.Chemical> PublicChemicals { get; set; } = new List<Chemical>();
 
         /// <summary>
-        /// ��ȡ���˿���
+        /// 获取总人口数
         /// </summary>
         /// <returns></returns>
         public int GetTotalPopulation() {
@@ -41,7 +41,7 @@ namespace CellWar.Model.Map {
 }
 
 /// <summary>
-/// ������Model
+/// 玩家相关Model
 /// </summary>
 namespace CellWar.Model.Gamer {
     public class Player {
@@ -50,65 +50,65 @@ namespace CellWar.Model.Gamer {
 }
 
 /// <summary>
-/// �������
+/// 物质相关
 /// </summary>
 namespace CellWar.Model.Substance {
     /// <summary>
-    /// ��ϵ
+    /// 菌系
     /// </summary>
     public class Strain : ICloneable {
         /// <summary>
-        /// ����
-        /// ��Ϸ��ʼ�ģ�ĳ���Դ��Ļ����顣��DOTA�л���Ӣ������������Ϊ���������ơ�
+        /// 种族
+        /// 游戏初始的，某种自带的基因组。与DOTA中基础英雄属性增长分为三类相类似。
         /// </summary>
         public class Species {
             public string Name { get; set; }
             /// <summary>
-            /// ������Я���Ļ�����
+            /// 该种族携带的基因组
             /// </summary>
             public List<RegulatoryGene> Genes { get; set; } = new List<RegulatoryGene>();
         }
 
         /// <summary>
-        /// ���ػ���
-        /// �����κ����飬ֻ����༭�����Ƿ�����
-        /// ������������Condition�й�
-        /// ���ػ��� ֧�� �������
+        /// 调控基因
+        /// 不做任何事情，只负责编辑基因是否工作。
+        /// 触发的条件是Condition有关
+        /// 调控基因 支配 编码基因
         /// </summary>
         public class RegulatoryGene {
             public string Name { get; set; }
             public int Length { get; set; }
             /// <summary>
-            /// ��������
-            /// �����������ʴ�����������꣬�ſ��Դ���Ч����
+            /// 触发条件
+            /// 满足所有物质存在且数量达标，才可以触发效果。
             /// </summary>
             public List<Substance.Chemical> Conditions { get; set; } = new List<Chemical>();
             /// <summary>
-            /// �жϸ����е�chemicals�Ƿ���conditions�ĸ�����������һ��������������chemical��Count��С��condition�е�Count
+            /// 判断格子中的chemicals是否是conditions的父集，且满足一定条件：格子中chemical的Count不小于condition中的Count
             /// </summary>
             /// <param name="chemicalsInBlock"></param>
             /// <returns></returns>
             public virtual bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) { return default; }
 
             /// <summary>
-            /// ���ػ���֧��ı������
+            /// 调控基因支配的编码基因
             /// </summary>
             public List<CodingGene> CodingGenes { get; set; } = new List<CodingGene>();
             #region PRIVATE
             /// <summary>
-            /// �ж��Ƿ�������������
+            /// 判断是否满足所有条件
             /// </summary>
             /// <param name="chemicalsInBlock"></param>
             /// <returns></returns>
             protected bool isMeetAllCondition( List<Substance.Chemical> chemicalsInBlock ) {
                 foreach( var cInCondition in Conditions ) {
-                    // Ѱ�Ҹ������Ƿ���������chemical
+                    // 寻找格子中是否含有条件的chemical
                     var result = chemicalsInBlock.Find( r => { return r.Name == cInCondition.Name; } );
-                    // ���������ֱ������ֱ�Ӳ�����
+                    // 如果不存在直接条件直接不成立
                     if( result == null ) {
                         return false;
                     }
-                    // ������ڣ��ж������Ƿ��꣬�粻���ֱ�Ӳ�����
+                    // 如果存在，判断数量是否达标，如不达标直接不成立
                     if( result.Count < cInCondition.Count ) {
                         return false;
                     }
@@ -117,33 +117,33 @@ namespace CellWar.Model.Substance {
             }
 
             /// <summary>
-            /// ����һ�������ʹ���
+            /// 仅有一个条件就触发
             /// </summary>
             /// <param name="chemicalsInBlock"></param>
             /// <returns></returns>
             protected bool isMeetAtLeastOneCondition( List<Substance.Chemical> chemicalsInBlock ) {
                 foreach( var cInCondition in Conditions ) {
-                    // Ѱ�Ҹ������Ƿ���������chemical
+                    // 寻找格子中是否含有条件的chemical
                     var result = chemicalsInBlock.Find( r => { return r.Name == cInCondition.Name; } );
-                    // ���������ֱ������ֱ�Ӳ�����
+                    // 如果不存在直接条件直接不成立
                     if( result == null ) {
                         return false;
                     }
-                    // ������ڣ��ж������Ƿ��꣬�粻���ֱ�Ӳ�����
+                    // 如果存在，判断数量是否达标，如不达标直接不成立
                     if( result.Count < cInCondition.Count ) {
                         return false;
                     }
                     return true;
                 }
-                return false; // ��Ӧ�õ�������
+                return false; // 不应该到达这里
             }
             #endregion
         }
 
         #region MEANINGFUL_REGULARTOYGENES
         /// <summary>
-        /// ��ȫ���ػ���
-        /// �������������������ɴ�������
+        /// 正全调控基因
+        /// 必须满足所有条件方可触发条件
         /// </summary>
         public class PositiveAllRegulatoryGene : RegulatoryGene {
             public override bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) {
@@ -151,8 +151,8 @@ namespace CellWar.Model.Substance {
             }
         }
         /// <summary>
-        /// ��ȫ���ػ���
-        /// ���������������ǹر���������
+        /// 负全调控基因
+        /// 当满足所有条件是关闭条件触发
         /// </summary>
         public class NegativeAllRegulartoryGene : RegulatoryGene {
             public override bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) {
@@ -161,7 +161,7 @@ namespace CellWar.Model.Substance {
         }
 
         /// <summary>
-        /// ������ػ���
+        /// 正或调控基因
         /// </summary>
         public class PositiveOrRegulartoryGene : RegulatoryGene {
             public override bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) {
@@ -170,7 +170,7 @@ namespace CellWar.Model.Substance {
         }
 
         /// <summary>
-        /// ������ػ���
+        /// 负或调控基因
         /// </summary>
         public class NegativeOrRegulartoryGene : RegulatoryGene {
             public override bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) {
@@ -184,39 +184,39 @@ namespace CellWar.Model.Substance {
             public int Length { get; set; }
 
             /// <summary>
-            /// �˿�ǰ��ϵ�� 
+            /// 人口前的系数 
             /// </summary>
             public int PopulationCoefficient { get; set; }
 
             /// <summary>
-            /// �ı�Ļ�ѧ����
-            /// Count�����ɸ�
+            /// 改变的化学物质
+            /// Count可正可负
             /// </summary>
             public Chemical ProductionChemicalInfo { get; set; }
 
             /// <summary>
-            /// ���ⲿ��������Դ
-            /// Count һ��Ϊ��
+            /// 从外部拿来的资源
+            /// Count 一定为正
             /// </summary>
             /// <seealso cref="CellWar.Model.Map.Block.PublicChemicals"/>
             public Chemical ImportChemicalInfo { get; set; }
 
             /// <summary>
-            /// �ؾ�
+            /// 截距
             /// </summary>
             public int Intercept { get; set; }
 
             /// <summary>
-            /// �״δ���ʱ�İٷֱ�
-            /// ���磺���˿����ﵽ�����˿����޵�50%ʱ����Χ���ӿ�ʼ������������Ϊ30%
-            /// ��FistSpreadMountRateΪ0.3
+            /// 首次传播时的百分比
+            /// 例如：当人口数达到格子人口上限的50%时对周围格子开始传播，传播量为30%
+            /// 则FistSpreadMountRate为0.3
             /// </summary>
             public float FirstSpreadMountRate { get; set; }
 
             /// <summary>
-            /// �״δ����ﵽ�˿����ߵİٷֱ�
-            /// ���磺���˿����ﵽ�����˿����޵�50%ʱ����Χ���ӿ�ʼ������������Ϊ30%
-            /// ��SpreadConditionRateΪ0.5
+            /// 首次传播达到人口上线的百分比
+            /// 例如：当人口数达到格子人口上限的50%时对周围格子开始传播，传播量为30%
+            /// 则SpreadConditionRate为0.5
             /// </summary>
             public float SpreadConditionRate { get; set; }
 
@@ -227,11 +227,11 @@ namespace CellWar.Model.Substance {
             /// <param name="currentBlock"></param>
             /// <param name="neigborBlocks"></param>
             public void Effect( ref Strain parentStrain, ref Map.Block currentBlock, ref List<Map.Block> neigborBlocks ) {
-                // �˿�*ϵ�� ��ֵӰ�����ʸı����Ĵ�С
+                // 人口*系数 的值影响物质改变量的大小
                 var delta = ( parentStrain.Population * PopulationCoefficient ) + Intercept;
 
-                // ----- �Ի�ѧ���ʲ���Ӱ�� -----
-                // �����Ƿ�����������
+                // ----- 对化学物质产生影响 -----
+                // 查找是否存在这个物质
                 var productChem = currentBlock.PublicChemicals.Find( che => { return che.Name == ProductionChemicalInfo.Name; } );
                 if( productChem == null ) {
                     productChem = new Chemical {
@@ -239,18 +239,18 @@ namespace CellWar.Model.Substance {
                         Count = 0,
                         SpreadRate = ProductionChemicalInfo.SpreadRate
                     };
-                    // ��block���ʼ�����Ӹı��chemical
+                    // 向block物质集中添加改变的chemical
                     currentBlock.PublicChemicals.Add( productChem );
                 }
                 productChem.Count += ( ProductionChemicalInfo.Count * delta );
-                // ----- �Ի�ѧ ���ʲ���Ӱ�� -----
+                // ----- 对化学 物质产生影响 -----
 
-                // ----- �Ը�strain����Ӱ�� -----
-                // --- ����˿� ---
+                // ----- 对父strain产生影响 -----
+                // --- 添加人口 ---
                 parentStrain.Population += delta;
 
-                // --- ���˽�л�ѧ����� ---
-                // ��Ѱ��block���Ƿ���ڸ��ֻ�ѧ����
+                // --- 添加私有化学库的量 ---
+                // 先寻找block内是否存在该种化学物质
                 var publicChemical = currentBlock.PublicChemicals.Find( chem => { return chem.Name == ImportChemicalInfo.Name; } );
                 if( publicChemical != null ) {
                     var privateChemical = parentStrain.PrivateChemicals.Find( chem => { return chem.Name == publicChemical.Name; } );
@@ -259,27 +259,27 @@ namespace CellWar.Model.Substance {
                             Count = 0,
                             Name = ImportChemicalInfo.Name,
                             SpreadRate = ImportChemicalInfo.SpreadRate
-                        } ); // ���û�У������
+                        } ); // 如果没有，先添加
                     }
                     if( publicChemical.Count >= privateChemical.Count ) {
                         privateChemical.Count += ImportChemicalInfo.Count;
                         publicChemical.Count -= ImportChemicalInfo.Count;
                     }
                 }
-                // ----- �Ը�strain����Ӱ�� -----
+                // ----- 对父strain产生影响 -----
 
-                // ----- ϸ����ɢ -----
-                // �Ƿ�������ɢ����
+                // ----- 细菌扩散 -----
+                // 是否满足扩散条件
                 if( parentStrain.Population * SpreadConditionRate >= parentStrain.Population ) {
                     var cloneStrain = ( Strain )parentStrain.Clone();
-                    // �趨��ʼ�˿���
+                    // 设定初始人口数
                     cloneStrain.Population = ( int )( parentStrain.Population * FirstSpreadMountRate );
-                    // Ϊ��Χ�ĸ�����Ӹ�ϸ��
+                    // 为周围的格子添加该细菌
                     foreach( var block in neigborBlocks ) {
                         block.Strains.Add( cloneStrain );
                     }
                 }
-                // ----- ϸ����ɢ -----
+                // ----- 细菌扩散 -----
             }
         }
 
@@ -288,19 +288,19 @@ namespace CellWar.Model.Substance {
         public int Population { get; set; }
 
         /// <summary>
-        /// ���ѡ����Դ��Ļ��ǿ���Ĭ�ϴ��ڵĻ���
+        /// 玩家选择的自带的或是库里默认存在的基因
         /// </summary>
         public List<RegulatoryGene> PlayerSelectedGenes { get; set; } = new List<RegulatoryGene>();
 
         /// <summary>
-        /// ��ȡ�Ļ�ѧ����
-        /// �� PublicChemicals
+        /// 夺取的化学物质
+        /// 从 PublicChemicals
         /// </summary>
         /// <seealso cref="CellWar.Model.Map.Block.PublicChemicals"/>
         public List<Substance.Chemical> PrivateChemicals { get; set; } = new List<Chemical>();
 
         /// <summary>
-        /// �����Դ��Ļ���
+        /// 种族自带的基因
         /// </summary>
         public Species BasicSpecies { get; set; }
 
@@ -317,13 +317,13 @@ namespace CellWar.Model.Substance {
 
 
     /// <summary>
-    /// ��ѧ����
+    /// 化学物质
     /// </summary>
     public class Chemical {
         public string Name { get; set; }
         public int Count { get; set; }
         /// <summary>
-        /// ������
+        /// 保留功能
         /// </summary>
         public int SpreadRate { get; set; }
     }
