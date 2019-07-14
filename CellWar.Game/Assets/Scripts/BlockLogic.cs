@@ -11,7 +11,7 @@ public class BlockLogic : MonoBehaviour
     void Start()
     {
         mBlock.BlockType = Block.Type.Normal;
-        mBlock.Strains.
+        
     }
 
     // Update is called once per frame
