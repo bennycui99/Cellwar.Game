@@ -7,6 +7,15 @@ public class BlockLogic : MonoBehaviour
     List<GameObject> neighbour = new List<GameObject>();
 
     Block mBlock = new Block();
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Block")
+        {
+            neighbour.Add(other.gameObject);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
