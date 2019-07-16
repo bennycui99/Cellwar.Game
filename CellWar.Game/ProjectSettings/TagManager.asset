@@ -6,7 +6,11 @@ TagManager:
   tags:
   - ground
   - Main
+<<<<<<< HEAD
   - HexBlock
+=======
+  - Block
+>>>>>>> 6e458cd3d1a3335b290b559bd3dbc441314ee5b6
   layers:
   - Default
   - TransparentFX
