@@ -20,13 +20,15 @@ namespace CellWar.Model.Map {
         public List<Block> Blocks { get; set; } = new List<Block>();
 
         /// <summary>
-        /// 于MapLogic Start中调用
+        /// 于MapLogic Awake中调用
+        /// 若置于Start中会导致block列表为空的问题
         /// </summary>
         /// <param name="mapTransform"></param>
         public void LoadAllBlockUnityObjectFromTransform( Transform mapTransform ) {
             foreach( Transform blockTransform in mapTransform ) {
                 Blocks.Add( new Block { UnityObject = blockTransform.gameObject } );
             }
+            Debug.Log( Blocks.Count );
         }
 
         public Block FindBlockFromGameObjectName( string gameObjectName ) {
@@ -84,7 +86,7 @@ namespace CellWar.Model.Map {
                 && other.gameObject.name != UnityObject.gameObject.name
                 && !NeighborBlocks.Exists( hb => { return hb.UnityObject.name == other.gameObject.name; } ) ) {
                 NeighborBlocks.Add( map.FindBlockFromGameObjectName( other.gameObject.name ) );
-                // Debug.Log( other.name + " Added " + "to " + this.gameObject.name );
+                Debug.Log( other.name + " Added " + "to " + UnityObject.gameObject.name );
             }
         }
     }

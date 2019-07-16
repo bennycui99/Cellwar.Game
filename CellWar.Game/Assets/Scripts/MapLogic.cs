@@ -17,9 +17,13 @@ public class MapLogic : MonoBehaviour {
 
     public static Map basicSceneMap { get; set; } = new Map();
 
+    private void Awake() {
+        basicSceneMap.LoadAllBlockUnityObjectFromTransform( transform );
+    }
+
     // Start is called before the first frame update
     void Start() {
-        basicSceneMap.LoadAllBlockUnityObjectFromTransform( transform );
+        
     }
 
     // Update is called once per frame
