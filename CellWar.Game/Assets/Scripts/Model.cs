@@ -1,22 +1,63 @@
-﻿using System.Linq;
+﻿///<summary>
+/// 游戏中核心对象的Model实现
+/// </summary>
+using System.Linq;
 using System.Collections.Generic;
 using CellWar.Model.Substance;
 using System;
+using UnityEngine;
 
 /// <summary>
 /// 存放地图相关的Model
 /// </summary>
 namespace CellWar.Model.Map {
+
+    public class Map {
+        /// <summary>
+        /// 地图中所有的格子
+        /// 应该在地图加载时给该列表赋值
+        /// </summary>
+        public List<Block> Blocks { get; set; } = new List<Block>();
+
+        /// <summary>
+        /// 于MapLogic Start中调用
+        /// </summary>
+        /// <param name="mapTransform"></param>
+        public void LoadAllBlockUnityObjectFromTransform( Transform mapTransform ) {
+            foreach( Transform blockTransform in mapTransform ) {
+                Blocks.Add( new Block { UnityObject = blockTransform.gameObject } );
+            }
+        }
+
+        public Block FindBlockFromGameObjectName( string gameObjectName ) {
+            return Blocks.Find( b => b.UnityObject.gameObject.name == gameObjectName );
+        }
+    }
+
     public class Block {
+
+        public const string Tag = "HexBlock";
+
+        /// <summary>
+        /// Unity 游戏对象
+        /// </summary>
+        public GameObject UnityObject;
+
         public enum Type {
             Normal,
             Empty
         }
+
         public Type BlockType { get; set; }
         /// <summary>
         /// 人口上限
         /// </summary>
         public int Capacity { get; set; }
+
+        /// <summary>
+        /// 相邻的格子集合
+        /// </summary>
+        public List<Block> NeighborBlocks { get; set; } = new List<Block>();
 
         /// <summary>
         /// 各自内存在的所有细菌
@@ -36,6 +77,15 @@ namespace CellWar.Model.Map {
             int totalPopulation = 0;
             foreach( var s in Strains ) { totalPopulation += s.Population; }
             return totalPopulation;
+        }
+
+        public void FetchNeighborBlocksFromMap_OnTriggerEnter( Collider other, Map map ) {
+            if( other.gameObject.tag == Block.Tag
+                && other.gameObject.name != UnityObject.gameObject.name
+                && !NeighborBlocks.Exists( hb => { return hb.UnityObject.name == other.gameObject.name; } ) ) {
+                NeighborBlocks.Add( map.FindBlockFromGameObjectName( other.gameObject.name ) );
+                // Debug.Log( other.name + " Added " + "to " + this.gameObject.name );
+            }
         }
     }
 }
@@ -304,7 +354,7 @@ namespace CellWar.Model.Substance {
         /// </summary>
         public Species BasicSpecies { get; set; }
 
-        public Object Clone() {
+        public System.Object Clone() {
             return new Strain() {
                 Population = 0,
                 Name = this.Name,

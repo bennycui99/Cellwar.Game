@@ -2,21 +2,22 @@
 using CellWar.Model.Map;
 using System.Collections.Generic;
 
-public class BlockLogic : MonoBehaviour
-{
-    List<GameObject> neighbour = new List<GameObject>();
+public class BlockLogic : MonoBehaviour {
 
-    Block mBlock = new Block();
+    Block mHexBlock;
+
+    private void OnTriggerEnter( Collider other ) {
+        mHexBlock.FetchNeighborBlocksFromMap_OnTriggerEnter( other, MapLogic.basicSceneMap );
+    }
+
+
     // Start is called before the first frame update
-    void Start()
-    {
-        mBlock.BlockType = Block.Type.Normal;
-        
+    void Start() {
+        mHexBlock = MapLogic.basicSceneMap.FindBlockFromGameObjectName( gameObject.name );
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
+    void Update() {
+
     }
 }
