@@ -16,6 +16,10 @@ public class BlockLogic : MonoBehaviour {
         mHexBlock = MapLogic.basicSceneMap.FindBlockFromGameObjectName( gameObject.name );
     }
 
+    private void OnMouseDown() {
+        Debug.Log("Clicked" + gameObject.name);
+    }
+
     // Update is called once per frame
     void Update() {
 
