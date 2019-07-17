@@ -16,6 +16,9 @@ public class BlockLogic : MonoBehaviour {
         mHexBlock = MapLogic.basicSceneMap.FindBlockFromGameObjectName( gameObject.name );
     }
 
+    /// <summary>
+    /// 点击方块显示方块信息
+    /// </summary>
     private void OnMouseDown() {
         Debug.Log("Clicked" + gameObject.name);
     }
