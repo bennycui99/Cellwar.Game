@@ -4,6 +4,9 @@ This game is used in HumanPractices part in our iGEM project. After iGEM, we can
 
 See [TODO List](<https://github.com/bennycui99/Cellwar.Game/blob/master/TODO.md>) and fuck your tasks off! LOL
 
+## Where the hell we are?
+### 7.17
+![avatar](Progress/7.17.gif)
 
 
 ## C# Coding/Scripting Agreement
