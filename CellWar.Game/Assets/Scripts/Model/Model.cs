@@ -92,14 +92,6 @@ namespace CellWar.Model.Map {
     }
 }
 
-/// <summary>
-/// 玩家相关Model
-/// </summary>
-namespace CellWar.Model.Gamer {
-    public class Player {
-        public string Name { get; set; }
-    }
-}
 
 /// <summary>
 /// 物质相关

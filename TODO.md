@@ -8,7 +8,7 @@
 
 ## 7.17
 
-X - 实现将strain拖拽至block的ui与逻辑
+O - 实现将strain拖拽至block的ui与逻辑
 
 X - 修正摄像机移动僵硬的问题
 

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class cameraLogic : MonoBehaviour {
-    float cameraMove = CellWar.Game.Controller.Camera.MoveSpeed;
+public class U3D_CameraLogic : MonoBehaviour {
+    float cameraMove = CellWar.Model.Settings.Camera.MoveSpeed;
 
     // Update is called once per frame
     void Update() {

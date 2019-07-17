@@ -2,6 +2,8 @@
 Game for iGEM.
 This game is used in HumanPractices part in our iGEM project. After iGEM, we can polish this game and make it for other uses. Meanwhile, this game is about the war of cells.
 
+See [TODO List](<https://github.com/bennycui99/Cellwar.Game/blob/master/TODO.md>) and fuck your tasks off! LOL
+
 
 
 ## C# Coding/Scripting Agreement
@@ -17,6 +19,16 @@ namespace CellWar {
     }
 }
 ```
+
+or
+
+```c#
+namespace CellWar.Foo {
+    
+}
+```
+
+
 
 ### Class Members
 
