@@ -5,22 +5,22 @@ using UnityEngine;
 public class U3D_CameraLogic : MonoBehaviour {
     float cameraMove = CellWar.Model.Settings.Camera.MoveSpeed;
     [SerializeField]
-    float CameraXMax;
+    float CameraXMax = CellWar.Model.Settings.Camera.XMax;
 
     [SerializeField]
-    float CameraXMin;
+    float CameraXMin = CellWar.Model.Settings.Camera.XMin;
 
     [SerializeField]
-    float CameraYMax;
+    float CameraYMax = CellWar.Model.Settings.Camera.YMax;
 
     [SerializeField]
-    float CameraYMin;
+    float CameraYMin = CellWar.Model.Settings.Camera.YMin;
 
     [SerializeField]
-    float CameraZMax;
+    float CameraZMax = CellWar.Model.Settings.Camera.ZMax;
 
     [SerializeField]
-    float CameraZMin;
+    float CameraZMin = CellWar.Model.Settings.Camera.ZMin;
 
     // Update is called once per frame
     void Update() {
@@ -31,7 +31,7 @@ public class U3D_CameraLogic : MonoBehaviour {
         } else if( Input.mousePosition.x <= 10 && Camera.main.transform.position.x >= CameraXMin) {
             newPosition = new Vector3( Camera.main.transform.position.x - cameraMove, Camera.main.transform.position.y, Camera.main.transform.position.z );
         }
-        if( Input.mousePosition.y >= Screen.height - 10 && Camera.main.transform.position.z <= CameraYMax) {
+        if( Input.mousePosition.y >= Screen.height - 10 && Camera.main.transform.position.y <= CameraYMax) {
             newPosition = new Vector3( Camera.main.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z + cameraMove );
         } else if( Input.mousePosition.y <= 10 && Camera.main.transform.position.z >= CameraYMin) {
             newPosition = new Vector3( Camera.main.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z - cameraMove );

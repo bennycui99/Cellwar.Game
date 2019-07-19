@@ -81,6 +81,11 @@ namespace CellWar.Model.Map {
             return totalPopulation;
         }
 
+        /// <summary>
+        /// 通过碰撞器获取相邻的格子
+        /// </summary>
+        /// <param name="other">OnTriggerEnter参数</param>
+        /// <param name="map">地图实例，用于查询Block实例</param>
         public void FetchNeighborBlocksFromMap_OnTriggerEnter( Collider other, Map map ) {
             if( other.gameObject.tag == Block.Tag
                 && other.gameObject.name != UnityObject.gameObject.name
@@ -265,14 +270,22 @@ namespace CellWar.Model.Substance {
             public float SpreadConditionRate { get; set; }
 
             /// <summary>
-            /// 
+            /// 单独负责delta计算
             /// </summary>
-            /// <param name="parentStrain"></param>
-            /// <param name="currentBlock"></param>
-            /// <param name="neigborBlocks"></param>
-            public void Effect( ref Strain parentStrain, ref Map.Block currentBlock, ref List<Map.Block> neigborBlocks ) {
+            /// <returns></returns>
+            private int GetDelta( ref Strain parentStrain ) {
+                return ( parentStrain.Population * PopulationCoefficient ) + Intercept;
+            }
+
+            /// <summary>
+            /// 游戏核心函数
+            /// </summary>
+            /// <param name="parentStrain">该基因的父细菌</param>
+            /// <param name="currentBlock">父细菌所在的block</param>
+            public void Effect( ref Strain parentStrain, ref Map.Block currentBlock ) {
                 // 人口*系数 的值影响物质改变量的大小
-                var delta = ( parentStrain.Population * PopulationCoefficient ) + Intercept;
+                // 7.18 改动
+                var delta = GetDelta( ref parentStrain );
 
                 // ----- 对化学物质产生影响 -----
                 // 查找是否存在这个物质
@@ -319,7 +332,7 @@ namespace CellWar.Model.Substance {
                     // 设定初始人口数
                     cloneStrain.Population = ( int )( parentStrain.Population * FirstSpreadMountRate );
                     // 为周围的格子添加该细菌
-                    foreach( var block in neigborBlocks ) {
+                    foreach( var block in currentBlock.NeighborBlocks ) {
                         block.Strains.Add( cloneStrain );
                     }
                 }

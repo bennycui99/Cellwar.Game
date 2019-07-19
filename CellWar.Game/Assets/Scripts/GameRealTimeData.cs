@@ -14,6 +14,9 @@ namespace CellWar.GameData {
         /// </summary>
         public static Strain HoldingStrain = null;
 
+        /// <summary>
+        /// 当前鼠标下的block的MonoBehavior实例
+        /// </summary>
         public static U3D_BlockLogic FocusedBlock = null;
     }
 }
