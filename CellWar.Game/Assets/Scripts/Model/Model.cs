@@ -290,8 +290,10 @@ namespace CellWar.Model.Substance {
             public float SpreadConditionRate { get; set; }
 
             /// <summary>
-            /// 单独负责delta计算
+            /// 人口*系数 的值影响物质改变量的大小
+            /// 7.18 改动?
             /// </summary>
+            /// <param name="parentStrain"></param>
             /// <returns></returns>
             private float GetPopulationDelta( ref Strain parentStrain ) => ( parentStrain.Population * PopulationCoefficient ) + PopulationIntercept;
             private float GetProductionChemicalDelta( ref Strain parentStrain ) => ( parentStrain.Population * ProductionChemicalCoeffeicient ) + ProductionChemicalIntercept;
@@ -303,11 +305,6 @@ namespace CellWar.Model.Substance {
             /// <param name="parentStrain">该基因的父细菌</param>
             /// <param name="currentBlock">父细菌所在的block</param>
             public void Effect( ref Strain parentStrain, ref Map.Block currentBlock ) {
-                // 人口*系数 的值影响物质改变量的大小
-                // 7.18 改动?
-                // delta就是人口增量
-                var populationDelta = ;
-
                 var productionChemical = Local.FindChemicalByName( ProductionChemicalName );
                 // ----- 对化学物质产生影响 -----
                 // 查找是否存在这个物质
@@ -341,7 +338,7 @@ parentStrain.Population += ( int )GetPopulationDelta( ref parentStrain );
                             SpreadRate = importChemical.SpreadRate
                         } ); // 如果没有，先添加
                     }
-                    var importCount = populationDelta + ProductionChemicalCount;
+                    var importCount = ( int )GetPopulationDelta( ref parentStrain ) + ProductionChemicalCount;
                     if( publicChemical.Count >= privateChemical.Count ) {
 privateChemical.Count += ( int )GetImportChemicalDelta( ref parentStrain );
 publicChemical.Count -= ( int )GetImportChemicalDelta( ref parentStrain );
