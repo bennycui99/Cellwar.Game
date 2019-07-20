@@ -1,7 +1,6 @@
 ﻿///<summary>
 /// 游戏中核心对象的Model实现
 /// </summary>
-using System.Linq;
 using System.Collections.Generic;
 using CellWar.Model.Substance;
 using System;
@@ -119,15 +118,20 @@ namespace CellWar.Model.Substance {
             public List<RegulatoryGene> Genes { get; set; } = new List<RegulatoryGene>();
         }
 
+        public class Gene {
+            public string Name { get; set; }
+            public int Length { get; set; }
+            public string Description { get; set; }
+        }
+
         /// <summary>
         /// 调控基因
         /// 不做任何事情，只负责编辑基因是否工作。
         /// 触发的条件是Condition有关
         /// 调控基因 支配 编码基因
         /// </summary>
-        public class RegulatoryGene {
-            public string Name { get; set; }
-            public int Length { get; set; }
+        public class RegulatoryGene : Gene {
+
             /// <summary>
             /// 触发条件
             /// 满足所有物质存在且数量达标，才可以触发效果。
@@ -229,40 +233,47 @@ namespace CellWar.Model.Substance {
         }
         #endregion
 
-        public class CodingGene {
-            public string Name { get; set; }
-            public int Length { get; set; }
-
+        public class CodingGene : Gene {
+            #region PRODUCTION_CHEMICAL
             /// <summary>
-            /// 改变的化学物质
+            /// 改变的化学物质的名字
             /// </summary>
             public string ProductionChemicalName { get; set; }
-
             /// <summary>
+            /// 改变化学物质的量
             /// Count可正可负
             /// </summary>
             public int ProductionChemicalCount { get; set; }
+            public float ProductionChemicalCoeffeicient { get; set; }
+            public int ProductionChemicalIntercept { get; set; }
+            #endregion
 
+            #region IMPORT_CHEMICAL
             /// <summary>
-            /// 从外部拿来的资源
+            /// 从外部拿来的化学物质的名字
             /// </summary>
             /// <seealso cref="CellWar.Model.Map.Block.PublicChemicals"/>
             public string ImportChemicalName { get; set; }
-
             /// <summary>
-            /// Count 一定为正
+            /// 拿来化学物质的量
+            /// Count可正可负
             /// </summary>
             /// <seealso cref="CellWar.Model.Map.Block.PublicChemicals"/>
             public int ImportChemicalCount { get; set; }
+            public float ImportChemicalCoeffeicient { get; set; }
+            public int ImportChemicalIntercept { get; set; }
+            #endregion
 
+            #region POPULATION
             /// <summary>
             /// 人口前的系数 
             /// </summary>
             public float PopulationCoefficient { get; set; }
             /// <summary>
-            /// 截距
+            /// 人口截距
             /// </summary>
-            public int Intercept { get; set; }
+            public int PopulationIntercept { get; set; }
+            #endregion
 
             /// <summary>
             /// 首次传播时的百分比
@@ -282,9 +293,9 @@ namespace CellWar.Model.Substance {
             /// 单独负责delta计算
             /// </summary>
             /// <returns></returns>
-            private float GetDelta( ref Strain parentStrain ) {
-                return ( parentStrain.Population * PopulationCoefficient ) + Intercept;
-            }
+            private float GetPopulationDelta( ref Strain parentStrain ) => ( parentStrain.Population * PopulationCoefficient ) + PopulationIntercept;
+            private float GetProductionChemicalDelta( ref Strain parentStrain ) => ( parentStrain.Population * ProductionChemicalCoeffeicient ) + ProductionChemicalIntercept;
+            private float GetImportChemicalDelta( ref Strain parentStrain ) => ( parentStrain.Population * ImportChemicalCoeffeicient ) + ImportChemicalIntercept;
 
             /// <summary>
             /// 游戏核心函数
@@ -294,7 +305,8 @@ namespace CellWar.Model.Substance {
             public void Effect( ref Strain parentStrain, ref Map.Block currentBlock ) {
                 // 人口*系数 的值影响物质改变量的大小
                 // 7.18 改动?
-                var delta = (int)GetDelta( ref parentStrain );
+                // delta就是人口增量
+                var populationDelta = ;
 
                 var productionChemical = Local.FindChemicalByName( ProductionChemicalName );
                 // ----- 对化学物质产生影响 -----
@@ -309,12 +321,12 @@ namespace CellWar.Model.Substance {
                     // 向block物质集中添加改变的chemical
                     currentBlock.PublicChemicals.Add( productChem );
                 }
-                productChem.Count += ( ProductionChemicalCount * delta );
+productChem.Count += ( int )GetProductionChemicalDelta( ref parentStrain );
                 // ----- 对化学 物质产生影响 -----
 
                 // ----- 对父strain产生影响 -----
                 // --- 添加人口 ---
-                parentStrain.Population += delta;
+parentStrain.Population += ( int )GetPopulationDelta( ref parentStrain );
 
                 // --- 添加私有化学库的量 ---
                 // 先寻找block内是否存在该种化学物质
@@ -329,9 +341,10 @@ namespace CellWar.Model.Substance {
                             SpreadRate = importChemical.SpreadRate
                         } ); // 如果没有，先添加
                     }
+                    var importCount = populationDelta + ProductionChemicalCount;
                     if( publicChemical.Count >= privateChemical.Count ) {
-                        privateChemical.Count += ImportChemicalCount;
-                        publicChemical.Count  -= ImportChemicalCount;
+privateChemical.Count += ( int )GetImportChemicalDelta( ref parentStrain );
+publicChemical.Count -= ( int )GetImportChemicalDelta( ref parentStrain );
                     }
                 }
                 // ----- 对父strain产生影响 -----
@@ -340,8 +353,8 @@ namespace CellWar.Model.Substance {
                 // 是否满足扩散条件
                 if( parentStrain.Population * SpreadConditionRate >= parentStrain.Population ) {
                     var cloneStrain = ( Strain )parentStrain.Clone();
-                    // 设定初始人口数
-                    cloneStrain.Population = ( int )( parentStrain.Population * FirstSpreadMountRate );
+// 设定初始人口数
+cloneStrain.Population = ( int )( parentStrain.Population * FirstSpreadMountRate );
                     // 为周围的格子添加该细菌
                     foreach( var block in currentBlock.NeighborBlocks ) {
                         block.Strains.Add( cloneStrain );
