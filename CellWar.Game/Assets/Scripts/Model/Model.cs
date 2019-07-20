@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using CellWar.Model.Substance;
 using System;
 using UnityEngine;
+using CellWar.GameData;
 
 /// <summary>
 /// 存放地图相关的Model
@@ -233,23 +234,31 @@ namespace CellWar.Model.Substance {
             public int Length { get; set; }
 
             /// <summary>
-            /// 人口前的系数 
+            /// 改变的化学物质
             /// </summary>
-            public int PopulationCoefficient { get; set; }
+            public string ProductionChemicalName { get; set; }
 
             /// <summary>
-            /// 改变的化学物质
             /// Count可正可负
             /// </summary>
-            public Chemical ProductionChemicalInfo { get; set; }
+            public int ProductionChemicalCount { get; set; }
 
             /// <summary>
             /// 从外部拿来的资源
+            /// </summary>
+            /// <seealso cref="CellWar.Model.Map.Block.PublicChemicals"/>
+            public string ImportChemicalName { get; set; }
+
+            /// <summary>
             /// Count 一定为正
             /// </summary>
             /// <seealso cref="CellWar.Model.Map.Block.PublicChemicals"/>
-            public Chemical ImportChemicalInfo { get; set; }
+            public int ImportChemicalCount { get; set; }
 
+            /// <summary>
+            /// 人口前的系数 
+            /// </summary>
+            public float PopulationCoefficient { get; set; }
             /// <summary>
             /// 截距
             /// </summary>
@@ -273,7 +282,7 @@ namespace CellWar.Model.Substance {
             /// 单独负责delta计算
             /// </summary>
             /// <returns></returns>
-            private int GetDelta( ref Strain parentStrain ) {
+            private float GetDelta( ref Strain parentStrain ) {
                 return ( parentStrain.Population * PopulationCoefficient ) + Intercept;
             }
 
@@ -284,22 +293,23 @@ namespace CellWar.Model.Substance {
             /// <param name="currentBlock">父细菌所在的block</param>
             public void Effect( ref Strain parentStrain, ref Map.Block currentBlock ) {
                 // 人口*系数 的值影响物质改变量的大小
-                // 7.18 改动
-                var delta = GetDelta( ref parentStrain );
+                // 7.18 改动?
+                var delta = (int)GetDelta( ref parentStrain );
 
+                var productionChemical = Local.FindChemicalByName( ProductionChemicalName );
                 // ----- 对化学物质产生影响 -----
                 // 查找是否存在这个物质
-                var productChem = currentBlock.PublicChemicals.Find( che => { return che.Name == ProductionChemicalInfo.Name; } );
+                var productChem = currentBlock.PublicChemicals.Find( che => { return che.Name == ProductionChemicalName; } );
                 if( productChem == null ) {
                     productChem = new Chemical {
-                        Name = ProductionChemicalInfo.Name,
+                        Name = ProductionChemicalName,
                         Count = 0,
-                        SpreadRate = ProductionChemicalInfo.SpreadRate
+                        SpreadRate = productionChemical.SpreadRate
                     };
                     // 向block物质集中添加改变的chemical
                     currentBlock.PublicChemicals.Add( productChem );
                 }
-                productChem.Count += ( ProductionChemicalInfo.Count * delta );
+                productChem.Count += ( ProductionChemicalCount * delta );
                 // ----- 对化学 物质产生影响 -----
 
                 // ----- 对父strain产生影响 -----
@@ -308,19 +318,20 @@ namespace CellWar.Model.Substance {
 
                 // --- 添加私有化学库的量 ---
                 // 先寻找block内是否存在该种化学物质
-                var publicChemical = currentBlock.PublicChemicals.Find( chem => { return chem.Name == ImportChemicalInfo.Name; } );
+                var importChemical = Local.FindChemicalByName( ImportChemicalName );
+                var publicChemical = currentBlock.PublicChemicals.Find( chem => { return chem.Name == ImportChemicalName; } );
                 if( publicChemical != null ) {
                     var privateChemical = parentStrain.PrivateChemicals.Find( chem => { return chem.Name == publicChemical.Name; } );
                     if( privateChemical == null ) {
                         parentStrain.PrivateChemicals.Add( new Chemical {
                             Count = 0,
-                            Name = ImportChemicalInfo.Name,
-                            SpreadRate = ImportChemicalInfo.SpreadRate
+                            Name = ImportChemicalName,
+                            SpreadRate = importChemical.SpreadRate
                         } ); // 如果没有，先添加
                     }
                     if( publicChemical.Count >= privateChemical.Count ) {
-                        privateChemical.Count += ImportChemicalInfo.Count;
-                        publicChemical.Count -= ImportChemicalInfo.Count;
+                        privateChemical.Count += ImportChemicalCount;
+                        publicChemical.Count  -= ImportChemicalCount;
                     }
                 }
                 // ----- 对父strain产生影响 -----
@@ -378,6 +389,8 @@ namespace CellWar.Model.Substance {
     /// </summary>
     public class Chemical {
         public string Name { get; set; }
+        public string Description { get; set; }
+        public string Detail { get; set; }
         public int Count { get; set; }
         /// <summary>
         /// 保留功能

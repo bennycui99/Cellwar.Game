@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
+using System.IO;
 
 /// <summary>
 /// Utils
@@ -42,10 +43,19 @@ namespace CellWar.Utils {
         /// <summary>
         /// load file and get its text
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="jsonFilePath"></param>
         /// <returns></returns>
-        private static string getStringFromFile( string path ) { 
-            return ( Resources.Load( path ) as TextAsset ).text;
+        private static string getStringFromFile( string jsonFilePath ) {
+            string fullPath = Path.Combine( Application.dataPath, jsonFilePath );
+            if( !File.Exists( fullPath ) ) {
+                throw new FileNotFoundException( "File: [" + fullPath + "] Not Found." );
+            }
+
+            StreamReader sr = new StreamReader( fullPath );
+            if( sr == null ) {
+                throw new IOException( "File: [" + fullPath + "] Failed to Open." );
+            }
+            return sr.ReadToEnd();
         }
     }
 

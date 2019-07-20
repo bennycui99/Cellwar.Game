@@ -1,0 +1,58 @@
+[
+  {
+    "Name": "IPTG",
+    "Description": "乳糖类似物。诱导剂",
+    "Detailed": "",
+    "Count": "0",
+    "SpreadRate": "0"
+  },
+  {
+    "Name": "Glucose",
+    "Description": "葡萄糖",
+    "Detailed": "",
+    "Count": "0",
+    "SpreadRate": "0"
+  },
+  {
+    "Name": "ATP",
+    "Description": "能量货币",
+    "Detailed": "",
+    "Count": "0",
+    "SpreadRate": "0"
+  },
+  {
+    "Name": "GFP",
+    "Description": "绿色荧光蛋白",
+    "Detailed": "",
+    "Count": "0",
+    "SpreadRate": "0"
+  },
+  {
+    "Name": "lactose",
+    "Description": "乳糖",
+    "Detailed": "",
+    "Count": "0",
+    "SpreadRate": "0"
+  },
+  {
+    "Name": "Ampicillin",
+    "Description": "氨苄西林。抗生素",
+    "Detailed": "",
+    "Count": "0",
+    "SpreadRate": "0"
+  },
+  {
+    "Name": "AHL",
+    "Description": "高丝氨酸内酯。信号分子，用于群体感应",
+    "Detailed": "",
+    "Count": "0",
+    "SpreadRate": "0"
+  },
+  {
+    "Name": "AI-2",
+    "Description": "信号分子",
+    "Detailed": "",
+    "Count": "0",
+    "SpreadRate": "0"
+  }
+]
