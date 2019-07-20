@@ -348,7 +348,7 @@ publicChemical.Count -= ( int )GetImportChemicalDelta( ref parentStrain );
 
                 // ----- 细菌扩散 -----
                 // 是否满足扩散条件
-                if( parentStrain.Population * SpreadConditionRate >= parentStrain.Population ) {
+                if( parentStrain.Population * SpreadConditionRate >= currentBlock.Capacity ) {
                     var cloneStrain = ( Strain )parentStrain.Clone();
 // 设定初始人口数
 cloneStrain.Population = ( int )( parentStrain.Population * FirstSpreadMountRate );
