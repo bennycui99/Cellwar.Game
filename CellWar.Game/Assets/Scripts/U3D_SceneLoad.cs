@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class U3D_SceneLoad : MonoBehaviour {
     private void Awake() {
-        CellWar.GameData.Local.LoadAllCodingGenes();
-        CellWar.GameData.Local.LoadAllChemicals();
-        Debug.Log( CellWar.GameData.Local.AllCodingGenes );
-        Debug.Log( CellWar.GameData.Local.AllChemicals );
+        try {
+            CellWar.GameData.Local.LoadAllCodingGenes();
+            CellWar.GameData.Local.LoadAllChemicals();
+            Debug.Log( CellWar.GameData.Local.AllCodingGenes );
+            Debug.Log( CellWar.GameData.Local.AllChemicals );
+        } catch {
+            Debug.LogError("Local json load failed.");
+            throw;
+        }
     }
 
     // Start is called before the first frame update

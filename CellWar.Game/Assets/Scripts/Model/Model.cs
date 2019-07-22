@@ -97,6 +97,12 @@ namespace CellWar.Model.Map {
     }
 }
 
+namespace CellWar.Model.Json {
+    public class RegulartoryGeneJsonModel {
+        public string Name { get; set; }
+        public List<string> ConditionChemicalNames { get; set; } = new List<string>();
+    }
+}
 
 /// <summary>
 /// 物质相关
@@ -131,12 +137,12 @@ namespace CellWar.Model.Substance {
         /// 调控基因 支配 编码基因
         /// </summary>
         public class RegulatoryGene : Gene {
-
             /// <summary>
             /// 触发条件
             /// 满足所有物质存在且数量达标，才可以触发效果。
             /// </summary>
             public List<Substance.Chemical> Conditions { get; set; } = new List<Chemical>();
+
             /// <summary>
             /// 判断格子中的chemicals是否是conditions的父集，且满足一定条件：格子中chemical的Count不小于condition中的Count
             /// </summary>

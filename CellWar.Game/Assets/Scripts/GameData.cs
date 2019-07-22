@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using CellWar.Model.Substance;
+using CellWar.View;
 using UnityEngine;
 using static CellWar.Model.Substance.Strain;
 
