@@ -138,3 +138,9 @@ You should install [ppbash](<http://github.com/cyf-gh/ppbash>) first enable to u
 $ . open_scene.sh
 ```
 
+For powershell,
+
+```powershell
+PS >. open_scene.ps1
+```
+
