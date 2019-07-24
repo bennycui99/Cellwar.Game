@@ -9,6 +9,15 @@ See [TODO List](<https://github.com/bennycui99/Cellwar.Game/blob/master/TODO.md>
 ![avatar](Progress/7.17.gif)
 
 
+
+## About CellWar Json Files In GameData
+
+We use excel to edit raw data and for 2json, you can use [THIS SITE](<http://www.bejson.com/json/col2json/>)
+
+to convert the excel to json file.
+
+see **CellWar.Document/game_data.xlsx** file to make sense about the core game data of CW.
+
 ## C# Coding/Scripting Agreement
 
 ### Namespace
@@ -87,9 +96,23 @@ eg
 U3D_CameraLogic.cs
 ```
 
+All unity class should be put in namespace like
+
+```c#
+namespace CellWar.View {
+    class U3D_FooLogic : MonoBehavior {
+        ...
+    }
+}
+```
+
+
+
 #### Controller
 
 be left vacant for the time being.
+
+The controller behavior is integreted into the model so far.
 
 
 
