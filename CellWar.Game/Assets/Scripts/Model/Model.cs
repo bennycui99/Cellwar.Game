@@ -98,9 +98,16 @@ namespace CellWar.Model.Map {
 }
 
 namespace CellWar.Model.Json {
+    enum RegulartoryGeneType {
+        PA, NA, PO, NO
+    }
     public class RegulartoryGeneJsonModel {
         public string Name { get; set; }
-        public List<string> ConditionChemicalNames { get; set; } = new List<string>();
+        public string Type { get; set; }
+        public int Length { get; set; }
+        public string Chemical { get; set; }
+        public string Description { get; set; }
+        public int Count { get; set; }
     }
 }
 

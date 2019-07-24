@@ -7,6 +7,7 @@ public class U3D_SceneLoad : MonoBehaviour {
         try {
             CellWar.GameData.Local.LoadAllCodingGenes();
             CellWar.GameData.Local.LoadAllChemicals();
+            CellWar.GameData.Local.LoadAllRegulartoryGenes();
             Debug.Log( CellWar.GameData.Local.AllCodingGenes );
             Debug.Log( CellWar.GameData.Local.AllChemicals );
         } catch {

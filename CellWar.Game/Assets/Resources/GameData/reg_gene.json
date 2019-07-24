@@ -1,0 +1,7 @@
+[
+{"Name":"C1","Length":"0","Chemical":"Ampicillin","Count":"50","Type":"NA","Description":"假如Ampcilin抗生素数量大于50，基因关闭"},
+{"Name":"C2","Length":"0","Chemical":"lactose","Count":"100","Type":"PA","Description":"假如lactose抗生素数量大于100，基因打开"},
+{"Name":"C3","Length":"0","Chemical":"IPTG","Count":"100","Type":"PA","Description":"假如IPTG抗生素数量大于100，基因打开"},
+{"Name":"C4","Length":"0","Chemical":"","Count":"0","Type":"PA","Description":"默认打开"},
+{"Name":"RedLight","Length":"0","Chemical":"RedLight","Count":"1","Type":"NA","Description":"假如Ampcilin抗生素数量大于54，基因关闭"}
+]

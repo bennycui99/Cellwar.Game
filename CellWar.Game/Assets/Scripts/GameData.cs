@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using CellWar.Model.Json;
 using CellWar.Model.Substance;
+using CellWar.Utils.Object;
 using CellWar.View;
 using UnityEngine;
 using static CellWar.Model.Substance.Strain;
@@ -36,8 +39,47 @@ namespace CellWar.GameData {
             return AllChemicals;
         }
 
+        public static List<RegulatoryGene> LoadAllRegulartoryGenes() {
+            var allRegulatoryGeneJson = CellWar.Utils.JsonHelper.Json2Object_NT<List<RegulartoryGeneJsonModel>>( GetGameDataPath( "reg_gene.json" ) );
+            List<RegulatoryGene> regulatoryGenes = new List<RegulatoryGene>();
+            foreach( var geneJson in allRegulatoryGeneJson ) {
+                RegulatoryGene gene;
+                var c = ( RegulartoryGeneType )Enum.Parse( typeof( RegulartoryGeneType ), geneJson.Type );
+                switch( c ) {
+                    case RegulartoryGeneType.PA:
+                        gene = new PositiveAllRegulatoryGene();
+                        break;
+                    case RegulartoryGeneType.NA:
+                        gene = new NegativeAllRegulartoryGene();
+                        break;
+                    case RegulartoryGeneType.PO:
+                        gene = new PositiveOrRegulartoryGene();
+                        break;
+                    case RegulartoryGeneType.NO:
+                        gene = new NegativeOrRegulartoryGene();
+                        break;
+                    default:
+                        throw new Exception( "In LoadAllRegulartoryGenes. Type is Invalid." );
+                }
+
+                gene.Name = geneJson.Name;
+                gene.Description = geneJson.Description;
+                gene.Length = geneJson.Length;
+
+                var ch = ObjectHelper.Clone<Chemical>( Local.FindChemicalByName( geneJson.Chemical ) );
+                if( ch != null ) { 
+                    ch.Count = geneJson.Count;
+                    gene.Conditions.Add( ch );
+                }
+                regulatoryGenes.Add( gene );
+            }
+            AllRegulartoryGenes = regulatoryGenes;
+            return regulatoryGenes;
+        }
+
         public static Chemical FindChemicalByName( string chemicalName ) => AllChemicals.Find( c => { return c.Name == chemicalName; } );
 
+        public static List<RegulatoryGene> AllRegulartoryGenes { get; set; }
         public static List<Chemical> AllChemicals { get; set; }
 
         public static string GetGameDataPath( string fileName ) => "Resources/GameData/" + fileName;
