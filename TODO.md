@@ -29,3 +29,15 @@ O - 摄像机跑出地图边缘的问题
 
 例如：(private.物质A>20 and private.物质B=0）or （map.物质C>100）×负：满足(物质A>20 or 物质B=0）and （物质C>100）时为false（下游coding gene不工作），否则为true（下游coding gene工作）
 
+## 7.24
+
+## X-化学物质，基因的details
+
+## X-鼠标悬停，按下等等的颜色
+
+## X-skybox
+
+## X-地图和关卡
+
+## X-细菌设定
+
