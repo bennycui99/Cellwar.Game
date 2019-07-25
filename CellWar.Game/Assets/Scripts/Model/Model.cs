@@ -123,12 +123,16 @@ namespace CellWar.Model.Substance {
         /// 种族
         /// 游戏初始的，某种自带的基因组。与DOTA中基础英雄属性增长分为三类相类似。
         /// </summary>
-        public class Species {
+        public class Race {
             public string Name { get; set; }
+            /// <summary>
+            /// 基因长度上限
+            /// </summary>
+            public int MaxLength { get; set; }
             /// <summary>
             /// 该种族携带的基因组
             /// </summary>
-            public List<RegulatoryGene> Genes { get; set; } = new List<RegulatoryGene>();
+            public List<CodingGene> Genes { get; set; } = new List<CodingGene>();
         }
 
         public class Gene {
@@ -155,12 +159,7 @@ namespace CellWar.Model.Substance {
             /// </summary>
             /// <param name="chemicalsInBlock"></param>
             /// <returns></returns>
-            public virtual bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) { return default; }
-
-            /// <summary>
-            /// 调控基因支配的编码基因
-            /// </summary>
-            public List<CodingGene> CodingGenes { get; set; } = new List<CodingGene>();
+            public virtual bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) { return default; } 
             #region PRIVATE
             /// <summary>
             /// 判断是否满足所有条件
@@ -331,12 +330,12 @@ namespace CellWar.Model.Substance {
                     // 向block物质集中添加改变的chemical
                     currentBlock.PublicChemicals.Add( productChem );
                 }
-productChem.Count += ( int )GetProductionChemicalDelta( ref parentStrain );
+                productChem.Count += ( int )GetProductionChemicalDelta( ref parentStrain );
                 // ----- 对化学 物质产生影响 -----
 
                 // ----- 对父strain产生影响 -----
                 // --- 添加人口 ---
-parentStrain.Population += ( int )GetPopulationDelta( ref parentStrain );
+                parentStrain.Population += ( int )GetPopulationDelta( ref parentStrain );
 
                 // --- 添加私有化学库的量 ---
                 // 先寻找block内是否存在该种化学物质
@@ -353,8 +352,8 @@ parentStrain.Population += ( int )GetPopulationDelta( ref parentStrain );
                     }
                     var importCount = ( int )GetPopulationDelta( ref parentStrain ) + ProductionChemicalCount;
                     if( publicChemical.Count >= privateChemical.Count ) {
-privateChemical.Count += ( int )GetImportChemicalDelta( ref parentStrain );
-publicChemical.Count -= ( int )GetImportChemicalDelta( ref parentStrain );
+                        privateChemical.Count += ( int )GetImportChemicalDelta( ref parentStrain );
+                        publicChemical.Count -= ( int )GetImportChemicalDelta( ref parentStrain );
                     }
                 }
                 // ----- 对父strain产生影响 -----
@@ -363,8 +362,8 @@ publicChemical.Count -= ( int )GetImportChemicalDelta( ref parentStrain );
                 // 是否满足扩散条件
                 if( parentStrain.Population * SpreadConditionRate >= currentBlock.Capacity ) {
                     var cloneStrain = ( Strain )parentStrain.Clone();
-// 设定初始人口数
-cloneStrain.Population = ( int )( parentStrain.Population * FirstSpreadMountRate );
+                    // 设定初始人口数
+                    cloneStrain.Population = ( int )( parentStrain.Population * FirstSpreadMountRate );
                     // 为周围的格子添加该细菌
                     foreach( var block in currentBlock.NeighborBlocks ) {
                         block.Strains.Add( cloneStrain );
@@ -381,8 +380,9 @@ cloneStrain.Population = ( int )( parentStrain.Population * FirstSpreadMountRate
         /// <summary>
         /// 玩家选择的自带的或是库里默认存在的基因
         /// </summary>
-        public List<Gene> PlayerSelectedGenes { get; set; } = new List<Gene>();
+        public List<CodingGene> PlayerSelectedGenes { get; set; } = new List<CodingGene>();
 
+        public RegulatoryGene ConditionGene { get; set; } = new RegulatoryGene();
         /// <summary>
         /// 夺取的化学物质
         /// 从 PublicChemicals
@@ -393,7 +393,13 @@ cloneStrain.Population = ( int )( parentStrain.Population * FirstSpreadMountRate
         /// <summary>
         /// 种族自带的基因
         /// </summary>
-        public Species BasicSpecies { get; set; }
+        public Race BasicRace { get; set; }
+
+        public bool IsValid() {
+            int totalLength = 0;
+            PlayerSelectedGenes.ForEach( gene => { totalLength += gene.Length; } );
+            return totalLength < BasicRace.MaxLength;
+        }
 
         public System.Object Clone() {
             return new Strain() {
@@ -401,7 +407,7 @@ cloneStrain.Population = ( int )( parentStrain.Population * FirstSpreadMountRate
                 Name = this.Name,
                 PlayerSelectedGenes = this.PlayerSelectedGenes,
                 Owner = this.Owner,
-                BasicSpecies = this.BasicSpecies
+                BasicRace = this.BasicRace
             };
         }
     }

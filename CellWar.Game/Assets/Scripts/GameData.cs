@@ -45,23 +45,18 @@ namespace CellWar.GameData {
         }
 
         public static string GetCurrentBlockStrainDetailInfo() {
-            if( CellWar.GameData.Current.FocusedBlock == null ) {
+            if( FocusedBlock == null ) {
                 return "";
             }
-
-            var currentHexBlock = CellWar.GameData.Current.FocusedBlock.HexBlockModel;
+            var currentHexBlock = FocusedBlock.HexBlockModel;
             string showText = "";
-            bool isTriggered = false;
             foreach( var str in currentHexBlock.Strains ) {
                 showText += str.Name + "\n";
                 foreach( var gene in str.PlayerSelectedGenes ) {
                     showText += gene.Name + "\t";
-                    if( gene is RegulatoryGene ) {
-                        isTriggered = ( gene as RegulatoryGene ).IsTriggered( currentHexBlock.PublicChemicals );
-                    }
                 }
                 showText += "\n";
-                showText += isTriggered ? "Working" : "Sleeping";
+                showText += str.ConditionGene.IsTriggered( currentHexBlock.PublicChemicals ) ? "Working" : "Sleeping";
             }
             return showText;
         }

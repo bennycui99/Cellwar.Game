@@ -21,7 +21,7 @@ public class U3D_SceneLoad : MonoBehaviour {
         Mocks.MockStrainList.Add( Mocks.Strain2 );
         Mocks.MockStrainList.Add( Mocks.Strain3 );
         Mocks.Strain1.PlayerSelectedGenes.AddRange( Local.AllCodingGenes );
-        Mocks.Strain1.PlayerSelectedGenes.Add( Local.AllRegulartoryGenes[0] );
+        Mocks.Strain1.ConditionGene = ( Local.AllRegulartoryGenes[0] );
         Mocks.MockStrainList.Add( Mocks.Strain1 );
         Current.StrainList = Mocks.MockStrainList;
         #endregion
