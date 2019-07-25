@@ -47,7 +47,7 @@ namespace CellWar.Model.Map {
 
         public enum Type {
             Normal,
-            Empty
+            Unaccessable
         }
 
         public Type BlockType { get; set; }
@@ -381,7 +381,7 @@ cloneStrain.Population = ( int )( parentStrain.Population * FirstSpreadMountRate
         /// <summary>
         /// 玩家选择的自带的或是库里默认存在的基因
         /// </summary>
-        public List<RegulatoryGene> PlayerSelectedGenes { get; set; } = new List<RegulatoryGene>();
+        public List<Gene> PlayerSelectedGenes { get; set; } = new List<Gene>();
 
         /// <summary>
         /// 夺取的化学物质

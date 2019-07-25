@@ -19,6 +19,52 @@ namespace CellWar.GameData {
         /// </summary>
         public static Strain HoldingStrain = null;
 
+        public static List<Strain> StrainList = new List<Strain>();
+
+        public static string GetCurrentBlockDetailInfo() {
+            if( CellWar.GameData.Current.FocusedBlock == null ) {
+                return "";
+            }
+            var currentHexBlock = CellWar.GameData.Current.FocusedBlock.HexBlockModel;
+            string showText = "Condition: " + currentHexBlock.BlockType.ToString() + "\n\n";
+            showText += "Chemicals: \n";
+            if( currentHexBlock.PublicChemicals.Count == 0 ) {
+                showText += "Nothing so far.";
+            }
+            foreach( var chem in currentHexBlock.PublicChemicals ) {
+                showText += string.Format( "{0}: {1}\n", chem.Name, chem.Count.ToString() );
+            }
+            showText += "\n\nStrains: \n";
+            if( currentHexBlock.Strains.Count == 0 ) {
+                showText += "Nothing so far.";
+            }
+            foreach( var str in currentHexBlock.Strains ) {
+                showText += string.Format( "{0}: {1}\n", str.Name, str.Population.ToString() );
+            }
+            return showText;
+        }
+
+        public static string GetCurrentBlockStrainDetailInfo() {
+            if( CellWar.GameData.Current.FocusedBlock == null ) {
+                return "";
+            }
+
+            var currentHexBlock = CellWar.GameData.Current.FocusedBlock.HexBlockModel;
+            string showText = "";
+            bool isTriggered = false;
+            foreach( var str in currentHexBlock.Strains ) {
+                showText += str.Name + "\n";
+                foreach( var gene in str.PlayerSelectedGenes ) {
+                    showText += gene.Name + "\t";
+                    if( gene is RegulatoryGene ) {
+                        isTriggered = ( gene as RegulatoryGene ).IsTriggered( currentHexBlock.PublicChemicals );
+                    }
+                }
+                showText += "\n";
+                showText += isTriggered ? "Working" : "Sleeping";
+            }
+            return showText;
+        }
         /// <summary>
         /// 当前鼠标下的block的MonoBehavior实例
         /// </summary>

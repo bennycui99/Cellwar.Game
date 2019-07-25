@@ -30,6 +30,19 @@ namespace CellWar.View {
         /// </summary>
         private void OnMouseDown() {
             Debug.Log( "Clicked" + gameObject.name );
+            processSelectedStrain();
+        }
+        
+        public void processSelectedStrain() {
+            if( Current.FocusedBlock != null && Current.HoldingStrain != null ) {
+                Current.FocusedBlock.ChangeBlockColor( Color.yellow );
+                // 防止反复增加同一种细菌
+                if( !Current.FocusedBlock.HexBlockModel.Strains.Exists( m => m.Name == Current.HoldingStrain.Name ) ) {
+                    Current.FocusedBlock.HexBlockModel.Strains.Add( Current.HoldingStrain );
+                }
+                GameObject.Find(Current.HoldingStrain.Name).SetActive( false );
+                Current.HoldingStrain = null;
+            }
         }
 
         private void OnMouseEnter() {
