@@ -324,9 +324,9 @@ namespace CellWar.Model.Substance {
             /// </summary>
             /// <param name="parentStrain"></param>
             /// <returns></returns>
-            private float GetPopulationDelta( ref Strain parentStrain ) => ( parentStrain.Population * PopulationCoefficient ) + PopulationIntercept;
-            private float GetProductionChemicalDelta( ref Strain parentStrain ) => ( parentStrain.Population * ProductionChemicalCoeffeicient ) + ProductionChemicalIntercept;
-            private float GetImportChemicalDelta( ref Strain parentStrain ) => ( parentStrain.Population * ImportChemicalCoeffeicient ) + ImportChemicalIntercept;
+            private float GetPopulationDelta( ref Strain parentStrain ) => ( parentStrain.Population * PopulationCoefficient ) + PopulationIntercept;//此项值可为负，为负则是死亡
+            private float GetProductionChemicalDelta( ref Strain parentStrain ) => ( parentStrain.Population * ProductionChemicalCoeffeicient ) + ProductionChemicalIntercept;//此项值可为负，为负则是分解物质（与消耗不同）
+            private float GetImportChemicalDelta( ref Strain parentStrain ) => ( parentStrain.Population * ImportChemicalCoeffeicient ) + ImportChemicalIntercept;//此项值可为负，为负则为运出物质
 
             /// <summary>
             /// 游戏核心函数
@@ -363,6 +363,10 @@ namespace CellWar.Model.Substance {
                     currentBlock.PublicChemicals.Add( productChem );
                 }
                 productChem.Count += ( int )GetProductionChemicalDelta( ref parentStrain );
+                if (productChem.Count < 0)
+                {
+                    productChem.Count = 0;//消灭的物质不足时，不为负
+                }
                 // ----- 对化学 物质产生影响 -----
 
                 // ----- 对父strain产生影响 -----
@@ -373,26 +377,36 @@ namespace CellWar.Model.Substance {
                 // 先寻找block内是否存在该种化学物质
                 var importChemical = Local.FindChemicalByName( ImportChemicalName );
                 var publicChemical = currentBlock.PublicChemicals.Find( chem => { return chem.Name == ImportChemicalName; } );
-                if( publicChemical != null ) {
-                    var privateChemical = parentStrain.PrivateChemicals.Find( chem => { return chem.Name == publicChemical.Name; } );
-                    if( privateChemical == null ) {
-                        parentStrain.PrivateChemicals.Add( new Chemical {
-                            Count = 0,
-                            Name = ImportChemicalName,
-                            SpreadRate = importChemical.SpreadRate
-                        } ); // 如果没有，先添加
-                    }
-                    var importCount = ( int )GetPopulationDelta( ref parentStrain ) + ProductionChemicalCount;
-                    if( publicChemical.Count >= privateChemical.Count ) {
-                        privateChemical.Count += ( int )GetImportChemicalDelta( ref parentStrain );
-                        publicChemical.Count -= ( int )GetImportChemicalDelta( ref parentStrain );
-                    }
+                var privateChemical = parentStrain.PrivateChemicals.Find(chem => { return chem.Name == publicChemical.Name; });
+                if( privateChemical == null ) {
+                    parentStrain.PrivateChemicals.Add( new Chemical {
+                        Count = 0,
+                        Name = ImportChemicalName,
+                        SpreadRate = importChemical.SpreadRate
+                    } ); // 如果没有，先添加
+                }
+                if (publicChemical == null)
+                {
+                    currentBlock.PublicChemicals.Add(new Chemical
+                    {
+                        Count = 0,
+                        Name = ImportChemicalName,
+                        SpreadRate = importChemical.SpreadRate
+                    }); // 如果没有，先添加
+                }
+                var importCount = ( int )GetPopulationDelta( ref parentStrain ) + ProductionChemicalCount;//该项可为负
+
+                if( (publicChemical.Count+(int)GetImportChemicalDelta(ref parentStrain) >= 0 )//判断是否会变为0
+                && (publicChemical.Count - (int)GetImportChemicalDelta(ref parentStrain)>=0))
+                {
+                    privateChemical.Count += ( int )GetImportChemicalDelta( ref parentStrain );//去除从高到低运输的要求（符合实际）
+                    publicChemical.Count -= ( int )GetImportChemicalDelta( ref parentStrain );
                 }
                 // ----- 对父strain产生影响 -----
 
                 // ----- 细菌扩散 -----
                 // 是否满足扩散条件
-                if( parentStrain.Population * SpreadConditionRate >= currentBlock.Capacity ) {
+                if( parentStrain.Population  >= currentBlock.Capacity * SpreadConditionRate) {
                     var cloneStrain = ( Strain )parentStrain.Clone();
                     // 设定初始人口数
                     cloneStrain.Population = ( int )( parentStrain.Population * FirstSpreadMountRate );
