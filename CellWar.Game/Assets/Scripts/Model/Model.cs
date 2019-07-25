@@ -159,7 +159,7 @@ namespace CellWar.Model.Substance {
             /// </summary>
             /// <param name="chemicalsInBlock"></param>
             /// <returns></returns>
-            public virtual bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) { return default; } 
+            public virtual bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) { return default; }
             #region PRIVATE
             /// <summary>
             /// 判断是否满足所有条件
@@ -175,8 +175,14 @@ namespace CellWar.Model.Substance {
                         return false;
                     }
                     // 如果存在，判断数量是否达标，如不达标直接不成立
-                    if( result.Count < cInCondition.Count ) {
-                        return false;
+                    if( cInCondition.Count > 0 ) {
+                        if( result.Count < cInCondition.Count ) {
+                            return false;
+                        }
+                    } else if( cInCondition.Count < 0 ) {
+                        if( result.Count > -cInCondition.Count ) {
+                            return false;
+                        }
                     }
                 }
                 return true;
@@ -287,6 +293,17 @@ namespace CellWar.Model.Substance {
             public int PopulationIntercept { get; set; }
             #endregion
 
+            #region CONSUME
+
+            public string ConsumeChemicalName { get; set; }
+            public int ConsumeChemicalCount { get; set; }
+            public float ConsumeChemicalCoeffeicient { get; set; }
+            public int ConsumeChemicalIntercept { get; set; }
+            public bool IsConsumePublic { get; set; }
+
+            #endregion
+
+
             /// <summary>
             /// 首次传播时的百分比
             /// 例如：当人口数达到格子人口上限的50%时对周围格子开始传播，传播量为30%
@@ -317,6 +334,21 @@ namespace CellWar.Model.Substance {
             /// <param name="parentStrain">该基因的父细菌</param>
             /// <param name="currentBlock">父细菌所在的block</param>
             public void Effect( ref Strain parentStrain, ref Map.Block currentBlock ) {
+                // ----- 消耗 -----
+                // 若小号物质不存在，gene罢工
+                var consumeChemical = currentBlock.PublicChemicals.Find( chem => { return chem.Name == ConsumeChemicalName; } );
+                var chemicalToConsume = ( IsConsumePublic ? currentBlock.PublicChemicals : parentStrain.PrivateChemicals ).Find( chem => { return chem.Name == ConsumeChemicalName; } );
+                if( chemicalToConsume == null ) {
+                    return; // 根本不存在该物质，不工作
+                } else { 
+                    if( chemicalToConsume.Count >= ConsumeChemicalCount ) {
+                        chemicalToConsume.Count -= ConsumeChemicalCount;
+                    } else {
+                        return; // 需要消耗的量不足，不工作
+                    }
+                }
+                // ----- 消耗 -----
+
                 var productionChemical = Local.FindChemicalByName( ProductionChemicalName );
                 // ----- 对化学物质产生影响 -----
                 // 查找是否存在这个物质
