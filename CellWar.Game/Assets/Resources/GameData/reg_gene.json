@@ -1,7 +1,77 @@
 [
-{"Name":"C1","Length":"0","Chemical":"Ampicillin","Count":"50","Type":"NA","Description":"假如Ampcilin抗生素数量大于50，基因关闭"},
-{"Name":"C2","Length":"0","Chemical":"lactose","Count":"100","Type":"PA","Description":"假如lactose抗生素数量大于100，基因打开"},
-{"Name":"C3","Length":"0","Chemical":"IPTG","Count":"100","Type":"PA","Description":"假如IPTG抗生素数量大于100，基因打开"},
-{"Name":"C4","Length":"0","Chemical":"","Count":"0","Type":"PA","Description":"默认打开"},
-{"Name":"RedLight","Length":"0","Chemical":"RedLight","Count":"1","Type":"NA","Description":"假如Ampcilin抗生素数量大于54，基因关闭"}
+  {
+    "Name": "C1",
+    "Length": "180",
+    "Condition": [
+      {
+        "Chemical": "Ampicillin",
+        "Count": "100"
+      },
+      {
+        "Chemical": "Kana",
+        "Count": "100"
+      }
+    ],
+    "Type": "NO",
+    "Description": "受ampcillin抑制的开关"
+  },
+  {
+    "Name": "C2",
+    "Length": "237",
+    "Condition": [
+      {
+        "Chemical": "lactose",
+        "Count": "100"
+      },
+      {
+        "Chemical": "Kana",
+        "Count": "-100"
+      },
+      {
+        "Chemical": "Ampicillin",
+        "Count": "-99"
+      }
+    ],
+    "Type": "PA",
+    "Description": "受lactose激活的开关"
+  },
+  {
+    "Name": "C3",
+    "Length": "237",
+    "Condition": [
+      {
+        "Chemical": "lactose",
+        "Count": "100"
+      },
+      {
+        "Chemical": "Kana",
+        "Count": "-100"
+      },
+      {
+        "Chemical": "Ampicillin",
+        "Count": "-99"
+      }
+    ],
+    "Type": "PA",
+    "Description": "受IPTG激活的开关"
+  },
+  {
+    "Name": "C4",
+    "Length": "562",
+    "Condition": null,
+    "Type": "PositiveAllRegulatoryGene",
+    "Description": "永远开启的调控基因"
+  },
+  {
+    "Name": "RedLight1",
+    "Length": "234",
+    "Condition": [
+      {
+        "Chemical": "RedLight",
+        "Count": "100"
+      }
+    ],
+    "Type": "PA",
+    "Description": "受红光激活的开关"
+  }
 ]
