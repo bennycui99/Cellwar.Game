@@ -70,24 +70,55 @@ namespace CellWar.GameData {
     /// </summary>
     public static class Local {
 
+        /// <summary>
+        /// 加载所有的race
+        /// geneNameList的规范为 r1;c1;c2;r2;c3;r3;c4
+        /// reg后的cod会被自动归类到该r的支配基因中，读到下一个reg时停止
+        /// r1;c1;c2;r2;c3;r3;c4
+        /// 将会转化为
+        /// r1 - c1
+        ///      c2
+        ///      
+        /// r2 - c3
+        /// 
+        /// r3 - c4
+        /// </summary>
+        /// <returns></returns>
         public static List<Race> LoadAllRaces() {
-            var allRaceJson = CellWar.Utils.JsonHelper.Json2Object_NT<List<RaceJsonModel>>( GetGameDataPath("race.json") );
+            var allRaceJson = CellWar.Utils.JsonHelper.Json2Object_NT<List<RaceJsonModel>>( GetGameDataPath( "race.json" ) );
             AllRaces = new List<Race>();
             foreach( var raceJson in allRaceJson ) {
-                var geneNameList = raceJson.CodingGeneNames.Split(';');
-                List<CodingGene> genes = new List<CodingGene>();
+                if( raceJson.CodingGeneNames == "" ) continue;
+
+                var geneNameList = raceJson.CodingGeneNames.Split( ';' );
+                List<RegulatoryGene> regulatoryGenes = new List<RegulatoryGene>();
+
+                RegulatoryGene previousReg = null;
+
                 foreach( var geneName in geneNameList ) {
-                    var tgene = AllCodingGenes.Find( m => m.Name == geneName );
-                    if( tgene != null ) {
-                        genes.Add( tgene );
-                    } else {
-                        throw new InvalidOperationException( "No gene named: " + geneName + "\n you should call LoadAllRaces() after LoadAllCodingGenes");
+                    var regGene = AllRegulartoryGenes.Find( m => m.Name == geneName );
+                    // 首个名字必须为 reg gene
+                    if( regGene == null && previousReg == null ) {
+                        throw new InvalidOperationException( "Invalid GeneNames. you should input a reg gene at first of the string list"
+                            + "\n current gene name:" + geneName );
+                    } else if( regGene == null && previousReg != null ) {
+                        // 继续增加该reg下的支配cod 
+                        var codGene = AllCodingGenes.Find( m => m.Name == geneName );
+                        if( codGene != null ) {
+                            previousReg.DominatedGenes.Add( codGene );
+                        } else {
+                            throw new InvalidOperationException( "No gene named: " + geneName + "\n you should call LoadAllRaces() after LoadAllCodingGenes" );
+                        }
+                    } else if( regGene != null ) {
+                        // 开始添加下一个reg
+                        regulatoryGenes.Add( ObjectHelper.Clone( regGene, regGene.GetType() ) );
+                        previousReg = regGene;
                     }
                 }
                 AllRaces.Add( new Race {
                     Name = raceJson.Name,
                     MaxLength = raceJson.MaxLength,
-                    Genes = genes
+                    RegulatoryGenes = regulatoryGenes
                 } );
             }
             return AllRaces;
@@ -134,7 +165,7 @@ namespace CellWar.GameData {
 
                 foreach( var cc in geneJson.Condition ) {
                     var ch = ObjectHelper.Clone( FindChemicalByName( cc.Chemical ) );
-                    if( ch != null ) { 
+                    if( ch != null ) {
                         ch.Count = cc.Count;
                         gene.Conditions.Add( ch );
                     }

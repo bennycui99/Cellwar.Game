@@ -151,7 +151,7 @@ namespace CellWar.Model.Substance {
             /// <summary>
             /// 该种族携带的基因组
             /// </summary>
-            public List<CodingGene> Genes { get; set; } = new List<CodingGene>();
+            public List<RegulatoryGene> RegulatoryGenes { get; set; } = new List<RegulatoryGene>();
         }
 
         public class Gene {
@@ -172,6 +172,11 @@ namespace CellWar.Model.Substance {
             /// 满足所有物质存在且数量达标，才可以触发效果。
             /// </summary>
             public List<Substance.Chemical> Conditions { get; set; } = new List<Chemical>();
+
+            /// <summary>
+            /// 被调控基因支配的基因
+            /// </summary>
+            public List<CodingGene> DominatedGenes { get; set; } = new List<CodingGene>();
 
             /// <summary>
             /// 判断格子中的chemicals是否是conditions的父集，且满足一定条件：格子中chemical的Count不小于condition中的Count
