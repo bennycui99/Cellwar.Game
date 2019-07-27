@@ -10,6 +10,10 @@ See [TODO List](<https://github.com/bennycui99/Cellwar.Game/blob/master/TODO.md>
 
 
 
+### 7.27
+
+![avatar](Progress/7.27.gif)
+
 ## About CellWar Json Files In GameData
 
 We use excel to edit raw data and for 2json, you can use [THIS SITE](<http://www.bejson.com/json/col2json/>)
