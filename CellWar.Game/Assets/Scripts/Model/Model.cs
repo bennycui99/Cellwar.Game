@@ -105,9 +105,28 @@ namespace CellWar.Model.Json {
         public string Name { get; set; }
         public string Type { get; set; }
         public int Length { get; set; }
-        public string Chemical { get; set; }
+        public List<RegulatoryCondition> Condition { get; set; }
         public string Description { get; set; }
+    }
+
+    public class RegulatoryCondition {
+        /// <summary>
+        /// Chemical Name
+        /// </summary>
+        public string Chemical { get; set; }
         public int Count { get; set; }
+    }
+
+    public class RaceJsonModel {
+        public string Name { get; set; }
+        /// <summary>
+        /// 基因长度上限
+        /// </summary>
+        public int MaxLength { get; set; }
+        /// <summary>
+        /// 该种族携带的基因组
+        /// </summary>
+        public string CodingGeneNames { get; set; }
     }
 }
 
@@ -303,6 +322,15 @@ namespace CellWar.Model.Substance {
 
             #endregion
 
+            #region DECOMPOSITION
+
+            public string DecompositionChemicalName { get; set; }
+            public int DecompositionChemicalCount { get; set; }
+            public float DecompositionChemicalCoeffeicient { get; set; }
+            public int DecompositionChemicalIntercept { get; set; }
+            public bool IsDecompositionPublic { get; set; }
+
+            #endregion
 
             /// <summary>
             /// 首次传播时的百分比
@@ -342,12 +370,28 @@ namespace CellWar.Model.Substance {
                     return; // 根本不存在该物质，不工作
                 } else { 
                     if( chemicalToConsume.Count >= ConsumeChemicalCount ) {
-                        chemicalToConsume.Count -= ConsumeChemicalCount;
+                    // ----- 分解 -----
+                    // 若小号物质不存在，gene罢工
+                    var decompositeChemical = currentBlock.PublicChemicals.Find( chem => { return chem.Name == ConsumeChemicalName; } );
+                    var chemicalToDecomposite = ( IsDecompositionPublic ? currentBlock.PublicChemicals : parentStrain.PrivateChemicals ).Find( chem => { return chem.Name == ConsumeChemicalName; } );
+                    if( chemicalToDecomposite == null ) {
+                        return; // 根本不存在该物质，不工作
+                    } else {
+                        if( chemicalToDecomposite.Count >= DecompositionChemicalCount ) {
+                            chemicalToDecomposite.Count -= DecompositionChemicalCount;
+                            chemicalToConsume.Count -= ConsumeChemicalCount;
+                        } else {
+                            return; // 需要消耗的量不足，不工作
+                        }
+                    }
+                    // ----- 分解 -----
                     } else {
                         return; // 需要消耗的量不足，不工作
                     }
                 }
                 // ----- 消耗 -----
+
+
 
                 var productionChemical = Local.FindChemicalByName( ProductionChemicalName );
                 // ----- 对化学物质产生影响 -----
@@ -392,7 +436,7 @@ namespace CellWar.Model.Substance {
 
                 // ----- 细菌扩散 -----
                 // 是否满足扩散条件
-                if( parentStrain.Population * SpreadConditionRate >= currentBlock.Capacity ) {
+                if( parentStrain.Population >= currentBlock.Capacity * SpreadConditionRate ) {
                     var cloneStrain = ( Strain )parentStrain.Clone();
                     // 设定初始人口数
                     cloneStrain.Population = ( int )( parentStrain.Population * FirstSpreadMountRate );

@@ -12,6 +12,7 @@ public class U3D_SceneLoad : MonoBehaviour {
             CellWar.GameData.Local.LoadAllCodingGenes();
             CellWar.GameData.Local.LoadAllChemicals();
             CellWar.GameData.Local.LoadAllRegulartoryGenes();
+            Local.LoadAllRaces();
         } catch {
             Debug.LogError( "Local json load failed." );
             throw;

@@ -69,6 +69,31 @@ namespace CellWar.GameData {
     /// 游戏本地数据
     /// </summary>
     public static class Local {
+
+        public static List<Race> LoadAllRaces() {
+            var allRaceJson = CellWar.Utils.JsonHelper.Json2Object_NT<List<RaceJsonModel>>( GetGameDataPath("race.json") );
+            AllRaces = new List<Race>();
+            foreach( var raceJson in allRaceJson ) {
+                var geneNameList = raceJson.CodingGeneNames.Split(';');
+                List<CodingGene> genes = new List<CodingGene>();
+                foreach( var geneName in geneNameList ) {
+                    var tgene = AllCodingGenes.Find( m => m.Name == geneName );
+                    if( tgene != null ) {
+                        genes.Add( tgene );
+                    } else {
+                        throw new InvalidOperationException( "No gene named: " + geneName + "\n you should call LoadAllRaces() after LoadAllCodingGenes");
+                    }
+                }
+                AllRaces.Add( new Race {
+                    Name = raceJson.Name,
+                    MaxLength = raceJson.MaxLength,
+                    Genes = genes
+                } );
+            }
+            return AllRaces;
+        }
+        public static List<Race> AllRaces { get; set; }
+
         public static List<CodingGene> LoadAllCodingGenes() {
             Local.AllCodingGenes = CellWar.Utils.JsonHelper.Json2Object_NT<List<CodingGene>>( GetGameDataPath( "coding_gene.json" ) );
             return AllCodingGenes;
@@ -107,11 +132,14 @@ namespace CellWar.GameData {
                 gene.Description = geneJson.Description;
                 gene.Length = geneJson.Length;
 
-                var ch = ObjectHelper.Clone<Chemical>( Local.FindChemicalByName( geneJson.Chemical ) );
-                if( ch != null ) { 
-                    ch.Count = geneJson.Count;
-                    gene.Conditions.Add( ch );
+                foreach( var cc in geneJson.Condition ) {
+                    var ch = ObjectHelper.Clone( FindChemicalByName( cc.Chemical ) );
+                    if( ch != null ) { 
+                        ch.Count = cc.Count;
+                        gene.Conditions.Add( ch );
+                    }
                 }
+
                 regulatoryGenes.Add( gene );
             }
             AllRegulartoryGenes = regulatoryGenes;
