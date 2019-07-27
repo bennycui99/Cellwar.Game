@@ -58,8 +58,8 @@
   {
     "Name": "C4",
     "Length": "562",
-    "Condition": null,
-    "Type": "PositiveAllRegulatoryGene",
+    "Condition": [],
+    "Type": "PA",
     "Description": "永远开启的调控基因"
   },
   {
