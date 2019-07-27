@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using CellWar.GameData;
 using CellWar.Mock;
+using CellWar.Model.Substance;
+using CellWar.Utils;
 using CellWar.View;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,20 +29,11 @@ public class U3D_SceneLoad : MonoBehaviour {
         Current.StrainList = Mocks.MockStrainList;
         #endregion
 
-        InitStrainList();
-    }
-
-
-    public void InitStrainList() {
-        var strainUIList = GameObject.Find( "UI_StrainList" );
-        var strainUI = GameObject.Find( "UI_Strain" );
-        foreach( var strain in Current.StrainList ) {
-            var newStrainUI = Instantiate( strainUI );
-            newStrainUI.name = strain.Name;
-            newStrainUI.GetComponent<U3D_StrainPackageLogic>().Strain = strain;
-            newStrainUI.transform.parent = strainUIList.transform;
-        }
-        strainUI.SetActive( false );
+        UIHelper.InitUIList<Strain>( "UI_StrainList", "UI_Strain", Current.StrainList,
+            ( GameObject g, Strain obj ) => {
+                g.GetComponent<U3D_StrainPackageLogic>().Strain = obj;
+                g.name = obj.Name;
+            } );
     }
 
     // Start is called before the first frame update

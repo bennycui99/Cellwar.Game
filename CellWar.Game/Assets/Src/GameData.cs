@@ -65,6 +65,10 @@ namespace CellWar.GameData {
         /// </summary>
         public static U3D_BlockLogic FocusedBlock = null;
     }
+
+    public static class GeneCreatorCurrent {
+        public static RegulatoryGene RegulatoryGene = null;
+    }
     /// <summary>
     /// 游戏本地数据
     /// </summary>
@@ -111,8 +115,8 @@ namespace CellWar.GameData {
                         }
                     } else if( regGene != null ) {
                         // 开始添加下一个reg
-                        regulatoryGenes.Add( ObjectHelper.Clone( regGene, regGene.GetType() ) );
-                        previousReg = regGene;
+                        previousReg = ObjectHelper.Clone( regGene, regGene.GetType() );
+                        regulatoryGenes.Add( previousReg );
                     }
                 }
                 AllRaces.Add( new Race {
