@@ -12,6 +12,6 @@ public class U3D_BlockDetail : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        gameObject.GetComponent<Text>().text = Current.GetCurrentBlockDetailInfo();
+        gameObject.GetComponent<Text>().text = MainGameCurrent.GetCurrentBlockDetailInfo();
     }
 }

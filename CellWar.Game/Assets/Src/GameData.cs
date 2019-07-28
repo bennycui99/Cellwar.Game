@@ -12,7 +12,7 @@ namespace CellWar.GameData {
     /// <summary>
     /// 游戏及时数据
     /// </summary>
-    public static class Current {
+    public static class MainGameCurrent {
         /// <summary>
         /// 玩家手上是否拿着细菌准备防止重要数据
         /// 见 U3D_StrainPackageLogic.cs
@@ -22,10 +22,10 @@ namespace CellWar.GameData {
         public static List<Strain> StrainList = new List<Strain>();
 
         public static string GetCurrentBlockDetailInfo() {
-            if( CellWar.GameData.Current.FocusedBlock == null ) {
+            if( CellWar.GameData.MainGameCurrent.FocusedBlock == null ) {
                 return "";
             }
-            var currentHexBlock = CellWar.GameData.Current.FocusedBlock.HexBlockModel;
+            var currentHexBlock = CellWar.GameData.MainGameCurrent.FocusedBlock.HexBlockModel;
             string showText = "Condition: " + currentHexBlock.BlockType.ToString() + "\n\n";
             showText += "Chemicals: \n";
             if( currentHexBlock.PublicChemicals.Count == 0 ) {
@@ -56,7 +56,7 @@ namespace CellWar.GameData {
                     showText += gene.Name + "\t";
                 }
                 showText += "\n";
-                showText += str.ConditionGene.IsTriggered( currentHexBlock.PublicChemicals ) ? "Working" : "Sleeping";
+                // showText += str.ConditionGene.IsTriggered( currentHexBlock.PublicChemicals ) ? "Working" : "Sleeping";
             }
             return showText;
         }
@@ -66,8 +66,10 @@ namespace CellWar.GameData {
         public static U3D_BlockLogic FocusedBlock = null;
     }
 
-    public static class GeneCreatorCurrent {
+    public static class StrainCreatorCurrent {
         public static RegulatoryGene RegulatoryGene = null;
+        public static Strain NewStrain = null;
+        public static bool IsLengthOverflowed = false;
     }
     /// <summary>
     /// 游戏本地数据

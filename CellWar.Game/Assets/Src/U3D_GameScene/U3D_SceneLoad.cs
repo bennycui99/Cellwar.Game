@@ -23,13 +23,12 @@ public class U3D_SceneLoad : MonoBehaviour {
         #region MOCKS
         Mocks.MockStrainList.Add( Mocks.Strain2 );
         Mocks.MockStrainList.Add( Mocks.Strain3 );
-        Mocks.Strain1.PlayerSelectedGenes.AddRange( Local.AllCodingGenes );
-        Mocks.Strain1.ConditionGene = ( Local.AllRegulartoryGenes[0] );
+        Mocks.Strain1.PlayerSelectedGenes.AddRange( Local.AllRegulartoryGenes );
         Mocks.MockStrainList.Add( Mocks.Strain1 );
-        Current.StrainList = Mocks.MockStrainList;
+        MainGameCurrent.StrainList = Mocks.MockStrainList;
         #endregion
 
-        UIHelper.InitUIList<Strain>( "UI_StrainList", "UI_Strain", Current.StrainList,
+        UIHelper.InitUIList<Strain>( "UI_StrainList", "UI_Strain", MainGameCurrent.StrainList,
             ( GameObject g, Strain obj ) => {
                 g.GetComponent<U3D_StrainPackageLogic>().Strain = obj;
                 g.name = obj.Name;

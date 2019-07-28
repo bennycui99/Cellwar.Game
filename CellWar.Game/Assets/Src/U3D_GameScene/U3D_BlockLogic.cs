@@ -33,20 +33,20 @@ namespace CellWar.View {
         }
         
         public void processSelectedStrain() {
-            if( Current.FocusedBlock != null && Current.HoldingStrain != null ) {
-                Current.FocusedBlock.ChangeBlockColor( Color.yellow );
+            if( MainGameCurrent.FocusedBlock != null && MainGameCurrent.HoldingStrain != null ) {
+                MainGameCurrent.FocusedBlock.ChangeBlockColor( Color.yellow );
                 // 防止反复增加同一种细菌
-                if( !Current.FocusedBlock.HexBlockModel.Strains.Exists( m => m.Name == Current.HoldingStrain.Name ) ) {
-                    Current.FocusedBlock.HexBlockModel.Strains.Add( Current.HoldingStrain );
+                if( !MainGameCurrent.FocusedBlock.HexBlockModel.Strains.Exists( m => m.Name == MainGameCurrent.HoldingStrain.Name ) ) {
+                    MainGameCurrent.FocusedBlock.HexBlockModel.Strains.Add( MainGameCurrent.HoldingStrain );
                 }
-                GameObject.Find(Current.HoldingStrain.Name).SetActive( false );
-                Current.HoldingStrain = null;
+                GameObject.Find(MainGameCurrent.HoldingStrain.Name).SetActive( false );
+                MainGameCurrent.HoldingStrain = null;
             }
         }
 
         private void OnMouseEnter() {
-            Current.FocusedBlock = this;
-            if( Current.HoldingStrain != null ) {
+            MainGameCurrent.FocusedBlock = this;
+            if( MainGameCurrent.HoldingStrain != null ) {
                 /// TODO: 当手里拿着细菌准备放置时的代码
                 ChangeBlockColor( Color.red );
             } else {
@@ -56,7 +56,7 @@ namespace CellWar.View {
         }
 
         private void OnMouseExit() {
-            Current.FocusedBlock = null;
+            MainGameCurrent.FocusedBlock = null;
             if( HexBlockModel.Strains.Count != 0 ) {
                 /// TODO: Block中有细菌时的代码
                 ChangeBlockColor( Color.yellow );

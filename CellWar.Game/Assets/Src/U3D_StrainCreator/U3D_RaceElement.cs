@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using CellWar.Contoller;
+using CellWar.GameData;
 using CellWar.Utils;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,7 +16,7 @@ public class U3D_RaceElement : MonoBehaviour {
     }
 
     public void ChangeText() {
-        GameObject.Find( "UI_MaxLength" ).GetComponent<Text>().text =
-            "Max Length: " + Race.MaxLength.ToString();
+        StrainCreatorCurrent.NewStrain.BasicRace = this.Race;
+        U3D_CreatorSceneLoad.FreshLength();
     }
 }

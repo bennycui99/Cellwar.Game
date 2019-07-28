@@ -12,6 +12,6 @@ public class U3D_BlockStrainDetail : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        gameObject.GetComponent<Text>().text = Current.GetCurrentBlockStrainDetailInfo();
+        gameObject.GetComponent<Text>().text = MainGameCurrent.GetCurrentBlockStrainDetailInfo();
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CellWar.GameData;
 using CellWar.Utils;
+using CellWar.Utils.Object;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -16,14 +17,9 @@ namespace CellWar.View {
             transform.Find( "Label" ).GetComponent<Text>().text = RegulatoryGene.Name;
         }
 
-        // Update is called once per frame
-        void Update() {
-
-        }
-
-        public void SwitchCodingGeneList() {
-            var reg = RegulatoryGene;
-            GeneCreatorCurrent.RegulatoryGene = reg;
+        public void SwitchCodingGeneList( RegulatoryGene currentReg ) {
+            var reg = currentReg;
+            StrainCreatorCurrent.RegulatoryGene = reg;
             string str = reg.Name + "'s Coding Gene(s)";
             UIHelper.ChangeText( GameObject.Find( "UI_CurrentReg" ), str );
             UIHelper.SwitchOffAllToggle( "UI_CodList" );
@@ -34,7 +30,19 @@ namespace CellWar.View {
         }
 
         public void OnPointerClick( PointerEventData eventData ) {
-            SwitchCodingGeneList();
+            var regs = StrainCreatorCurrent.NewStrain.PlayerSelectedGenes;
+            var reg = regs.Find( m => m.Name == RegulatoryGene.Name );
+            if( GetComponent<Toggle>().isOn ) {
+                if( reg == null ) {
+                    regs.Add( reg = RegulatoryGene );
+                }
+            } else {
+                if( reg != null ) {
+                    regs.Remove( reg );
+                }
+            }
+            SwitchCodingGeneList( reg );
+            U3D_CreatorSceneLoad.FreshLength();
         }
     }
 }

@@ -373,23 +373,23 @@ namespace CellWar.Model.Substance {
                 var chemicalToConsume = ( IsConsumePublic ? currentBlock.PublicChemicals : parentStrain.PrivateChemicals ).Find( chem => { return chem.Name == ConsumeChemicalName; } );
                 if( chemicalToConsume == null ) {
                     return; // 根本不存在该物质，不工作
-                } else { 
+                } else {
                     if( chemicalToConsume.Count >= ConsumeChemicalCount ) {
-                    // ----- 分解 -----
-                    // 若小号物质不存在，gene罢工
-                    var decompositeChemical = currentBlock.PublicChemicals.Find( chem => { return chem.Name == ConsumeChemicalName; } );
-                    var chemicalToDecomposite = ( IsDecompositionPublic ? currentBlock.PublicChemicals : parentStrain.PrivateChemicals ).Find( chem => { return chem.Name == ConsumeChemicalName; } );
-                    if( chemicalToDecomposite == null ) {
-                        return; // 根本不存在该物质，不工作
-                    } else {
-                        if( chemicalToDecomposite.Count >= DecompositionChemicalCount ) {
-                            chemicalToDecomposite.Count -= DecompositionChemicalCount;
-                            chemicalToConsume.Count -= ConsumeChemicalCount;
+                        // ----- 分解 -----
+                        // 若小号物质不存在，gene罢工
+                        var decompositeChemical = currentBlock.PublicChemicals.Find( chem => { return chem.Name == ConsumeChemicalName; } );
+                        var chemicalToDecomposite = ( IsDecompositionPublic ? currentBlock.PublicChemicals : parentStrain.PrivateChemicals ).Find( chem => { return chem.Name == ConsumeChemicalName; } );
+                        if( chemicalToDecomposite == null ) {
+                            return; // 根本不存在该物质，不工作
                         } else {
-                            return; // 需要消耗的量不足，不工作
+                            if( chemicalToDecomposite.Count >= DecompositionChemicalCount ) {
+                                chemicalToDecomposite.Count -= DecompositionChemicalCount;
+                                chemicalToConsume.Count -= ConsumeChemicalCount;
+                            } else {
+                                return; // 需要消耗的量不足，不工作
+                            }
                         }
-                    }
-                    // ----- 分解 -----
+                        // ----- 分解 -----
                     } else {
                         return; // 需要消耗的量不足，不工作
                     }
@@ -461,9 +461,8 @@ namespace CellWar.Model.Substance {
         /// <summary>
         /// 玩家选择的自带的或是库里默认存在的基因
         /// </summary>
-        public List<CodingGene> PlayerSelectedGenes { get; set; } = new List<CodingGene>();
+        public List<RegulatoryGene> PlayerSelectedGenes { get; set; } = new List<RegulatoryGene>();
 
-        public RegulatoryGene ConditionGene { get; set; } = new RegulatoryGene();
         /// <summary>
         /// 夺取的化学物质
         /// 从 PublicChemicals

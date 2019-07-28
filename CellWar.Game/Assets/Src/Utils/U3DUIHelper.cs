@@ -50,5 +50,9 @@ namespace CellWar.Utils {
                 toggle.GetComponent<Toggle>().isOn = false;
             }
         }
+
+        public static string GetInputText( string inputName ) {
+            return GameObject.Find( inputName ).GetComponent<InputField>().text;
+        }
     }
 }

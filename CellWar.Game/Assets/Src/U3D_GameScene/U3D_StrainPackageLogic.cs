@@ -14,7 +14,7 @@ public class U3D_StrainPackageLogic : MonoBehaviour, IPointerClickHandler {
     public Strain Strain { get; set; }
 
     public void OnPointerClick( PointerEventData eventData ) {
-        Current.HoldingStrain = Strain;
+        MainGameCurrent.HoldingStrain = Strain;
     }
 
     // Start is called before the first frame update

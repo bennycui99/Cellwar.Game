@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using CellWar.GameData;
+using CellWar.Utils.Object;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -15,24 +16,20 @@ namespace CellWar.View {
             transform.Find( "Label" ).GetComponent<Text>().text = CodingGene.Name;
         }
 
-        // Update is called once per frame
-        void Update() {
-
-        }
-
         public void Switch() {
-
         }
 
         public void OnPointerClick( PointerEventData eventData ) {
-            var dominatedGenes = GeneCreatorCurrent.RegulatoryGene.DominatedGenes;
+            var dominatedGenes = StrainCreatorCurrent.RegulatoryGene.DominatedGenes;
+            var cod = dominatedGenes.Find( m => m.Name == CodingGene.Name );
             if( GetComponent<Toggle>().isOn ) {
-                if( !dominatedGenes.Exists( m => m.Name == CodingGene.Name ) ) {
-                    dominatedGenes.Add( CodingGene );
+                if( cod == null ) {
+                    dominatedGenes.Add( ObjectHelper.Clone( CodingGene ) );
                 }
             } else {
-                dominatedGenes.Remove( CodingGene );
+                dominatedGenes.Remove( cod );
             }
+            U3D_CreatorSceneLoad.FreshLength();
         }
     }
 }

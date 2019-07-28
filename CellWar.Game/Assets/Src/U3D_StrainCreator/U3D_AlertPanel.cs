@@ -1,0 +1,10 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class U3D_AlertPanel : MonoBehaviour, IPointerClickHandler {
+    public void OnPointerClick( PointerEventData eventData ) {
+        gameObject.SetActive( false );
+    }
+}
