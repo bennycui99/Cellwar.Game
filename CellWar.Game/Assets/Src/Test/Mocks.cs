@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using CellWar.Model.Gamer;
 using CellWar.Model.Substance;
 
-namespace CellWar.Mock {
+namespace CellWar.Test.Mock {
     public class Mocks {
         public static Strain Strain1 { get; set; } = new Strain {
             Name = "Strain1",

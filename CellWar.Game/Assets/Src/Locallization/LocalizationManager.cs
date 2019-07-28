@@ -4,10 +4,9 @@ using UnityEngine;
 using System.Xml;
 using System.IO;
 
-using CellWar.Localization;
 using CellWar.Utils;
 
-namespace CellWar.Localization {
+namespace CellWar.Misc.Localization {
     public class LocalizationManager : MonoBehaviour {
 
         #region FUCK_SINGLETON

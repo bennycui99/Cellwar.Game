@@ -20,7 +20,7 @@ namespace CellWar.Utils {
         /// <param name="path">like "json/foo"</param>
         /// <returns>object</returns>
         public static T Json2Object_JU<T>( string path ) {
-            return JsonUtility.FromJson<T>( getStringFromFile( path ) );
+            return JsonUtility.FromJson<T>( getFullPath( path ) );
         }
         /// <summary>
         /// convert json file to object
@@ -29,15 +29,19 @@ namespace CellWar.Utils {
         /// <param name="path">like "json/foo"</param>
         /// <returns>object</returns>
         public static T Json2Object_NT<T>( string path ) {
-            return JsonConvert.DeserializeObject<T>( getStringFromFile( path ) );
+            return JsonConvert.DeserializeObject<T>( getFullPath( path ) );
         }
 
         public static Dictionary<string, string> Json2DictionaryFromPath( string path ) {
-            return Json2Dictionary( getStringFromFile( path ) );
+            return Json2Dictionary( getFullPath( path ) );
         }
 
         public static Dictionary<string, string> Json2Dictionary( string context ) {
             return JsonConvert.DeserializeObject<Dictionary<string, string>>( context );
+        }
+
+        public static string Object2Json<T>( T obj ) {
+            return JsonConvert.SerializeObject( obj );
         }
 
         /// <summary>
@@ -45,7 +49,7 @@ namespace CellWar.Utils {
         /// </summary>
         /// <param name="jsonFilePath"></param>
         /// <returns></returns>
-        private static string getStringFromFile( string jsonFilePath ) {
+        private static string getFullPath( string jsonFilePath ) {
             string fullPath = Path.Combine( Application.dataPath, jsonFilePath );
             if( !File.Exists( fullPath ) ) {
                 throw new FileNotFoundException( "File: [" + fullPath + "] Not Found." );

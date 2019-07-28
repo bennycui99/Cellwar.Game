@@ -15,7 +15,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CellWar.Localization {
+namespace CellWar.Misc.Localization {
 
     public enum Language {
         English,

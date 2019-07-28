@@ -7,7 +7,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using static CellWar.Model.Substance.Strain;
 
-public class U3D_RaceElement : MonoBehaviour {
+namespace CellWar.View {
+
+    public class U3D_RaceElement : MonoBehaviour {
     public Race Race { get; set; }
 
     private void Start() {
@@ -19,4 +21,5 @@ public class U3D_RaceElement : MonoBehaviour {
         StrainCreatorCurrent.NewStrain.BasicRace = this.Race;
         U3D_CreatorSceneLoad.FreshLength();
     }
+}
 }

@@ -9,20 +9,23 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class U3D_StrainPackageLogic : MonoBehaviour, IPointerClickHandler {
 
-    public Strain Strain { get; set; }
+namespace CellWar.View {
+    public class U3D_StrainPackageLogic : MonoBehaviour, IPointerClickHandler {
 
-    public void OnPointerClick( PointerEventData eventData ) {
-        MainGameCurrent.HoldingStrain = Strain;
-    }
+        public Strain Strain { get; set; }
 
-    // Start is called before the first frame update
-    void Start() {
-        gameObject.GetComponent<Text>().text =  Strain.Name;
-    }
+        public void OnPointerClick( PointerEventData eventData ) {
+            MainGameCurrent.HoldingStrain = Strain;
+        }
 
-    // Update is called once per frame
-    void Update() {
+        // Start is called before the first frame update
+        void Start() {
+            gameObject.GetComponent<Text>().text = Strain.Name;
+        }
+
+        // Update is called once per frame
+        void Update() {
+        }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using CellWar.Model.Json;
 using CellWar.Model.Substance;
+using CellWar.Utils;
 using CellWar.Utils.Object;
 using CellWar.View;
 using UnityEngine;
@@ -75,7 +77,6 @@ namespace CellWar.GameData {
     /// 游戏本地数据
     /// </summary>
     public static class Local {
-
         /// <summary>
         /// 加载所有的race
         /// geneNameList的规范为 r1;c1;c2;r2;c3;r3;c4
@@ -189,5 +190,18 @@ namespace CellWar.GameData {
         public static List<Chemical> AllChemicals { get; set; }
 
         public static string GetGameDataPath( string fileName ) => "Resources/GameData/" + fileName;
+    }
+
+    /// <summary>
+    /// 玩家储存数据
+    /// TODO：玩家信息
+    /// </summary>
+    public static class Save {
+        public static List<Strain> Strains = new List<Strain>();
+        public static string GetGameSavePath( string fileName ) => Path.Combine( Application.dataPath, "Resources/Save/" + fileName );
+        public static void SaveAllStrains() {
+            File.WriteAllText( Save.GetGameSavePath( "strains.json" ), JsonHelper.Object2Json( Save.Strains ) );
+        }
+
     }
 }
