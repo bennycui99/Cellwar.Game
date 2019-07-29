@@ -18,8 +18,8 @@ namespace CellWar.Utils {
         /// <param name="dataList">List T的列表</param>
         /// <param name="func">进行数据元素和ui元素的某些操作</param>
         public static void InitUIList<T>( string listName, string elementName, List<T> dataList, FeedListElementHandle<T> func ) {
-            var UIList = GameObject.Find( listName );
-            var UIElement = GameObject.Find( elementName );
+            var UIList = GameObject.Find( listName ).gameObject;
+            var UIElement = GameObject.Find( elementName ).gameObject;
             foreach( var datum in dataList ) {
                 var newUIElement = GameObject.Instantiate( UIElement );
                 func( newUIElement, datum );

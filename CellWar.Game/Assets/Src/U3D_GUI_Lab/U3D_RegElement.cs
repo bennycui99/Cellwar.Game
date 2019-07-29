@@ -19,7 +19,7 @@ namespace CellWar.View {
 
         public void SwitchCodingGeneList( RegulatoryGene currentReg ) {
             var reg = currentReg;
-            StrainCreatorCurrent.RegulatoryGene = reg;
+            LabCurrent.RegulatoryGene = reg;
             string str = reg.Name + "'s Coding Gene(s)";
             UIHelper.ChangeText( GameObject.Find( "UI_CurrentReg" ), str );
             UIHelper.SwitchOffAllToggle( "UI_CodList" );
@@ -30,7 +30,7 @@ namespace CellWar.View {
         }
 
         public void OnPointerClick( PointerEventData eventData ) {
-            var regs = StrainCreatorCurrent.NewStrain.PlayerSelectedGenes;
+            var regs = LabCurrent.Strain.PlayerSelectedGenes;
             var reg = regs.Find( m => m.Name == RegulatoryGene.Name );
             if( GetComponent<Toggle>().isOn ) {
                 if( reg == null ) {

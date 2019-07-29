@@ -20,7 +20,7 @@ namespace CellWar.View {
         }
 
         public void OnPointerClick( PointerEventData eventData ) {
-            var dominatedGenes = StrainCreatorCurrent.RegulatoryGene.DominatedGenes;
+            var dominatedGenes = LabCurrent.RegulatoryGene.DominatedGenes;
             var cod = dominatedGenes.Find( m => m.Name == CodingGene.Name );
             if( GetComponent<Toggle>().isOn ) {
                 if( cod == null ) {

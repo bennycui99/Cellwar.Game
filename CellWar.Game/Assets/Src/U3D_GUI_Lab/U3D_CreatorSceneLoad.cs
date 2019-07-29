@@ -12,20 +12,12 @@ using CellWar.Utils.Object;
 using System.IO;
 
 namespace CellWar.View {
-
     public class U3D_CreatorSceneLoad : MonoBehaviour {
+
+        static GameObject UITextMaxLength;
 
         // Start is called before the first frame update
         void Awake() {
-            try {
-                CellWar.GameData.Local.LoadAllCodingGenes();
-                CellWar.GameData.Local.LoadAllChemicals();
-                CellWar.GameData.Local.LoadAllRegulartoryGenes();
-                CellWar.GameData.Local.LoadAllRaces();
-            } catch {
-                Debug.LogError( "Local json load failed." );
-                throw;
-            }
             #region INIT_UIs
             UIHelper.InitUIList( "UI_RaceList", "UI_Ele_Race", Local.AllRaces,
                 ( GameObject g, Race obj ) => {
@@ -46,24 +38,30 @@ namespace CellWar.View {
                 } );
             #endregion
 
-            StrainCreatorCurrent.NewStrain = new CellWar.Model.Substance.Strain();
+            // 没有Strain实例表示创建新的Strain
+            if( LabCurrent.Strain == null ) {
+                LabCurrent.Strain = new CellWar.Model.Substance.Strain();
+            }
+
+            UITextMaxLength = GameObject.Find( "UI_MaxLength" );
+            gameObject.SetActive(false);
         }
+
         public static void FreshLength() {
             StrainContoller contoller = new StrainContoller();
-            if( StrainCreatorCurrent.NewStrain == null ) {
+            if( LabCurrent.Strain == null ) {
                 return;
             }
 
-            int maxLength = StrainCreatorCurrent.NewStrain.BasicRace.MaxLength;
-            int currentLength = contoller.GetTotalLength( StrainCreatorCurrent.NewStrain?.PlayerSelectedGenes );
+            int maxLength = LabCurrent.Strain.BasicRace.MaxLength;
+            int currentLength = contoller.GetTotalLength( LabCurrent.Strain?.PlayerSelectedGenes );
 
             string alert = maxLength < currentLength ? "Overflowed!!!!!" : "";
 
-            StrainCreatorCurrent.IsLengthOverflowed = alert == "" ? false : true;
+            LabCurrent.IsLengthOverflowed = alert == "" ? false : true;
 
-            GameObject.Find( "UI_MaxLength" ).GetComponent<Text>().text =
-                "Max Length: " + maxLength.ToString() + "/" + currentLength.ToString()
-                + "\n" + alert;
+            UITextMaxLength.GetComponent<Text>().text =
+                "Max Length: " + maxLength.ToString() + "/" + currentLength.ToString() + "  " + alert;
         }
 
         public static void EmitAlert( string message ) {
@@ -80,13 +78,13 @@ namespace CellWar.View {
                 U3D_CreatorSceneLoad.EmitAlert( "Please Enter Strain Name" );
                 return;
             }
-            if( StrainCreatorCurrent.IsLengthOverflowed ) {
+            if( LabCurrent.IsLengthOverflowed ) {
                 U3D_CreatorSceneLoad.EmitAlert( "The Length is Overflowed. Please Trim the Gene you carry." );
                 return;
             }
             // 储存基因
-            StrainCreatorCurrent.NewStrain.Name = strainName;
-            Save.Strains.Add( StrainCreatorCurrent.NewStrain );
+            LabCurrent.Strain.Name = strainName;
+            Save.Strains.Add( LabCurrent.Strain );
         }
     }
 }

@@ -10,9 +10,9 @@ See [TODO List](<https://github.com/bennycui99/Cellwar.Game/blob/master/TODO.md>
 
 
 
-### 7.27
+### 7.29
 
-![avatar](Progress/7.27.gif)
+![avatar](Progress/7.29.gif)
 
 ## About CellWar Json Files In GameData
 

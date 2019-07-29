@@ -8,6 +8,7 @@ using CellWar.Utils;
 using CellWar.Utils.Object;
 using CellWar.View;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static CellWar.Model.Substance.Strain;
 
 namespace CellWar.GameData {
@@ -68,9 +69,9 @@ namespace CellWar.GameData {
         public static U3D_BlockLogic FocusedBlock = null;
     }
 
-    public static class StrainCreatorCurrent {
+    public static class LabCurrent {
         public static RegulatoryGene RegulatoryGene = null;
-        public static Strain NewStrain = null;
+        public static Strain Strain = null;
         public static bool IsLengthOverflowed = false;
     }
     /// <summary>
@@ -203,5 +204,21 @@ namespace CellWar.GameData {
             File.WriteAllText( Save.GetGameSavePath( "strains.json" ), JsonHelper.Object2Json( Save.Strains ) );
         }
 
+        public static List<Strain> LoadAllStrains() {
+            Strains = JsonHelper.Json2Object_NT<List<Strain>>( Local.GetGameDataPath( "chemicals.json" ) );
+            return Strains;
+        }
+
+    }
+
+    public static class Check {
+        /// <summary>
+        /// 如果检测到数据未加载，则返回数据加载场景
+        /// </summary>
+        public static void GameDataLoaded() {
+            if( GameData.Local.AllChemicals == null ) {
+                SceneManager.LoadScene( "ApplicationStartScene" );
+            }
+        }
     }
 }
