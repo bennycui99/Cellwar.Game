@@ -13,7 +13,7 @@ namespace CellWar.View {
         public Strain Strain { get; set; }
 
         public void LoadStrainInfo() {
-            LabCurrent.Strain = GetComponent<Toggle>().isOn ? ObjectHelper.Clone( Strain ) : null;
+            LabCurrent.Strain = GetComponent<Toggle>().isOn ?  Strain.Clone() as Strain : null;
             if( LabCurrent.Strain == null ) {
                 return;
             }

@@ -500,7 +500,7 @@ namespace CellWar.Model.Substance {
             return new Strain() {
                 Population = 0,
                 Name = this.Name,
-                PlayerSelectedGenes = this.PlayerSelectedGenes,
+                PlayerSelectedGenes = (new StrainContoller()).CloneRegGeneList(PlayerSelectedGenes),
                 Owner = this.Owner,
                 BasicRace = this.BasicRace
             };

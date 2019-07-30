@@ -35,7 +35,7 @@ namespace CellWar.View {
 
             if( Input.GetMouseButtonDown( 0 ) ) { // Left
                 if( reg == null ) {
-                    regs.Add( reg = RegulatoryGene );
+                    regs.Add( reg = ObjectHelper.Clone( RegulatoryGene, RegulatoryGene.GetType() ) );
                 } else {
                     regs.Remove( reg );
                 }

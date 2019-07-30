@@ -10,9 +10,9 @@ See [TODO List](<https://github.com/bennycui99/Cellwar.Game/blob/master/TODO.md>
 
 
 
-### 7.29
+### 7.30 Finished Lab
 
-![avatar](Progress/7.29.gif)
+![avatar](Progress/7.30.gif)
 
 ## About CellWar Json Files In GameData
 
