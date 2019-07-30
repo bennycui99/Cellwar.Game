@@ -6,12 +6,13 @@ using CellWar.Model.Substance;
 using System;
 using UnityEngine;
 using CellWar.GameData;
+using CellWar.Utils.Object;
+using CellWar.Contoller;
 
 /// <summary>
 /// 存放地图相关的Model
 /// </summary>
 namespace CellWar.Model.Map {
-
     public class Map {
         /// <summary>
         /// 地图中所有的格子
@@ -144,6 +145,8 @@ namespace CellWar.Model.Substance {
         /// </summary>
         public class Race {
             public string Name { get; set; }
+
+            public string Description { get; set; }
             /// <summary>
             /// 基因长度上限
             /// </summary>
@@ -152,7 +155,19 @@ namespace CellWar.Model.Substance {
             /// 该种族携带的基因组
             /// </summary>
             public List<RegulatoryGene> RegulatoryGenes { get; set; } = new List<RegulatoryGene>();
+
+            public Race Clone() {
+                var ctr = ( new StrainContoller() );
+                var list = ctr.CloneRegGeneList( this.RegulatoryGenes );
+                return new Race {
+                    Name = Name,
+                    Description = Description,
+                    MaxLength = MaxLength,
+                    RegulatoryGenes = list
+                };
+            }
         }
+
 
         public class Gene {
             public string Name { get; set; }

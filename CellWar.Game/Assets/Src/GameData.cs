@@ -191,6 +191,10 @@ namespace CellWar.GameData {
         public static List<Chemical> AllChemicals { get; set; }
 
         public static string GetGameDataPath( string fileName ) => "Resources/GameData/" + fileName;
+
+        public static string Readable( string name, string description ) {
+            return string.Format( "Name:{0}\nDescription:{1}", name, description );
+        }
     }
 
     /// <summary>
@@ -205,7 +209,7 @@ namespace CellWar.GameData {
         }
 
         public static List<Strain> LoadAllStrains() {
-            Strains = JsonHelper.Json2Object_NT<List<Strain>>( Local.GetGameDataPath( "chemicals.json" ) );
+            Strains = JsonHelper.Json2Object_NT<List<Strain>>( GetGameSavePath( "strains.json" ) );
             return Strains;
         }
 

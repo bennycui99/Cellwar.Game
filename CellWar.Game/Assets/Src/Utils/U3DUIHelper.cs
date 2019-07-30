@@ -27,6 +27,38 @@ namespace CellWar.Utils {
             }
             UIElement.SetActive( false );
         }
+
+
+        public static void InitUIList<T>( string listName, string elementName, List<T> dataList, FeedListElementHandle<T> func, ref GameObject elementHandle ) {
+            var UIList = GameObject.Find( listName ).gameObject;
+            var UIElement = GameObject.Find( elementName ).gameObject;
+            foreach( var datum in dataList ) {
+                var newUIElement = GameObject.Instantiate( UIElement );
+                func( newUIElement, datum );
+                newUIElement.transform.parent = UIList.transform;
+            }
+            elementHandle = UIElement;
+            UIElement.SetActive( false );
+        }
+
+        public static void RefreshUIList<T>( string listName, GameObject elementObject, List<T> dataList, FeedListElementHandle<T> func) {
+            elementObject.SetActive(true);
+            var UIList = GameObject.Find( listName ).gameObject;
+            foreach( Transform child in UIList.transform ) {
+                if( child.name == elementObject.name ) {
+                    continue;
+                } else {
+                    GameObject.Destroy( child.gameObject );
+                }
+            }
+            var UIElement = elementObject;
+            foreach( var datum in dataList ) {
+                var newUIElement = GameObject.Instantiate( UIElement );
+                func( newUIElement, datum );
+                newUIElement.transform.parent = UIList.transform;
+            }
+            UIElement.SetActive( false );
+        }
         /// <summary>
         /// 改变UI Text的text值
         /// </summary>
@@ -53,6 +85,10 @@ namespace CellWar.Utils {
 
         public static string GetInputText( string inputName ) {
             return GameObject.Find( inputName ).GetComponent<InputField>().text;
+        }
+
+        public static void SetInputText( string inputName, string text ) {
+            GameObject.Find( inputName ).GetComponent<InputField>().text = text;
         }
     }
 }

@@ -9,7 +9,7 @@ using UnityEngine.UI;
 using static CellWar.Model.Substance.Strain;
 
 namespace CellWar.View {
-    public class U3D_RegElement : MonoBehaviour, IPointerClickHandler {
+    public class U3D_RegElement : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler {
         public RegulatoryGene RegulatoryGene { get; set; }
 
         // Start is called before the first frame update
@@ -29,19 +29,34 @@ namespace CellWar.View {
             }
         }
 
-        public void OnPointerClick( PointerEventData eventData ) {
+        public void OnPointerDown( PointerEventData eventData ) {
             var regs = LabCurrent.Strain.PlayerSelectedGenes;
             var reg = regs.Find( m => m.Name == RegulatoryGene.Name );
-            if( GetComponent<Toggle>().isOn ) {
+
+            if( Input.GetMouseButtonDown( 0 ) ) { // Left
                 if( reg == null ) {
                     regs.Add( reg = RegulatoryGene );
-                }
-            } else {
-                if( reg != null ) {
+                } else {
                     regs.Remove( reg );
                 }
+                SwitchCodingGeneList( reg );
             }
-            SwitchCodingGeneList( reg );
+            if( Input.GetMouseButtonDown( 1 ) && GetComponent<Toggle>().isOn ) { // Right
+                SwitchCodingGeneList( reg );
+            }
+            U3D_CreatorSceneLoad.FreshLength();
+        }
+
+        public void OnPointerEnter( PointerEventData eventData ) {
+            U3D_CreatorSceneLoad.ChangeMaxLengthText(
+                string.Format(
+                    "Name: {0}\n" +
+                    "Description: {1}\n"
+                    , RegulatoryGene.Name, RegulatoryGene.Description
+                ) );
+        }
+
+        public void OnPointerExit( PointerEventData eventData ) {
             U3D_CreatorSceneLoad.FreshLength();
         }
     }

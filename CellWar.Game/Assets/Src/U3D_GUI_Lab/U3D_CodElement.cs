@@ -8,7 +8,7 @@ using UnityEngine.UI;
 using static CellWar.Model.Substance.Strain;
 
 namespace CellWar.View {
-    public class U3D_CodElement : MonoBehaviour, IPointerClickHandler {
+    public class U3D_CodElement : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler {
         public CodingGene CodingGene { get; set; }
 
         // Start is called before the first frame update
@@ -29,6 +29,19 @@ namespace CellWar.View {
             } else {
                 dominatedGenes.Remove( cod );
             }
+            U3D_CreatorSceneLoad.FreshLength();
+        }
+
+        public void OnPointerEnter( PointerEventData eventData ) {
+            U3D_CreatorSceneLoad.ChangeMaxLengthText(
+                string.Format(
+                    "Name: {0}\n" +
+                    "Description: {1}\n"
+                    , CodingGene.Name, CodingGene.Description
+                ) );
+        }
+
+        public void OnPointerExit( PointerEventData eventData ) {
             U3D_CreatorSceneLoad.FreshLength();
         }
     }
