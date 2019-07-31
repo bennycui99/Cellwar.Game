@@ -6,5 +6,7 @@ using System.Threading.Tasks;
 
 namespace CellWar.Utils {
     public static class LambdaHelper {
+        public delegate void BaseEvent();
+
     }
 }

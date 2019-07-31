@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using CellWar.Contoller;
 using CellWar.Model.Json;
 using CellWar.Model.Substance;
 using CellWar.Utils;
@@ -21,6 +22,11 @@ namespace CellWar.GameData {
         /// 见 U3D_StrainPackageLogic.cs
         /// </summary>
         public static Strain HoldingStrain = null;
+
+        /// <summary>
+        /// 细菌的所有基因作用的间隔
+        /// </summary>
+        public static float GeneEffectInterval = 0.6f;
 
         public static List<Strain> StrainList = new List<Strain>();
 
@@ -67,6 +73,23 @@ namespace CellWar.GameData {
         /// 当前鼠标下的block的MonoBehavior实例
         /// </summary>
         public static U3D_BlockLogic FocusedBlock = null;
+
+        public static MainGameController Contoller = new MainGameController();
+
+        public static class Camera {
+            /// <summary>
+            /// 摄像机的移动速度
+            /// </summary>
+            public static float MoveSpeed { get; set; } = 0.07f;
+
+            public static float XMax { get; set; }
+            public static float YMax { get; set; }
+            public static float ZMax { get; set; }
+
+            public static float XMin { get; set; }
+            public static float YMin { get; set; }
+            public static float ZMin { get; set; }
+        }
     }
 
     public static class LabCurrent {
@@ -162,6 +185,9 @@ namespace CellWar.GameData {
                         break;
                     case RegulartoryGeneType.NO:
                         gene = new NegativeOrRegulartoryGene();
+                        break;
+                    case RegulartoryGeneType.TRUE:
+                        gene = new TrueRegGene();
                         break;
                     default:
                         throw new Exception( "In LoadAllRegulartoryGenes. Type is Invalid." );

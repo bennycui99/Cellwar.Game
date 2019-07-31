@@ -5,8 +5,9 @@ This game is used in HumanPractices part in our iGEM project. After iGEM, we can
 See [TODO List](<https://github.com/bennycui99/Cellwar.Game/blob/master/TODO.md>) and fuck your tasks off! LOL
 
 ## Where the hell we are?
-### 7.17
-![avatar](Progress/7.17.gif)
+### 7.31 Finished Game Real Time Running
+
+![avatar](Progress/7.31-2.gif)
 
 
 

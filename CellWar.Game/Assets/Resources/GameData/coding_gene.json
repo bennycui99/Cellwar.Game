@@ -35,7 +35,7 @@
     "ImportChemicalIntercept": "0",
     "FirstSpreadMountRate": "0.05",
     "SpreadConditionRate": "0.5",
-    "Description": "每秒钟改变人口：0.12×人口数+(0)。消耗1×人口数+400的ATP。是否消耗公共资源：False。产生1×人口数+0的Log1B。当人口达到上限的0.05时，扩散新产生的人口的0.5。长度1800。Ture"
+    "Description": "每秒钟改变人口：0.12×人口数+(0)。消耗1×人口数+400的ATP。是否消耗公共资源：False。产生1×人口数+0的Log1B。当人口达到上限的0.05时，扩散新产生的人口的0.5。长度1800。"
   },
   {
     "Name": "Log1C",
@@ -340,5 +340,24 @@
     "FirstSpreadMountRate": "0",
     "SpreadConditionRate": "0",
     "Description": "消耗0.01×人口数+1的ATP。是否消耗公共资源：False。产生0.1×人口数+0的GFP。长度186.1。绿色荧光蛋白"
+  },
+  {
+    "Name": "Ether",
+    "Length": "186",
+    "PopulationCoefficient": "0.01",
+    "PopulationIntercept": "10",
+    "ConsumeChemicalName": "",
+    "ConsumeChemicalCoeffeicient": "0",
+    "ConsumeChemicalIntercept": "0",
+    "IsConsumePublic": "False",
+    "ProductionChemicalName": "",
+    "ProductionChemicalCoeffeicient": "0",
+    "ProductionChemicalIntercept": "0",
+    "ImportChemicalName": "",
+    "ImportChemicalCoeffeicient": "0",
+    "ImportChemicalIntercept": "0",
+    "FirstSpreadMountRate": "0.02",
+    "SpreadConditionRate": "0.02",
+    "Description": "以太细菌，无脑增长，没有用。"
   }
 ]

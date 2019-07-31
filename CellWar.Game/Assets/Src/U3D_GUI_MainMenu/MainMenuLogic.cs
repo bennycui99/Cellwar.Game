@@ -45,7 +45,7 @@ namespace CellWar.View {
 
         #region EVENTS
         public void OnStageClicked() {
-            Switch( MenuStates.Lab );
+            SceneManager.LoadScene( "GameScene" );
         }
         public void OnOptionClicked() {
             Switch( MenuStates.Options );

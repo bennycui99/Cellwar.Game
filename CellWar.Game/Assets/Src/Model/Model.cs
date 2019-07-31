@@ -100,7 +100,7 @@ namespace CellWar.Model.Map {
 
 namespace CellWar.Model.Json {
     enum RegulartoryGeneType {
-        PA, NA, PO, NO
+        PA, NA, PO, NO, TRUE
     }
     public class RegulartoryGeneJsonModel {
         public string Name { get; set; }
@@ -198,7 +198,7 @@ namespace CellWar.Model.Substance {
             /// </summary>
             /// <param name="chemicalsInBlock"></param>
             /// <returns></returns>
-            public virtual bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) { return default; }
+            public virtual bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) { return true; }
             #region PRIVATE
             /// <summary>
             /// 判断是否满足所有条件
@@ -246,7 +246,7 @@ namespace CellWar.Model.Substance {
                     }
                     return true;
                 }
-                return false; // 不应该到达这里
+                return true; // 不应该到达这里
             }
             #endregion
         }
@@ -257,7 +257,7 @@ namespace CellWar.Model.Substance {
         /// 必须满足所有条件方可触发条件
         /// </summary>
         public class PositiveAllRegulatoryGene : RegulatoryGene {
-            public override bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) {
+            public sealed override bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) {
                 return isMeetAllCondition( chemicalsInBlock );
             }
         }
@@ -266,7 +266,7 @@ namespace CellWar.Model.Substance {
         /// 当满足所有条件是关闭条件触发
         /// </summary>
         public class NegativeAllRegulartoryGene : RegulatoryGene {
-            public override bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) {
+            public sealed override bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) {
                 return !isMeetAllCondition( chemicalsInBlock );
             }
         }
@@ -275,7 +275,7 @@ namespace CellWar.Model.Substance {
         /// 正或调控基因
         /// </summary>
         public class PositiveOrRegulartoryGene : RegulatoryGene {
-            public override bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) {
+            public sealed override bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) {
                 return isMeetAtLeastOneCondition( chemicalsInBlock );
             }
         }
@@ -284,8 +284,14 @@ namespace CellWar.Model.Substance {
         /// 负或调控基因
         /// </summary>
         public class NegativeOrRegulartoryGene : RegulatoryGene {
-            public override bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) {
+            public sealed override bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) {
                 return isMeetAllCondition( chemicalsInBlock );
+            }
+        }
+
+        public class TrueRegGene : RegulatoryGene {
+            public sealed override bool IsTriggered( List<Chemical> chemicalsInBlock ) {
+                return true;
             }
         }
         #endregion
@@ -387,6 +393,9 @@ namespace CellWar.Model.Substance {
                 var consumeChemical = currentBlock.PublicChemicals.Find( chem => { return chem.Name == ConsumeChemicalName; } );
                 var chemicalToConsume = ( IsConsumePublic ? currentBlock.PublicChemicals : parentStrain.PrivateChemicals ).Find( chem => { return chem.Name == ConsumeChemicalName; } );
                 if( chemicalToConsume == null ) {
+                    if( ConsumeChemicalName == "" ) {
+                        goto NEXT_STEP;
+                    }
                     return; // 根本不存在该物质，不工作
                 } else {
                     if( chemicalToConsume.Count >= ConsumeChemicalCount ) {
@@ -411,13 +420,13 @@ namespace CellWar.Model.Substance {
                 }
                 // ----- 消耗 -----
 
-
+                NEXT_STEP:
 
                 var productionChemical = Local.FindChemicalByName( ProductionChemicalName );
                 // ----- 对化学物质产生影响 -----
                 // 查找是否存在这个物质
                 var productChem = currentBlock.PublicChemicals.Find( che => { return che.Name == ProductionChemicalName; } );
-                if( productChem == null ) {
+                if( productChem == null && ProductionChemicalName != "" ) {
                     productChem = new Chemical {
                         Name = ProductionChemicalName,
                         Count = 0,
@@ -425,13 +434,15 @@ namespace CellWar.Model.Substance {
                     };
                     // 向block物质集中添加改变的chemical
                     currentBlock.PublicChemicals.Add( productChem );
+                    productChem.Count += ( int )GetProductionChemicalDelta( ref parentStrain );
                 }
-                productChem.Count += ( int )GetProductionChemicalDelta( ref parentStrain );
                 // ----- 对化学 物质产生影响 -----
 
                 // ----- 对父strain产生影响 -----
                 // --- 添加人口 ---
                 parentStrain.Population += ( int )GetPopulationDelta( ref parentStrain );
+
+                Debug.Log( parentStrain.Population );
 
                 // --- 添加私有化学库的量 ---
                 // 先寻找block内是否存在该种化学物质
@@ -457,11 +468,15 @@ namespace CellWar.Model.Substance {
                 // ----- 细菌扩散 -----
                 // 是否满足扩散条件
                 if( parentStrain.Population >= currentBlock.Capacity * SpreadConditionRate ) {
-                    var cloneStrain = ( Strain )parentStrain.Clone();
-                    // 设定初始人口数
-                    cloneStrain.Population = ( int )( parentStrain.Population * FirstSpreadMountRate );
+                    string strainName = parentStrain.Name.Clone() as string;
                     // 为周围的格子添加该细菌
                     foreach( var block in currentBlock.NeighborBlocks ) {
+                        if( block.Strains.Exists( m => { return m.Name == strainName; } ) ) {
+                            continue;
+                        }
+                        var cloneStrain = ( Strain )parentStrain.Clone();
+                        // 设定初始人口数
+                        cloneStrain.Population = ( int )( parentStrain.Population * FirstSpreadMountRate );
                         block.Strains.Add( cloneStrain );
                     }
                 }

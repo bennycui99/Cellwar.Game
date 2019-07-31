@@ -21,13 +21,15 @@ namespace CellWar.View {
                 throw;
             }
 
-            #region MOCKS
-            Mocks.MockStrainList.Add( Mocks.Strain2 );
-            Mocks.MockStrainList.Add( Mocks.Strain3 );
-            Mocks.Strain1.PlayerSelectedGenes.AddRange( Local.AllRegulartoryGenes );
-            Mocks.MockStrainList.Add( Mocks.Strain1 );
-            MainGameCurrent.StrainList = Mocks.MockStrainList;
-            #endregion
+            //#region MOCKS
+            //Mocks.MockStrainList.Add( Mocks.Strain2 );
+            //Mocks.MockStrainList.Add( Mocks.Strain3 );
+            //Mocks.Strain1.PlayerSelectedGenes.AddRange( Local.AllRegulartoryGenes );
+            //Mocks.MockStrainList.Add( Mocks.Strain1 );
+            //MainGameCurrent.StrainList = Mocks.MockStrainList;
+            //#endregion
+
+            MainGameCurrent.StrainList = Save.Strains;
 
             UIHelper.InitUIList<Strain>( "UI_StrainList", "UI_Strain", MainGameCurrent.StrainList,
                 ( GameObject g, Strain obj ) => {

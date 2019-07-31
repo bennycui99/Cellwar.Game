@@ -59,7 +59,7 @@
     "Name": "C4",
     "Length": "562",
     "Condition": [],
-    "Type": "PA",
+    "Type": "TRUE",
     "Description": "永远开启的调控基因"
   },
   {

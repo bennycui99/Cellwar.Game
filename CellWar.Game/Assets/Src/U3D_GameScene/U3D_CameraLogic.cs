@@ -1,31 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using CellWar.GameData;
 using UnityEngine;
 
 namespace CellWar.View {
 
     public class U3D_CameraLogic : MonoBehaviour {
-        float cameraMove = CellWar.Model.Settings.Camera.MoveSpeed;
+        float cameraMove = MainGameCurrent.Camera.MoveSpeed;
         [SerializeField]
-        float CameraXMax = CellWar.Model.Settings.Camera.XMax;
+        float CameraXMax = MainGameCurrent.Camera.XMax;
 
         [SerializeField]
-        float CameraXMin = CellWar.Model.Settings.Camera.XMin;
+        float CameraXMin = MainGameCurrent.Camera.XMin;
 
         [SerializeField]
-        float CameraYMax = CellWar.Model.Settings.Camera.YMax;
+        float CameraYMax = MainGameCurrent.Camera.YMax;
 
         [SerializeField]
-        float CameraYMin = CellWar.Model.Settings.Camera.YMin;
+        float CameraYMin = MainGameCurrent.Camera.YMin;
 
         [SerializeField]
-        float CameraZMax = CellWar.Model.Settings.Camera.ZMax;
+        float CameraZMax = MainGameCurrent.Camera.ZMax;
 
         [SerializeField]
-        float CameraZMin = CellWar.Model.Settings.Camera.ZMin;
+        float CameraZMin = MainGameCurrent.Camera.ZMin;
 
         // Update is called once per frame
-        void Update() {
+        void Update_() {
             Vector3 newPosition = transform.position;
 
             if( Input.mousePosition.x >= Screen.width - 10 && Camera.main.transform.position.x <= CameraXMax ) {
