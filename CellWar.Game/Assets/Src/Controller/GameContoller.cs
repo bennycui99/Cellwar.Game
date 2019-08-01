@@ -32,7 +32,6 @@ namespace CellWar.Contoller {
     }
 
     public class MainGameController {
-        private float mSec = 0;
         /// <summary>
         /// 按每个间隔更新一次
         /// </summary>
