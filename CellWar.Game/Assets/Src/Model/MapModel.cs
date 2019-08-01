@@ -3,11 +3,6 @@
 /// </summary>
 using System.Collections.Generic;
 using CellWar.Model.Substance;
-using System;
-using UnityEngine;
-using CellWar.GameData;
-using CellWar.Utils.Object;
-using CellWar.Controller;
 
 /// <summary>
 /// 存放地图相关的Model

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using CellWar.Model.Substance;
-using UnityEngine;
 
 
 /// <summary>
