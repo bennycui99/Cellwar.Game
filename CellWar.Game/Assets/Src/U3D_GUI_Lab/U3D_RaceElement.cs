@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using CellWar.Contoller;
+using CellWar.Controller;
 using CellWar.GameData;
 using CellWar.Utils;
 using CellWar.Utils.Object;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CellWar.GameData;
 using CellWar.Model.Map;
 using CellWar.Model.Substance;
 using CellWar.Utils.Object;
@@ -10,7 +11,7 @@ using UnityEngine;
 using static CellWar.Model.Substance.Strain;
 using static CellWar.Utils.LambdaHelper;
 
-namespace CellWar.Contoller {
+namespace CellWar.Controller {
     public class StrainContoller {
         public int GetTotalLength( List<RegulatoryGene> regs ) {
             int total = 0;
@@ -25,10 +26,12 @@ namespace CellWar.Contoller {
             }
             return newRegs;
         }
-    }
 
-    public class BlockController {
-        public bool IsPopulationFull( Block block ) { return block.GetTotalPopulation() > block.Capacity; }
+        public bool IsValid( Strain strain ) {
+            int totalLength = 0;
+            strain.PlayerSelectedGenes.ForEach( gene => { totalLength += gene.Length; } );
+            return totalLength < strain.BasicRace.MaxLength;
+        }
     }
 
     public class MainGameController {
@@ -58,12 +61,11 @@ namespace CellWar.Contoller {
                 return strain;
             }
             foreach( var reg in strain.PlayerSelectedGenes ) {
-                Debug.Log( reg.GetType().ToString() );
-                if( reg.IsTriggered( block.PublicChemicals ) ) {
-                    Debug.Log( "Triggered" );
-                    foreach( var cod in reg.DominatedGenes ) {
+                if( MainGameCurrent.RegCtor.IsTriggered( block.PublicChemicals, reg ) ) {
+                    for( Int32 i = 0; i < reg.DominatedGenes.Count; i++ ) {
+                        var cod = reg.DominatedGenes[i];
                         Debug.Log( "Effect" );
-                        cod.Effect( ref strain, ref block );
+                        MainGameCurrent.CodCtor.Effect( ref strain, ref block, ref cod );
                     }
                 }
             }

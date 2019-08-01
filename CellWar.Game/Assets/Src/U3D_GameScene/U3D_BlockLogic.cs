@@ -19,7 +19,7 @@ namespace CellWar.View {
         }
 
         private void printColorWithPopulation() {
-            var number = HexBlockModel.GetTotalPopulation();
+            var number = MainGameCurrent.BlockController.GetTotalPopulation( HexBlockModel );
             if( number > 10 ) {
                 ChangeBlockColor( new Color( 1f, 0.4f, 0.4f, 0.5f ) );
             }
@@ -51,23 +51,23 @@ namespace CellWar.View {
             ChangeBlockColor( color );
         }
         private void Update() {
-            MainGameCurrent.Contoller.UpdateByInterval(
+            MainGameCurrent.MainGameController.UpdateByInterval(
                 () => {
-                    int previousPopulation = HexBlockModel.GetTotalPopulation();
+                    int previousPopulation = MainGameCurrent.BlockController.GetTotalPopulation( HexBlockModel );
                     for( var i = 0; i < HexBlockModel.Strains.Count; ++i ) {
-                        HexBlockModel.Strains[i] = MainGameCurrent.Contoller.StrainWork( HexBlockModel.Strains[i], ref HexBlockModel );
+                        HexBlockModel.Strains[i] = MainGameCurrent.MainGameController.StrainWork( HexBlockModel.Strains[i], ref HexBlockModel );
                     }
-                    populationDelta = ( HexBlockModel.GetTotalPopulation() - previousPopulation );
+                    populationDelta = ( MainGameCurrent.BlockController.GetTotalPopulation( HexBlockModel ) - previousPopulation );
                 }, ref mSec
             );
             if( isMouseEnter ) {
                 ChangeMouseEnterColor();
             } else {
-                MainGameCurrent.Contoller.UpdateBlockColorByInterval( () => { printColorWithPopulation2(); }, ref mColorChangeSec );
+                MainGameCurrent.MainGameController.UpdateBlockColorByInterval( () => { printColorWithPopulation2(); }, ref mColorChangeSec );
             }
         }
         private void OnTriggerEnter( Collider other ) {
-            HexBlockModel.FetchNeighborBlocksFromMap_OnTriggerEnter( other, U3D_MapLogic.basicSceneMap );
+            MainGameCurrent.BlockController.FetchNeighborBlocksFromMap_OnTriggerEnter( ref HexBlockModel, other, U3D_MapLogic.basicSceneMap );
         }
 
 

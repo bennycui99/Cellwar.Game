@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using CellWar.Contoller;
+using CellWar.Controller;
 using CellWar.Model.Json;
 using CellWar.Model.Substance;
 using CellWar.Utils;

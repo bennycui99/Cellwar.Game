@@ -46,5 +46,13 @@ namespace CellWar.Utils.Object {
                 return formatter.Deserialize( objectStream ) as List<T>;
             }
         }
+
+        public static List<T> CloneList2<T>( List<T> list ) {
+            List<T> newList = new List<T>();
+            foreach( var ele in list ) {
+                newList.Add( ObjectHelper.Clone( ele, ele.GetType() ) );
+            }
+            return newList;
+        }
     }
 }

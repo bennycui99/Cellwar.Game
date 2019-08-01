@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using CellWar.Contoller;
+using CellWar.Controller;
+using CellWar.Controller.Gene;
 using CellWar.Model.Substance;
 using CellWar.View;
 
@@ -68,7 +69,10 @@ namespace CellWar.GameData {
         /// </summary>
         public static U3D_BlockLogic FocusedBlock = null;
 
-        public static MainGameController Contoller = new MainGameController();
+        public static MainGameController MainGameController = new MainGameController();
+        public static BlockController BlockController = new BlockController();
+        public static RegulatoryGeneController RegCtor = new RegulatoryGeneController();
+        public static CodingGeneController CodCtor = new CodingGeneController();
 
         public static class Camera {
             /// <summary>
