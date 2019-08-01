@@ -15,21 +15,32 @@ using UnityEngine;
 
 namespace CellWar.View {
     public class U3D_MapLogic : MonoBehaviour {
-
-        public static Map basicSceneMap { get; set; } = new Map();
+        /// <summary>
+        /// 地图中所有的格子
+        /// 应该在地图加载时给该列表赋值
+        /// </summary>
+        public static List<U3D_BlockLogic> Blocks { get; set; } = new List<U3D_BlockLogic>();
 
         private void Awake() {
-            basicSceneMap.LoadAllBlockUnityObjectFromTransform( transform );
+            LoadAllBlockUnityObjectFromTransform( transform );
         }
 
-        // Start is called before the first frame update
-        void Start() {
 
+        /// <summary>
+        /// 于MapLogic Awake中调用
+        /// 若置于Start中会导致block列表为空的问题
+        /// </summary>
+        /// <param name="mapTransform"></param>
+        public static void LoadAllBlockUnityObjectFromTransform( Transform mapTransform ) {
+            foreach( Transform blockTransform in mapTransform ) {
+                Blocks.Add( blockTransform.GetComponent<U3D_BlockLogic>() );
+            }
+            Debug.Log( Blocks.Count );
         }
 
-        // Update is called once per frame
-        void Update() {
 
+        public static U3D_BlockLogic FindBlockFromGameObjectName( string gameObjectName ) {
+            return Blocks.Find( b => b.gameObject.name == gameObjectName );
         }
     }
 }

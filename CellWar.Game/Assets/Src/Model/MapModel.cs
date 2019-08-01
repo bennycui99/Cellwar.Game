@@ -14,36 +14,16 @@ using CellWar.Controller;
 /// </summary>
 namespace CellWar.Model.Map {
     public class Map {
-        /// <summary>
-        /// 地图中所有的格子
-        /// 应该在地图加载时给该列表赋值
-        /// </summary>
-        public List<Block> Blocks { get; set; } = new List<Block>();
 
-        /// <summary>
-        /// 于MapLogic Awake中调用
-        /// 若置于Start中会导致block列表为空的问题
-        /// </summary>
-        /// <param name="mapTransform"></param>
-        public void LoadAllBlockUnityObjectFromTransform( Transform mapTransform ) {
-            foreach( Transform blockTransform in mapTransform ) {
-                Blocks.Add( new Block { UnityObject = blockTransform.gameObject } );
-            }
-            Debug.Log( Blocks.Count );
-        }
-
-        public Block FindBlockFromGameObjectName( string gameObjectName ) {
-            return Blocks.Find( b => b.UnityObject.gameObject.name == gameObjectName );
-        }
     }
 
     public class Block {
         public const string Tag = "HexBlock";
 
         /// <summary>
-        /// Unity 游戏对象
+        /// Unity 游戏对象名字
         /// </summary>
-        public GameObject UnityObject;
+        public string ParentUnityObjectName;
 
         public enum Type {
             Normal,

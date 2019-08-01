@@ -63,7 +63,7 @@ namespace CellWar.View {
         }
 
         public static void FreshLength() {
-            StrainContoller contoller = new StrainContoller();
+            StrainController contoller = new StrainController();
             if( LabCurrent.Strain == null ) {
                 return;
             }

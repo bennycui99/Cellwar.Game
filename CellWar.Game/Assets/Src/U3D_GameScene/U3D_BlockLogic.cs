@@ -67,13 +67,13 @@ namespace CellWar.View {
             }
         }
         private void OnTriggerEnter( Collider other ) {
-            MainGameCurrent.BlockController.FetchNeighborBlocksFromMap_OnTriggerEnter( ref HexBlockModel, other, U3D_MapLogic.basicSceneMap );
+            MainGameCurrent.BlockController.FetchNeighborBlocksFromMap_OnTriggerEnter( ref HexBlockModel, other, this.gameObject.name );
         }
 
 
-        // Start is called before the first frame update
-        void Start() {
-            HexBlockModel = U3D_MapLogic.basicSceneMap.FindBlockFromGameObjectName( gameObject.name );
+        void Awake() {
+            HexBlockModel = new Block();
+            HexBlockModel.ParentUnityObjectName = gameObject.name;
             HexBlockModel.Capacity = 1000;
         }
 

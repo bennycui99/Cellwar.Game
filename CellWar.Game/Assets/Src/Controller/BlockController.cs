@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CellWar.Model.Map;
+using CellWar.View;
 using UnityEngine;
 
 namespace CellWar.Controller {
@@ -26,12 +27,12 @@ namespace CellWar.Controller {
         /// </summary>
         /// <param name="other">OnTriggerEnter参数</param>
         /// <param name="map">地图实例，用于查询Block实例</param>
-        public void FetchNeighborBlocksFromMap_OnTriggerEnter( ref Block block, Collider other, Map map ) {
+        public void FetchNeighborBlocksFromMap_OnTriggerEnter( ref Block block, Collider other, string gameObjectName ) {
             if( other.gameObject.tag == Block.Tag
-                && other.gameObject.name != block.UnityObject.gameObject.name
-                && !block.NeighborBlocks.Exists( hb => { return hb.UnityObject.name == other.gameObject.name; } ) ) {
-                block.NeighborBlocks.Add( map.FindBlockFromGameObjectName( other.gameObject.name ) );
-                Debug.Log( other.name + " Added " + "to " + block.UnityObject.gameObject.name );
+                && other.gameObject.name != gameObjectName
+                && !block.NeighborBlocks.Exists( hb => { return hb.ParentUnityObjectName == other.gameObject.name; } ) ) {
+                block.NeighborBlocks.Add( U3D_MapLogic.FindBlockFromGameObjectName( other.gameObject.name ).HexBlockModel );
+                Debug.Log( other.name + " Added " + "to " + gameObjectName );
             }
         }
     }

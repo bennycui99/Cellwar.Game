@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using CellWar.GameData;
 using CellWar.Model.Map;
 using CellWar.Model.Substance;
+using UnityEngine;
 using static CellWar.Model.Substance.Strain;
 
 namespace CellWar.Controller.Gene {
     public class CodingGeneController {
         public CodingGeneController() {
-            EffectEvents.Add( ProductChemical );
             EffectEvents.Add( ConsumeAndDecomposite );
+            EffectEvents.Add( ProductChemical );
             EffectEvents.Add( ModifyPopulation );
             EffectEvents.Add( ImportChemical );
             EffectEvents.Add( StrainSpread );
@@ -50,7 +51,7 @@ namespace CellWar.Controller.Gene {
                 productChem.Count += ( int )GetProductionChemicalDelta( ref parentStrain, ref gene );
             }
             // ----- 对化学 物质产生影响 -----
-            return false;
+            return true;
         }
         public bool ConsumeAndDecomposite( ref Strain parentStrain, ref Block currentBlock, ref CodingGene gene ) {
             string ConsumeChemicalName = gene.ConsumeChemicalName.Clone() as string;
@@ -60,7 +61,7 @@ namespace CellWar.Controller.Gene {
             var chemicalToConsume = ( gene.IsConsumePublic ? currentBlock.PublicChemicals : parentStrain.PrivateChemicals ).Find( chem => { return chem.Name == ConsumeChemicalName; } );
             if( chemicalToConsume == null ) {
                 if( gene.ConsumeChemicalName == "" ) {
-                    return false;
+                    return true; // 不消耗
                 }
                 return false; // 根本不存在该物质，不工作
             } else {
@@ -152,7 +153,10 @@ namespace CellWar.Controller.Gene {
         /// <param name="currentBlock">父细菌所在的block</param>
         public void Effect( ref Strain parentStrain, ref Block currentBlock, ref CodingGene gene ) {
             foreach( var eve in EffectEvents ) {
-                if( !eve( ref parentStrain, ref currentBlock, ref gene ) ) return;
+                if( !eve( ref parentStrain, ref currentBlock, ref gene ) ) { 
+                    Debug.Log("Stop at" + EffectEvents.FindIndex( m => m == eve ) );
+                    return;
+                }
             }
         }
     }
