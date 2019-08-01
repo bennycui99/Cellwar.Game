@@ -7,7 +7,9 @@ using CellWar.GameData;
 namespace CellWar.View {
     public class U3D_BlockLogic : MonoBehaviour {
         private float mSec = 0;
-
+        private float mColorChangeSec = 0;
+        private float populationDelta = 0;
+        private Color color = new Color( 1f, 0.5f, 0.5f, 0.5f );
         public Block HexBlockModel;
         bool isMouseEnter = false;
         public void ChangeBlockColor( Color color ) {
@@ -34,24 +36,36 @@ namespace CellWar.View {
                 ChangeBlockColor( new Color( 0.5f, 0f, 0f, 0.5f ) );
             }
         }
+        private void printColorWithPopulation2() {
+            float dr = populationDelta * 0.5f / HexBlockModel.Capacity;
 
+            if( populationDelta > 0 ) {
+                color.r = ( color.r - dr ) < 0.5f ? 0.5f : color.r - dr;
+                color.g = ( color.g - dr ) < 0f ? 0f : color.g - dr;
+                color.b = ( color.b - dr ) < 0f ? 0f : color.b - dr;
+            } else {
+                color.r = ( color.r + dr ) > 1f ? 1f : color.r + dr;
+                color.g = ( color.g + dr ) > 0.5f ? 0.5f : color.g + dr;
+                color.b = ( color.b + dr ) > 0.5f ? 0.5f : color.b + dr;
+            }
+            ChangeBlockColor( color );
+        }
         private void Update() {
             MainGameCurrent.Contoller.UpdateByInterval(
                 () => {
+                    int previousPopulation = HexBlockModel.GetTotalPopulation();
                     for( var i = 0; i < HexBlockModel.Strains.Count; ++i ) {
                         HexBlockModel.Strains[i] = MainGameCurrent.Contoller.StrainWork( HexBlockModel.Strains[i], ref HexBlockModel );
-
-                        Debug.Log( HexBlockModel.GetTotalPopulation() );
                     }
+                    populationDelta = ( HexBlockModel.GetTotalPopulation() - previousPopulation );
                 }, ref mSec
             );
             if( isMouseEnter ) {
                 ChangeMouseEnterColor();
             } else {
-                printColorWithPopulation();
+                MainGameCurrent.Contoller.UpdateBlockColorByInterval( () => { printColorWithPopulation2(); }, ref mColorChangeSec );
             }
         }
-
         private void OnTriggerEnter( Collider other ) {
             HexBlockModel.FetchNeighborBlocksFromMap_OnTriggerEnter( other, U3D_MapLogic.basicSceneMap );
         }
@@ -103,7 +117,7 @@ namespace CellWar.View {
             MainGameCurrent.FocusedBlock = null;
             if( HexBlockModel.Strains.Count != 0 ) {
                 /// TODO: Block中有细菌时的代码
-                 ChangeBlockColor( Color.yellow );
+                ChangeBlockColor( Color.yellow );
             } else {
                 /// TODO: Block中没有细菌时的代码
                 ChangeBlockColor( Color.white );

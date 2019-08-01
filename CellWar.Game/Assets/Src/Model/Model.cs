@@ -192,13 +192,28 @@ namespace CellWar.Model.Substance {
             /// 被调控基因支配的基因
             /// </summary>
             public List<CodingGene> DominatedGenes { get; set; } = new List<CodingGene>();
+            
+            /// <summary>
+            /// Reg类型
+            /// </summary>
+            public string Type { get; set; }
 
             /// <summary>
             /// 判断格子中的chemicals是否是conditions的父集，且满足一定条件：格子中chemical的Count不小于condition中的Count
             /// </summary>
             /// <param name="chemicalsInBlock"></param>
             /// <returns></returns>
-            public virtual bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) { return true; }
+            public virtual bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) {
+                switch( Type ) {
+                    case "PA":      return isMeetAllCondition( chemicalsInBlock );
+                    case "NA":      return !isMeetAllCondition( chemicalsInBlock );
+                    case "PO":      return isMeetAtLeastOneCondition( chemicalsInBlock );
+                    case "NO":      return !isMeetAtLeastOneCondition( chemicalsInBlock );
+                    case "TRUE":    return true;
+                    case "FALSE" :  return false;
+                    default:        return default;
+                }
+            }
             #region PRIVATE
             /// <summary>
             /// 判断是否满足所有条件
@@ -252,48 +267,47 @@ namespace CellWar.Model.Substance {
         }
 
         #region MEANINGFUL_REGULARTOYGENES
-        /// <summary>
-        /// 正全调控基因
-        /// 必须满足所有条件方可触发条件
-        /// </summary>
-        public class PositiveAllRegulatoryGene : RegulatoryGene {
-            public sealed override bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) {
-                return isMeetAllCondition( chemicalsInBlock );
-            }
-        }
-        /// <summary>
-        /// 负全调控基因
-        /// 当满足所有条件是关闭条件触发
-        /// </summary>
-        public class NegativeAllRegulartoryGene : RegulatoryGene {
-            public sealed override bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) {
-                return !isMeetAllCondition( chemicalsInBlock );
-            }
-        }
+        ///// <summary>
+        ///// 正全调控基因
+        ///// 必须满足所有条件方可触发条件
+        ///// </summary>
+        //public class PositiveAllRegulatoryGene : RegulatoryGene {
+        //    public sealed override bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) {
+        //    }
+        //}
+        ///// <summary>
+        ///// 负全调控基因
+        ///// 当满足所有条件是关闭条件触发
+        ///// </summary>
+        //public class NegativeAllRegulartoryGene : RegulatoryGene {
+        //    public sealed override bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) {
+        //        return !isMeetAllCondition( chemicalsInBlock );
+        //    }
+        //}
 
-        /// <summary>
-        /// 正或调控基因
-        /// </summary>
-        public class PositiveOrRegulartoryGene : RegulatoryGene {
-            public sealed override bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) {
-                return isMeetAtLeastOneCondition( chemicalsInBlock );
-            }
-        }
+        ///// <summary>
+        ///// 正或调控基因
+        ///// </summary>
+        //public class PositiveOrRegulartoryGene : RegulatoryGene {
+        //    public sealed override bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) {
+        //        return isMeetAtLeastOneCondition( chemicalsInBlock );
+        //    }
+        //}
 
-        /// <summary>
-        /// 负或调控基因
-        /// </summary>
-        public class NegativeOrRegulartoryGene : RegulatoryGene {
-            public sealed override bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) {
-                return isMeetAllCondition( chemicalsInBlock );
-            }
-        }
+        ///// <summary>
+        ///// 负或调控基因
+        ///// </summary>
+        //public class NegativeOrRegulartoryGene : RegulatoryGene {
+        //    public sealed override bool IsTriggered( List<Substance.Chemical> chemicalsInBlock ) {
+        //        return isMeetAllCondition( chemicalsInBlock );
+        //    }
+        //}
 
-        public class TrueRegGene : RegulatoryGene {
-            public sealed override bool IsTriggered( List<Chemical> chemicalsInBlock ) {
-                return true;
-            }
-        }
+        //public class TrueRegGene : RegulatoryGene {
+        //    public sealed override bool IsTriggered( List<Chemical> chemicalsInBlock ) {
+        //        return true;
+        //    }
+        //}
         #endregion
 
         public class CodingGene : Gene {
@@ -441,8 +455,6 @@ namespace CellWar.Model.Substance {
                 // ----- 对父strain产生影响 -----
                 // --- 添加人口 ---
                 parentStrain.Population += ( int )GetPopulationDelta( ref parentStrain );
-
-                Debug.Log( parentStrain.Population );
 
                 // --- 添加私有化学库的量 ---
                 // 先寻找block内是否存在该种化学物质

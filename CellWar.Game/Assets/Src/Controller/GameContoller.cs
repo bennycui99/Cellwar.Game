@@ -44,10 +44,17 @@ namespace CellWar.Contoller {
             }
             sec += Time.deltaTime;
         }
+        public void UpdateBlockColorByInterval( BaseEvent eventUpdateInInterval, ref float sec ) {
+            if( sec >= GameData.MainGameCurrent.BlockColorInterval ) {
+                eventUpdateInInterval();
+                sec = 0;
+            }
+            sec += Time.deltaTime;
+        }
         public Strain StrainWork( Strain strain, ref Block block ) {
             BlockController blockController = new BlockController();
 
-            if( blockController.IsPopulationFull( block) ) {
+            if( blockController.IsPopulationFull( block ) ) {
                 return strain;
             }
             foreach( var reg in strain.PlayerSelectedGenes ) {
@@ -62,5 +69,6 @@ namespace CellWar.Contoller {
             }
             return strain;
         }
+
     }
 }

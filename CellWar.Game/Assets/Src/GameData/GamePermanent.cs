@@ -88,28 +88,8 @@ namespace CellWar.GameData {
             var allRegulatoryGeneJson = CellWar.Utils.JsonHelper.Json2Object_NT<List<RegulartoryGeneJsonModel>>( GetGameDataPath( "reg_gene.json" ) );
             List<RegulatoryGene> regulatoryGenes = new List<RegulatoryGene>();
             foreach( var geneJson in allRegulatoryGeneJson ) {
-                RegulatoryGene gene;
-                var c = ( RegulartoryGeneType )Enum.Parse( typeof( RegulartoryGeneType ), geneJson.Type );
-                switch( c ) {
-                    case RegulartoryGeneType.PA:
-                        gene = new PositiveAllRegulatoryGene();
-                        break;
-                    case RegulartoryGeneType.NA:
-                        gene = new NegativeAllRegulartoryGene();
-                        break;
-                    case RegulartoryGeneType.PO:
-                        gene = new PositiveOrRegulartoryGene();
-                        break;
-                    case RegulartoryGeneType.NO:
-                        gene = new NegativeOrRegulartoryGene();
-                        break;
-                    case RegulartoryGeneType.TRUE:
-                        gene = new TrueRegGene();
-                        break;
-                    default:
-                        throw new Exception( "In LoadAllRegulartoryGenes. Type is Invalid." );
-                }
-
+                RegulatoryGene gene = new RegulatoryGene();
+                gene.Type = geneJson.Type;
                 gene.Name = geneJson.Name;
                 gene.Description = geneJson.Description;
                 gene.Length = geneJson.Length;

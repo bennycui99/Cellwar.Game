@@ -18,7 +18,9 @@ namespace CellWar.View {
         void Info( string textInfo ) {
             UIHelper.ChangeText( uiTextInfo, textInfo );
         }
-
+        private void Awake() {
+            Application.targetFrameRate = 120;
+        }
         private void Start() {
             StartCoroutine( LoadGameData() );
         }

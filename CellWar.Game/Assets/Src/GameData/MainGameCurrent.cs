@@ -17,8 +17,11 @@ namespace CellWar.GameData {
         /// <summary>
         /// 细菌的所有基因作用的间隔
         /// </summary>
-        public static float GeneEffectInterval = 0.6f;
-
+        public static float GeneEffectInterval = 1f;
+        public static float BlockColorInterval = 0.3f;
+        public static float GetBlockColorChangeFps() {
+            return 1 / BlockColorInterval;
+        }
         public static List<Strain> StrainList = new List<Strain>();
 
         public static string GetCurrentBlockDetailInfo() {
