@@ -38,6 +38,7 @@ namespace CellWar.View {
                 } );
         }
 
+        /*
         // Start is called before the first frame update
         void Start() {
 
@@ -47,5 +48,6 @@ namespace CellWar.View {
         void Update() {
 
         }
+        */
     }
 }
