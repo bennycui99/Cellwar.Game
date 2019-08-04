@@ -90,10 +90,10 @@ namespace CellWar.Controller.Gene {
         }
         public bool ModifyPopulation( ref Strain parentStrain, ref Block currentBlock, ref CodingGene gene ) {
             var delta = ( int )GetPopulationDelta( ref parentStrain, ref gene );
-            if( MainGameCurrent.BlockController.IsPopulationBeingFull( currentBlock, delta )
-                && !MainGameCurrent.BlockController.IsPopulationFull( currentBlock ) ) { // 最后一次人口增加，即将变满
-                parentStrain.Population += currentBlock.Capacity - MainGameCurrent.BlockController.GetTotalPopulation( currentBlock );
-            } else if( MainGameCurrent.BlockController.IsPopulationFull( currentBlock ) ) { // 人口已满，无法增加
+            if( currentBlock.IsPopulationBeingFull( delta )
+                && !currentBlock.IsPopulationFull() ) { // 最后一次人口增加，即将变满
+                parentStrain.Population += currentBlock.Capacity - currentBlock.TotalPopulation;
+            } else if( currentBlock.IsPopulationFull() ) { // 人口已满，无法增加
                 return false;
             } else {
                 parentStrain.Population += delta;
@@ -146,6 +146,7 @@ namespace CellWar.Controller.Gene {
             return true;
             // ----- 细菌扩散 -----
         }
+        
         /// <summary>
         /// 游戏核心函数
         /// </summary>

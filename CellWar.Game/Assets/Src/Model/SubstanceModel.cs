@@ -146,6 +146,7 @@ namespace CellWar.Model.Substance {
             /// </summary>
             public float SpreadConditionRate { get; set; }
         }
+
         public Gamer.Player Owner { get; set; } = new Gamer.Player();
         public string Name { get; set; }
         public int Population { get; set; }
@@ -177,6 +178,7 @@ namespace CellWar.Model.Substance {
             };
         }
     }
+
     /// <summary>
     /// 化学物质
     /// </summary>

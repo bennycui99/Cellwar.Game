@@ -26,6 +26,7 @@ namespace CellWar.Model.Map {
         }
 
         public Type BlockType { get; set; }
+
         /// <summary>
         /// 人口上限
         /// </summary>
@@ -45,5 +46,27 @@ namespace CellWar.Model.Map {
         /// 公共资源库
         /// </summary>
         public List<Substance.Chemical> PublicChemicals { get; set; } = new List<Chemical>();
+
+        public bool IsPopulationFull() { return TotalPopulation > Capacity; }
+
+        public int TotalPopulation;
+
+        /// <summary>
+        /// 统计所有菌类数量
+        /// </summary>
+        public int GetTotalPopulation()
+        {
+            int totalPopulation = 0;
+            foreach (var s in Strains) { totalPopulation += s.Population; }
+            return totalPopulation;
+        }
+
+        /// <summary>
+        /// 检查这次添加是否已满
+        /// </summary>
+        /// <param name="delta"></param>
+        /// <returns></returns>
+        public bool IsPopulationBeingFull(int delta) { return (TotalPopulation + delta) > Capacity; }
+
     }
 }
