@@ -22,9 +22,9 @@ namespace CellWar.View {
         public static List<GameObject> BlockGameObjectList { get; set; } = new List<GameObject>();
 
         /// <summary>
-        /// Block radius 1.0f 但是这里暂且用1.1f,后续再调整
+        /// Block radius 1.0f 相距 根号3(1.7320508）
         /// </summary>
-        const float BLOCK_DISTANCE = 1.1f;
+        const float BLOCK_DISTANCE = 2.0f;
 
         private void Awake()
         {

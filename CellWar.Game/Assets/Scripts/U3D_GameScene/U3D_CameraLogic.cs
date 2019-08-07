@@ -17,7 +17,7 @@ namespace CellWar.View {
         /// <summary>
         /// 边界距离
         /// </summary>
-        const float EDGE_OFFSET = 5.0f;
+        const float EDGE_OFFSET = 7.0f;
 
         void Start()
         {
@@ -52,23 +52,24 @@ namespace CellWar.View {
 
         // Update is called once per frame
         void Update() {
-            if (Input.mousePosition.x >= Screen.width)
+            // 移动镜头,并控制镜头边界
+            if (Input.mousePosition.x >= Screen.width && Camera.main.transform.position.x <= m_CameraXMax)
             {
                 // Move Camera Right
                 Camera.main.transform.position = new Vector3(Camera.main.transform.position.x + CAMERA_SCROLL_SPEED, Camera.main.transform.position.y, Camera.main.transform.position.z);
             }
-            else if (Input.mousePosition.x <= 0)
+            else if (Input.mousePosition.x <= 0 && Camera.main.transform.position.x >= m_CameraXMin)
             {
                 // Move Camera Left
                 Camera.main.transform.position = new Vector3(Camera.main.transform.position.x - CAMERA_SCROLL_SPEED, Camera.main.transform.position.y, Camera.main.transform.position.z);
             }
 
-            if (Input.mousePosition.y >= Screen.height)
+            if (Input.mousePosition.y >= Screen.height && Camera.main.transform.position.z <= m_CameraZMax)
             {
                 // Move Camera Down
                 Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z + CAMERA_SCROLL_SPEED);
             }
-            else if (Input.mousePosition.y <= 0)
+            else if (Input.mousePosition.y <= 0 && Camera.main.transform.position.z >= m_CameraZMin)
             {
                 // Move Camera Up
                 Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z - CAMERA_SCROLL_SPEED);
