@@ -21,7 +21,10 @@ namespace CellWar.View {
         /// </summary>
         public static List<GameObject> Blocks { get; set; } = new List<GameObject>();
 
-        const float BLOCK_DISTANCE = 0.05f;
+        /// <summary>
+        /// Block radius 1.0f 但是这里暂且用1.1f,后续再调整
+        /// </summary>
+        const float BLOCK_DISTANCE = 1.1f;
 
         private void Awake()
         {
@@ -59,7 +62,7 @@ namespace CellWar.View {
                     Block neighbor = Blocks[j].GetComponent<U3D_BlockLogic>().HexBlockModel;
 
                     // 中心距离小于BLOCK_DISTANCE 即互相为邻居
-                    if ((Blocks[i].transform.position - Blocks[j].transform.position).magnitude > BLOCK_DISTANCE)
+                    if ((Blocks[i].transform.position - Blocks[j].transform.position).magnitude <= BLOCK_DISTANCE)
                     {
                         block.NeighborBlocks.Add(neighbor);
                         neighbor.NeighborBlocks.Add(block);
