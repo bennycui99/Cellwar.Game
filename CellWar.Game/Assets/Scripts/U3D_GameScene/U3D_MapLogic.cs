@@ -45,7 +45,7 @@ namespace CellWar.View {
             foreach( Transform child in transform ) {
                 BlockGameObjectList.Add(child.gameObject);
             }
-            Debug.Log(BlockGameObjectList.Count );
+            Debug.Log("Total block numbers:"+BlockGameObjectList.Count);
         }
 
         /// <summary>
