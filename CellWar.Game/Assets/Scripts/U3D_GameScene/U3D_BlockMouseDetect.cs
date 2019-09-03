@@ -14,6 +14,8 @@ namespace CellWar.View {
 
         bool m_IsMouseEnter = false;
 
+        Renderer m_BlockRenderer;
+
         /// <summary>
         /// 目标颜色
         /// </summary>
@@ -25,7 +27,7 @@ namespace CellWar.View {
         /// <summary>
         /// 当前颜色和目标差值
         /// </summary>
-        const float STEP_COLOR = 1.0f;
+        const float STEP_COLOR = 2.0f;
 
         /// <summary>
         /// 颜色变化淡入淡出时间
@@ -37,6 +39,7 @@ namespace CellWar.View {
         void Start()
         {
             HexBlockModel = ParentBlockLogic.HexBlockModel;
+            m_BlockRenderer = GetComponent<MeshRenderer>();
         }
 
         public void BlockColorUpdate()
@@ -56,7 +59,7 @@ namespace CellWar.View {
         /// </summary>
         private void FixedUpdate()
         {
-            //ChangeBlockColor(Color.Lerp(GetCurrentColor(), m_DestColor, STEP_COLOR * Time.deltaTime));
+            ChangeBlockColor(Color.Lerp(GetCurrentColor(), m_DestColor, STEP_COLOR * Time.deltaTime));
         }
 
         /// <summary>
@@ -89,7 +92,7 @@ namespace CellWar.View {
 
             return new Color(1f, 0.4f, 0.4f, 0.5f);
         }
-        /*
+        
         Color GetCurrentColor()
         {
             return m_BlockRenderer.material.color;
@@ -101,7 +104,7 @@ namespace CellWar.View {
                 m_BlockRenderer.material.color = color;
             }
         }
-        */
+        
 
         /// <summary>
         /// 点击方块显示方块信息
@@ -116,7 +119,7 @@ namespace CellWar.View {
             //Debug.Log(MainGameCurrent.HoldingStrain);
             if (MainGameCurrent.FocusedBlock != null && MainGameCurrent.HoldingStrain != null)
             {
-                //MainGameCurrent.FocusedBlock.ChangeBlockColor(Color.yellow);
+                ChangeBlockColor(Color.yellow);
                 // 防止反复增加同一种细菌
                 if (!MainGameCurrent.FocusedBlock.HexBlockModel.Strains.Exists(m => m.Name == MainGameCurrent.HoldingStrain.Name))
                 {
@@ -132,7 +135,7 @@ namespace CellWar.View {
             //Debug.Log("Mouse Enter");
             m_IsMouseEnter = true;
             MainGameCurrent.FocusedBlock = ParentBlockLogic;
-            /*
+            
             if (MainGameCurrent.HoldingStrain != null)
             {
                 /// 当手里拿着细菌准备放置时的代码
@@ -143,7 +146,7 @@ namespace CellWar.View {
                 /// 手里什么都没有拿时鼠标移动到格子上的代码
                 m_DestColor = Color.blue;
             }
-            */
+            
         }
 
         private void OnMouseExit()
