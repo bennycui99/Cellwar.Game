@@ -59,6 +59,7 @@ namespace CellWar.View {
         /// </summary>
         private void FixedUpdate()
         {
+
             ChangeBlockColor(Color.Lerp(GetCurrentColor(), m_DestColor, STEP_COLOR * Time.deltaTime));
         }
 
@@ -69,28 +70,28 @@ namespace CellWar.View {
         /// <returns></returns>
         Color GetColorAccordingToPopulation(int n)
         {
-            if (n > 10)
+            if (n > 1000)
             {
-                return new Color(1f, 0.4f, 0.4f, 0.5f);
+                return new Color(0.5f, 0f, 0f, 0.5f);
             }
-            if (n > 50)
+            if (n > 500)
             {
-                return new Color(1f, 0.2f, 0.2f, 0.5f);
+                return new Color(0f, 0f, 0f, 0.5f);
             }
             if (n > 100)
             {
                 return new Color(1f, 0f, 0f, 0.5f);
             }
-            if (n > 500)
+            if (n > 50)
             {
-                return new Color(0.8f, 0f, 0f, 0.5f);
+                return new Color(1f, 0.2f, 0.2f, 0.5f);
             }
-            if (n > 1000)
+            if (n > 10)
             {
-                return new Color(0.5f, 0f, 0f, 0.5f);
+                return new Color(1f, 0.4f, 0.4f, 0.5f);
             }
-
-            return new Color(1f, 0.4f, 0.4f, 0.5f);
+            
+            return new Color(188f/255f, 238f/255f, 104f/255f, 1f);
         }
         
         Color GetCurrentColor()
