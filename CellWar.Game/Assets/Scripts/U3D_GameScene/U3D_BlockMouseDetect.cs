@@ -113,6 +113,7 @@ namespace CellWar.View {
 
         public void processSelectedStrain()
         {
+            //Debug.Log(MainGameCurrent.HoldingStrain);
             if (MainGameCurrent.FocusedBlock != null && MainGameCurrent.HoldingStrain != null)
             {
                 //MainGameCurrent.FocusedBlock.ChangeBlockColor(Color.yellow);
@@ -128,7 +129,7 @@ namespace CellWar.View {
 
         private void OnMouseEnter()
         {
-            Debug.Log("Mouse Enter");
+            //Debug.Log("Mouse Enter");
             m_IsMouseEnter = true;
             MainGameCurrent.FocusedBlock = ParentBlockLogic;
             /*

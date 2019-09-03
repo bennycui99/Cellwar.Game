@@ -56,8 +56,7 @@ namespace CellWar.View {
             for (int i = 0; i < BlockGameObjectList.Count; ++i)
             {
                 Block block = BlockGameObjectList[i].GetComponent<U3D_BlockLogic>().HexBlockModel;
-
-                for(int j = 0; j < BlockGameObjectList.Count && j>i; ++j)
+                for (int j = i+1;j < BlockGameObjectList.Count; ++j)
                 {
                     Block neighbor = BlockGameObjectList[j].GetComponent<U3D_BlockLogic>().HexBlockModel;
 
@@ -66,6 +65,7 @@ namespace CellWar.View {
                     {
                         block.NeighborBlocks.Add(neighbor);
                         neighbor.NeighborBlocks.Add(block);
+                        //Debug.Log("Neighbor Built!");
                     }
                 }
             }

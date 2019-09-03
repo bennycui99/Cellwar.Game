@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &673859483553257511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2164513275510185812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8e7b0c567bbb0f46a20e15b17f5af08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ParentBlockLogic: {fileID: 0}
 --- !u!64 &7134584476166500738
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -27,6 +14,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 1443009928476396408, guid: 1bcee20c9fa4fca4a96c5b81165a1117, type: 3}
+--- !u!114 &673859483553257511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2164513275510185812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e7b0c567bbb0f46a20e15b17f5af08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ParentBlockLogic: {fileID: 0}
 --- !u!64 &1034974984329116073
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -117,6 +117,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4591044060028816925, guid: 1bcee20c9fa4fca4a96c5b81165a1117,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.001
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 1bcee20c9fa4fca4a96c5b81165a1117,
         type: 3}
