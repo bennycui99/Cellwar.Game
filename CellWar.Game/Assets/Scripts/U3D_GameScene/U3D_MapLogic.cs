@@ -1,11 +1,14 @@
 ﻿///<summary>
-/// 游戏场景的结构必须是一个 Map空对象，子对象为Block
+/// 游戏场景的结构必须是一个 Map空对象，子对象为BlockContainer
 /// 
 /// 形如： 
 ///
 /// Map -
-///     | -Block1
-///     | -Block2
+///     | -BlockContainer
+///         | -Block
+///         | -纸片人
+///     | -BlockContainer
+///     | -BlockContainer
 ///     
 /// </summary>
 using System.Collections;
