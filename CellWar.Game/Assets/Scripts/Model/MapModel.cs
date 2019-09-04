@@ -9,11 +9,21 @@ using CellWar.Model.Substance;
 /// </summary>
 namespace CellWar.Model.Map {
     public class Map {
-
+        public string Name { get; set; }
+        public List<Block> Blocks { get; set; } = new List<Block>();
     }
 
     public class Block {
         public const string Tag = "HexBlock";
+
+        /// <summary>
+        /// Hex仿射坐标 X
+        /// </summary>
+        public int X { get; set; }
+        /// <summary>
+        /// Hex仿射坐标 Y
+        /// </summary>
+        public int Y { get; set; }
 
         /// <summary>
         /// Unity 游戏对象名字
