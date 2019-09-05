@@ -34,6 +34,9 @@ namespace CellWar.Model.Map {
         }
     }
 
+    /// <summary>
+    /// X/Z 轴双轴六边形坐标
+    /// </summary>
     public class HexCoordinate
     {
         const float RADIUS = 1.73205f;

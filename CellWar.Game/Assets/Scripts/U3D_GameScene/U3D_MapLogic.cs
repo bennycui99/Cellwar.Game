@@ -22,16 +22,13 @@ using CellWar.Utils;
 namespace CellWar.View {
     public class U3D_MapLogic : MonoBehaviour {
 
+        /// <summary>
+        /// 地图的Instance
+        /// </summary>
         public static Map StageMap = new Map();
 
         [SerializeField]
         public GameObject BlockPrefab;
-
-        /// <summary>
-        /// 地图中所有的格子的GameObject
-        /// 地图加载时,block自身awake 创建HexBlockModel
-        /// </summary>
-        public static List<GameObject> BlockGameObjectList { get; set; } = new List<GameObject>();
 
         /// <summary>
         /// Block HexCoor 相距 <=2
