@@ -359,5 +359,24 @@
     "FirstSpreadMountRate": "0.02",
     "SpreadConditionRate": "0.02",
     "Description": "以太细菌，无脑增长，没有用。"
+  },
+  {
+    "Name": "MT",
+    "Length": "1422",
+    "PopulationCoefficient": "1",
+    "PopulationIntercept": "0",
+    "ConsumeChemicalName": "Amino Acid",
+    "ConsumeChemicalCoeffeicient": "2",
+    "ConsumeChemicalIntercept": "10",
+    "IsConsumePublic": "True",
+    "ProductionChemicalName": "",
+    "ProductionChemicalCoeffeicient": "0",
+    "ProductionChemicalIntercept": "0",
+    "ImportChemicalName": "Cu",
+    "ImportChemicalCoeffeicient": "10",
+    "ImportChemicalIntercept": "0",
+    "FirstSpreadMountRate": "0",
+    "SpreadConditionRate": "0",
+    "Description": "产生金属硫蛋白，具有结合金属。能够减少一个区域内的金属铜离子"
   }
 ]
