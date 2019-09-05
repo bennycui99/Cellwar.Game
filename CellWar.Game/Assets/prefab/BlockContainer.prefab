@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10b275c75e8fa75449bfe509eaf9f514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BlockMouseDetectObject: {fileID: 0}
+  m_BlockMouseDetectObject: {fileID: 6466213765957440890}
 --- !u!64 &6001125342781120514
 MeshCollider:
   m_ObjectHideFlags: 0

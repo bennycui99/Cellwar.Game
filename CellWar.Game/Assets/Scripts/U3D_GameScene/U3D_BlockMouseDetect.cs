@@ -16,14 +16,17 @@ namespace CellWar.View {
 
         Renderer m_BlockRenderer;
 
-        /// <summary>
-        /// 目标颜色
-        /// </summary>
-        Color m_DestColor;
+        static Color INIT_COLOR = new Color(188f / 255f, 238f / 255f, 104f / 255f, 1f);
+
         /// <summary>
         /// 方块人口对应颜色
         /// </summary>
-        Color m_PopulationColor;
+        Color m_PopulationColor = INIT_COLOR;
+
+        /// <summary>
+        /// 目标颜色
+        /// </summary>
+        Color m_DestColor = INIT_COLOR;
         /// <summary>
         /// 当前颜色和目标差值
         /// </summary>
@@ -39,6 +42,7 @@ namespace CellWar.View {
         void Start()
         {
             m_BlockRenderer = GetComponent<MeshRenderer>();
+            //ChangeBlockColor(INIT_COLOR);
         }
 
         public void BlockColorUpdate()
@@ -58,7 +62,6 @@ namespace CellWar.View {
         /// </summary>
         private void FixedUpdate()
         {
-
             ChangeBlockColor(Color.Lerp(GetCurrentColor(), m_DestColor, STEP_COLOR * Time.deltaTime));
         }
 
@@ -90,7 +93,7 @@ namespace CellWar.View {
                 return new Color(1f, 0.4f, 0.4f, 0.5f);
             }
             
-            return new Color(188f/255f, 238f/255f, 104f/255f, 1f);
+            return INIT_COLOR;
         }
         
         Color GetCurrentColor()

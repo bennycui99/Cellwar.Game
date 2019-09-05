@@ -1,0 +1,56 @@
+[
+	{
+		"HexCoor":{
+			"X" : "0",
+			"Z" : "0"
+		},
+		"BlockType" : "Normal",
+		"Capacity" : "1000",
+		"Strains" : [],
+		"PublicChemicals": []
+	},
+	
+	{
+		"HexCoor":{
+			"X" : "1",
+			"Z" : "0"
+		},
+		"BlockType" : "Normal",
+		"Capacity" : "1000",
+		"Strains" : [],
+		"PublicChemicals": []
+	},
+	
+	{
+		"HexCoor":{
+			"X" : "1",
+			"Z" : "1"
+		},
+		"BlockType" : "Normal",
+		"Capacity" : "1000",
+		"Strains" : [],
+		"PublicChemicals": []
+	},
+	
+	{
+		"HexCoor":{
+			"X" : "3",
+			"Z" : "1"
+		},
+		"BlockType" : "Normal",
+		"Capacity" : "1000",
+		"Strains" : [],
+		"PublicChemicals": []
+	},
+	
+	{
+		"HexCoor":{
+			"X" : "-1",
+			"Z" : "0"
+		},
+		"BlockType" : "Normal",
+		"Capacity" : "1000",
+		"Strains" : [],
+		"PublicChemicals": []
+	},
+]

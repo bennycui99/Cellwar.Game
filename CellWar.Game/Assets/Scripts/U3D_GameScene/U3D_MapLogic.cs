@@ -22,7 +22,7 @@ using CellWar.Utils;
 namespace CellWar.View {
     public class U3D_MapLogic : MonoBehaviour {
 
-        public Map StageMap = new Map();
+        public static Map StageMap = new Map();
 
         [SerializeField]
         public GameObject BlockPrefab;
@@ -34,15 +34,13 @@ namespace CellWar.View {
         public static List<GameObject> BlockGameObjectList { get; set; } = new List<GameObject>();
 
         /// <summary>
-        /// Block radius 1.0f 相距 根号3(1.7320508）
+        /// Block HexCoor 相距 <=2
         /// </summary>
-        const float BLOCK_DISTANCE = 2.0f;
+        const int BLOCK_DISTANCE = 2;
 
         private void Awake()
         {
             GenerateBlockContainer();
-
-            GetAllBlockGameObjects();
         }
 
         private void Start()
@@ -69,25 +67,13 @@ namespace CellWar.View {
                 StageMap.Blocks.Add(HexBlockModel);
 
                 //生成object
-                GameObject blockObject = Instantiate(BlockPrefab) as GameObject;
+                GameObject blockObject = Instantiate(BlockPrefab,gameObject.transform) as GameObject;
                 //赋值block
                 blockObject.GetComponent<U3D_BlockLogic>().HexBlockModel = HexBlockModel;
                 //移动到正确位置
-                blockObject.transform.position = new Vector3(HexBlockModel.StandardCoor.X, HexBlockModel.StandardCoor.Y, 0);
+                blockObject.transform.position = new Vector3(HexBlockModel.StandardCoor.X, 0, HexBlockModel.StandardCoor.Z);
                 blockObject.SetActive(true);
             }
-        }
-
-
-        /// <summary>
-        /// 取得所有Block Object
-        /// </summary>
-        public void GetAllBlockGameObjects()
-        {
-            foreach( Transform child in transform ) {
-                BlockGameObjectList.Add(child.gameObject);
-            }
-            Debug.Log("Total block numbers:"+BlockGameObjectList.Count);
         }
 
         /// <summary>
@@ -95,15 +81,15 @@ namespace CellWar.View {
         /// </summary>
         void BuildNeighborNetwork()
         {
-            for (int i = 0; i < BlockGameObjectList.Count; ++i)
+            for (int i = 0; i < StageMap.Blocks.Count; ++i)
             {
-                Block block = BlockGameObjectList[i].GetComponent<U3D_BlockLogic>().HexBlockModel;
-                for (int j = i+1;j < BlockGameObjectList.Count; ++j)
+                Block block = StageMap.Blocks[i];
+                for (int j = i+1;j < StageMap.Blocks.Count; ++j)
                 {
-                    Block neighbor = BlockGameObjectList[j].GetComponent<U3D_BlockLogic>().HexBlockModel;
+                    Block neighbor = StageMap.Blocks[j];
 
                     // 中心距离小于BLOCK_DISTANCE 即互相为邻居
-                    if ((BlockGameObjectList[i].transform.position - BlockGameObjectList[j].transform.position).magnitude <= BLOCK_DISTANCE)
+                    if (block.HexCoor.HexDistance(block.HexCoor,neighbor.HexCoor) <= BLOCK_DISTANCE)
                     {
                         block.NeighborBlocks.Add(neighbor);
                         neighbor.NeighborBlocks.Add(block);

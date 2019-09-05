@@ -18,14 +18,19 @@ namespace CellWar.Model.Map {
     {
         const float RADIUS = 1.73205f;
         public float X { get; set; }
-        public float Y { get; set; }
+        public float Z { get; set; }
 
         public HexCoordinate StandardToHexCoordiante()
         {
             HexCoordinate hex = new HexCoordinate();
-            hex.Y = (int)(Math.Round(Y / 1.5f));
-            hex.X = (int)(Math.Round((X - hex.Y * (RADIUS / 2)) / RADIUS));
+            hex.Z = (int)(Math.Round(Z / 1.5f));
+            hex.X = (int)(Math.Round((X - hex.Z * (RADIUS / 2)) / RADIUS));
             return hex;
+        }
+
+        public float StandardDistance(StandardCoordinate a, StandardCoordinate b)
+        {
+            return (a.X - b.X) * (a.X - b.X) + (a.Z - b.Z) * (a.Z - b.Z);
         }
     }
 
@@ -37,16 +42,21 @@ namespace CellWar.Model.Map {
         /// </summary>
         public int X { get; set; }
         /// <summary>
-        /// Hex仿射坐标 Y
+        /// Hex仿射坐标 Z
         /// </summary>
-        public int Y { get; set; }
+        public int Z { get; set; }
 
         public StandardCoordinate HexToStandardCoordiante()
         {
             StandardCoordinate standard = new StandardCoordinate();
-            standard.Y = Y * 1.5f;
-            standard.X = Y * (RADIUS / 2f) + X * RADIUS;
+            standard.Z = Z * 1.5f;
+            standard.X = Z * (RADIUS / 2f) + X * RADIUS;
             return standard;
+        }
+
+        public int HexDistance(HexCoordinate a, HexCoordinate b)
+        {
+            return (a.X - b.X) * (a.X - b.X) + (a.Z - b.Z) * (a.Z - b.Z);
         }
     }
 

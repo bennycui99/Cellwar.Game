@@ -22,24 +22,24 @@ namespace CellWar.View {
         void Start()
         {
             // 取得地图边界
-            for(int i=0;i< U3D_MapLogic.BlockGameObjectList.Count; ++i)
+            for(int i=0;i< U3D_MapLogic.StageMap.Blocks.Count; ++i)
             {
-                if (m_CameraXMin > U3D_MapLogic.BlockGameObjectList[i].transform.position.x)
+                if (m_CameraXMin > U3D_MapLogic.StageMap.Blocks[i].StandardCoor.X)
                 {
-                    m_CameraXMin = U3D_MapLogic.BlockGameObjectList[i].transform.position.x;
+                    m_CameraXMin = U3D_MapLogic.StageMap.Blocks[i].StandardCoor.X;
                 }
-                if (m_CameraXMax < U3D_MapLogic.BlockGameObjectList[i].transform.position.x)
+                if (m_CameraXMax < U3D_MapLogic.StageMap.Blocks[i].StandardCoor.X)
                 {
-                    m_CameraXMax = U3D_MapLogic.BlockGameObjectList[i].transform.position.x;
+                    m_CameraXMax = U3D_MapLogic.StageMap.Blocks[i].StandardCoor.X;
                 }
 
-                if (m_CameraZMin > U3D_MapLogic.BlockGameObjectList[i].transform.position.z)
+                if (m_CameraZMin > U3D_MapLogic.StageMap.Blocks[i].StandardCoor.Z)
                 {
-                    m_CameraZMin = U3D_MapLogic.BlockGameObjectList[i].transform.position.z;
+                    m_CameraZMin = U3D_MapLogic.StageMap.Blocks[i].StandardCoor.Z;
                 }
-                if (m_CameraZMax < U3D_MapLogic.BlockGameObjectList[i].transform.position.z)
+                if (m_CameraZMax < U3D_MapLogic.StageMap.Blocks[i].StandardCoor.Z)
                 {
-                    m_CameraZMax = U3D_MapLogic.BlockGameObjectList[i].transform.position.z;
+                    m_CameraZMax = U3D_MapLogic.StageMap.Blocks[i].StandardCoor.Z;
                 }
             }
 
