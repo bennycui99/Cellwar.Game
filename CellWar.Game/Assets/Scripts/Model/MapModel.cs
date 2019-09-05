@@ -3,6 +3,7 @@
 /// </summary>
 using System.Collections.Generic;
 using CellWar.Model.Substance;
+using System;
 
 /// <summary>
 /// 存放地图相关的Model
@@ -13,9 +14,24 @@ namespace CellWar.Model.Map {
         public List<Block> Blocks { get; set; } = new List<Block>();
     }
 
-    public class Block {
-        public const string Tag = "HexBlock";
+    public class StandardCoordinate
+    {
+        const float RADIUS = 1.73205f;
+        public float X { get; set; }
+        public float Y { get; set; }
 
+        public HexCoordinate StandardToHexCoordiante()
+        {
+            HexCoordinate hex = new HexCoordinate();
+            hex.Y = (int)(Math.Round(Y / 1.5f));
+            hex.X = (int)(Math.Round((X - hex.Y * (RADIUS / 2)) / RADIUS));
+            return hex;
+        }
+    }
+
+    public class HexCoordinate
+    {
+        const float RADIUS = 1.73205f;
         /// <summary>
         /// Hex仿射坐标 X
         /// </summary>
@@ -24,6 +40,21 @@ namespace CellWar.Model.Map {
         /// Hex仿射坐标 Y
         /// </summary>
         public int Y { get; set; }
+
+        public StandardCoordinate HexToStandardCoordiante()
+        {
+            StandardCoordinate standard = new StandardCoordinate();
+            standard.Y = Y * 1.5f;
+            standard.X = Y * (RADIUS / 2f) + X * RADIUS;
+            return standard;
+        }
+    }
+
+    public class Block {
+        public const string Tag = "HexBlock";
+
+        public HexCoordinate HexCoor;
+        public StandardCoordinate StandardCoor;
 
         /// <summary>
         /// Unity 游戏对象名字
@@ -59,7 +90,7 @@ namespace CellWar.Model.Map {
 
         public bool IsPopulationFull() { return TotalPopulation > Capacity; }
 
-        public int TotalPopulation;
+        public int TotalPopulation = 0;
 
         /// <summary>
         /// 统计所有菌类数量
@@ -78,5 +109,6 @@ namespace CellWar.Model.Map {
         /// <returns></returns>
         public bool IsPopulationBeingFull(int delta) { return (TotalPopulation + delta) > Capacity; }
 
+       
     }
 }

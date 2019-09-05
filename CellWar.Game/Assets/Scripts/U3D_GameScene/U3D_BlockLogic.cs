@@ -10,30 +10,23 @@ namespace CellWar.View {
         const float MAX_UPDATE_COUNT = 1.0f;
         float m_UpdateCount = MAX_UPDATE_COUNT;
 
-        const int INIT_CAPACITY = 1000;
         public Block HexBlockModel;
 
         [SerializeField]
-        GameObject m_BlockMouseDetection;
+        GameObject m_BlockMouseDetectObject;
 
         U3D_BlockMouseDetect m_BlockMouseDetectLogic;
 
         /// <summary>
         /// 初始化这个Block
         /// </summary>
-        void Awake()
-        {
-            HexBlockModel = new Block();
-            HexBlockModel.ParentUnityObjectName = gameObject.name;
-            HexBlockModel.Capacity = INIT_CAPACITY;
-
-            m_BlockMouseDetectLogic = m_BlockMouseDetection.GetComponent<U3D_BlockMouseDetect>();
-            m_BlockMouseDetectLogic.ParentBlockLogic = this;
-        }
-
         private void Start()
         {
+            HexBlockModel.ParentUnityObjectName = gameObject.name;
 
+            m_BlockMouseDetectLogic = m_BlockMouseDetectObject.GetComponent<U3D_BlockMouseDetect>();
+            m_BlockMouseDetectLogic.ParentBlockLogic = this;
+            m_BlockMouseDetectLogic.HexBlockModel = HexBlockModel;
         }
 
         private void Update()
