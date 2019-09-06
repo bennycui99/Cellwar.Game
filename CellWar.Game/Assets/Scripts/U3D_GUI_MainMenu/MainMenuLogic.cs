@@ -19,7 +19,9 @@ namespace CellWar.View {
             Check.GameDataLoaded();
         }
         // Start is called before the first frame update
-        void Start() { }
+        void Start() {
+            
+        }
 
         #region STATE_SWITCH
 
@@ -45,7 +47,9 @@ namespace CellWar.View {
 
         #region EVENTS
         public void OnStageClicked() {
-            SceneManager.LoadScene( "GameScene" );
+            StartCoroutine(VideoManager.Instance().PlayFadeoutVideo());
+            VideoManager.Instance().m_videoPlayer.loopPointReached += EndReached;
+
         }
         public void OnOptionClicked() {
             Switch( MenuStates.Options );
@@ -60,5 +64,11 @@ namespace CellWar.View {
             Switch( MenuStates.MainMenu );
         }
         #endregion
+        void EndReached(UnityEngine.Video.VideoPlayer vp)
+        {
+            SceneManager.LoadScene("GameScene");
+            //Event Handler for VideoManager.
+        }
+        
     }
 }
