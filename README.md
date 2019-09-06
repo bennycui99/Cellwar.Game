@@ -5,6 +5,12 @@ This game is used in HumanPractices part in our iGEM project. After iGEM, we can
 See [TODO List](<https://github.com/bennycui99/Cellwar.Game/blob/master/TODO.md>) and fuck your tasks off! LOL
 
 ## Where the hell we are?
+### 9.6 Implement Video Manager - Fade between scenes
+
+The in-game fade in animation remain unimplemented, but the API is easy to use.
+![avatar](Progress/9.6.gif)
+
+
 ### 9.4 Smooth Game Animation s
 
 ![avatar](Progress/9.4.gif)
