@@ -1,22 +1,66 @@
 [
   {
-    "Name": "C1",
+    "Name": "AmpKanaChlVH1",
     "Length": "180",
     "Condition": [
       {
         "Chemical": "Ampicillin",
+        "Count": "10"
+      },
+      {
+        "Chemical": "Kana",
+        "Count": "10"
+      },
+      {
+        "Chemical": "Chl",
+        "Count": "10"
+      }
+    ],
+    "Type": "NO",
+    "Description": "对ampcillin，Kana，Chl非常敏感的开关"
+  },
+  {
+    "Name": "AmpKanaChlH1",
+    "Length": "360",
+    "Condition": [
+      {
+        "Chemical": "Ampicillin",
         "Count": "100"
       },
       {
         "Chemical": "Kana",
+        "Count": "100"
+      },
+      {
+        "Chemical": "Chl",
         "Count": "100"
       }
     ],
     "Type": "NO",
-    "Description": "受ampcillin抑制的开关"
+    "Description": "对ampcillin，Kana，Chl敏感的开关"
   },
   {
-    "Name": "C2",
+    "Name": "AmpKanaChlL",
+    "Length": "720",
+    "Condition": [
+      {
+        "Chemical": "Ampicillin",
+        "Count": "300"
+      },
+      {
+        "Chemical": "Kana",
+        "Count": "300"
+      },
+      {
+        "Chemical": "Chl",
+        "Count": "300"
+      }
+    ],
+    "Type": "NO",
+    "Description": "对ampcillin，Kana，Chl低敏感的开关"
+  },
+  {
+    "Name": "Lactose",
     "Length": "237",
     "Condition": [
       {
@@ -25,53 +69,97 @@
       },
       {
         "Chemical": "Kana",
-        "Count": "-100"
+        "Count": "-10"
       },
       {
         "Chemical": "Ampicillin",
-        "Count": "-99"
+        "Count": "-10"
+      },
+      {
+        "Chemical": "Chl",
+        "Count": "-10"
       }
     ],
     "Type": "PA",
-    "Description": "受lactose激活的开关"
+    "Description": "受lactose激活的开关，对抗生素高敏感"
   },
   {
-    "Name": "C3",
+    "Name": "IPTG",
     "Length": "237",
     "Condition": [
       {
-        "Chemical": "lactose",
+        "Chemical": "IPTG",
         "Count": "100"
       },
       {
         "Chemical": "Kana",
-        "Count": "-100"
+        "Count": "-10"
       },
       {
         "Chemical": "Ampicillin",
-        "Count": "-99"
+        "Count": "-10"
+      },
+      {
+        "Chemical": "Chl",
+        "Count": "-10"
       }
     ],
     "Type": "PA",
-    "Description": "受IPTG激活的开关"
+    "Description": "受IPTG激活的开关，对抗生素高敏感"
   },
   {
-    "Name": "C4",
-    "Length": "562",
+    "Name": "GOD",
+    "Length": "0",
     "Condition": [],
     "Type": "TRUE",
-    "Description": "永远开启的调控基因"
+    "Description": "永远不会被关闭的调控基因"
   },
   {
-    "Name": "RedLight1",
-    "Length": "234",
+    "Name": "IPTG",
+    "Length": "237",
     "Condition": [
       {
         "Chemical": "RedLight",
         "Count": "100"
+      },
+      {
+        "Chemical": "Kana",
+        "Count": "-10"
+      },
+      {
+        "Chemical": "Ampicillin",
+        "Count": "-10"
+      },
+      {
+        "Chemical": "Chl",
+        "Count": "-10"
       }
     ],
     "Type": "PA",
-    "Description": "受红光激活的开关"
+    "Description": "受IPTG激活的开关，对抗生素高敏感"
+  },
+  {
+    "Name": "BlueLight",
+    "Length": "237",
+    "Condition": [
+      {
+        "Chemical": "BlueLight",
+        "Count": "100"
+      },
+      {
+        "Chemical": "Kana",
+        "Count": "-10"
+      },
+      {
+        "Chemical": "Ampicillin",
+        "Count": "-10"
+      },
+      {
+        "Chemical": "Chl",
+        "Count": "-10"
+      }
+    ],
+    "Type": "PA",
+    "Description": "高敏感蓝光启动子"
   }
 ]

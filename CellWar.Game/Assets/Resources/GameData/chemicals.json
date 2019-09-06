@@ -54,5 +54,40 @@
     "Detailed": "",
     "Count": "0",
     "SpreadRate": "0"
+  },
+  {
+    "Name": "Amino Acid",
+    "Description": "氨基酸",
+    "Detailed": "",
+    "Count": "0",
+    "SpreadRate": "0"
+  },
+  {
+    "Name": "Cu",
+    "Description": "金属铜离子",
+    "Detailed": "",
+    "Count": "0",
+    "SpreadRate": "0"
+  },
+  {
+    "Name": "Chl",
+    "Description": "氯霉素",
+    "Detailed": "",
+    "Count": "0",
+    "SpreadRate": "0"
+  },
+  {
+    "Name": "Kana",
+    "Description": "卡那霉素",
+    "Detailed": "",
+    "Count": "0",
+    "SpreadRate": "0"
+  },
+  {
+    "Name": "BlueLight",
+    "Description": "蓝光",
+    "Detailed": "",
+    "Count": "0",
+    "SpreadRate": "0"
   }
 ]

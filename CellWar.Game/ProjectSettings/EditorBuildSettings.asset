@@ -14,10 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: 323b25e9a2898604bb44556b52df28ff
-  - enabled: 1
+  - enabled: 0
     path: Assets/$$DEMO$$/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/$$DEMO$$/DemoScene.unity
     guid: ef80e82698a06c744aa28e335042b044
   m_configObjects: {}
