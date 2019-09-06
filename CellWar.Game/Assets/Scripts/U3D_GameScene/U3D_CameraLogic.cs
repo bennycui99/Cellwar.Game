@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using CellWar.Model.Map;
 using CellWar.GameData;
 using UnityEngine;
 
 namespace CellWar.View {
 
     public class U3D_CameraLogic : MonoBehaviour {
+        public Map StageMap;
+
         /// <summary>
         /// 镜头滚动速度
         /// </summary>
@@ -21,25 +24,26 @@ namespace CellWar.View {
 
         void Start()
         {
+            StageMap = MainGameCurrent.StageMap;
             // 取得地图边界
-            for(int i=0;i< U3D_MapLogic.StageMap.Blocks.Count; ++i)
+            for (int i=0;i< StageMap.Blocks.Count; ++i)
             {
-                if (m_CameraXMin > U3D_MapLogic.StageMap.Blocks[i].StandardCoor.X)
+                if (m_CameraXMin > StageMap.Blocks[i].StandardCoor.X)
                 {
-                    m_CameraXMin = U3D_MapLogic.StageMap.Blocks[i].StandardCoor.X;
+                    m_CameraXMin = StageMap.Blocks[i].StandardCoor.X;
                 }
-                if (m_CameraXMax < U3D_MapLogic.StageMap.Blocks[i].StandardCoor.X)
+                if (m_CameraXMax < StageMap.Blocks[i].StandardCoor.X)
                 {
-                    m_CameraXMax = U3D_MapLogic.StageMap.Blocks[i].StandardCoor.X;
+                    m_CameraXMax = StageMap.Blocks[i].StandardCoor.X;
                 }
 
-                if (m_CameraZMin > U3D_MapLogic.StageMap.Blocks[i].StandardCoor.Z)
+                if (m_CameraZMin > StageMap.Blocks[i].StandardCoor.Z)
                 {
-                    m_CameraZMin = U3D_MapLogic.StageMap.Blocks[i].StandardCoor.Z;
+                    m_CameraZMin = StageMap.Blocks[i].StandardCoor.Z;
                 }
-                if (m_CameraZMax < U3D_MapLogic.StageMap.Blocks[i].StandardCoor.Z)
+                if (m_CameraZMax < StageMap.Blocks[i].StandardCoor.Z)
                 {
-                    m_CameraZMax = U3D_MapLogic.StageMap.Blocks[i].StandardCoor.Z;
+                    m_CameraZMax = StageMap.Blocks[i].StandardCoor.Z;
                 }
             }
 
@@ -49,6 +53,8 @@ namespace CellWar.View {
             m_CameraZMin -= EDGE_OFFSET;
             //ZMax 不需要增加offset,反而要减
             m_CameraZMax -= EDGE_OFFSET;
+
+            Debug.Log(m_CameraXMax);
         }
 
         // Update is called once per frame

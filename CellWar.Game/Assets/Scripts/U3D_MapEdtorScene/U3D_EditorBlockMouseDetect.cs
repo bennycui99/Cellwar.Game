@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using CellWar.Model.Map;
-using UnityEngine.EventSystems;
-using CellWar.GameData;
-using CellWar.Model.Substance;
 using UnityEngine;
+using CellWar.Model.Map;
+using CellWar.GameData;
+using UnityEngine.UI;
 
-namespace CellWar.View {
-    public class U3D_BlockMouseDetect : MonoBehaviour
+namespace CellWar.View
+{
+    public class U3D_EditorBlockMouseDetect : MonoBehaviour
     {
         public Block HexBlockModel;
 
@@ -15,13 +15,11 @@ namespace CellWar.View {
 
         Renderer m_BlockRenderer;
 
-        static Color INIT_COLOR = new Color(188f / 255f, 238f / 255f, 104f / 255f, 1f);
-
+        static Color INIT_COLOR = new Color(190f / 255f, 190f / 255f, 190f / 255f, 0f);
         /// <summary>
         /// 方块人口对应颜色
         /// </summary>
         Color m_PopulationColor = INIT_COLOR;
-
         /// <summary>
         /// 目标颜色
         /// </summary>
@@ -31,15 +29,24 @@ namespace CellWar.View {
         /// </summary>
         const float STEP_COLOR = 2.0f;
 
+        [SerializeField]
+        GameObject CoorTextObject;
+
         // Start is called before the first frame update
         void Start()
         {
             m_BlockRenderer = GetComponent<MeshRenderer>();
-            //ChangeBlockColor(INIT_COLOR);
+            m_BlockRenderer.enabled = false;
+
+            CoorTextObject.GetComponent<TextMesh>().text = HexBlockModel.HexCoor.X.ToString() + "   " + HexBlockModel.HexCoor.Z.ToString();
         }
 
-        public void BlockColorUpdate()
+        public void Update()
         {
+            if (!HexBlockModel.IsActive)
+            {
+                return;
+            }
             //更新这块方块颜色和数量
             HexBlockModel.TotalPopulation = HexBlockModel.GetTotalPopulation();
             m_PopulationColor = GetColorAccordingToPopulation(HexBlockModel.TotalPopulation);
@@ -85,10 +92,10 @@ namespace CellWar.View {
             {
                 return new Color(1f, 0.4f, 0.4f, 0.5f);
             }
-            
+
             return INIT_COLOR;
         }
-        
+
         Color GetCurrentColor()
         {
             return m_BlockRenderer.material.color;
@@ -100,14 +107,38 @@ namespace CellWar.View {
                 m_BlockRenderer.material.color = color;
             }
         }
-        
 
         /// <summary>
-        /// 点击方块显示方块信息
+        /// 左键激活/放置细菌 右键关闭/取消手上细菌
         /// </summary>
-        private void OnMouseDown()
+        private void OnMouseOver()
         {
-            processSelectedStrain();
+            // 0 1 2 左键 右键 中键
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (MainGameCurrent.HoldingStrain == null && !HexBlockModel.IsActive)
+                {
+                    m_BlockRenderer.enabled = true;
+                    HexBlockModel.IsActive = true;
+                }
+                else if (MainGameCurrent.HoldingStrain != null && HexBlockModel.IsActive)
+                {
+                    processSelectedStrain();
+                }
+            }
+            else if (Input.GetMouseButtonDown(1))
+            {
+                if (MainGameCurrent.HoldingStrain != null)
+                {
+                    MainGameCurrent.HoldingStrain = null;
+                }
+                else if (MainGameCurrent.HoldingStrain == null && HexBlockModel.IsActive)
+                {
+                    m_BlockRenderer.enabled = false;
+                    HexBlockModel.IsActive = false;
+                }
+            }
+
         }
 
         public void processSelectedStrain()
@@ -121,7 +152,7 @@ namespace CellWar.View {
                 {
                     MainGameCurrent.FocusedHexBlock.Strains.Add(MainGameCurrent.HoldingStrain);
                 }
-                GameObject.Find(MainGameCurrent.HoldingStrain.Name).SetActive(false);
+                //GameObject.Find(MainGameCurrent.HoldingStrain.Name).SetActive(false);
                 MainGameCurrent.HoldingStrain = null;
             }
         }
@@ -131,7 +162,7 @@ namespace CellWar.View {
             //Debug.Log("Mouse Enter");
             m_IsMouseEnter = true;
             MainGameCurrent.FocusedHexBlock = HexBlockModel;
-            
+
             if (MainGameCurrent.HoldingStrain != null)
             {
                 /// 当手里拿着细菌准备放置时的代码
@@ -142,7 +173,7 @@ namespace CellWar.View {
                 /// 手里什么都没有拿时鼠标移动到格子上的代码
                 m_DestColor = Color.blue;
             }
-            
+
         }
 
         private void OnMouseExit()
@@ -152,6 +183,5 @@ namespace CellWar.View {
 
             m_DestColor = m_PopulationColor;
         }
-
     }
 }

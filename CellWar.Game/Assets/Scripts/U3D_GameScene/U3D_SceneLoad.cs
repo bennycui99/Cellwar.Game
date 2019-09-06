@@ -12,9 +12,9 @@ namespace CellWar.View {
     public class U3D_SceneLoad : MonoBehaviour {
         private void Awake() {
             try {
-                CellWar.GameData.Local.LoadAllCodingGenes();
-                CellWar.GameData.Local.LoadAllChemicals();
-                CellWar.GameData.Local.LoadAllRegulartoryGenes();
+                Local.LoadAllCodingGenes();
+                Local.LoadAllChemicals();
+                Local.LoadAllRegulartoryGenes();
                 Local.LoadAllRaces();
             } catch {
                 Debug.LogError( "Local json load failed." );

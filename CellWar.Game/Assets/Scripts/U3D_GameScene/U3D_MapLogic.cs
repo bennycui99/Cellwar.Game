@@ -18,14 +18,12 @@ using System.Collections.Generic;
 using CellWar.Model.Map;
 using UnityEngine;
 using CellWar.Utils;
+using CellWar.GameData;
 
 namespace CellWar.View {
     public class U3D_MapLogic : MonoBehaviour {
 
-        /// <summary>
-        /// 地图的Instance
-        /// </summary>
-        public static Map StageMap = new Map();
+        public Map StageMap;
 
         [SerializeField]
         public GameObject BlockPrefab;
@@ -37,6 +35,7 @@ namespace CellWar.View {
 
         private void Awake()
         {
+            StageMap = MainGameCurrent.StageMap;
             GenerateBlockContainer();
         }
 
@@ -54,7 +53,7 @@ namespace CellWar.View {
                 Block HexBlockModel = new Block();
 
                 HexBlockModel.HexCoor = blockJson.HexCoor;
-                HexBlockModel.StandardCoor = HexBlockModel.HexCoor.HexToStandardCoordiante();
+                HexBlockModel.StandardCoor = blockJson.StandardCoor;
 
                 HexBlockModel.Capacity = blockJson.Capacity;
                 HexBlockModel.BlockType = blockJson.BlockType;

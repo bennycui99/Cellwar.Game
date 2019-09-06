@@ -25,7 +25,6 @@ namespace CellWar.View {
             HexBlockModel.ParentUnityObjectName = gameObject.name;
 
             m_BlockMouseDetectLogic = m_BlockMouseDetectObject.GetComponent<U3D_BlockMouseDetect>();
-            m_BlockMouseDetectLogic.ParentBlockLogic = this;
             m_BlockMouseDetectLogic.HexBlockModel = HexBlockModel;
         }
 

@@ -66,8 +66,10 @@ namespace CellWar.Model.Map {
     public class Block {
         public const string Tag = "HexBlock";
 
-        public HexCoordinate HexCoor;
-        public StandardCoordinate StandardCoor;
+        public bool IsActive = false;
+
+        public HexCoordinate HexCoor = new HexCoordinate();
+        public StandardCoordinate StandardCoor = new StandardCoordinate();
 
         /// <summary>
         /// Unity 游戏对象名字

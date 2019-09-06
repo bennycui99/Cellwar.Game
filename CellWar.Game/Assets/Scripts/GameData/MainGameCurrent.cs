@@ -3,12 +3,19 @@ using CellWar.Controller;
 using CellWar.Controller.Gene;
 using CellWar.Model.Substance;
 using CellWar.View;
+using CellWar.Model.Map;
 
 namespace CellWar.GameData {
     /// <summary>
     /// 游戏及时数据
     /// </summary>
     public static class MainGameCurrent {
+
+        /// <summary>
+        /// 地图的Instance
+        /// </summary>
+        public static Map StageMap = new Map();
+
         /// <summary>
         /// 玩家手上是否拿着细菌准备防止重要数据
         /// 见 U3D_StrainPackageLogic.cs
@@ -26,10 +33,10 @@ namespace CellWar.GameData {
         public static List<Strain> StrainList = new List<Strain>();
 
         public static string GetCurrentBlockDetailInfo() {
-            if( CellWar.GameData.MainGameCurrent.FocusedBlock == null ) {
+            if( CellWar.GameData.MainGameCurrent.FocusedHexBlock == null ) {
                 return "";
             }
-            var currentHexBlock = CellWar.GameData.MainGameCurrent.FocusedBlock.HexBlockModel;
+            var currentHexBlock = CellWar.GameData.MainGameCurrent.FocusedHexBlock;
             string showText = "Condition: " + currentHexBlock.BlockType.ToString() + "\n\n";
             showText += "Chemicals: \n";
             if( currentHexBlock.PublicChemicals.Count == 0 ) {
@@ -49,10 +56,10 @@ namespace CellWar.GameData {
         }
 
         public static string GetCurrentBlockStrainDetailInfo() {
-            if( FocusedBlock == null ) {
+            if(FocusedHexBlock == null ) {
                 return "";
             }
-            var currentHexBlock = FocusedBlock.HexBlockModel;
+            var currentHexBlock = FocusedHexBlock;
             string showText = "";
             foreach( var str in currentHexBlock.Strains ) {
                 showText += str.Name + "\n";
@@ -67,7 +74,7 @@ namespace CellWar.GameData {
         /// <summary>
         /// 当前鼠标下的block的MonoBehavior实例
         /// </summary>
-        public static U3D_BlockLogic FocusedBlock = null;
+        public static CellWar.Model.Map.Block FocusedHexBlock = null;
 
         public static RegulatoryGeneController RegCtor = new RegulatoryGeneController();
         public static CodingGeneController CodCtor = new CodingGeneController();
