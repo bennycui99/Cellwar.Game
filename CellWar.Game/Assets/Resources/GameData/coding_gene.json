@@ -1,12 +1,12 @@
 [
   {
-    "Name": "Log1A",
+    "Name": "GrowNatATP1",
     "Length": "1200",
-    "PopulationCoefficient": "0.1",
+    "PopulationCoefficient": "0.05",
     "PopulationIntercept": "0",
     "ConsumeChemicalName": "ATP",
     "ConsumeChemicalCoeffeicient": "1",
-    "ConsumeChemicalIntercept": "200",
+    "ConsumeChemicalIntercept": "",
     "IsConsumePublic": "False",
     "ProductionChemicalName": "Log1A",
     "ProductionChemicalCoeffeicient": "1",
@@ -16,7 +16,26 @@
     "ImportChemicalIntercept": "0",
     "FirstSpreadMountRate": "0.05",
     "SpreadConditionRate": "0.5",
-    "Description": "每秒钟改变人口：0.1×人口数+(0)。消耗1×人口数+200的ATP。是否消耗公共资源：False。产生1×人口数+0的Log1A。当人口达到上限的0.05时，扩散新产生的人口的0.5。长度1200。False"
+    "Description": "每次增加5%人口。消耗自身1×人口数的ATP。产生1×人口数+0的Log1A。当人口达到上限的0.05时，扩散新产生的人口的0.5。长度1200。False"
+  },
+  {
+    "Name": "GrowNatAA1",
+    "Length": "1200",
+    "PopulationCoefficient": "0.05",
+    "PopulationIntercept": "0",
+    "ConsumeChemicalName": "Amino Acid",
+    "ConsumeChemicalCoeffeicient": "1",
+    "ConsumeChemicalIntercept": "",
+    "IsConsumePublic": "False",
+    "ProductionChemicalName": "Log1A",
+    "ProductionChemicalCoeffeicient": "1",
+    "ProductionChemicalIntercept": "0",
+    "ImportChemicalName": "",
+    "ImportChemicalCoeffeicient": "0",
+    "ImportChemicalIntercept": "0",
+    "FirstSpreadMountRate": "0.05",
+    "SpreadConditionRate": "0.5",
+    "Description": "每次增加5%人口。消耗自身1×人口数的氨基酸。产生1×人口数+0的Log1A。当人口达到上限的0.05时，扩散新产生的人口的0.5。长度1200。False"
   },
   {
     "Name": "Log1B",
@@ -133,6 +152,25 @@
     "Description": "每秒钟改变人口：0×人口数+(1)。消耗1×人口数+0的ATP。是否消耗公共资源：False。长度200。"
   },
   {
+    "Name": "DeathNat1",
+    "Length": "1000",
+    "PopulationCoefficient": "-0.08",
+    "PopulationIntercept": "-1",
+    "ConsumeChemicalName": "",
+    "ConsumeChemicalCoeffeicient": "0",
+    "ConsumeChemicalIntercept": "0",
+    "IsConsumePublic": "False",
+    "ProductionChemicalName": "",
+    "ProductionChemicalCoeffeicient": "0",
+    "ProductionChemicalIntercept": "0",
+    "ImportChemicalName": "",
+    "ImportChemicalCoeffeicient": "0",
+    "ImportChemicalIntercept": "0",
+    "FirstSpreadMountRate": "0",
+    "SpreadConditionRate": "0",
+    "Description": "每次减少8%+1人口。长度1000。"
+  },
+  {
     "Name": "OLD1A",
     "Length": "1000",
     "PopulationCoefficient": "-0.2",
@@ -247,7 +285,7 @@
     "Description": "消耗0.5×人口数+0的ATP。是否消耗公共资源：False。产生0.1×人口数+0的AHL。长度643。生产一种诱导素的基因"
   },
   {
-    "Name": "GLUT1A",
+    "Name": "GLUTL1",
     "Length": "345",
     "PopulationCoefficient": "0",
     "PopulationIntercept": "0",
@@ -264,6 +302,25 @@
     "FirstSpreadMountRate": "0",
     "SpreadConditionRate": "0",
     "Description": "消耗0.1×人口数+0的ATP。是否消耗公共资源：False。转运0.1×人口数+0的Glucose。长度345。运输葡萄糖的基因"
+  },
+  {
+    "Name": "AAL1",
+    "Length": "345",
+    "PopulationCoefficient": "0",
+    "PopulationIntercept": "0",
+    "ConsumeChemicalName": "ATP",
+    "ConsumeChemicalCoeffeicient": "0.1",
+    "ConsumeChemicalIntercept": "0",
+    "IsConsumePublic": "False",
+    "ProductionChemicalName": "",
+    "ProductionChemicalCoeffeicient": "0",
+    "ProductionChemicalIntercept": "0",
+    "ImportChemicalName": "Amino Acid",
+    "ImportChemicalCoeffeicient": "0.1",
+    "ImportChemicalIntercept": "0",
+    "FirstSpreadMountRate": "0",
+    "SpreadConditionRate": "0",
+    "Description": "消耗0.1×人口数+0的ATP。是否消耗公共资源：False。转运0.1×人口数+0的Amino Acid。长度345。吸收氨基酸的基因"
   },
   {
     "Name": "GLUT1B",
@@ -304,13 +361,13 @@
     "Description": "消耗1×人口数+1的Ampicillin。是否消耗公共资源：Ture。引入0.1×人口数+0的Ampicillin。长度120。氨苄抗性基因。清除细菌内部的氨苄ampicillin"
   },
   {
-    "Name": "Glu1",
+    "Name": "TCAL1",
     "Length": "245",
-    "PopulationCoefficient": "0",
+    "PopulationCoefficient": "0.1",
     "PopulationIntercept": "0",
-    "ConsumeChemicalName": "Glucose",
-    "ConsumeChemicalCoeffeicient": "0.1",
-    "ConsumeChemicalIntercept": "5",
+    "ConsumeChemicalName": "ATP",
+    "ConsumeChemicalCoeffeicient": "1",
+    "ConsumeChemicalIntercept": "0",
     "IsConsumePublic": "False",
     "ProductionChemicalName": "ATP",
     "ProductionChemicalCoeffeicient": "0.32",
@@ -320,7 +377,7 @@
     "ImportChemicalIntercept": "0",
     "FirstSpreadMountRate": "0",
     "SpreadConditionRate": "0",
-    "Description": "消耗0.1×人口数+5的Glucose。是否消耗公共资源：False。产生0.32×人口数+0的ATP。引入0.32×人口数+0的ATP。长度245。分解葡萄糖的基因。转化为ATP，储存在体内以便使用"
+    "Description": "消耗自身0.1×人口数的Glucose。产生0.32×人口数的ATP。引入0.32×人口数+0的ATP。长度245。分解葡萄糖转化为ATP，储存在体内以便使用"
   },
   {
     "Name": "GFP",
@@ -340,6 +397,25 @@
     "FirstSpreadMountRate": "0",
     "SpreadConditionRate": "0",
     "Description": "消耗0.01×人口数+1的ATP。是否消耗公共资源：False。产生0.1×人口数+0的GFP。长度186.1。绿色荧光蛋白"
+  },
+  {
+    "Name": "photosynthesisL1",
+    "Length": "186",
+    "PopulationCoefficient": "0",
+    "PopulationIntercept": "0",
+    "ConsumeChemicalName": "",
+    "ConsumeChemicalCoeffeicient": "0",
+    "ConsumeChemicalIntercept": "0",
+    "IsConsumePublic": "False",
+    "ProductionChemicalName": "Glucose",
+    "ProductionChemicalCoeffeicient": "0.1",
+    "ProductionChemicalIntercept": "0",
+    "ImportChemicalName": "",
+    "ImportChemicalCoeffeicient": "0.11",
+    "ImportChemicalIntercept": "0",
+    "FirstSpreadMountRate": "0",
+    "SpreadConditionRate": "0",
+    "Description": "产生10%×人口数+0的葡萄糖。储存在体内。长度186.1。光合作用基因"
   },
   {
     "Name": "Ether",

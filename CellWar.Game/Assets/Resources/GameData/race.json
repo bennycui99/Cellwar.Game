@@ -1,17 +1,7 @@
 [
-    {
-        "Name": "mock1",
-        "MaxLength": "10000",
-        "CodingGeneNames": "C1;GLUT1A;Log1A;Glu1;LuxS;C2;galactosidase"
-    },
-    {
-        "Name": "mock2",
-        "MaxLength": "7000",
-        "CodingGeneNames": "C1;GLUT1A;Log3A;Glu1;LuxS;C2;galactosidase"
-    },
-    {
-        "Name": "mock3",
-        "MaxLength": "20000",
-        "CodingGeneNames": "C1;GLUT1B;Log3A;Glu1;LuxS;C2;galactosidase"
-    }
+  {
+    "Name": "Test1",
+    "MaxLength": "20000",
+    "CodingGeneNames": "AmpKanaChlVH1;GLUTL1;AAL1;photosynthesisL1;TCAL1;GrowNatATP1;GrowNatAA1;GOD;DeathNat1"
+  }
 ]
