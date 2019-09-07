@@ -17,6 +17,11 @@ namespace CellWar.GameData {
         public static Map StageMap = new Map();
 
         /// <summary>
+        /// Editor用的 手上的chemical
+        /// </summary>
+        public static Chemical HoldingChemical = null;
+
+        /// <summary>
         /// 玩家手上是否拿着细菌准备防止重要数据
         /// 见 U3D_StrainPackageLogic.cs
         /// </summary>

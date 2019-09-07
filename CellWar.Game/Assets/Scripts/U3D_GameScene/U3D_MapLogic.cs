@@ -46,22 +46,11 @@ namespace CellWar.View {
 
         void GenerateBlockContainer()
         {
-            var mapJsonData = JsonHelper.Json2Object_NT<List<Block>>(CellWar.GameData.Local.GetGameDataPath("map.json"));
+            StageMap = JsonHelper.Json2Object_NT<Map>(CellWar.GameData.Local.GetGameDataPath("map.json"));
 
-            foreach(var blockJson in mapJsonData)
+            for (int i = 0; i < StageMap.Blocks.Count; ++i)
             {
-                Block HexBlockModel = new Block();
-
-                HexBlockModel.HexCoor = blockJson.HexCoor;
-                HexBlockModel.StandardCoor = blockJson.StandardCoor;
-
-                HexBlockModel.Capacity = blockJson.Capacity;
-                HexBlockModel.BlockType = blockJson.BlockType;
-                HexBlockModel.Strains = blockJson.Strains;
-                HexBlockModel.PublicChemicals = blockJson.PublicChemicals;
-
-                StageMap.Blocks.Add(HexBlockModel);
-
+                Block HexBlockModel = StageMap.Blocks[i];
                 //生成object
                 GameObject blockObject = Instantiate(BlockPrefab,gameObject.transform) as GameObject;
                 //赋值block

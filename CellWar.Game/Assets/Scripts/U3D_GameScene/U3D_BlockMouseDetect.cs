@@ -100,30 +100,53 @@ namespace CellWar.View {
                 m_BlockRenderer.material.color = color;
             }
         }
-        
+
 
         /// <summary>
-        /// 点击方块显示方块信息
+        /// 左键放置细菌 右键取消手上细菌
         /// </summary>
-        private void OnMouseDown()
+        private void OnMouseOver()
         {
-            processSelectedStrain();
+            // 0 1 2 左键 右键 中键
+            if (Input.GetMouseButton(0))
+            {
+                if (MainGameCurrent.HoldingStrain != null)
+                {
+                    ProcessSelectedStrain();
+                }
+            }
+            else if (Input.GetMouseButton(1))
+            {
+                if (MainGameCurrent.HoldingStrain != null)
+                {
+                    MainGameCurrent.HoldingStrain = null;
+                }
+            }
+            /*
+            else if (Input.GetKeyDown(KeyCode.Z))
+            {
+                if (HexBlockModel.IsActive && HexBlockModel.Strains.Count > 0)
+                {
+                    HexBlockModel.Strains.RemoveAt(HexBlockModel.Strains.Count - 1);
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.X))
+            {
+
+            }*/
         }
 
-        public void processSelectedStrain()
+        public void ProcessSelectedStrain()
         {
             //Debug.Log(MainGameCurrent.HoldingStrain);
-            if (MainGameCurrent.FocusedHexBlock != null && MainGameCurrent.HoldingStrain != null)
+            ChangeBlockColor(Color.yellow);
+            // 防止反复增加同一种细菌
+            if (!HexBlockModel.Strains.Exists(m => m.Name == MainGameCurrent.HoldingStrain.Name))
             {
-                ChangeBlockColor(Color.yellow);
-                // 防止反复增加同一种细菌
-                if (!MainGameCurrent.FocusedHexBlock.Strains.Exists(m => m.Name == MainGameCurrent.HoldingStrain.Name))
-                {
-                    MainGameCurrent.FocusedHexBlock.Strains.Add(MainGameCurrent.HoldingStrain);
-                }
-                GameObject.Find(MainGameCurrent.HoldingStrain.Name).SetActive(false);
-                MainGameCurrent.HoldingStrain = null;
+                HexBlockModel.Strains.Add(MainGameCurrent.HoldingStrain);
             }
+            GameObject.Find(MainGameCurrent.HoldingStrain.Name).SetActive(false);
+            MainGameCurrent.HoldingStrain = null;
         }
 
         private void OnMouseEnter()

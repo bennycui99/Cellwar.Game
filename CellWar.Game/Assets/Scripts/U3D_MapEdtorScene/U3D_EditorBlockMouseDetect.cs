@@ -110,6 +110,7 @@ namespace CellWar.View
 
         /// <summary>
         /// 左键激活/放置细菌 右键关闭/取消手上细菌
+        /// Z键撤销上次的放置细菌 X撤销上次放置的化学物质
         /// </summary>
         private void OnMouseOver()
         {
@@ -123,7 +124,7 @@ namespace CellWar.View
                 }
                 else if (MainGameCurrent.HoldingStrain != null && HexBlockModel.IsActive)
                 {
-                    processSelectedStrain();
+                    ProcessSelectedStrain();
                 }
             }
             else if (Input.GetMouseButton(1))
@@ -138,23 +139,49 @@ namespace CellWar.View
                     HexBlockModel.IsActive = false;
                 }
             }
+            else if (Input.GetKeyDown(KeyCode.Z))
+            {
+                if (HexBlockModel.IsActive && HexBlockModel.Strains.Count > 0)
+                {
+                    HexBlockModel.Strains.RemoveAt(HexBlockModel.Strains.Count - 1);
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.X))
+            {
 
+            }
         }
 
-        public void processSelectedStrain()
+        public void ProcessSelectedStrain()
         {
             //Debug.Log(MainGameCurrent.HoldingStrain);
-            if (MainGameCurrent.FocusedHexBlock != null && MainGameCurrent.HoldingStrain != null)
+            ChangeBlockColor(Color.yellow);
+            // 防止反复增加同一种细菌; 同一种叠加数量
+            if (!HexBlockModel.Strains.Exists(m => m.Name == MainGameCurrent.HoldingStrain.Name)) 
             {
-                ChangeBlockColor(Color.yellow);
-                // 防止反复增加同一种细菌
-                if (!MainGameCurrent.FocusedHexBlock.Strains.Exists(m => m.Name == MainGameCurrent.HoldingStrain.Name))
-                {
-                    MainGameCurrent.FocusedHexBlock.Strains.Add(MainGameCurrent.HoldingStrain);
-                }
-                //GameObject.Find(MainGameCurrent.HoldingStrain.Name).SetActive(false);
-                MainGameCurrent.HoldingStrain = null;
+                HexBlockModel.Strains.Add(MainGameCurrent.HoldingStrain);
             }
+            else
+            {
+                HexBlockModel.Strains.Find(m => m.Name == MainGameCurrent.HoldingStrain.Name).Population += MainGameCurrent.HoldingStrain.Population;
+            }
+            MainGameCurrent.HoldingStrain = null;
+        }
+
+        public void ProcessSelectedChemical()
+        {
+            ChangeBlockColor(Color.yellow);
+
+            // 防止反复增加同一种化学物质; 同一种叠加数量
+            if (!HexBlockModel.PublicChemicals.Exists(m => m.Name == MainGameCurrent.HoldingChemical.Name))
+            {
+                HexBlockModel.PublicChemicals.Add(MainGameCurrent.HoldingChemical);
+            }
+            else
+            {
+                HexBlockModel.PublicChemicals.Find(m => m.Name == MainGameCurrent.HoldingChemical.Name).Count += MainGameCurrent.HoldingChemical.Count;
+            }
+            MainGameCurrent.HoldingStrain = null;
         }
 
         private void OnMouseEnter()

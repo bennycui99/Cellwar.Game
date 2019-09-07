@@ -9,6 +9,7 @@ using CellWar.Utils;
 using CellWar.Utils.Object;
 using CellWar.View;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using static CellWar.Model.Substance.Strain;
 
@@ -18,6 +19,21 @@ namespace CellWar.GameData {
     /// 游戏本地数据
     /// </summary>
     public static class Local {
+
+        /*
+        public static bool CheckGuiRaycastObjects()
+        {
+            PointerEventData eventData = new PointerEventData(Main.Instance.eventSystem);
+            eventData.pressPosition = Input.mousePosition;
+            eventData.position = Input.mousePosition;
+
+            List<RaycastResult> list = new List<RaycastResult>();
+            Main.Instance.graphicRaycaster.Raycast(eventData, list);
+            //Debug.Log(list.Count);
+            return list.Count > 0;
+        }
+        */
+
         /// <summary>
         /// 加载所有的race
         /// geneNameList的规范为 r1;c1;c2;r2;c3;r3;c4

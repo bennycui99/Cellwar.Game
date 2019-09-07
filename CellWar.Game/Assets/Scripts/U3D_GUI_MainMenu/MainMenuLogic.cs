@@ -48,7 +48,7 @@ namespace CellWar.View {
         #region EVENTS
         public void OnStageClicked() {
             StartCoroutine(VideoManager.Instance().PlayFadeoutVideo());
-            VideoManager.Instance().m_videoPlayer.loopPointReached += EndReached;
+            VideoManager.Instance().m_videoPlayer.loopPointReached += EndReachedStageScene;
 
         }
         public void OnOptionClicked() {
@@ -57,6 +57,12 @@ namespace CellWar.View {
         public void OnLabClicked() {
             Switch( MenuStates.Lab );
         }
+        public void OnMapEditorClicked()
+        {
+            StartCoroutine(VideoManager.Instance().PlayFadeoutVideo());
+            VideoManager.Instance().m_videoPlayer.loopPointReached += EndReachedEditorScene;
+
+        }
         public void OnExitClicked() {
             Application.Quit();
         }
@@ -64,11 +70,16 @@ namespace CellWar.View {
             Switch( MenuStates.MainMenu );
         }
         #endregion
-        void EndReached(UnityEngine.Video.VideoPlayer vp)
+        void EndReachedStageScene(UnityEngine.Video.VideoPlayer vp)
         {
             SceneManager.LoadScene("GameScene");
             //Event Handler for VideoManager.
         }
-        
+
+        void EndReachedEditorScene(UnityEngine.Video.VideoPlayer vp)
+        {
+            SceneManager.LoadScene("MapEditorScene");
+            //Event Handler for VideoManager.
+        }
     }
 }
