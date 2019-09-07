@@ -168,6 +168,22 @@
     "Description": "对Cu高敏感的开关,受到Cu抑制"
   },
   {
+    "Name": "SignalA_1",
+    "Length": "360",
+    "Condition": [
+      {
+        "Chemical": "SignalA",
+        "Count": "10"
+      },
+      {
+        "Chemical": "growth",
+        "Count": "1000"
+      }
+    ],
+    "Type": "NO",
+    "Description": "受到信号A抑制"
+  },
+  {
     "Name": "Growth_1000",
     "Length": "360",
     "Condition": [
