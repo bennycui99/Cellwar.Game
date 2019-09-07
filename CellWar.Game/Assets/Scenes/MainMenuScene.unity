@@ -5749,6 +5749,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   videoCanvasPrefab: {fileID: 3966138041434830323, guid: dd5fddc6b8f35454b95bdfdf3d409e62,
     type: 3}
+  m_videoPlayer: {fileID: 0}
   m_FadeinVideo: {fileID: 32900000, guid: 9b36b432f18fbf44faf5dcece460c702, type: 3}
   m_FadeoutVideo: {fileID: 32900000, guid: b277ef0e1ce51844fa00e67e86b3df45, type: 3}
 --- !u!1 &1588522400
