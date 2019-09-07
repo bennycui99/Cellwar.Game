@@ -89,5 +89,19 @@
     "Detailed": "",
     "Count": "0",
     "SpreadRate": "0"
+  },
+  {
+    "Name": "Growth",
+    "Description": "细菌生长代谢物",
+    "Detailed": "",
+    "Count": "0",
+    "SpreadRate": "0"
+  },
+  {
+    "Name": "SignalA",
+    "Description": "信号分子A",
+    "Detailed": "",
+    "Count": "0",
+    "SpreadRate": "0"
   }
 ]

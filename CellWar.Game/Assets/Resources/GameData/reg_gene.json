@@ -1,6 +1,6 @@
 [
   {
-    "Name": "AmpKanaChlVH1",
+    "Name": "Amp_Kana_Chl_VH_B",
     "Length": "180",
     "Condition": [
       {
@@ -14,13 +14,69 @@
       {
         "Chemical": "Chl",
         "Count": "10"
+      },
+      {
+        "Chemical": "growth",
+        "Count": "1000"
       }
     ],
     "Type": "NO",
-    "Description": "对ampcillin，Kana，Chl非常敏感的开关"
+    "Description": "对抗生素非常敏感，对重金属不敏感的开关"
   },
   {
-    "Name": "AmpKanaChlH1",
+    "Name": "Amp_Kana_Chl_Cu_VH_A",
+    "Length": "180",
+    "Condition": [
+      {
+        "Chemical": "Ampicillin",
+        "Count": "10"
+      },
+      {
+        "Chemical": "Kana",
+        "Count": "10"
+      },
+      {
+        "Chemical": "Chl",
+        "Count": "10"
+      },
+      {
+        "Chemical": "Cu",
+        "Count": "10"
+      },
+      {
+        "Chemical": "growth",
+        "Count": "1000"
+      }
+    ],
+    "Type": "NO",
+    "Description": "对抗生素和重金属非常敏感的开关"
+  },
+  {
+    "Name": "Amp_Kana_Chl_H_1",
+    "Length": "360",
+    "Condition": [
+      {
+        "Chemical": "Ampicillin",
+        "Count": "100"
+      },
+      {
+        "Chemical": "Kana",
+        "Count": "100"
+      },
+      {
+        "Chemical": "Chl",
+        "Count": "100"
+      },
+      {
+        "Chemical": "Cu",
+        "Count": "10"
+      }
+    ],
+    "Type": "NO",
+    "Description": "对ampcillin，Kana，Chl敏感的开关"
+  },
+  {
+    "Name": "Amp_Kana_Chl_H_1",
     "Length": "360",
     "Condition": [
       {
@@ -40,7 +96,27 @@
     "Description": "对ampcillin，Kana，Chl敏感的开关"
   },
   {
-    "Name": "AmpKanaChlL",
+    "Name": "Amp_Kana_Chl_H_3",
+    "Length": "360",
+    "Condition": [
+      {
+        "Chemical": "Ampicillin",
+        "Count": "100"
+      },
+      {
+        "Chemical": "Kana",
+        "Count": "100"
+      },
+      {
+        "Chemical": "Chl",
+        "Count": "100"
+      }
+    ],
+    "Type": "NO",
+    "Description": "对ampcillin，Kana，Chl敏感的开关"
+  },
+  {
+    "Name": "Amp_Kana_Chl_L_1",
     "Length": "720",
     "Condition": [
       {
@@ -58,6 +134,50 @@
     ],
     "Type": "NO",
     "Description": "对ampcillin，Kana，Chl低敏感的开关"
+  },
+  {
+    "Name": "Cu_H_1",
+    "Length": "360",
+    "Condition": [
+      {
+        "Chemical": "Cu",
+        "Count": "500"
+      },
+      {
+        "Chemical": "growth",
+        "Count": "1000"
+      }
+    ],
+    "Type": "NO",
+    "Description": "对Cu低敏感的开关,受到Cu抑制"
+  },
+  {
+    "Name": "Cu_L_1",
+    "Length": "360",
+    "Condition": [
+      {
+        "Chemical": "Cu",
+        "Count": "10"
+      },
+      {
+        "Chemical": "growth",
+        "Count": "1000"
+      }
+    ],
+    "Type": "NO",
+    "Description": "对Cu高敏感的开关,受到Cu抑制"
+  },
+  {
+    "Name": "Growth_1000",
+    "Length": "360",
+    "Condition": [
+      {
+        "Chemical": "Growth",
+        "Count": "1000"
+      }
+    ],
+    "Type": "NO",
+    "Description": "growth含量达到1000时关闭基因"
   },
   {
     "Name": "Lactose",
@@ -113,30 +233,6 @@
     "Condition": [],
     "Type": "TRUE",
     "Description": "永远不会被关闭的调控基因"
-  },
-  {
-    "Name": "IPTG",
-    "Length": "237",
-    "Condition": [
-      {
-        "Chemical": "RedLight",
-        "Count": "100"
-      },
-      {
-        "Chemical": "Kana",
-        "Count": "-10"
-      },
-      {
-        "Chemical": "Ampicillin",
-        "Count": "-10"
-      },
-      {
-        "Chemical": "Chl",
-        "Count": "-10"
-      }
-    ],
-    "Type": "PA",
-    "Description": "受IPTG激活的开关，对抗生素高敏感"
   },
   {
     "Name": "BlueLight",
