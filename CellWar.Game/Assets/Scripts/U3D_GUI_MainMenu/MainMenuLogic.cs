@@ -15,6 +15,7 @@ namespace CellWar.View {
             Options,
             Exit
         }
+
         private void Awake() {
             Check.GameDataLoaded();
         }

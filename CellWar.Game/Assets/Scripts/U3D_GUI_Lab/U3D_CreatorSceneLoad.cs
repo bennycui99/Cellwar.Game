@@ -58,6 +58,7 @@ namespace CellWar.View {
                 LabCurrent.Strain = new CellWar.Model.Substance.Strain();
             }
 
+
             UITextMaxLength = GameObject.Find( "UI_MaxLength" );
             gameObject.SetActive( false );
         }

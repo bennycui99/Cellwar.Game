@@ -54,7 +54,7 @@ namespace CellWar.View {
             //ZMax 不需要增加offset,反而要减
             m_CameraZMax -= EDGE_OFFSET;
 
-            Debug.Log(m_CameraXMax);
+            //Debug.Log(m_CameraXMax);
         }
 
         // Update is called once per frame

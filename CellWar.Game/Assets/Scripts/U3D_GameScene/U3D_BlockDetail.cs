@@ -13,7 +13,16 @@ namespace CellWar.View {
 
         // Update is called once per frame
         void Update() {
-            gameObject.GetComponent<Text>().text = MainGameCurrent.GetCurrentBlockDetailInfo();
+            if (MainGameCurrent.FocusedHexBlock == null || !MainGameCurrent.FocusedHexBlock.IsActive)
+            {
+                gameObject.GetComponent<Text>().text = "";
+                return;
+            }
+
+            if (MainGameCurrent.FocusedHexBlock.IsActive)
+            {
+                gameObject.GetComponent<Text>().text = MainGameCurrent.GetCurrentBlockDetailInfo();
+            }
         }
     }
 }
