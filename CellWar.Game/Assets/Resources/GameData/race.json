@@ -2,6 +2,6 @@
   {
     "Name": "Test1",
     "MaxLength": "20000",
-    "CodingGeneNames": "AmpKanaChlVH1;GLUTL1;AAL1;photosynthesisL1;TCAL1;GrowNatATP1;GrowNatAA1;GOD;DeathNat1"
+    "CodingGeneNames": "GLUTL1;AAL1;photosynthesisL1;TCAL1;GrowNatATP1;GrowNatAA1;DeathNat1"
   }
 ]
