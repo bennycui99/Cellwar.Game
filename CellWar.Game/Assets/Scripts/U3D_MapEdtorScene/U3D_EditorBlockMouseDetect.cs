@@ -114,7 +114,7 @@ namespace CellWar.View
         private void OnMouseOver()
         {
             // 0 1 2 左键 右键 中键
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButton(0))
             {
                 if (MainGameCurrent.HoldingStrain == null && !HexBlockModel.IsActive)
                 {
@@ -126,7 +126,7 @@ namespace CellWar.View
                     processSelectedStrain();
                 }
             }
-            else if (Input.GetMouseButtonDown(1))
+            else if (Input.GetMouseButton(1))
             {
                 if (MainGameCurrent.HoldingStrain != null)
                 {
