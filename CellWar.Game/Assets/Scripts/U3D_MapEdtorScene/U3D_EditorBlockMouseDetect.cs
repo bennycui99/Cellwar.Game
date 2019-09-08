@@ -10,7 +10,6 @@ namespace CellWar.View
     public class U3D_EditorBlockMouseDetect : MonoBehaviour
     {
         UnityEngine.EventSystems.EventSystem m_EventSystem;
-
         GraphicRaycaster m_GraphicRaycaster;
 
         public Block HexBlockModel;
