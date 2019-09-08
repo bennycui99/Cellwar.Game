@@ -5,13 +5,26 @@ This game is used in HumanPractices part in our iGEM project. After iGEM, we can
 See [TODO List](<https://github.com/bennycui99/Cellwar.Game/blob/master/TODO.md>) and fuck your tasks off! LOL
 
 ## Where the hell we are?
+### 9.8 MapEditor
+When holding a bacteria/ chemical you can not active/de-active a block.
+Left Click to active/ right click to de-active.
+Left Click multiple times can change the capacity of a block.
+
+Left Click to add to block(can add multiple tiems)/Right Click to discard the holding.
+Z to discard last bacteria/ X to discard last chemical.
+
+Bacteria reads from Resources/Save/strain.json; Chemicals reads from Resources/GameData/chemicals.json.
+Export to Resources/Save/map_generation.json
+
+GameScene reads map from Resources/GameData/map.json
+
 ### 9.6 Implement Video Manager - Fade between scenes
 
 The in-game fade in animation remain unimplemented, but the API is easy to use.
 ![avatar](Progress/9.6.gif)
 
 
-### 9.4 Smooth Game Animation s
+### 9.4 Smooth Game Animations
 
 ![avatar](Progress/9.4.gif)
 

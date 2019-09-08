@@ -42,7 +42,8 @@ namespace CellWar.GameData {
                 return "";
             }
             var currentHexBlock = CellWar.GameData.MainGameCurrent.FocusedHexBlock;
-            string showText = "Condition: " + currentHexBlock.BlockType.ToString() + "\n\n";
+            //string showText = "Condition: " + currentHexBlock.BlockType.ToString() + "\n\n";
+            string showText = "Capacity: " + currentHexBlock.Capacity + "\n\n";
             showText += "Chemicals: \n";
             if( currentHexBlock.PublicChemicals.Count == 0 ) {
                 showText += "Nothing so far.";

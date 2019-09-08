@@ -122,6 +122,18 @@ namespace CellWar.View
         {
             if (Local.CheckGuiRaycastObjects(m_EventSystem, m_GraphicRaycaster)) return;
 
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (MainGameCurrent.HoldingChemical == null && MainGameCurrent.HoldingStrain == null && HexBlockModel.IsActive)
+                {
+                    HexBlockModel.Capacity += 1000;
+                    if (HexBlockModel.Capacity == 10000)
+                    {
+                        HexBlockModel.Capacity = 1000;
+                    }
+                }
+            }
+
             // 0 1 2 左键 右键 中键
             if (Input.GetMouseButton(0))
             {
@@ -177,8 +189,7 @@ namespace CellWar.View
                 {
                     MainGameCurrent.HoldingChemical = null;
                 }
-            }
-            
+            }   
         }
 
         public void ProcessSelectedStrain()
