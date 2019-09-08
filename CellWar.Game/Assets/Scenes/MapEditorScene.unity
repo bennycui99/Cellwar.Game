@@ -630,6 +630,7 @@ GameObject:
   - component: {fileID: 715342130}
   - component: {fileID: 715342129}
   - component: {fileID: 715342131}
+  - component: {fileID: 715342132}
   m_Layer: 5
   m_Name: Export
   m_TagString: Untagged
@@ -756,6 +757,19 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!65 &715342132
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715342127}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &768157699
 GameObject:
   m_ObjectHideFlags: 0
@@ -878,7 +892,6 @@ GameObject:
   - component: {fileID: 802698647}
   - component: {fileID: 802698646}
   - component: {fileID: 802698645}
-  - component: {fileID: 802698644}
   m_Layer: 5
   m_Name: UI_Strain
   m_TagString: Untagged
@@ -905,19 +918,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 181.49, y: 22.25}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!65 &802698644
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 802698642}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &802698645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1761,7 +1761,6 @@ GameObject:
   - component: {fileID: 1389942654}
   - component: {fileID: 1389942658}
   - component: {fileID: 1389942657}
-  - component: {fileID: 1389942655}
   - component: {fileID: 1389942656}
   m_Layer: 5
   m_Name: UI_Chemical
@@ -1789,19 +1788,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 181.49, y: 22.25}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!65 &1389942655
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1389942653}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1389942656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2045,7 +2031,7 @@ GameObject:
   - component: {fileID: 1989874399}
   - component: {fileID: 1989874400}
   m_Layer: 0
-  m_Name: UIManager
+  m_Name: UIContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

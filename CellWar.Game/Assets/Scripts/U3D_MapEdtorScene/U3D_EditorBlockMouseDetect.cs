@@ -9,6 +9,10 @@ namespace CellWar.View
 {
     public class U3D_EditorBlockMouseDetect : MonoBehaviour
     {
+        UnityEngine.EventSystems.EventSystem m_EventSystem;
+
+        GraphicRaycaster m_GraphicRaycaster;
+
         public Block HexBlockModel;
 
         bool m_IsMouseEnter = false;
@@ -35,6 +39,9 @@ namespace CellWar.View
         // Start is called before the first frame update
         void Start()
         {
+            m_EventSystem = GameObject.Find("EventSystem").GetComponent<UnityEngine.EventSystems.EventSystem>();
+            m_GraphicRaycaster = GameObject.Find("Canvas").GetComponent<GraphicRaycaster>();
+
             m_BlockRenderer = GetComponent<MeshRenderer>();
             m_BlockRenderer.enabled = false;
 
@@ -114,6 +121,8 @@ namespace CellWar.View
         /// </summary>
         private void OnMouseOver()
         {
+            if (Local.CheckGuiRaycastObjects(m_EventSystem, m_GraphicRaycaster)) return;
+
             // 0 1 2 左键 右键 中键
             if (Input.GetMouseButton(0))
             {

@@ -12,6 +12,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using static CellWar.Model.Substance.Strain;
+using UnityEngine.UI;
 
 
 namespace CellWar.GameData {
@@ -19,20 +20,24 @@ namespace CellWar.GameData {
     /// 游戏本地数据
     /// </summary>
     public static class Local {
-
-        /*
-        public static bool CheckGuiRaycastObjects()
+        
+        /// <summary>
+        /// 检测UI穿透
+        /// </summary>
+        /// <returns></returns>
+        public static bool CheckGuiRaycastObjects(EventSystem eventSystem, GraphicRaycaster graphicRaycaster)
         {
-            PointerEventData eventData = new PointerEventData(Main.Instance.eventSystem);
+
+            PointerEventData eventData = new PointerEventData(eventSystem);
             eventData.pressPosition = Input.mousePosition;
             eventData.position = Input.mousePosition;
 
             List<RaycastResult> list = new List<RaycastResult>();
-            Main.Instance.graphicRaycaster.Raycast(eventData, list);
+            graphicRaycaster.Raycast(eventData, list);
             //Debug.Log(list.Count);
             return list.Count > 0;
         }
-        */
+        
 
         /// <summary>
         /// 加载所有的race
