@@ -16,6 +16,9 @@ namespace CellWar.View {
         public Strain Strain { get; set; }
 
         public void OnPointerClick( PointerEventData eventData ) {
+            //置空另外一个
+            MainGameCurrent.HoldingChemical = null;
+
             MainGameCurrent.HoldingStrain = Strain;
         }
 

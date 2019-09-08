@@ -232,7 +232,7 @@
       "Guid": "00000000-0000-0000-0000-000000000000"
     },
     "Name": "demo_strain2",
-    "Population": 0,
+    "Population": 10,
     "PlayerSelectedGenes": [
       {
         "Conditions": [],

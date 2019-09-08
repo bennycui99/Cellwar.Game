@@ -187,6 +187,18 @@ namespace CellWar.Model.Substance {
         public string Description { get; set; }
         public string Detail { get; set; }
         public int Count { get; set; }
+
+        public System.Object Clone()
+        {
+            return new Chemical()
+            {
+                Name = this.Name,
+                Description = this.Description,
+                Detail = this.Detail,
+                Count = this.Count
+            };
+        }
+
         /// <summary>
         /// 保留功能
         /// </summary>

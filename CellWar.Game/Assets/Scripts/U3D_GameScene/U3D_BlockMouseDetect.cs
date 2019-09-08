@@ -143,7 +143,7 @@ namespace CellWar.View {
             // 防止反复增加同一种细菌
             if (!HexBlockModel.Strains.Exists(m => m.Name == MainGameCurrent.HoldingStrain.Name))
             {
-                HexBlockModel.Strains.Add(MainGameCurrent.HoldingStrain);
+                HexBlockModel.Strains.Add((Strain)MainGameCurrent.HoldingStrain.Clone());
             }
             GameObject.Find(MainGameCurrent.HoldingStrain.Name).SetActive(false);
             MainGameCurrent.HoldingStrain = null;

@@ -72,23 +72,23 @@ namespace CellWar.View
         /// <returns></returns>
         Color GetColorAccordingToPopulation(int n)
         {
-            if (n > 1000)
+            if (n > 200)
             {
                 return new Color(0.5f, 0f, 0f, 0.5f);
             }
-            if (n > 500)
+            if (n > 100)
             {
                 return new Color(0f, 0f, 0f, 0.5f);
             }
-            if (n > 100)
+            if (n > 40)
             {
                 return new Color(1f, 0f, 0f, 0.5f);
             }
-            if (n > 50)
+            if (n > 20)
             {
                 return new Color(1f, 0.2f, 0.2f, 0.5f);
             }
-            if (n > 10)
+            if (n > 5)
             {
                 return new Color(1f, 0.4f, 0.4f, 0.5f);
             }
@@ -117,23 +117,15 @@ namespace CellWar.View
             // 0 1 2 左键 右键 中键
             if (Input.GetMouseButton(0))
             {
-                if (MainGameCurrent.HoldingStrain == null && !HexBlockModel.IsActive)
+                if (MainGameCurrent.HoldingStrain == null && MainGameCurrent.HoldingChemical == null && !HexBlockModel.IsActive)
                 {
                     m_BlockRenderer.enabled = true;
                     HexBlockModel.IsActive = true;
                 }
-                else if (MainGameCurrent.HoldingStrain != null && HexBlockModel.IsActive)
-                {
-                    ProcessSelectedStrain();
-                }
             }
             else if (Input.GetMouseButton(1))
             {
-                if (MainGameCurrent.HoldingStrain != null)
-                {
-                    MainGameCurrent.HoldingStrain = null;
-                }
-                else if (MainGameCurrent.HoldingStrain == null && HexBlockModel.IsActive)
+                if (MainGameCurrent.HoldingStrain == null && MainGameCurrent.HoldingChemical == null && HexBlockModel.IsActive)
                 {
                     m_BlockRenderer.enabled = false;
                     HexBlockModel.IsActive = false;
@@ -148,8 +140,37 @@ namespace CellWar.View
             }
             else if (Input.GetKeyDown(KeyCode.X))
             {
-
+                if (HexBlockModel.IsActive && HexBlockModel.PublicChemicals.Count > 0)
+                {
+                    HexBlockModel.PublicChemicals.RemoveAt(HexBlockModel.PublicChemicals.Count - 1);
+                }
             }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                if (MainGameCurrent.HoldingStrain != null && HexBlockModel.IsActive)
+                {
+                    ProcessSelectedStrain();
+                }
+
+                if (MainGameCurrent.HoldingChemical != null && HexBlockModel.IsActive)
+                {
+                    ProcessSelectedChemical();
+                }
+            }
+            else if (Input.GetMouseButtonUp(1))
+            {
+                if (MainGameCurrent.HoldingStrain != null)
+                {
+                    MainGameCurrent.HoldingStrain = null;
+                }
+
+                if (MainGameCurrent.HoldingChemical != null)
+                {
+                    MainGameCurrent.HoldingChemical = null;
+                }
+            }
+            
         }
 
         public void ProcessSelectedStrain()
@@ -159,29 +180,32 @@ namespace CellWar.View
             // 防止反复增加同一种细菌; 同一种叠加数量
             if (!HexBlockModel.Strains.Exists(m => m.Name == MainGameCurrent.HoldingStrain.Name)) 
             {
-                HexBlockModel.Strains.Add(MainGameCurrent.HoldingStrain);
+                //深拷贝
+                HexBlockModel.Strains.Add((CellWar.Model.Substance.Strain)MainGameCurrent.HoldingStrain.Clone());
+                HexBlockModel.Strains[HexBlockModel.Strains.Count - 1].Population = MainGameCurrent.HoldingStrain.Population;
             }
             else
             {
                 HexBlockModel.Strains.Find(m => m.Name == MainGameCurrent.HoldingStrain.Name).Population += MainGameCurrent.HoldingStrain.Population;
             }
-            MainGameCurrent.HoldingStrain = null;
+            //MainGameCurrent.HoldingStrain = null;
         }
 
         public void ProcessSelectedChemical()
         {
-            ChangeBlockColor(Color.yellow);
+            ChangeBlockColor(Color.black);
 
             // 防止反复增加同一种化学物质; 同一种叠加数量
             if (!HexBlockModel.PublicChemicals.Exists(m => m.Name == MainGameCurrent.HoldingChemical.Name))
             {
-                HexBlockModel.PublicChemicals.Add(MainGameCurrent.HoldingChemical);
+                //深拷贝
+                HexBlockModel.PublicChemicals.Add((CellWar.Model.Substance.Chemical)MainGameCurrent.HoldingChemical.Clone());
             }
             else
             {
                 HexBlockModel.PublicChemicals.Find(m => m.Name == MainGameCurrent.HoldingChemical.Name).Count += MainGameCurrent.HoldingChemical.Count;
             }
-            MainGameCurrent.HoldingStrain = null;
+            //MainGameCurrent.HoldingChemical = null;
         }
 
         private void OnMouseEnter()
@@ -194,6 +218,11 @@ namespace CellWar.View
             {
                 /// 当手里拿着细菌准备放置时的代码
                 m_DestColor = Color.green;
+            }
+            else if (MainGameCurrent.HoldingChemical != null)
+            {
+                // 拿着chemical
+                m_DestColor = Color.grey;
             }
             else
             {
