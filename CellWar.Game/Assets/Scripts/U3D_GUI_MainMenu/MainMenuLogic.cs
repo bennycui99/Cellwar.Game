@@ -73,13 +73,15 @@ namespace CellWar.View {
         #endregion
         void EndReachedStageScene(UnityEngine.Video.VideoPlayer vp)
         {
-            SceneManager.LoadScene("GameScene");
+            
+         SceneManager.LoadScene("GameScene");
             //Event Handler for VideoManager.
         }
 
         void EndReachedEditorScene(UnityEngine.Video.VideoPlayer vp)
         {
-            SceneManager.LoadScene("MapEditorScene");
+           
+          SceneManager.LoadScene("MapEditorScene");
             //Event Handler for VideoManager.
         }
     }

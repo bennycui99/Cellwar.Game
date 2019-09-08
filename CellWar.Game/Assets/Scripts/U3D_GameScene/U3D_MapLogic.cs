@@ -37,13 +37,13 @@ namespace CellWar.View {
         {
             StageMap = MainGameCurrent.StageMap;
             GenerateBlockContainer();
+            
         }
-
         private void Start()
         {
             BuildNeighborNetwork();
         }
-
+        
         void GenerateBlockContainer()
         {
             StageMap = JsonHelper.Json2Object_NT<Map>(CellWar.GameData.Local.GetGameDataPath("map.json"));
@@ -83,6 +83,6 @@ namespace CellWar.View {
                 }
             }
         }
-
+        
     }
 }

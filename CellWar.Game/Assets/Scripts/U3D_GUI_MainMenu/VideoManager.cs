@@ -79,6 +79,14 @@ namespace CellWar.View {
             m_imageLayer.enabled = true;
             m_videoPlayer.Play();
         }
+        public void DisableImage()
+        {
+            m_imageLayer.enabled = false;
+            m_videoPlayer.enabled = false;
+            //Upon videoplay complete - disable the image layer.
+            //Maybe only needs to be used after fade in.
+            
+        }
         #endregion
     }
 }
