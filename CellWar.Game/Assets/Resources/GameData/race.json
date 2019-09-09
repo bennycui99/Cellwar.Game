@@ -13,5 +13,10 @@
     "Name": "B",
     "MaxLength": "20000",
     "CodingGeneNames": "Amp_Kana_Chl_VH_B;Grow_Nat_ATP_L_A;Grow_Nat_AA_L_A;GLUT_L_1;TCAL1;AminoAcid_L_1;GOD;Death_Nat_1"
+  },
+  {
+    "Name": "Empty",
+    "MaxLength": "99000",
+    "CodingGeneNames": "GOD;Grow_null"
   }
 ]
