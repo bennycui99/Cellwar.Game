@@ -1,0 +1,14 @@
+[
+    {
+        "Name": "NPC_Enemy",
+        "Guid": "18665ebc-be3d-4049-80e0-7d9186ff5cb2"
+    },
+    {
+        "Name": "NPC_Neutral",
+        "Guid": "a77e57c0-86e8-4755-89d4-767b60af5c08"
+    },
+    {
+        "Name": "NPC_Alien",
+        "Guid": "1ead68bf-3f22-48f3-84b2-980c792b4b38"
+    }
+]
