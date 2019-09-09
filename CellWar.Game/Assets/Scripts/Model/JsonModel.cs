@@ -29,4 +29,11 @@ namespace CellWar.Model.Json {
         /// </summary>
         public string CodingGeneNames { get; set; }
     }
+    public class StrainJsonModel {
+        public Gamer.Player Owner { get; set; } = new Gamer.Player();
+        public string Name { get; set; }
+        public int Population { get; set; }
+        public string BasicRaceName { get; set; }
+        public string PlayerSelectedGenesName { get; set; }
+    }
 }
