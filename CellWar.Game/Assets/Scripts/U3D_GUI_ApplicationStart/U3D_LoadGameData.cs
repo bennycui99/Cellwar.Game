@@ -33,7 +33,8 @@ namespace CellWar.View {
                     Local.LoadAllChemicals();
                     Local.LoadAllRegulartoryGenes();
                     Local.LoadAllRaces();
-
+                    Local.LoadAllNpcs();
+                    Local.LoadAllNpcStrains();
                     Info( "Static Game Data loaded successfully..." );
 
                 } catch( Exception ex ) {

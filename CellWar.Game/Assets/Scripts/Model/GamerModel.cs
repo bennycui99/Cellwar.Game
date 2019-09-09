@@ -9,4 +9,5 @@ namespace CellWar.Model.Gamer {
         public string Name { get; set; }
         public Guid Guid { get; set; }
     }
+
 }

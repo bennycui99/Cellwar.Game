@@ -13,14 +13,14 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using static CellWar.Model.Substance.Strain;
 using UnityEngine.UI;
-
+using CellWar.Model.Gamer;
 
 namespace CellWar.GameData {
     /// <summary>
     /// 游戏本地数据
     /// </summary>
     public static class Local {
-        
+
         /// <summary>
         /// 检测UI穿透
         /// </summary>
@@ -133,6 +133,21 @@ namespace CellWar.GameData {
 
         public static List<RegulatoryGene> AllRegulartoryGenes { get; set; }
         public static List<Chemical> AllChemicals { get; set; }
+
+        /// <summary>
+        /// 所有的游戏内置strain
+        /// </summary>
+        public static List<Strain> AllNpcStrains { get; set; }
+        public static List<Strain> LoadAllNpcStrains() {
+            AllNpcStrains = JsonHelper.Json2Object_NT<List<Strain>>( GetGameDataPath( "npc_strains.json" ) );
+            return AllNpcStrains;
+        }
+
+        public static List<Player> AllNpcs { get; set; }
+        public static List<Player> LoadAllNpcs() {
+            AllNpcs = JsonHelper.Json2Object_NT<List<Player>>( GetGameDataPath( "npc_characters.json" ) );
+            return AllNpcs;
+        }
 
         public static string GetGameDataPath( string fileName ) => "Resources/GameData/" + fileName;
 
