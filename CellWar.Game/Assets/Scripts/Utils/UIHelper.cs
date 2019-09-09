@@ -17,9 +17,13 @@ namespace CellWar.Utils {
         /// <param name="elementName">Viewport下列示元素的名字</param>
         /// <param name="dataList">List T的列表</param>
         /// <param name="func">进行数据元素和ui元素的某些操作</param>
-        public static void InitUIList<T>( string listName, string elementName, List<T> dataList, FeedListElementHandle<T> func ) {
+        public static void InitUIList<T>( string listName, string elementName, List<T> dataList, FeedListElementHandle<T> func )
+        {
             var UIList = GameObject.Find( listName ).gameObject;
             var UIElement = GameObject.Find( elementName ).gameObject;
+            if( dataList == null ) {
+                return;
+            }
             foreach( var datum in dataList ) {
                 var newUIElement = GameObject.Instantiate( UIElement );
                 func( newUIElement, datum );
@@ -29,7 +33,8 @@ namespace CellWar.Utils {
         }
 
 
-        public static void InitUIList<T>( string listName, string elementName, List<T> dataList, FeedListElementHandle<T> func, ref GameObject elementHandle ) {
+        public static void InitUIList<T>( string listName, string elementName, List<T> dataList, FeedListElementHandle<T> func, ref GameObject elementHandle )
+        {
             var UIList = GameObject.Find( listName ).gameObject;
             var UIElement = GameObject.Find( elementName ).gameObject;
             foreach( var datum in dataList ) {
@@ -41,13 +46,15 @@ namespace CellWar.Utils {
             UIElement.SetActive( false );
         }
 
-        public static void RefreshUIList<T>( string listName, GameObject elementObject, List<T> dataList, FeedListElementHandle<T> func) {
-            elementObject.SetActive(true);
+        public static void RefreshUIList<T>( string listName, GameObject elementObject, List<T> dataList, FeedListElementHandle<T> func )
+        {
+            elementObject.SetActive( true );
             var UIList = GameObject.Find( listName ).gameObject;
             foreach( Transform child in UIList.transform ) {
                 if( child.name == elementObject.name ) {
                     continue;
-                } else {
+                }
+                else {
                     GameObject.Destroy( child.gameObject );
                 }
             }
@@ -64,7 +71,8 @@ namespace CellWar.Utils {
         /// </summary>
         /// <param name="textObject"></param>
         /// <param name="text"></param>
-        public static void ChangeText( GameObject textObject, string text ) {
+        public static void ChangeText( GameObject textObject, string text )
+        {
             textObject.GetComponent<Text>().text = text;
         }
 
@@ -73,21 +81,25 @@ namespace CellWar.Utils {
         /// </summary>
         /// <param name="toggleName"></param>
         /// <param name="isOn"></param>
-        public static void SwitchToggle( string toggleName, bool isOn ) {
+        public static void SwitchToggle( string toggleName, bool isOn )
+        {
             GameObject.Find( toggleName ).GetComponent<Toggle>().isOn = isOn;
         }
 
-        public static void SwitchOffAllToggle( string parentName ) {
+        public static void SwitchOffAllToggle( string parentName )
+        {
             foreach( Transform toggle in GameObject.Find( parentName ).transform ) {
                 toggle.GetComponent<Toggle>().isOn = false;
             }
         }
 
-        public static string GetInputText( string inputName ) {
+        public static string GetInputText( string inputName )
+        {
             return GameObject.Find( inputName ).GetComponent<InputField>().text;
         }
 
-        public static void SetInputText( string inputName, string text ) {
+        public static void SetInputText( string inputName, string text )
+        {
             GameObject.Find( inputName ).GetComponent<InputField>().text = text;
         }
     }

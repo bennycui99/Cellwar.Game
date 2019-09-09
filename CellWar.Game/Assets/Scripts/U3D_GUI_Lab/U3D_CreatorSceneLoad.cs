@@ -26,6 +26,10 @@ namespace CellWar.View {
         }
 
         void Awake() {
+            if( Local.AllRaces == null ) {
+                return;
+            }
+
             #region INIT_UIs
             UIHelper.InitUIList( "UI_RaceList", "UI_Ele_Race", Local.AllRaces,
                 ( GameObject g, Race obj ) => {
@@ -55,7 +59,9 @@ namespace CellWar.View {
 
             // 没有Strain实例表示创建新的Strain
             if( LabCurrent.Strain == null ) {
-                LabCurrent.Strain = new CellWar.Model.Substance.Strain();
+                // 为新创建的strain实例指定一个默认race
+                // 注，race文件一定不能为空，不然会爆炸
+                LabCurrent.Strain = new Strain( GameData.Local.AllRaces[0] );
             }
 
 

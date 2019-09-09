@@ -10,6 +10,15 @@ namespace CellWar.Model.Substance {
     /// 菌系
     /// </summary>
     public class Strain : ICloneable {
+
+        public Strain() {
+
+        }
+
+        public Strain( Race basicRace ) {
+            BasicRace = basicRace;
+        }
+
         /// <summary>
         /// 种族
         /// 游戏初始的，某种自带的基因组。与DOTA中基础英雄属性增长分为三类相类似。

@@ -14,15 +14,17 @@ namespace CellWar.View {
         public Race Race { get; set; }
 
         private void Start() {
-            Debug.Log(LabCurrent.Strain);
-            GetComponent<Toggle>().isOn = LabCurrent.Strain.BasicRace.Name == Race.Name;
             UIHelper.ChangeText( transform.Find( "Label" ).gameObject, Race.Name );
+            GetComponent<Toggle>().isOn = LabCurrent.Strain.BasicRace.Name == Race.Name;
         }
 
         /// <summary>
         /// 当value on change时调用
         /// </summary>       
         public void ChangeText() {
+            if( Race == null ) {
+                return;
+            }
             LabCurrent.Strain.BasicRace = Race.Clone();
             U3D_CreatorSceneLoad.FreshLength();
         }

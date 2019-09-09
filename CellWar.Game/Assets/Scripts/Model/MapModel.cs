@@ -20,6 +20,10 @@ namespace CellWar.Model.Map {
         public float X { get; set; }
         public float Z { get; set; }
 
+        /// <summary>
+        /// 将unity坐标转化为hex坐标
+        /// </summary>
+        /// <returns></returns>
         public HexCoordinate StandardToHexCoordiante()
         {
             HexCoordinate hex = new HexCoordinate();
