@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using CellWar.Model.Map;
+﻿using CellWar.Model.Map;
 using CellWar.GameData;
 using UnityEngine;
 
-namespace CellWar.View {
+namespace CellWar.View
+{
 
     public class U3D_CameraLogic : MonoBehaviour {
         public Map StageMap;

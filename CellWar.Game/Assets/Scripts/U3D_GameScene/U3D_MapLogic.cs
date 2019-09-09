@@ -13,14 +13,13 @@
 ///     | -BlockContainer
 ///     
 /// </summary>
-using System.Collections;
-using System.Collections.Generic;
 using CellWar.Model.Map;
 using UnityEngine;
 using CellWar.Utils;
 using CellWar.GameData;
 
-namespace CellWar.View {
+namespace CellWar.View
+{
     public class U3D_MapLogic : MonoBehaviour {
 
         public Map StageMap;

@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace CellWar.Utils.Object {
+namespace CellWar.Utils.Object
+{
     public static class ObjectHelper {
         public static T Clone<T>( T obj ) {
             T ret = default( T );

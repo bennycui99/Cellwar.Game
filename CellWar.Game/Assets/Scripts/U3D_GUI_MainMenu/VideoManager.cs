@@ -1,10 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.UI;
 
-namespace CellWar.View {
+namespace CellWar.View
+{
     public class VideoManager : MonoBehaviour
     {
         private static VideoManager m_Instance = null;

@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using CellWar.GameData;
+﻿using CellWar.GameData;
 using UnityEngine;
 using UnityEngine.UI;
-namespace CellWar.View {
+namespace CellWar.View
+{
 
     public class U3D_BlockStrainDetail : MonoBehaviour {
         // Start is called before the first frame update

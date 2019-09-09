@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
 using System.IO;
@@ -7,7 +6,8 @@ using System.IO;
 /// <summary>
 /// Utils
 /// </summary>
-namespace CellWar.Utils {
+namespace CellWar.Utils
+{
 
     /// <summary>
     /// load json from file to objects.

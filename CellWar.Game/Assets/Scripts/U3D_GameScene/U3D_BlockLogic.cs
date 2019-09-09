@@ -1,14 +1,12 @@
 ﻿using UnityEngine;
 using CellWar.Model.Map;
-using System.Collections.Generic;
-using UnityEngine.EventSystems;
 using CellWar.GameData;
 using CellWar.Model.Substance;
+using CellWar.Controller;
 
-namespace CellWar.View {
+namespace CellWar.View
+{
     public class U3D_BlockLogic : MonoBehaviour {
-        const float MAX_UPDATE_COUNT = 1.0f;
-        float m_UpdateCount = MAX_UPDATE_COUNT;
 
         public Block HexBlockModel;
 
@@ -30,16 +28,7 @@ namespace CellWar.View {
 
         private void Update()
         {
-            // 每隔一秒更新一次
-            if (m_UpdateCount > 0)
-            {
-                m_UpdateCount -= Time.deltaTime;
-                return;
-            }
-            else
-            {
-                m_UpdateCount = MAX_UPDATE_COUNT;
-            }
+            if (GameManager.Instance.UpdateCount > 0) return;
 
             // 遍历所有种类细菌
             for(var i = 0; i < HexBlockModel.Strains.Count; ++i)

@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using CellWar.Model.Map;
-using UnityEngine.EventSystems;
+﻿using CellWar.Model.Map;
 using CellWar.GameData;
 using CellWar.Model.Substance;
 using UnityEngine;
+using CellWar.Controller;
 
-namespace CellWar.View {
+namespace CellWar.View
+{
     public class U3D_BlockMouseDetect : MonoBehaviour
     {
         UnityEngine.EventSystems.EventSystem m_EventSystem;
@@ -155,6 +154,11 @@ namespace CellWar.View {
             }
             GameObject.Find(MainGameCurrent.HoldingStrain.Name).SetActive(false);
             MainGameCurrent.HoldingStrain = null;
+
+            if (!GameManager.Instance.IsGameStarted)
+            {
+                GameManager.Instance.IsGameStarted = true;
+            }
         }
 
         private void OnMouseEnter()

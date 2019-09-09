@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using CellWar.GameData;
 using CellWar.Model.Map;
 using CellWar.Model.Substance;
 using UnityEngine;
 using static CellWar.Model.Substance.Strain;
 
-namespace CellWar.Controller.Gene {
+namespace CellWar.Controller.Gene
+{
     public class CodingGeneController {
         public CodingGeneController() {
             EffectEvents.Add( ConsumeAndDecomposite );
