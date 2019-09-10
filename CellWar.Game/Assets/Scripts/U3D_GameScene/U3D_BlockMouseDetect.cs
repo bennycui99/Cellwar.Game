@@ -161,7 +161,7 @@ namespace CellWar.View
 
         private void OnMouseEnter()
         {
-            if (Local.CheckGuiRaycastObjects(m_EventSystem, m_GraphicRaycaster)) return;
+            if (UIManager.Instance.CheckGuiRaycastObjects() ) return;
             //Debug.Log("Mouse Enter");
             m_IsMouseEnter = true;
             MainGameCurrent.FocusedHexBlock = HexBlockModel;
