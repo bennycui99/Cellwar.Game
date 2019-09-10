@@ -34,18 +34,16 @@ namespace CellWar.View
 
         private void Awake()
         {
-            StageMap = MainGameCurrent.StageMap;
-            GenerateBlockContainer();
-            
+            MainGameCurrent.StageMap = GenerateBlockContainer();
         }
         private void Start()
         {
             BuildNeighborNetwork();
         }
         
-        void GenerateBlockContainer()
+        Map GenerateBlockContainer()
         {
-            StageMap = JsonHelper.Json2Object_NT<Map>(CellWar.GameData.Local.GetGameDataPath("map.json"));
+            StageMap = JsonHelper.Json2Object_NT<Map>( Local.GetGameDataPath("map.json"));
 
             for (int i = 0; i < StageMap.Blocks.Count; ++i)
             {
@@ -58,6 +56,7 @@ namespace CellWar.View
                 blockObject.transform.position = new Vector3(HexBlockModel.StandardCoor.X, 0, HexBlockModel.StandardCoor.Z);
                 blockObject.SetActive(true);
             }
+            return StageMap;
         }
 
         /// <summary>

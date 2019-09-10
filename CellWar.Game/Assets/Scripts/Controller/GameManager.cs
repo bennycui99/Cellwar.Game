@@ -58,7 +58,7 @@ namespace CellWar.Controller
             // Demo用的铜离子检测
             for(int i = 0; i < MainGameCurrent.StageMap.Blocks.Count; ++i)
             {
-                if (MainGameCurrent.StageMap.Blocks[i].PublicChemicals.Find(m => m.Name == "Cu").Count > 100)
+                if (MainGameCurrent.StageMap.Blocks[i].PublicChemicals.Find(m => m.Name == "Cu")?.Count > 100)
                 {
                     return false;
                 }
