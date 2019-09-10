@@ -18,15 +18,11 @@ namespace CellWar.View {
         /// 初始化这个Block
         /// </summary>
         private void Start() {
-            HexBlockModel.ParentUnityObjectName = gameObject.name;
-
             m_BlockMouseDetectLogic = m_BlockMouseDetectObject.GetComponent<U3D_BlockMouseDetect>();
             m_BlockMouseDetectLogic.HexBlockModel = HexBlockModel;
         }
 
-        private void Update() {
-            if( GameManager.Instance.IsGameNextTick ) return;
-
+        public void BlockBacteriaUpdate() {
             // 遍历所有种类细菌
             for( var i = 0; i < HexBlockModel.Strains.Count; ++i ) {
                 Strain currentStrain = HexBlockModel.Strains[i];

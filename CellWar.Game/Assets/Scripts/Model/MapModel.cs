@@ -76,9 +76,9 @@ namespace CellWar.Model.Map {
         public StandardCoordinate StandardCoor = new StandardCoordinate();
 
         /// <summary>
-        /// Unity 游戏对象名字
+        /// Block对应的BlockLogic
         /// </summary>
-        public string ParentUnityObjectName;
+        public CellWar.View.U3D_BlockLogic BlockLogic = null;
 
         public enum Type {
             Normal,

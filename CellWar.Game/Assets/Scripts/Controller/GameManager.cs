@@ -14,8 +14,6 @@ namespace CellWar.Controller
         const float MAX_UPDATE_COUNT = 1.0f;
         public float UpdateCount = MAX_UPDATE_COUNT;
 
-        public bool IsGameNextTick;
-
         private void Awake()
         {
             if (_instance != null && _instance != this)
@@ -29,7 +27,6 @@ namespace CellWar.Controller
 
             IsGameStarted = false;
             IsGameCompleted = false;
-            IsGameNextTick = false;
         }
 
         private void Update()
@@ -47,10 +44,14 @@ namespace CellWar.Controller
             {
                 UpdateCount = MAX_UPDATE_COUNT;
             }
+            
+            // 更新所有格子
+            for(int i = 0; i < MainGameCurrent.StageMap.Blocks.Count; ++i)
+            {
+                MainGameCurrent.StageMap.Blocks[i].BlockLogic.BlockBacteriaUpdate();
+            }
 
-            // 下一个Tick 格子更新
-            IsGameNextTick = true;
-
+            /*
             // 判断游戏胜利
             if (IsStageCompleted())
             {
@@ -58,6 +59,7 @@ namespace CellWar.Controller
                 IsGameStarted = false;
                 //send information here
             }
+            */
         }
 
         bool IsStageCompleted()

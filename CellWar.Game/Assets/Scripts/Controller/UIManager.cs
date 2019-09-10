@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-
+using UnityEngine.SceneManagement;
+using CellWar.GameData;
 
 namespace CellWar.Controller
 {
@@ -25,7 +26,6 @@ namespace CellWar.Controller
             {
                 _instance = this;
             }
-
             m_EventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
             m_GraphicRaycaster = GameObject.Find("BlockingCanvas").GetComponent<GraphicRaycaster>();
         }
@@ -56,12 +56,16 @@ namespace CellWar.Controller
 
         public void OnGameSceneExitClick()
         {
+            MainGameCurrent.FocusedHexBlock = null;
 
+            SceneManager.LoadScene("MainMenuScene");
         }
 
         public void OnEditorSceneExitClick()
         {
+            MainGameCurrent.FocusedHexBlock = null;
 
+            SceneManager.LoadScene("MainMenuScene");
         }
     }
 
