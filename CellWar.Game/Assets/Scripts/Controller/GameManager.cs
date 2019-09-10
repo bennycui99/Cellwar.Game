@@ -55,6 +55,7 @@ namespace CellWar.Controller
 
         bool IsStageCompleted()
         {
+            return false;
             // Demo用的铜离子检测
             for(int i = 0; i < MainGameCurrent.StageMap.Blocks.Count; ++i)
             {

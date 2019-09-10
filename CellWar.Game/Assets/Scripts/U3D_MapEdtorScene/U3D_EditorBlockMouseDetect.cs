@@ -37,7 +37,7 @@ namespace CellWar.View
         void Start()
         {
             m_EventSystem = GameObject.Find("EventSystem").GetComponent<UnityEngine.EventSystems.EventSystem>();
-            m_GraphicRaycaster = GameObject.Find("Canvas").GetComponent<GraphicRaycaster>();
+            m_GraphicRaycaster = GameObject.Find("BlockingCanvas").GetComponent<GraphicRaycaster>();
 
             m_BlockRenderer = GetComponent<MeshRenderer>();
             m_BlockRenderer.enabled = false;

@@ -37,7 +37,7 @@ namespace CellWar.View
         void Start()
         {
             m_EventSystem = GameObject.Find("EventSystem").GetComponent<UnityEngine.EventSystems.EventSystem>();
-            m_GraphicRaycaster = GameObject.Find("Canvas").GetComponent<UnityEngine.UI.GraphicRaycaster>();
+            m_GraphicRaycaster = GameObject.Find("BlockingCanvas").GetComponent<UnityEngine.UI.GraphicRaycaster>();
 
             m_BlockRenderer = GetComponent<MeshRenderer>();
             //ChangeBlockColor(INIT_COLOR);
@@ -163,6 +163,7 @@ namespace CellWar.View
 
         private void OnMouseEnter()
         {
+            if (Local.CheckGuiRaycastObjects(m_EventSystem, m_GraphicRaycaster)) return;
             //Debug.Log("Mouse Enter");
             m_IsMouseEnter = true;
             MainGameCurrent.FocusedHexBlock = HexBlockModel;
