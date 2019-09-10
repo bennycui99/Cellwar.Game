@@ -49,7 +49,7 @@ namespace CellWar.View
             {
                 Block HexBlockModel = StageMap.Blocks[i];
                 //生成object
-                GameObject blockObject = Instantiate(BlockPrefab,gameObject.transform) as GameObject;
+                var blockObject = Instantiate(BlockPrefab, gameObject.transform) as GameObject;
                 //赋值block
                 blockObject.GetComponent<U3D_BlockLogic>().HexBlockModel = HexBlockModel;
                 //移动到正确位置

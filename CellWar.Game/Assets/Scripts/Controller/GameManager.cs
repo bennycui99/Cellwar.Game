@@ -55,15 +55,12 @@ namespace CellWar.Controller
 
         bool IsStageCompleted()
         {
-            // Demo用的铜离子检测
-            for(int i = 0; i < MainGameCurrent.StageMap.Blocks.Count; ++i)
-            {
-                if (MainGameCurrent.StageMap.Blocks[i].PublicChemicals.Find(m => m.Name == "Cu")?.Count > 100)
-                {
+            foreach( var block in MainGameCurrent.StageMap.Blocks ) {
+                if( block.PublicChemicals.Find( m => m.Name == "Cu" )?.Count > 100 ) {
                     return false;
                 }
             }
-
+            Debug.Log("Game Over");
             return true;
         }
     }
