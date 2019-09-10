@@ -8,13 +8,12 @@ namespace CellWar.View
 {
     public class U3D_EditorMapLogic : MonoBehaviour
     {
-        public Map StageMap;
+        public Map StageMap = new Map();
         [SerializeField]
         public GameObject BlockPrefab;
 
         private void Awake()
         {
-            StageMap = MainGameCurrent.StageMap;
             GenerateBlockContainer();
         }
 
@@ -48,6 +47,8 @@ namespace CellWar.View
                     blockObject.SetActive(true);
                 }
             }
+
+            MainGameCurrent.StageMap = StageMap;
         }
 
     }
