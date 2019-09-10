@@ -2,6 +2,7 @@
 using CellWar.Model.Map;
 using CellWar.GameData;
 using UnityEngine.UI;
+using CellWar.Controller;
 
 namespace CellWar.View
 {
@@ -36,9 +37,6 @@ namespace CellWar.View
         // Start is called before the first frame update
         void Start()
         {
-            m_EventSystem = GameObject.Find("EventSystem").GetComponent<UnityEngine.EventSystems.EventSystem>();
-            m_GraphicRaycaster = GameObject.Find("BlockingCanvas").GetComponent<GraphicRaycaster>();
-
             m_BlockRenderer = GetComponent<MeshRenderer>();
             m_BlockRenderer.enabled = false;
 
@@ -118,7 +116,7 @@ namespace CellWar.View
         /// </summary>
         private void OnMouseOver()
         {
-            if (Local.CheckGuiRaycastObjects(m_EventSystem, m_GraphicRaycaster)) return;
+            if (UIManager.Instance.CheckGuiRaycastObjects()) return;
 
             if (Input.GetMouseButtonDown(0))
             {

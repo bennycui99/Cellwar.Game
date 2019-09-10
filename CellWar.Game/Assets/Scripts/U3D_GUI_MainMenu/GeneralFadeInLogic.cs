@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using CellWar.Controller;
 
 namespace CellWar.View
 {

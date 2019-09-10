@@ -25,7 +25,7 @@ namespace CellWar.View {
         }
 
         private void Update() {
-            if( GameManager.Instance.UpdateCount > 0 ) return;
+            if( GameManager.Instance.IsGameNextTick ) return;
 
             // 遍历所有种类细菌
             for( var i = 0; i < HexBlockModel.Strains.Count; ++i ) {

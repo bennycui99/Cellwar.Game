@@ -22,22 +22,6 @@ namespace CellWar.GameData {
     public static class Local {
 
         /// <summary>
-        /// 检测UI穿透
-        /// </summary>
-        /// <returns></returns>
-        public static bool CheckGuiRaycastObjects( EventSystem eventSystem, GraphicRaycaster graphicRaycaster ) {
-
-            PointerEventData eventData = new PointerEventData(eventSystem);
-            eventData.pressPosition = Input.mousePosition;
-            eventData.position = Input.mousePosition;
-
-            List<RaycastResult> list = new List<RaycastResult>();
-            graphicRaycaster.Raycast( eventData, list );
-            //Debug.Log(list.Count);
-            return list.Count > 0;
-        }
-
-        /// <summary>
         /// 将reg-cod规范的字符串转化为reg list对象
         /// geneNameList的规范为 r1;c1;c2;r2;c3;r3;c4
         /// reg后的cod会被自动归类到该r的支配基因中，读到下一个reg时停止

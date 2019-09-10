@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.UI;
 
-namespace CellWar.View
+namespace CellWar.Controller
 {
     public class VideoManager : MonoBehaviour
     {
