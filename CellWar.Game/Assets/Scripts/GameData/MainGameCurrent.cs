@@ -14,7 +14,7 @@ namespace CellWar.GameData {
         /// <summary>
         /// 地图的Instance
         /// </summary>
-        public static Map StageMap = new Map();
+        public static Map StageMap = null;
 
         /// <summary>
         /// Editor用的 手上的chemical

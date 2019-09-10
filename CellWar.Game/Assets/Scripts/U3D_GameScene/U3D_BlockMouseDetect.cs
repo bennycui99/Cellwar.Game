@@ -140,18 +140,21 @@ namespace CellWar.View
 
         public void ProcessSelectedStrain()
         {
+            Debug.Log("Process");
             //Debug.Log(MainGameCurrent.HoldingStrain);
             ChangeBlockColor(Color.yellow);
             // 防止反复增加同一种细菌
             if (!HexBlockModel.Strains.Exists(m => m.Name == MainGameCurrent.HoldingStrain.Name))
             {
+                Debug.Log( "Put" );
                 HexBlockModel.Strains.Add((Strain)MainGameCurrent.HoldingStrain.Clone());
             }
             GameObject.Find(MainGameCurrent.HoldingStrain.Name).SetActive(false);
             MainGameCurrent.HoldingStrain = null;
 
-            if (!GameManager.Instance.IsGameStarted)
+            if (!GameManager.Instance.IsGameStarted && !GameManager.Instance.IsGameCompleted)
             {
+                Debug.Log( "Game Start" );
                 GameManager.Instance.IsGameStarted = true;
             }
         }
