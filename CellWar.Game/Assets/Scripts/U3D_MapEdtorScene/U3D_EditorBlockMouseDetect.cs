@@ -18,6 +18,8 @@ namespace CellWar.View
         Renderer m_BlockRenderer;
 
         static Color INIT_COLOR = new Color(190f / 255f, 190f / 255f, 190f / 255f, 0f);
+        static Color MOUSE_STRAIN_COLOR = Color.green;
+        static Color MOUSE_EMPTY_COLOR = Color.blue;
         /// <summary>
         /// 方块人口对应颜色
         /// </summary>
@@ -179,11 +181,13 @@ namespace CellWar.View
                 if (MainGameCurrent.HoldingStrain != null)
                 {
                     MainGameCurrent.HoldingStrain = null;
+                    m_DestColor = MOUSE_EMPTY_COLOR;
                 }
 
                 if (MainGameCurrent.HoldingChemical != null)
                 {
                     MainGameCurrent.HoldingChemical = null;
+                    m_DestColor = MOUSE_EMPTY_COLOR;
                 }
             }   
         }
@@ -197,7 +201,6 @@ namespace CellWar.View
             {
                 //深拷贝
                 HexBlockModel.Strains.Add((CellWar.Model.Substance.Strain)MainGameCurrent.HoldingStrain.Clone());
-                HexBlockModel.Strains[HexBlockModel.Strains.Count - 1].Population = MainGameCurrent.HoldingStrain.Population;
             }
             else
             {
@@ -232,7 +235,7 @@ namespace CellWar.View
             if (MainGameCurrent.HoldingStrain != null)
             {
                 /// 当手里拿着细菌准备放置时的代码
-                m_DestColor = Color.green;
+                m_DestColor = MOUSE_STRAIN_COLOR;
             }
             else if (MainGameCurrent.HoldingChemical != null)
             {
@@ -242,7 +245,7 @@ namespace CellWar.View
             else
             {
                 /// 手里什么都没有拿时鼠标移动到格子上的代码
-                m_DestColor = Color.blue;
+                m_DestColor = MOUSE_EMPTY_COLOR;
             }
 
         }

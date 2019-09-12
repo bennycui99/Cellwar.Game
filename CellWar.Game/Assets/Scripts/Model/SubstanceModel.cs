@@ -179,7 +179,7 @@ namespace CellWar.Model.Substance {
 
         public System.Object Clone() {
             return new Strain() {
-                Population = 0,
+                Population = this.Population,
                 Name = this.Name,
                 PlayerSelectedGenes = ObjectHelper.CloneList2( PlayerSelectedGenes ),
                 Owner = this.Owner,

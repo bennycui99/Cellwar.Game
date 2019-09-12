@@ -5,7 +5,7 @@
       "Guid": "00000000-0000-0000-0000-000000000000"
     },
     "Name": "demo_strain",
-    "Population": 0,
+    "Population": 10,
     "BasicRaceName": "A",
     "PlayerSelectedGenesName": "GOD;Ether"
   },
@@ -15,7 +15,7 @@
       "Guid": "00000000-0000-0000-0000-000000000000"
     },
     "Name": "demo_strain2",
-    "Population": 0,
+    "Population": 20,
     "BasicRaceName": "A",
     "PlayerSelectedGenesName": "Amp_Kana_Chl_Cu_VH_A;Grow_Nat_ATP_N_1;Grow_Nat_ATP_L_1;Grow_Nat_ATP_L_A;Amp_Kana_Chl_H_1;Grow_Nat_ATP_L_1;Grow_Nat_ATP_L_A;Grow_Nat_ATP_H_A"
   }
