@@ -5,6 +5,13 @@ This game is used in HumanPractices part in our iGEM project. After iGEM, we can
 See [TODO List](<https://github.com/bennycui99/Cellwar.Game/blob/master/TODO.md>) and fuck your tasks off! LOL
 
 ## Where the hell we are?
+
+### 9.10 In-Game Ready to use panel animation (in a separated project)
+
+![avatar](Progress/9.10.gif)
+
+Once the gameplay itself is fixed, we can begin to refine its looking.
+
 ### 9.8 MapEditor
 When holding a bacteria/ chemical you can not active/de-active a block.
 
