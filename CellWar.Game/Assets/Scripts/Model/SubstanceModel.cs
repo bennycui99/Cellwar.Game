@@ -181,6 +181,9 @@ namespace CellWar.Model.Substance {
             return new Strain() {
                 Population = this.Population,
                 Name = this.Name,
+                /// 直接引用，使所有同类strain公用一个PrivateChemicals
+                /// 若有两个strain且他们的相邻格子中没有对方的话，情况另议
+                PrivateChemicals = this.PrivateChemicals,
                 PlayerSelectedGenes = ObjectHelper.CloneList2( PlayerSelectedGenes ),
                 Owner = this.Owner,
                 BasicRace = this.BasicRace

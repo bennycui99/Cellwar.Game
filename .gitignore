@@ -37,3 +37,5 @@ sysinfo.txt
 
 # Editor
 bin/
+
+.DS_Store
