@@ -1,10 +1,77 @@
 # CellWar.Game
-Game for iGEM.
-This game is used in HumanPractices part in our iGEM project. After iGEM, we can polish this game and make it for other uses. Meanwhile, this game is about the war of cells.
+~~See [TODO List](<https://github.com/bennycui99/Cellwar.Game/blob/master/TODO.md>) and fuck your tasks off! LOL~~
 
-See [TODO List](<https://github.com/bennycui99/Cellwar.Game/blob/master/TODO.md>) and fuck your tasks off! LOL
+See [issue](https://github.com/bennycui99/Cellwar.Game/issues) page and fuck all issues off please.
 
 ## Where the hell we are?
+
+### 9.15 Fix all effect bugs and some descriptions
+
+
+
+#### Essential Items（必填项）
+
+```json
+  {
+    "Name": "No_Consume",
+    "Length": "0",
+    "PopulationCoefficient": "0",
+    "PopulationIntercept": "0",
+    "FirstSpreadMountRate": "1",
+    "SpreadConditionRate": "1",
+    "Description": "fooooooooooooooooo"
+  }
+```
+
+The gene above is the minimal json version of coding gene. The properties given above are essential.
+
+```json
+    "FirstSpreadMountRate": "1",
+```
+
+The properties above must be both sans-zero.
+
+```json
+    "SpreadConditionRate": "0",
+```
+
+Means always spreading.
+
+ 
+
+#### The Main Key of xxxxxxx（某一指标的主键）
+
+The model of the coding gene contains several properties like **xxxxxxxName** and we named those string type properties **The Main Key of xxxxxxxx**.
+
+In the [effect methods](https://github.com/bennycui99/Cellwar.Game/blob/master/CellWar.Game/Assets/Scripts/Controller/GeneController.cs) written so far, if **The Main Key of xxxxxxxx** is **Empty** ("") or **Null Reference**, the method will not be invoked.
+
+e.g.
+
+```json
+  {
+    "Name": "No_Consume",
+    "Length": "0",
+    "PopulationCoefficient": "0",
+    "PopulationIntercept": "0",
+    "ConsumeChemicalName": "",
+    "ConsumeChemicalCoeffeicient": "0",
+    "ConsumeChemicalIntercept": "0",
+    "IsConsumePublic": "False",
+    "ProductionChemicalName": "Demo",
+    "ProductionChemicalCoeffeicient": "1",
+    "ProductionChemicalIntercept": "2",
+    "ImportChemicalName": "Demo",
+    "ImportChemicalCoeffeicient": "1",
+    "ImportChemicalIntercept": "2",
+    "FirstSpreadMountRate": "1",
+    "SpreadConditionRate": "1",
+    "Description": "fooooooooooooooooo"
+  }
+```
+
+The gene above will never call the consume method.
+
+
 
 ### 9.10 In-Game Ready to use panel animation (in a separated project)
 

@@ -12,8 +12,9 @@ namespace CellWar.Controller.Gene
             EffectEvents.Add( Consume );
             EffectEvents.Add( Decomposite );
             EffectEvents.Add( ProductChemical );
-            EffectEvents.Add( ModifyPopulation );
             EffectEvents.Add( ImportChemical );
+
+            EffectEvents.Add( ModifyPopulation );
             EffectEvents.Add( StrainSpread );
         }
         public delegate bool EffectEvent( ref Strain parentStrain, ref Block currentBlock, ref CodingGene gene );
@@ -116,6 +117,10 @@ namespace CellWar.Controller.Gene
 
         public bool ModifyPopulation( ref Strain parentStrain, ref Block currentBlock, ref CodingGene gene ) {
             var delta = ( int )GetPopulationDelta( ref parentStrain, ref gene );
+            if ( delta == 0 )
+            {
+                return false;
+            }
             if( currentBlock.IsPopulationBeingFull( delta )
                 && !currentBlock.IsPopulationFull() ) { // 最后一次人口增加，即将变满
                 parentStrain.Population += currentBlock.Capacity - currentBlock.TotalPopulation;
@@ -167,7 +172,7 @@ namespace CellWar.Controller.Gene
             // 是否满足扩散条件
 
             // 避免人口为0时的幽灵扩散
-            if ( parentStrain.Population == 0 || gene.FirstSpreadMountRate.Equals( 0 ) || gene.SpreadConditionRate.Equals( 0 ) ) {
+            if ( parentStrain.Population == 0 || gene.FirstSpreadMountRate.Equals( 0 ) ) {
                 return true;
             }
             if( parentStrain.Population >= currentBlock.Capacity * SpreadConditionRate ) {
