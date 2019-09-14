@@ -526,7 +526,7 @@
     "ProductionChemicalIntercept": "0",
     "ImportChemicalName": "Glucose",
     "ImportChemicalCoeffeicient": "1",
-    "ImportChemicalIntercept": "0",
+    "ImportChemicalIntercept": "1",
     "FirstSpreadMountRate": "0",
     "SpreadConditionRate": "0",
     "Description": "消耗0.1×人口数+0的ATP。转运0.1×人口数+0的Glucose。长度345。运输葡萄糖的基因"

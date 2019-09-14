@@ -122,7 +122,9 @@ namespace CellWar.Model.Substance {
             #endregion
 
             #region CONSUME
-
+            /// <summary>
+            /// Consume的是
+            /// </summary>
             public string ConsumeChemicalName { get; set; }
             public int ConsumeChemicalCount { get; set; }
             public float ConsumeChemicalCoeffeicient { get; set; }
