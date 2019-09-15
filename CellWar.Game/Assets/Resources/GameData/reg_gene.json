@@ -4,19 +4,19 @@
     "Length": "180",
     "Condition": [
       {
-        "Chemical": "Ampicillin",
+        "Name": "Ampicillin",
         "Count": "10"
       },
       {
-        "Chemical": "Kana",
+        "Name": "Kana",
         "Count": "10"
       },
       {
-        "Chemical": "Chl",
+        "Name": "Chl",
         "Count": "10"
       },
       {
-        "Chemical": "growth",
+        "Name": "growth",
         "Count": "1000"
       }
     ],
@@ -28,24 +28,24 @@
     "Length": "180",
     "Condition": [
       {
-        "Chemical": "Ampicillin",
+        "Name": "Ampicillin",
         "Count": "10"
       },
       {
-        "Chemical": "Kana",
+        "Name": "Kana",
         "Count": "10"
       },
       {
-        "Chemical": "Chl",
-        "Count": "10"
+        "Name": "Chl",
+        "Count": "5"
       },
       {
-        "Chemical": "Cu",
-        "Count": "10"
+        "Name": "Cu",
+        "Count": "5"
       },
       {
-        "Chemical": "growth",
-        "Count": "1000"
+        "Name": "growth",
+        "Count": "500"
       }
     ],
     "Type": "NO",
@@ -56,19 +56,19 @@
     "Length": "360",
     "Condition": [
       {
-        "Chemical": "Ampicillin",
+        "Name": "Ampicillin",
         "Count": "100"
       },
       {
-        "Chemical": "Kana",
+        "Name": "Kana",
         "Count": "100"
       },
       {
-        "Chemical": "Chl",
+        "Name": "Chl",
         "Count": "100"
       },
       {
-        "Chemical": "Cu",
+        "Name": "Cu",
         "Count": "10"
       }
     ],
@@ -80,15 +80,15 @@
     "Length": "360",
     "Condition": [
       {
-        "Chemical": "Ampicillin",
+        "Name": "Ampicillin",
         "Count": "100"
       },
       {
-        "Chemical": "Kana",
+        "Name": "Kana",
         "Count": "100"
       },
       {
-        "Chemical": "Chl",
+        "Name": "Chl",
         "Count": "100"
       }
     ],
@@ -100,15 +100,15 @@
     "Length": "360",
     "Condition": [
       {
-        "Chemical": "Ampicillin",
+        "Name": "Ampicillin",
         "Count": "100"
       },
       {
-        "Chemical": "Kana",
+        "Name": "Kana",
         "Count": "100"
       },
       {
-        "Chemical": "Chl",
+        "Name": "Chl",
         "Count": "100"
       }
     ],
@@ -120,15 +120,15 @@
     "Length": "720",
     "Condition": [
       {
-        "Chemical": "Ampicillin",
+        "Name": "Ampicillin",
         "Count": "300"
       },
       {
-        "Chemical": "Kana",
+        "Name": "Kana",
         "Count": "300"
       },
       {
-        "Chemical": "Chl",
+        "Name": "Chl",
         "Count": "300"
       }
     ],
@@ -140,11 +140,11 @@
     "Length": "360",
     "Condition": [
       {
-        "Chemical": "Cu",
+        "Name": "Cu",
         "Count": "500"
       },
       {
-        "Chemical": "growth",
+        "Name": "growth",
         "Count": "1000"
       }
     ],
@@ -156,11 +156,11 @@
     "Length": "360",
     "Condition": [
       {
-        "Chemical": "Cu",
+        "Name": "Cu",
         "Count": "10"
       },
       {
-        "Chemical": "growth",
+        "Name": "growth",
         "Count": "1000"
       }
     ],
@@ -172,11 +172,11 @@
     "Length": "360",
     "Condition": [
       {
-        "Chemical": "SignalA",
+        "Name": "SignalA",
         "Count": "10"
       },
       {
-        "Chemical": "growth",
+        "Name": "growth",
         "Count": "1000"
       }
     ],
@@ -188,7 +188,7 @@
     "Length": "360",
     "Condition": [
       {
-        "Chemical": "Growth",
+        "Name": "Growth",
         "Count": "1000"
       }
     ],
@@ -200,19 +200,19 @@
     "Length": "237",
     "Condition": [
       {
-        "Chemical": "lactose",
+        "Name": "lactose",
         "Count": "100"
       },
       {
-        "Chemical": "Kana",
+        "Name": "Kana",
         "Count": "-10"
       },
       {
-        "Chemical": "Ampicillin",
+        "Name": "Ampicillin",
         "Count": "-10"
       },
       {
-        "Chemical": "Chl",
+        "Name": "Chl",
         "Count": "-10"
       }
     ],
@@ -224,19 +224,19 @@
     "Length": "237",
     "Condition": [
       {
-        "Chemical": "IPTG",
+        "Name": "IPTG",
         "Count": "100"
       },
       {
-        "Chemical": "Kana",
+        "Name": "Kana",
         "Count": "-10"
       },
       {
-        "Chemical": "Ampicillin",
+        "Name": "Ampicillin",
         "Count": "-10"
       },
       {
-        "Chemical": "Chl",
+        "Name": "Chl",
         "Count": "-10"
       }
     ],
@@ -255,19 +255,19 @@
     "Length": "237",
     "Condition": [
       {
-        "Chemical": "BlueLight",
+        "Name": "BlueLight",
         "Count": "100"
       },
       {
-        "Chemical": "Kana",
+        "Name": "Kana",
         "Count": "-10"
       },
       {
-        "Chemical": "Ampicillin",
+        "Name": "Ampicillin",
         "Count": "-10"
       },
       {
-        "Chemical": "Chl",
+        "Name": "Chl",
         "Count": "-10"
       }
     ],
