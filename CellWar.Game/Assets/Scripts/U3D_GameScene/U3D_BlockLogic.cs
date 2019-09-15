@@ -37,6 +37,20 @@ namespace CellWar.View {
                         }
                     }
                 }
+                /// 使race生效
+                foreach (var reg in HexBlockModel.Strains[i].BasicRace.RegulatoryGenes)
+                {
+                    // 检查基因条件
+                    if (MainGameCurrent.RegCtor.IsTriggered(HexBlockModel.PublicChemicals, reg))
+                    {
+                        for (int j = 0; j < reg.DominatedGenes.Count; j++)
+                        {
+                            var cod = reg.DominatedGenes[j];
+                            // 细菌活动
+                            MainGameCurrent.CodCtor.Effect(ref currentStrain, ref HexBlockModel, ref cod);
+                        }
+                    }
+                }
                 //更新该菌种
                 HexBlockModel.Strains[i] = currentStrain;
             }
