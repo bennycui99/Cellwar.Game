@@ -11,11 +11,9 @@ namespace Cellwar.View {
         Text m_GameOverText, m_Time, m_Population;
 
 
-        [SerializeField]
-
         void Awake()
         {
-            GetComponent<Canvas>().enabled = false;
+            //GetComponent<Canvas>().enabled = false;
         }
 
 
