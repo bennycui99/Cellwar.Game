@@ -157,8 +157,8 @@ namespace CellWar.Controller.Gene
                     privateChemical.Count += importCount;
                     publicChemical.Count -= importCount;
                     Debug.Log("imported by " + gene.Name);
-                    Debug.Log( privateChemical.Count );
-                    Debug.Log( publicChemical.Count );
+                    Debug.Log("privateChemical " + privateChemical.Count );
+                    Debug.Log("publicChemical " + publicChemical.Count );
                 }
             }
             return true;

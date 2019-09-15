@@ -105,8 +105,8 @@
       "Guid": "00000000-0000-0000-0000-000000000000"
     },
     "Name": "grow_t_1",
-    "Population": 1000,
+    "Population": 800,
     "BasicRaceName": "Empty",
-    "PlayerSelectedGenesName": "GOD;Grow_test_3"
+    "PlayerSelectedGenesName": "GOD;GLUT_test_1;GLUT_test_2;TCAL1;Grow_test_3;Death_test_1"
   }
 ]
