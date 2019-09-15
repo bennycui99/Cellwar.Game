@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using CellWar.Model.Substance;
 using System;
+using CellWar.Controller;
 
 /// <summary>
 /// 存放地图相关的Model
@@ -11,7 +12,19 @@ using System;
 namespace CellWar.Model.Map {
     public class Map {
         public string Name { get; set; }
+        
         public List<Block> Blocks { get; set; } = new List<Block>();
+        public List<Chemical> PlayerOwnedChemicals { get; set; } = new List<Chemical>();
+        public string PlayerOwnedChemicalsDescription { get; set; }
+
+        /// <summary>
+        /// 将语意句转化为对象并进行初始化操作
+        /// </summary>
+        public void Init()
+        {
+            PlayerOwnedChemicals = SemanticObjectController.GenerateText2ChemicalsWithCountInfo(PlayerOwnedChemicalsDescription);
+
+        }
     }
 
     public class StandardCoordinate
@@ -22,7 +35,7 @@ namespace CellWar.Model.Map {
 
         /// <summary>
         /// 将unity坐标转化为hex坐标
-        /// </summary>
+        /// </summary> 
         /// <returns></returns>
         public HexCoordinate StandardToHexCoordiante()
         {

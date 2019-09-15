@@ -4,6 +4,7 @@ using CellWar.Controller.Gene;
 using CellWar.Model.Substance;
 using CellWar.View;
 using CellWar.Model.Map;
+using CellWar.Utils;
 
 namespace CellWar.GameData {
     /// <summary>
@@ -15,6 +16,11 @@ namespace CellWar.GameData {
         /// 地图的Instance
         /// </summary>
         public static Map StageMap = null;
+        public static void LoadMap()
+        {
+            StageMap = JsonHelper.Json2Object_NT<Map>(Local.GetGameDataPath("map.json"));
+            StageMap.Init();
+        }
 
         /// <summary>
         /// Editor用的 手上的chemical
@@ -36,7 +42,6 @@ namespace CellWar.GameData {
             return 1 / BlockColorInterval;
         }
         public static List<Strain> StrainList = new List<Strain>();
-
         public static string GetCurrentBlockDetailInfo() {
             if( CellWar.GameData.MainGameCurrent.FocusedHexBlock == null ) {
                 return "";

@@ -35,5 +35,6 @@ namespace CellWar.Model.Json {
         public int Population { get; set; }
         public string BasicRaceName { get; set; }
         public string PlayerSelectedGenesName { get; set; }
+        public string PrivateChemicalInfos { get; set; }
     }
 }
