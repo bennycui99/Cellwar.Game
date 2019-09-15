@@ -7,31 +7,24 @@ using CellWar.Utils;
 using CellWar.View;
 using UnityEngine;
 using UnityEngine.UI;
+using CellWar.Utils.Object;
 
 namespace CellWar.View {
+    /// <summary>
+    /// 主游戏场景加载
+    /// </summary>
     public class U3D_SceneLoad : MonoBehaviour {
         private void Awake() {
-            try {
-                Local.LoadAllCodingGenes();
-                Local.LoadAllChemicals();
-                Local.LoadAllRegulartoryGenes();
-                Local.LoadAllRaces();
-            } catch {
-                Debug.LogError( "Local json load failed." );
-                throw;
-            }
 
-            //#region MOCKS
-            //Mocks.MockStrainList.Add( Mocks.Strain2 );
-            //Mocks.MockStrainList.Add( Mocks.Strain3 );
-            //Mocks.Strain1.PlayerSelectedGenes.AddRange( Local.AllRegulartoryGenes );
-            //Mocks.MockStrainList.Add( Mocks.Strain1 );
-            //MainGameCurrent.StrainList = Mocks.MockStrainList;
-            //#endregion
+            MainGameCurrent.LoadMap();
 
-            MainGameCurrent.StrainList = Save.Strains;
+            MainGameCurrent.StrainList = ObjectHelper.CloneList2( Save.Strains );
 
-            UIHelper.InitUIList<Strain>( "UI_StrainList", "UI_Strain", MainGameCurrent.StrainList,
+            /// 将所有玩家制作的strain的privatechemicals设置成地图给出的默认值
+            /// 每个strain一份
+            MainGameCurrent.StrainList.ForEach(strain => strain.PrivateChemicals = ObjectHelper.CloneList2(MainGameCurrent.StageMap.PlayerOwnedChemicals));
+
+            UIHelper.InitUIList( "UI_StrainList", "UI_Strain", MainGameCurrent.StrainList,
                 ( GameObject g, Strain obj ) => {
                     g.GetComponent<U3D_StrainPackageLogic>().Strain = obj;
                     g.name = obj.Name;
