@@ -13,7 +13,7 @@ namespace CellWar.View
         // Update is called once per frame
         void Update()
         {
-            if (VideoManager.Instance().m_videoPlayer.enabled)
+            if (VideoManager.Instance().m_videoPlayer && VideoManager.Instance().m_videoPlayer.enabled)
             {
                 StartCoroutine(VideoManager.Instance().PlayFadeinVideo());//Play fade in video
                 VideoManager.Instance().m_videoPlayer.started += FadeInBegin;

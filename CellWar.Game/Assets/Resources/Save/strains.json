@@ -1,82 +1,112 @@
 [
-    {
-        "Owner": {
-            "Name": null,
-            "Guid": "00000000-0000-0000-0000-000000000000"
-        },
-        "Name": "demo_strain",
-        "Population": 10,
-        "BasicRaceName": "A",
-        "PlayerSelectedGenesName": "GOD;Ether"
+  {
+    "Owner": {
+      "Name": null,
+      "Guid": "00000000-0000-0000-0000-000000000000"
     },
-    {
-        "Owner": {
-            "Name": null,
-            "Guid": "00000000-0000-0000-0000-000000000000"
-        },
-        "Name": "demo_strain2",
-        "Population": 20,
-        "BasicRaceName": "A",
-        "PlayerSelectedGenesName": "Amp_Kana_Chl_Cu_VH_A;Grow_Nat_ATP_N_1;Grow_Nat_ATP_L_1;Grow_Nat_ATP_L_A;Amp_Kana_Chl_H_1;Grow_Nat_ATP_L_1;Grow_Nat_ATP_L_A;Grow_Nat_ATP_H_A"
+    "Name": "demo_strain",
+    "Population": 10,
+    "BasicRaceName": "A",
+    "PlayerSelectedGenesName": "GOD;Ether"
+  },
+  {
+    "Owner": {
+      "Name": null,
+      "Guid": "00000000-0000-0000-0000-000000000000"
     },
-    {
-        "Owner": {
-            "Name": null,
-            "Guid": "00000000-0000-0000-0000-000000000000"
-        },
-        "Name": "C",
-        "Population": 0,
-        "BasicRaceName": "Empty",
-        "PlayerSelectedGenesName": "GOD;Consume_Test"
+    "Name": "demo_strain2",
+    "Population": 20,
+    "BasicRaceName": "A",
+    "PlayerSelectedGenesName": "Amp_Kana_Chl_Cu_VH_A;Grow_Nat_ATP_N_1;Grow_Nat_ATP_L_1;Grow_Nat_ATP_L_A;Amp_Kana_Chl_H_1;Grow_Nat_ATP_L_1;Grow_Nat_ATP_L_A;Grow_Nat_ATP_H_A"
+  },
+  {
+    "Owner": {
+      "Name": null,
+      "Guid": "00000000-0000-0000-0000-000000000000"
     },
-    {
-        "Owner": {
-            "Name": null,
-            "Guid": "00000000-0000-0000-0000-000000000000"
-        },
-        "Name": "C",
-        "Population": 10,
-        "BasicRaceName": "Empty",
-        "PlayerSelectedGenesName": "GOD;Consume_Test"
+    "Name": "C",
+    "Population": 0,
+    "BasicRaceName": "Empty",
+    "PlayerSelectedGenesName": "GOD;Consume_Test"
+  },
+  {
+    "Owner": {
+      "Name": null,
+      "Guid": "00000000-0000-0000-0000-000000000000"
     },
-    {
-        "Owner": {
-            "Name": null,
-            "Guid": "00000000-0000-0000-0000-000000000000"
-        },
-        "Name": "P",
-        "Population": 10,
-        "BasicRaceName": "Test1",
-        "PlayerSelectedGenesName": "GOD;Product_Test"
+    "Name": "C",
+    "Population": 10,
+    "BasicRaceName": "Empty",
+    "PlayerSelectedGenesName": "GOD;Consume_Test"
+  },
+  {
+    "Owner": {
+      "Name": null,
+      "Guid": "00000000-0000-0000-0000-000000000000"
     },
-    {
-        "Owner": {
-            "Name": null,
-            "Guid": "00000000-0000-0000-0000-000000000000"
-        },
-        "Name": "T",
-        "Population": 10,
-        "BasicRaceName": "Test1",
-        "PlayerSelectedGenesName": "GOD;Transport_Test"
+    "Name": "TT",
+    "Population": 0,
+    "BasicRaceName": "Empty",
+    "PlayerSelectedGenesName": "GOD;Consume_Test"
+  },
+  {
+    "Owner": {
+      "Name": null,
+      "Guid": "00000000-0000-0000-0000-000000000000"
     },
-    {
-        "Owner": {
-            "Name": null,
-            "Guid": "00000000-0000-0000-0000-000000000000"
-        },
-        "Name": "TT",
-        "Population": 0,
-        "BasicRaceName": "Empty",
-        "PlayerSelectedGenesName": "GOD;Consume_Test"
+    "Name": "CT",
+    "Population": 0,
+    "BasicRaceName": "Empty",
+    "PlayerSelectedGenesName": "GOD;Transport_Test"
+  },
+  {
+    "Owner": {
+      "Name": null,
+      "Guid": "00000000-0000-0000-0000-000000000000"
     },
-    {
-        "Owner": {
-            "Name": null,
-            "Guid": "00000000-0000-0000-0000-000000000000"
-        },
-        "Name": "CT",
-        "Population": 0,
-        "BasicRaceName": "Empty",
-        "PlayerSelectedGenesName": "GOD;Transport_Test"
-    }
+    "Name": "T",
+    "Population": 10,
+    "BasicRaceName": "Empty",
+    "PlayerSelectedGenesName": "GOD;Transport_Test"
+  },
+  {
+    "Owner": {
+      "Name": null,
+      "Guid": "00000000-0000-0000-0000-000000000000"
+    },
+    "Name": "P",
+    "Population": 10,
+    "BasicRaceName": "Empty",
+    "PlayerSelectedGenesName": "GOD;Product_Test"
+  },
+  {
+    "Owner": {
+      "Name": null,
+      "Guid": "00000000-0000-0000-0000-000000000000"
+    },
+    "Name": "A",
+    "Population": 10,
+    "BasicRaceName": "A",
+    "PlayerSelectedGenesName": "GOD;NullGene"
+  },
+  {
+    "Owner": {
+      "Name": null,
+      "Guid": "00000000-0000-0000-0000-000000000000"
+    },
+    "Name": "B",
+    "Population": 10,
+    "BasicRaceName": "B",
+    "PlayerSelectedGenesName": "GOD;NullGene"
+  },
+  {
+    "Owner": {
+      "Name": null,
+      "Guid": "00000000-0000-0000-0000-000000000000"
+    },
+    "Name": "grow_t_1",
+    "Population": 800,
+    "BasicRaceName": "Empty",
+    "PlayerSelectedGenesName": "GOD;GLUT_test_1;GLUT_test_2;TCAL1;Grow_test_3;Death_test_1"
+  }
 ]
