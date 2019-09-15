@@ -98,5 +98,15 @@
     "Population": 10,
     "BasicRaceName": "B",
     "PlayerSelectedGenesName": "GOD;NullGene"
+  },
+  {
+    "Owner": {
+      "Name": null,
+      "Guid": "00000000-0000-0000-0000-000000000000"
+    },
+    "Name": "grow_t_1",
+    "Population": 1000,
+    "BasicRaceName": "Empty",
+    "PlayerSelectedGenesName": "GOD;Grow_test_3"
   }
 ]

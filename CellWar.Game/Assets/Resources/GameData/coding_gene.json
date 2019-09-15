@@ -190,6 +190,25 @@
     "Description": "每次增加0.5%人口。消耗自身0.2×人口数的氨基酸。产生00.5%人口数+0的growth因子。当人口达到上限的3%时，扩散新产生的人口的0.5。长度1200。False"
   },
   {
+    "Name": "Grow_test_3",
+    "Length": "0",
+    "PopulationCoefficient": "0.02",
+    "PopulationIntercept": "0",
+    "ConsumeChemicalName": "Glucose",
+    "ConsumeChemicalCoeffeicient": "0.001",
+    "ConsumeChemicalIntercept": "0",
+    "IsConsumePublic": "True",
+    "ProductionChemicalName": "Growth",
+    "ProductionChemicalCoeffeicient": "0.01",
+    "ProductionChemicalIntercept": "0",
+    "ImportChemicalName": "",
+    "ImportChemicalCoeffeicient": "0",
+    "ImportChemicalIntercept": "0",
+    "FirstSpreadMountRate": "0.001",
+    "SpreadConditionRate": "0.01",
+    "Description": "每次增加0.5%人口。消耗自身0.2×人口数的氨基酸。产生00.5%人口数+0的growth因子。当人口达到上限的3%时，扩散新产生的人口的0.5。长度1200。False"
+  },
+  {
     "Name": "Death_Nat_1",
     "Length": "1000",
     "PopulationCoefficient": "-0.02",
@@ -226,6 +245,25 @@
     "FirstSpreadMountRate": "0",
     "SpreadConditionRate": "0",
     "Description": "每次减少0.5%+1人口,并减少相同量的growth因子。长度1000。"
+  },
+  {
+    "Name": "Death_test_1",
+    "Length": "0",
+    "PopulationCoefficient": "-0.01",
+    "PopulationIntercept": "-1",
+    "ConsumeChemicalName": "",
+    "ConsumeChemicalCoeffeicient": "0",
+    "ConsumeChemicalIntercept": "0",
+    "IsConsumePublic": "False",
+    "ProductionChemicalName": "",
+    "ProductionChemicalCoeffeicient": "0",
+    "ProductionChemicalIntercept": "0",
+    "ImportChemicalName": "growth",
+    "ImportChemicalCoeffeicient": "0.01",
+    "ImportChemicalIntercept": "0",
+    "FirstSpreadMountRate": "0",
+    "SpreadConditionRate": "0",
+    "Description": "每次减少1.5%+1人口,并减少相同量的growth因子。长度1000。"
   },
   {
     "Name": "GLUT_L_1",
