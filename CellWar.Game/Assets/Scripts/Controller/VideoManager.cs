@@ -53,6 +53,10 @@ namespace CellWar.Controller
         
         public IEnumerator PlayFadeinVideo()
         {
+            if (!m_videoPlayer.enabled)
+            {
+                m_videoPlayer.enabled = true;
+            }//just to make sure its enabled.
             m_videoPlayer.clip = m_FadeinVideo;
             m_videoPlayer.Prepare();
             WaitForSeconds waitForSeconds = new WaitForSeconds(1);
@@ -67,6 +71,10 @@ namespace CellWar.Controller
         }
         public IEnumerator PlayFadeoutVideo()
         {
+            if (!m_videoPlayer.enabled)
+            {
+                m_videoPlayer.enabled = true;
+            }
             m_videoPlayer.clip = m_FadeoutVideo;
             m_videoPlayer.Prepare();
             WaitForSeconds waitForSeconds = new WaitForSeconds(1);
