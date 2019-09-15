@@ -16,6 +16,8 @@ namespace CellWar.Controller
         private EventSystem m_EventSystem;
         private GraphicRaycaster m_GraphicRaycaster;
 
+        private GameObject m_GameOverFrameObject;
+
         private void Awake()
         {
             if (_instance != null && _instance != this)
@@ -26,8 +28,11 @@ namespace CellWar.Controller
             {
                 _instance = this;
             }
+
             m_EventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
             m_GraphicRaycaster = GameObject.Find("BlockingCanvas").GetComponent<GraphicRaycaster>();
+
+            m_GameOverFrameObject = GameObject.Find("GameOverFrame");
         }
 
         /// <summary>
@@ -52,6 +57,12 @@ namespace CellWar.Controller
             m_GraphicRaycaster.Raycast(eventData, list);
             //Debug.Log(list.Count);
             return list.Count > 0;
+        }
+
+        public void UIDisplayGameOver()
+        {
+            m_GameOverFrameObject.SetActive(true);
+            // Set Text here
         }
 
         public void OnGameSceneExitClick()
