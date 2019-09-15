@@ -7,7 +7,7 @@
   {
     "Name": "A",
     "MaxLength": "20000",
-    "CodingGeneNames": "Amp_Kana_Chl_Cu_VH_A;Grow_Nat_ATP_H_A;Grow_Nat_AA_H_A;GLUT_H_1;TCAL1;AminoAcid_H_1;photosynthesisL1;GOD;Death_Nat_A"
+    "CodingGeneNames": "GOD;Death_test_1"
   },
   {
     "Name": "B",
@@ -17,6 +17,6 @@
   {
     "Name": "Empty",
     "MaxLength": "99000",
-    "CodingGeneNames": "GOD;Grow_null"
+    "CodingGeneNames": "GOD;NullGene"
   }
-]
+]  
