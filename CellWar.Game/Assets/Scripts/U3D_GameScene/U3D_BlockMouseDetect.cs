@@ -143,7 +143,6 @@ namespace CellWar.View
 
         public void ProcessSelectedStrain()
         {
-            //Debug.Log(MainGameCurrent.HoldingStrain);
             ChangeBlockColor(Color.yellow);
             // 防止反复增加同一种细菌
             if (!HexBlockModel.Strains.Exists(m => m.Name == MainGameCurrent.HoldingStrain.Name))
@@ -153,6 +152,7 @@ namespace CellWar.View
             GameObject.Find(MainGameCurrent.HoldingStrain.Name).SetActive(false);
             MainGameCurrent.HoldingStrain = null;
 
+            // 放置一种细菌游戏才会开始
             if (!GameManager.Instance.IsGameStarted && !GameManager.Instance.IsGameCompleted)
             {
                 GameManager.Instance.IsGameStarted = true;
