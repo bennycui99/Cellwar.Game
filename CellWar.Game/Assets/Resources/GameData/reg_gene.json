@@ -48,7 +48,7 @@
         "Count": "500"
       }
     ],
-    "Type": "NO",
+    "Type": "PO",
     "Description": "对抗生素和重金属非常敏感的开关"
   },
   {
@@ -157,14 +157,14 @@
     "Condition": [
       {
         "Name": "Cu",
-        "Count": "10"
+        "Count": "20"
       },
       {
         "Name": "growth",
         "Count": "1000"
       }
     ],
-    "Type": "NO",
+    "Type": "PO",
     "Description": "对Cu高敏感的开关,受到Cu抑制"
   },
   {

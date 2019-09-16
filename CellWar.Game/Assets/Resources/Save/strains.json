@@ -25,7 +25,7 @@
       "Guid": "00000000-0000-0000-0000-000000000000"
     },
     "Name": "A",
-    "Population": 100,
+    "Population": 800,
     "BasicRaceName": "A",
     "PlayerSelectedGenesName": "GOD;NullGene",
     "PrivateChemicalInfos": "ATP:500;Amino Acid:500"
@@ -56,7 +56,7 @@
       "Name": null,
       "Guid": "00000000-0000-0000-0000-000000000000"
     },
-    "Name": "grow_t_1",
+    "Name": "private_t_1",
     "Population": 800,
     "BasicRaceName": "Empty",
     "PlayerSelectedGenesName": "GOD;Private_test_1",
@@ -67,10 +67,10 @@
       "Name": null,
       "Guid": "00000000-0000-0000-0000-000000000000"
     },
-    "Name": "Death_t_1",
+    "Name": "grow_t_0",
     "Population": 800,
     "BasicRaceName": "Empty",
-    "PlayerSelectedGenesName": "GOD;Death_test_1",
+    "PlayerSelectedGenesName": "GOD;Ether",
     "PrivateChemicalInfos": "ATP:10"
   },
   {
@@ -78,10 +78,10 @@
       "Name": null,
       "Guid": "00000000-0000-0000-0000-000000000000"
     },
-    "Name": "grow_t_1",
+    "Name": "reg_t_1",
     "Population": 800,
     "BasicRaceName": "Empty",
-    "PlayerSelectedGenesName": "Amp_Kana_Chl_Cu_VH_A;Ether",
+    "PlayerSelectedGenesName": "Cu_L_1;Ether",
     "PrivateChemicalInfos": "ATP:10"
   }
 ]
