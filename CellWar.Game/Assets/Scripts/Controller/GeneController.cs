@@ -260,17 +260,28 @@ namespace CellWar.Controller.Gene
             foreach( var cInCondition in reg.Conditions ) {
                 // 寻找格子中是否含有条件的chemical
                 var result = chemicalsInBlock.Find( r => { return r.Name == cInCondition.Name; } );
-                // 如果不存在直接条件直接不成立
-                if( result == null ) {
-                    return false;
+                
+                if (result == null)
+                {
+                    continue;
                 }
-                // 如果存在，判断数量是否达标，如不达标直接不成立
-                if( result.Count < cInCondition.Count ) {
-                    return false;
+
+                if (cInCondition.Count > 0)
+                {
+                    if (result.Count >= cInCondition.Count)
+                    {
+                        return true;
+                    }
                 }
-                return true;
+                else if (cInCondition.Count < 0)
+                {
+                    if (result.Count <= -cInCondition.Count)
+                    {
+                        return true;
+                    }
+                }
             }
-            return true; // 不应该到达这里
+            return false;
         }
         #endregion
 

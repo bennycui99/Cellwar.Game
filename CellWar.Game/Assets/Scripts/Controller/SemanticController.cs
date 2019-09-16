@@ -5,6 +5,7 @@ using CellWar.Utils.Object;
 using CellWar.GameData;
 using static CellWar.Model.Substance.Strain;
 using CellWar.Model.Substance;
+using UnityEngine;
 
 namespace CellWar.Controller
 {
@@ -110,6 +111,11 @@ namespace CellWar.Controller
 		{
 			List<Chemical> chemicals = new List<Chemical>();
 
+            if ( string.IsNullOrEmpty( text ) )
+            {
+                return chemicals;
+            }
+
 			var chemicalPairs = text.Split(';');
 			foreach (var chemicalPair in chemicalPairs)
 			{
@@ -118,9 +124,14 @@ namespace CellWar.Controller
 				string name = nameAndCount[0];
 				int count = Convert.ToInt32( nameAndCount[1] );
 
-				var clone = Local.AllChemicals.Find(c => c.Name == name).Clone() as Chemical;
-				clone.Count = count;
-				chemicals.Add(clone);
+				var clone = Local.AllChemicals.Find(c1 => c1.Name == name);
+                if (clone == null)
+                {
+                    Debug.Log("Chemical named[ " + name + "] does not exsit.");
+                }
+                var c = clone.Clone() as Chemical;
+				c.Count = count;
+				chemicals.Add(c);
 			}
 			return chemicals;
 		}

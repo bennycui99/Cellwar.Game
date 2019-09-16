@@ -6,7 +6,7 @@ namespace CellWar.Model.Json {
         public string Name { get; set; }
         public string Type { get; set; }
         public int Length { get; set; }
-        public List<RegulatoryCondition> Condition { get; set; }
+        public string ChemicalConditions { get; set; }
         public string Description { get; set; }
     }
 

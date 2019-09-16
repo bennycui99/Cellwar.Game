@@ -50,31 +50,40 @@ namespace CellWar.GameData {
 
         public static List<RegulatoryGene> AllRegulartoryGenes { get; set; }
         public static List<RegulatoryGene> LoadAllRegulartoryGenes() {
-            var allRegulatoryGeneJson = CellWar.Utils.JsonHelper.Json2Object_NT<List<RegulartoryGeneJsonModel>>( GetGameDataPath( "reg_gene.json" ) );
-            List<RegulatoryGene> regulatoryGenes = new List<RegulatoryGene>();
-            foreach( var geneJson in allRegulatoryGeneJson ) {
-                RegulatoryGene gene = new RegulatoryGene();
-                gene.Type = geneJson.Type;
-                gene.Name = geneJson.Name;
-                gene.Description = geneJson.Description;
-                gene.Length = geneJson.Length;
+            try
+            {
+                var allRegulatoryGeneJson = CellWar.Utils.JsonHelper.Json2Object_NT<List<RegulartoryGeneJsonModel>>( GetGameDataPath( "reg_gene.json" ) );
+                List<RegulatoryGene> regulatoryGenes = new List<RegulatoryGene>();
+                foreach( var geneJson in allRegulatoryGeneJson ) {
+                    RegulatoryGene gene = new RegulatoryGene();
+                    gene.Type = geneJson.Type;
+                    gene.Name = geneJson.Name;
+                    gene.Description = geneJson.Description;
+                    gene.Length = geneJson.Length;
 
-                foreach( var cc in geneJson.Condition ) {
-                    var ch = ObjectHelper.Clone( FindChemicalByName( cc.Chemical ) );
-                    if( ch != null ) {
-                        ch.Count = cc.Count;
-                        gene.Conditions.Add( ch );
-                    }
+                    gene.Conditions = SemanticObjectController.GenerateText2ChemicalsWithCountInfo(geneJson.ChemicalConditions);
+
+                    regulatoryGenes.Add( gene );
                 }
-
-                regulatoryGenes.Add( gene );
+                AllRegulartoryGenes = regulatoryGenes;
+                return regulatoryGenes;
             }
-            AllRegulartoryGenes = regulatoryGenes;
-            return regulatoryGenes;
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
-
+        
         public static Chemical FindChemicalByName( string chemicalName ) => AllChemicals.Find( c => { return c.Name == chemicalName; } );
-        public static Race FindRaceByName( string raceName ) => AllRaces.Find( c => { return c.Name == raceName; } );
+        public static Race FindRaceByName(string raceName) {
+            var race = AllRaces.Find(c => { return c.Name == raceName; });
+            if (race == null)
+            {
+                throw new Exception(string.Format("Race named [ {0} ] does not exsits.", raceName));
+            }
+            return race;
+
+        }
 
         /// <summary>
         /// 所有的游戏内置strain
