@@ -6,6 +6,14 @@ using CellWar.View;
 using CellWar.Model.Map;
 using CellWar.Utils;
 
+namespace Cellwar.GameData
+{
+    public static class MapEditorCurrent
+    {
+        public static Map NewMap;
+    }
+}
+
 namespace CellWar.GameData {
     /// <summary>
     /// 游戏及时数据

@@ -23,7 +23,6 @@ namespace CellWar.Model.Map {
         public void Init()
         {
             PlayerOwnedChemicals = SemanticObjectController.GenerateText2ChemicalsWithCountInfo(PlayerOwnedChemicalsDescription);
-
         }
     }
 

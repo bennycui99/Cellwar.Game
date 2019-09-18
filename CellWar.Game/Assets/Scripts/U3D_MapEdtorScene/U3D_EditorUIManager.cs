@@ -5,12 +5,13 @@ using CellWar.Model.Map;
 using CellWar.Utils;
 using System.IO;
 using CellWar.Model.Substance;
+using Cellwar.GameData;
 
 namespace CellWar.View
 {
     public class U3D_EditorUIManager : MonoBehaviour
     {
-        public Map StageMap;
+        public Map NewMap;
 
         [SerializeField]
         Text m_ExportText;
@@ -19,7 +20,7 @@ namespace CellWar.View
         // Start is called before the first frame update
         void Awake()
         {
-            StageMap = MainGameCurrent.StageMap;
+            NewMap = MapEditorCurrent.NewMap;
 
             UIHelper.InitUIList<Chemical>("UI_ChemicalList", "UI_Chemical", Local.AllChemicals,
                 (GameObject g, Chemical obj) => {
@@ -32,13 +33,7 @@ namespace CellWar.View
         {
             Map map = new Map();
 
-            for(int i = 0; i < StageMap.Blocks.Count; ++i)
-            {
-                if (StageMap.Blocks[i].IsActive)
-                {
-                    map.Blocks.Add(StageMap.Blocks[i]);
-                }
-            }
+            map.Blocks.AddRange(NewMap.Blocks.FindAll(block => block.IsActive));
 
             File.WriteAllText(Save.GetGameSavePath("map_generate.json"), JsonHelper.Object2Json(map));
         }
