@@ -95,6 +95,7 @@ namespace CellWar.View {
             
          SceneManager.LoadScene("GameScene");
             //Event Handler for VideoManager.
+            //Obselete
         }
 
         void EndReachedEditorScene(UnityEngine.Video.VideoPlayer vp)
@@ -102,12 +103,13 @@ namespace CellWar.View {
            
           SceneManager.LoadScene("MapEditorScene");
             //Event Handler for VideoManager.
+            //Obselete
         }
         void EndReachedGeneral(UnityEngine.Video.VideoPlayer vp)
         {
             Debug.Log("Video Played");
             isReadyToLoad = true;
-            //General Event handler.
+            //General Event handler. May still have some bugs because now it's run on 2 coroutines.
         }
     }
 }
