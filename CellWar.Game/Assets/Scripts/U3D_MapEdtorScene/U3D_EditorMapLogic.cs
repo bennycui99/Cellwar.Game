@@ -3,12 +3,13 @@ using CellWar.Model.Map;
 using UnityEngine;
 using CellWar.Utils;
 using CellWar.GameData;
+using Cellwar.GameData;
 
 namespace CellWar.View
 {
     public class U3D_EditorMapLogic : MonoBehaviour
     {
-        public Map StageMap = new Map();
+        public Map NewMap = new Map();
         [SerializeField]
         public GameObject BlockPrefab;
 
@@ -21,6 +22,9 @@ namespace CellWar.View
         {
         }
 
+        /// <summary>
+        /// 初始化地图编辑器的地图
+        /// </summary>
         void GenerateBlockContainer()
         {
             for(int x = -10; x < 10; ++x)
@@ -36,7 +40,7 @@ namespace CellWar.View
                     HexBlockModel.Capacity = 1000;
                     HexBlockModel.BlockType = Block.Type.Normal;
 
-                    StageMap.Blocks.Add(HexBlockModel);
+                    NewMap.Blocks.Add(HexBlockModel);
 
                     //生成object
                     GameObject blockObject = Instantiate(BlockPrefab, gameObject.transform) as GameObject;
@@ -48,7 +52,7 @@ namespace CellWar.View
                 }
             }
 
-            MainGameCurrent.StageMap = StageMap;
+            MapEditorCurrent.NewMap = NewMap;
         }
 
     }
