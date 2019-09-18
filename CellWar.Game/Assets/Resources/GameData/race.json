@@ -7,7 +7,7 @@
   {
     "Name": "A",
     "MaxLength": "20000",
-    "CodingGeneNames": "GOD;Grow_Nat_ATP_H_A;Grow_Nat_AA_H_A;GLUT_H_1;TCAL1;AminoAcid_H_1;photosynthesisL1;Death_Nat_A"
+    "CodingGeneNames": "Amp_Kana_Chl_Cu_VH_A;Grow_default_A;;GLUT_default_A;TCA_default_A;AminoAcid_default_A;GOD;Death_default_A"
   },
   {
     "Name": "B",
