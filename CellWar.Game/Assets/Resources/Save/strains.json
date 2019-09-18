@@ -30,7 +30,7 @@
     "Population": 100,
     "BasicRaceName": "A",
     "PlayerSelectedGenesName": "GOD;NullGene",
-    "PrivateChemicalInfos": "ATP:10"
+    "PrivateChemicalInfos": "ATP:100"
   },
   {
     "Owner": {

@@ -14,9 +14,9 @@
     "ImportChemicalName": "",
     "ImportChemicalCoeffeicient": "0",
     "ImportChemicalIntercept": "0",
-    "FirstSpreadMountRate": "0.5",
-    "SpreadConditionRate": "0.1",
-    "Description": "消耗2%人口数的ATP。增加2%的人口，产生2%×人口数的growth因子。当人口达到上限的10%后，新产生的人口的50%将扩散。"
+    "FirstSpreadMountRate": "0.05",
+    "SpreadConditionRate": "0.05",
+    "Description": "消耗2%人口数的ATP。增加2%的人口，产生2%人口数的growth因子。当人口达到上限的5%后，向周围传播5%当前人口。"
   },
   {
     "Name": "Death_default_A",
@@ -42,7 +42,7 @@
     "Length": "0",
     "PopulationCoefficient": "0",
     "PopulationIntercept": "0",
-    "ConsumeChemicalName": "ATP",
+    "ConsumeChemicalName": "",
     "ConsumeChemicalCoeffeicient": "0.01",
     "ConsumeChemicalIntercept": "1",
     "IsConsumePublic": "False",
