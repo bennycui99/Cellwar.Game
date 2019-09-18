@@ -16,6 +16,7 @@ namespace CellWar.Controller
 
         bool IsStageCompleted()
         {
+            ////////////////////////////////////////////////////////////
             int total = 0;
             foreach( var block in MainGameCurrent.StageMap.Blocks ) {
                 var quantity = block.PublicChemicals.Find(m => m.Name == "Cu");
@@ -30,6 +31,7 @@ namespace CellWar.Controller
                 return true;
             }
             return false;
+            ////////////////////////////////////////////////////////////
         }
 
         #region SINGLETON
@@ -56,6 +58,9 @@ namespace CellWar.Controller
             IsGameCompleted = false;
         }
 
+        /// <summary>
+        /// 游戏最重要函数
+        /// </summary>
         private void Update()
         {
             // 游戏还没开始就不更新
@@ -71,13 +76,12 @@ namespace CellWar.Controller
             {
                 CurrentUpdateCount = MaxUpdateCount;
             }
-            
-            // 更新所有格子
-            for(int i = 0; i < MainGameCurrent.StageMap.Blocks.Count; ++i)
-            {
-                MainGameCurrent.StageMap.Blocks[i].BlockLogic.BlockBacteriaUpdate();
-            }
 
+            // 更新所有格子
+            foreach (var block in MainGameCurrent.StageMap.Blocks)
+            {
+                block.BlockLogic.BlockBacteriaUpdate();
+            }
             
             // 判断游戏胜利
             if (IsStageCompleted())

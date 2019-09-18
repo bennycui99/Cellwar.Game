@@ -178,14 +178,15 @@ namespace CellWar.Controller.Gene
             if( parentStrain.Population >= currentBlock.Capacity * SpreadConditionRate ) {
                 string strainName = parentStrain.Name.Clone() as string;
                 // 为周围的格子添加该细菌
-                foreach( var block in currentBlock.NeighborBlocks ) {
-                    if( block.Strains.Exists( m => { return m.Name == strainName; } ) ) {
+                foreach( var neighborBlock in currentBlock.NeighborBlocks ) {
+                    // 只要隔壁有存在相同的strain，就不传递
+                    if( neighborBlock.Strains.Exists( m => { return m.Name == strainName; } ) ) {
                         continue;
                     }
                     var cloneStrain = ( Strain )parentStrain.Clone();
                     // 设定初始人口数
                     cloneStrain.Population = ( int )( parentStrain.Population * gene.FirstSpreadMountRate );
-                    block.Strains.Add( cloneStrain );
+                    neighborBlock.Strains.Add( cloneStrain );
                 }
             }
             return true;
