@@ -16,13 +16,14 @@ namespace CellWar.View {
             Options,
             Exit
         }
+        bool isReadyToLoad = false;
 
         private void Awake() {
             Check.GameDataLoaded();
         }
         // Start is called before the first frame update
         void Start() {
-            
+            isReadyToLoad = false;
         }
 
         #region STATE_SWITCH
@@ -50,9 +51,12 @@ namespace CellWar.View {
         #region EVENTS
         public void OnStageClicked() {
             StartCoroutine(VideoManager.Instance().PlayFadeoutVideo());
-            VideoManager.Instance().m_videoPlayer.loopPointReached += EndReachedStageScene;
-
+            VideoManager.Instance().m_videoPlayer.loopPointReached += EndReachedGeneral;
+            StartCoroutine(SceneLoadWait("GameScene"));
         }
+
+ 
+
         public void OnOptionClicked() {
             Switch( MenuStates.Options );
         }
@@ -62,7 +66,8 @@ namespace CellWar.View {
         public void OnMapEditorClicked()
         {
             StartCoroutine(VideoManager.Instance().PlayFadeoutVideo());
-            VideoManager.Instance().m_videoPlayer.loopPointReached += EndReachedEditorScene;
+            VideoManager.Instance().m_videoPlayer.loopPointReached += EndReachedGeneral;
+            StartCoroutine(SceneLoadWait("MapEditorScene"));
 
         }
         public void OnExitClicked() {
@@ -70,6 +75,19 @@ namespace CellWar.View {
         }
         public void OnBackClicked() {
             Switch( MenuStates.MainMenu );
+        }
+        private IEnumerator SceneLoadWait(string SceneName)
+        {
+            WaitForSeconds waitForSeconds = new WaitForSeconds(2);
+            //Mystery, if the wait is 1 second, it wont work, but with 2 second it works perfectly - only on my machine, I need a check on lower performance machines. - Suomi.
+            while (!isReadyToLoad)
+            {
+                yield return waitForSeconds;
+                break;
+                //While the video is not finished, we continue to wait.
+            }
+            SceneManager.LoadScene(SceneName);
+            //When we are ready, load the target scene.
         }
         #endregion
         void EndReachedStageScene(UnityEngine.Video.VideoPlayer vp)
@@ -84,6 +102,12 @@ namespace CellWar.View {
            
           SceneManager.LoadScene("MapEditorScene");
             //Event Handler for VideoManager.
+        }
+        void EndReachedGeneral(UnityEngine.Video.VideoPlayer vp)
+        {
+            Debug.Log("Video Played");
+            isReadyToLoad = true;
+            //General Event handler.
         }
     }
 }
