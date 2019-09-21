@@ -42,7 +42,7 @@
     "Length": "0",
     "PopulationCoefficient": "0",
     "PopulationIntercept": "0",
-    "ConsumeChemicalName": "",
+    "ConsumeChemicalName": "ATP",
     "ConsumeChemicalCoeffeicient": "0.01",
     "ConsumeChemicalIntercept": "1",
     "IsConsumePublic": "False",
@@ -54,7 +54,7 @@
     "ImportChemicalIntercept": "1",
     "FirstSpreadMountRate": "0",
     "SpreadConditionRate": "0",
-    "Description": "消耗1%人口数的ATP。转运3%人口数+0的Glucose。运输葡萄糖的基因"
+    "Description": "消耗1%人口数的ATP。转运1%人口数+0的Glucose。运输葡萄糖的基因"
   },
   {
     "Name": "TCA_default_A",
