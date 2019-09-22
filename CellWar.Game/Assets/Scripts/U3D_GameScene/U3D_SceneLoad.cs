@@ -24,6 +24,11 @@ namespace CellWar.View {
             /// 每个strain一份
             MainGameCurrent.StrainList.ForEach(strain => strain.PrivateChemicals = ObjectHelper.CloneList2(MainGameCurrent.StageMap.PlayerOwnedChemicals));
 
+            foreach (var s in MainGameCurrent.StrainList)
+            {
+                Debug.Log(s.PrivateChemicals.Count);
+            }
+
             UIHelper.InitUIList( "UI_StrainList", "UI_Strain", MainGameCurrent.StrainList,
                 ( GameObject g, Strain obj ) => {
                     g.GetComponent<U3D_StrainPackageLogic>().Strain = obj;

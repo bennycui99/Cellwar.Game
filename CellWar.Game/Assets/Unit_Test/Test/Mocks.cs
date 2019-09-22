@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CellWar.Controller.Gene;
 using CellWar.Model.Gamer;
+using CellWar.Model.Map;
 using CellWar.Model.Substance;
 using CellWar.Utils.Object;
 using UnityEngine;
@@ -110,6 +111,101 @@ namespace CellWar.Test.Mock {
                     Name =  name, Count = count
                 }
             }, reg));
+        }
+
+        /// <summary>
+        /// 游戏性问题 #22
+        /// https://github.com/bennycui99/Cellwar.Game/issues/22
+        /// </summary>
+        public static void TestPrivateChemical_Usable()
+        {
+            CodingGene g = new CodingGene
+            {
+                Name = "g",
+                ConsumeChemicalName = "c",
+                ConsumeChemicalIntercept = 1,
+                ConsumeChemicalCoeffeicient = 0.1f,
+                IsConsumePublic = false
+            };
+
+            Chemical c = new Chemical
+            {
+                Name = "c",
+                Count = 100
+            };
+
+            Strain s = new Strain();
+
+            s.PrivateChemicals.Add(c);
+
+            Block b = new Block();
+
+            CodingGeneController ctor = new CodingGeneController();
+            ctor.Consume(ref s, ref b, ref g);
+            Debug.Log(s.PrivateChemicals.Find(ss => ss.Name == "c").Count);
+            Debug.Assert(s.PrivateChemicals.Find(ss => ss.Name == "c").Count < 100);
+            ctor.Consume(ref s, ref b, ref g);
+            Debug.Log(s.PrivateChemicals.Find(ss => ss.Name == "c").Count);
+
+            Debug.Assert(s.PrivateChemicals.Find(ss => ss.Name == "c").Count < 100);
+
+            Debug.Log(s.PrivateChemicals.Find(ss => ss.Name == "c").Count);
+            ctor.Consume(ref s, ref b, ref g);
+            Debug.Assert(s.PrivateChemicals.Find(ss => ss.Name == "c").Count < 100);
+
+            Debug.Log(s.PrivateChemicals.Find(ss => ss.Name == "c").Count);
+            ctor.Consume(ref s, ref b, ref g);
+            Debug.Assert(s.PrivateChemicals.Find(ss => ss.Name == "c").Count < 100);
+        }
+
+        /// <summary>
+        /// 游戏性问题 #22
+        /// https://github.com/bennycui99/Cellwar.Game/issues/22
+        /// </summary>
+        public static void TestDeathGeneImportChemical_Usable()
+        {
+            CodingGene g = new CodingGene
+            {
+                Name = "g",
+                ImportChemicalName = "c",
+                ImportChemicalIntercept = 1,
+                ImportChemicalCoeffeicient = 0.01f,
+            };
+
+            Chemical c = new Chemical
+            {
+                Name = "c",
+                Count = 10
+            };
+
+            Strain s = new Strain();
+
+            s.PrivateChemicals.Add(ObjectHelper.Clone(c));
+
+            Block b = new Block();
+
+            GameData.Local.AllChemicals = new List<Chemical>();
+            GameData.Local.AllChemicals.Add(ObjectHelper.Clone(c));
+            c.Count = 100;
+            b.PublicChemicals.Add( ObjectHelper.Clone( c));
+
+            CodingGeneController ctor = new CodingGeneController();
+            ctor.ImportChemical(ref s, ref b, ref g);
+
+            //
+            Debug.Log(b.PublicChemicals.Find(cc => cc.Name == "c").Count);
+            Debug.Log(s.PrivateChemicals.Find(cc => cc.Name == "c").Count);
+            Debug.Assert(b.PublicChemicals.Find(cc => cc.Name == "c").Count < 100);
+
+            //
+            s.PrivateChemicals.Clear();
+            ctor.ImportChemical(ref s, ref b, ref g);
+            Debug.Log(b.PublicChemicals.Find(cc => cc.Name == "c").Count);
+            Debug.Log(s.PrivateChemicals.Find(cc => cc.Name == "c").Count);
+            Debug.Assert(b.PublicChemicals.Find(cc => cc.Name == "c").Count < 100);
+
+
+            GameData.Local.AllChemicals = null;
         }
     }
 }

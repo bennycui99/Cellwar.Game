@@ -64,7 +64,6 @@ namespace CellWar.Controller.Gene
             }
             string ConsumeChemicalName = gene.ConsumeChemicalName.Clone() as string;
             // 若消耗物质不存在，gene罢工
-            var consumeChemical = currentBlock.PublicChemicals.Find( chem => { return chem.Name == ConsumeChemicalName; } );
             var chemicalToConsume = ( gene.IsConsumePublic ? currentBlock.PublicChemicals : parentStrain.PrivateChemicals ).Find( chem => { return chem.Name == ConsumeChemicalName; } );
             if( chemicalToConsume == null ) {
                 if( gene.ConsumeChemicalName == "" ) {

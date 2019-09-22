@@ -1,5 +1,6 @@
 {
   "Name": null,
+  "PlayerOwnedChemicalsDescription": "ATP:10;GFP:20;lactose:10",
   "Blocks": [
     {
       "IsActive": true,
@@ -191,6 +192,5 @@
       ]
     }
   ],
-  "PlayerOwnedChemicals": [],
-  "PlayerOwnedChemicalsDescription": null
+  "PlayerOwnedChemicals": []
 }
