@@ -78,11 +78,6 @@ namespace CellWar.Model.Map {
         public HexCoordinate HexCoor = new HexCoordinate();
         public StandardCoordinate StandardCoor = new StandardCoordinate();
 
-        /// <summary>
-        /// Block对应的BlockLogic
-        /// </summary>
-        public CellWar.View.U3D_BlockLogic BlockLogic = null;
-
         public enum Type {
             Normal,
             Unaccessable

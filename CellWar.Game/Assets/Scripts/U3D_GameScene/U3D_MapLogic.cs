@@ -48,10 +48,10 @@ namespace CellWar.View
             {
                 Block HexBlockModel = StageMap.Blocks[i];
                 //生成object
-                var blockObject = Instantiate(BlockPrefab, gameObject.transform) as GameObject;
+                var blockObject = Instantiate(BlockPrefab, gameObject.transform);
                 //赋值block
-                HexBlockModel.BlockLogic = blockObject.GetComponent<U3D_BlockLogic>();
-                HexBlockModel.BlockLogic.HexBlockModel = HexBlockModel;
+                var BlockLogic = blockObject.GetComponent<U3D_BlockLogic>();
+                BlockLogic.HexBlockModel = HexBlockModel;
                 //移动到正确位置
                 blockObject.transform.position = new Vector3(HexBlockModel.StandardCoor.X, 0, HexBlockModel.StandardCoor.Z);
                 blockObject.SetActive(true);
