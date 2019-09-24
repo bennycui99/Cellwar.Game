@@ -5,16 +5,43 @@ namespace CellWar.Controller
 {
     public class GameManager : MonoBehaviour
     {
-        private static GameManager _instance;
-        public static GameManager Instance { get { return _instance; } }
-
         public bool IsGameStarted;
         public bool IsGameCompleted;
 
-        const float MAX_UPDATE_COUNT = 1.0f;
-        public float UpdateCount = MAX_UPDATE_COUNT;
+        const float defaultUpdateCount = 1.0f;
 
-        public bool IsGameNextTick;
+        public float MaxUpdateCount { get; set; } = defaultUpdateCount;
+
+        private float CurrentUpdateCount = defaultUpdateCount;
+
+        bool IsStageCompleted()
+        {
+            ////////////////////////////////////////////////////////////
+            int total = 0;
+            foreach( var block in MainGameCurrent.StageMap.Blocks ) {
+                var quantity = block.PublicChemicals.Find(m => m.Name == "Cu");
+                if ( quantity != null)
+                {
+                    total += quantity.Count;
+                }
+            }
+            if (total <= 100)
+            {
+                Debug.Log("Game Over");
+                return true;
+            }
+            return false;
+            //////////////////////////////////////////////////////////// 
+        }
+
+        #region SINGLETON
+
+        private static GameManager _instance;
+        public static GameManager Instance { get { return _instance; } }
+
+        #endregion
+
+        #region U3D
 
         private void Awake()
         {
@@ -29,28 +56,33 @@ namespace CellWar.Controller
 
             IsGameStarted = false;
             IsGameCompleted = false;
-            IsGameNextTick = false;
         }
 
+        /// <summary>
+        /// 游戏最重要函数
+        /// </summary>
         private void Update()
         {
             // 游戏还没开始就不更新
             if (!Instance.IsGameStarted) { return; }
 
             // 每隔一秒更新一次
-            if (UpdateCount > 0)
+            if (CurrentUpdateCount > 0)
             {
-                UpdateCount -= Time.deltaTime;
+                CurrentUpdateCount -= Time.deltaTime;
                 return;
             }
             else
             {
-                UpdateCount = MAX_UPDATE_COUNT;
+                CurrentUpdateCount = MaxUpdateCount;
             }
 
-            // 下一个Tick 格子更新
-            IsGameNextTick = true;
-
+            // 更新所有格子
+            foreach (var block in MainGameCurrent.StageMap.Blocks)
+            {
+                block.BlockLogic.BlockBacteriaUpdate();
+            }
+            
             // 判断游戏胜利
             if (IsStageCompleted())
             {
@@ -58,18 +90,9 @@ namespace CellWar.Controller
                 IsGameStarted = false;
                 //send information here
             }
+            
         }
-
-        bool IsStageCompleted()
-        {
-            foreach( var block in MainGameCurrent.StageMap.Blocks ) {
-                if( block.PublicChemicals.Find( m => m.Name == "Cu" )?.Count > 100 ) {
-                    return false;
-                }
-            }
-            Debug.Log("Game Over");
-            return true;
-        }
+        #endregion
     }
 
 }

@@ -10,7 +10,7 @@
     "Name": "Glucose",
     "Description": "葡萄糖",
     "Detailed": "",
-    "Count": "10",
+    "Count": "100",
     "SpreadRate": "0"
   },
   {
@@ -31,7 +31,7 @@
     "Name": "lactose",
     "Description": "乳糖",
     "Detailed": "",
-    "Count": "0",
+    "Count": "100",
     "SpreadRate": "0"
   },
   {

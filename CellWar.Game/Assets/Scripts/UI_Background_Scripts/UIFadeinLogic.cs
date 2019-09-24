@@ -5,16 +5,22 @@ using UnityEngine.UI;
 
 public class UIFadeinLogic : MonoBehaviour
 {
-    
-    public CanvasGroup m_canvasGroup;
+    [SerializeField]
+    CanvasGroup m_canvasGroup;
     void Awake()
     {
         m_canvasGroup.alpha = 0;
         //On entering the game, hide the UI elements.
     }
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            StartCoroutine(IncreaseAlpha());
+        }
+    }
     void OnTriggerEnter()
     {
-        Debug.Log("RP1 collider hit");
         StartCoroutine(IncreaseAlpha());
     }
     IEnumerator IncreaseAlpha()
@@ -24,6 +30,7 @@ public class UIFadeinLogic : MonoBehaviour
             m_canvasGroup.alpha += Time.deltaTime;
             yield return null;
         }
+        enabled = false;//disable itself
         yield return null;
     }
 }

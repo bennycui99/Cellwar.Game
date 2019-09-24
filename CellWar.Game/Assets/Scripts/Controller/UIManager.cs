@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-
+using UnityEngine.SceneManagement;
+using CellWar.GameData;
 
 namespace CellWar.Controller
 {
@@ -14,6 +15,8 @@ namespace CellWar.Controller
 
         private EventSystem m_EventSystem;
         private GraphicRaycaster m_GraphicRaycaster;
+
+        private GameObject m_GameOverFrameObject;
 
         private void Awake()
         {
@@ -28,6 +31,8 @@ namespace CellWar.Controller
 
             m_EventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
             m_GraphicRaycaster = GameObject.Find("BlockingCanvas").GetComponent<GraphicRaycaster>();
+
+            m_GameOverFrameObject = GameObject.Find("GameOverFrame");
         }
 
         /// <summary>
@@ -54,14 +59,24 @@ namespace CellWar.Controller
             return list.Count > 0;
         }
 
+        public void UIDisplayGameOver()
+        {
+            m_GameOverFrameObject.SetActive(true);
+            // Set Text here
+        }
+
         public void OnGameSceneExitClick()
         {
+            MainGameCurrent.FocusedHexBlock = null;
 
+            SceneManager.LoadScene("MainMenuScene");
         }
 
         public void OnEditorSceneExitClick()
         {
+            MainGameCurrent.FocusedHexBlock = null;
 
+            SceneManager.LoadScene("MainMenuScene");
         }
     }
 

@@ -20,76 +20,6 @@ namespace CellWar.GameData {
     /// 游戏本地数据
     /// </summary>
     public static class Local {
-
-        /// <summary>
-        /// 将reg-cod规范的字符串转化为reg list对象
-        /// geneNameList的规范为 r1;c1;c2;r2;c3;r3;c4
-        /// reg后的cod会被自动归类到该r的支配基因中，读到下一个reg时停止
-        /// r1;c1;c2;r2;c3;r3;c4
-        /// 将会转化为
-        /// r1 - c1
-        ///      c2
-        ///      
-        /// r2 - c3
-        /// 
-        /// r3 - c4
-        /// </summary>
-        /// <returns></returns>
-        public static List<RegulatoryGene> GenerateText2RegGeneObjects( string geneNames ) {
-            var geneNameList = geneNames.Split( ';' );
-            List<RegulatoryGene> regulatoryGenes = new List<RegulatoryGene>();
-
-            RegulatoryGene previousReg = null;
-
-            foreach( var geneName in geneNameList ) {
-                var regGene = AllRegulartoryGenes.Find( m => m.Name == geneName );
-                // 首个名字必须为 reg gene
-                if( regGene == null && previousReg == null ) {
-                    throw new InvalidOperationException( "Invalid GeneNames. you should input a reg gene at first of the string list"
-                        + "\n current gene name:" + geneName );
-                }
-                else if( regGene == null && previousReg != null ) {
-                    // 继续增加该reg下的支配cod 
-                    var codGene = AllCodingGenes.Find( m => m.Name == geneName );
-                    if( codGene != null ) {
-                        previousReg.DominatedGenes.Add( codGene );
-                    }
-                    else {
-                        throw new InvalidOperationException( "No gene named: " + geneName + "\n you should call LoadAllRaces() after LoadAllCodingGenes" );
-                    }
-                }
-                else if( regGene != null ) {
-                    // 开始添加下一个reg
-                    previousReg = ObjectHelper.Clone( regGene, regGene.GetType() );
-                    regulatoryGenes.Add( previousReg );
-                }
-            }
-            return regulatoryGenes;
-        }
-        /// <summary>
-        /// 将reg list对象转化为reg-cod规范的字符串
-        /// geneNameList的规范为 r1;c1;c2;r2;c3;r3;c4
-        /// r1 - c1
-        ///      c2
-        ///      
-        /// r2 - c3
-        /// 
-        /// r3 - c4
-        /// 将会转化为
-        /// r1;c1;c2;r2;c3;r3;c4
-        /// </summary>
-        /// <returns></returns>
-        public static string GenerateRegGeneObjects2Text( List<RegulatoryGene> regs ) {
-            string generated = "";
-            foreach( var reg in regs ) {
-                generated += reg.Name + ";";
-                foreach( var cod in reg.DominatedGenes ) {
-                    generated += cod.Name + ";";
-                }
-            }
-            return generated.Remove( generated.Length - 1 );
-        }
-
         public static List<Race> AllRaces { get; set; }
         public static List<Race> LoadAllRaces() {
             var allRaceJson = CellWar.Utils.JsonHelper.Json2Object_NT<List<RaceJsonModel>>( GetGameDataPath( "race.json" ) );
@@ -100,7 +30,7 @@ namespace CellWar.GameData {
                 AllRaces.Add( new Race {
                     Name = raceJson.Name,
                     MaxLength = raceJson.MaxLength,
-                    RegulatoryGenes = GenerateText2RegGeneObjects( raceJson.CodingGeneNames )
+                    RegulatoryGenes = SemanticObjectController.GenerateText2RegGeneObjects( raceJson.CodingGeneNames )
                 } );
             }
             return AllRaces;
@@ -120,38 +50,61 @@ namespace CellWar.GameData {
 
         public static List<RegulatoryGene> AllRegulartoryGenes { get; set; }
         public static List<RegulatoryGene> LoadAllRegulartoryGenes() {
-            var allRegulatoryGeneJson = CellWar.Utils.JsonHelper.Json2Object_NT<List<RegulartoryGeneJsonModel>>( GetGameDataPath( "reg_gene.json" ) );
-            List<RegulatoryGene> regulatoryGenes = new List<RegulatoryGene>();
-            foreach( var geneJson in allRegulatoryGeneJson ) {
-                RegulatoryGene gene = new RegulatoryGene();
-                gene.Type = geneJson.Type;
-                gene.Name = geneJson.Name;
-                gene.Description = geneJson.Description;
-                gene.Length = geneJson.Length;
+            try
+            {
+                var allRegulatoryGeneJson = CellWar.Utils.JsonHelper.Json2Object_NT<List<RegulartoryGeneJsonModel>>( GetGameDataPath( "reg_gene.json" ) );
+                List<RegulatoryGene> regulatoryGenes = new List<RegulatoryGene>();
+                foreach( var geneJson in allRegulatoryGeneJson ) {
+                    RegulatoryGene gene = new RegulatoryGene();
+                    gene.Type = geneJson.Type;
+                    gene.Name = geneJson.Name;
+                    gene.Description = geneJson.Description;
+                    gene.Length = geneJson.Length;
 
-                foreach( var cc in geneJson.Condition ) {
-                    var ch = ObjectHelper.Clone( FindChemicalByName( cc.Chemical ) );
-                    if( ch != null ) {
-                        ch.Count = cc.Count;
-                        gene.Conditions.Add( ch );
-                    }
+                    gene.Conditions = SemanticObjectController.GenerateText2ChemicalsWithCountInfo(geneJson.ChemicalConditions);
+
+                    regulatoryGenes.Add( gene );
                 }
-
-                regulatoryGenes.Add( gene );
+                AllRegulartoryGenes = regulatoryGenes;
+                return regulatoryGenes;
             }
-            AllRegulartoryGenes = regulatoryGenes;
-            return regulatoryGenes;
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
-
+        
         public static Chemical FindChemicalByName( string chemicalName ) => AllChemicals.Find( c => { return c.Name == chemicalName; } );
-        public static Race FindRaceByName( string raceName ) => AllRaces.Find( c => { return c.Name == raceName; } );
+        public static Race FindRaceByName(string raceName) {
+            var race = AllRaces.Find(c => { return c.Name == raceName; });
+            if (race == null)
+            {
+                throw new Exception(string.Format("Race named [ {0} ] does not exsits.", raceName));
+            }
+            return race;
+
+        }
 
         /// <summary>
         /// 所有的游戏内置strain
         /// </summary>
-        public static List<Strain> AllNpcStrains { get; set; }
+        public static List<Strain> AllNpcStrains { get; set; } = new List<Strain>();
         public static List<Strain> LoadAllNpcStrains() {
-            AllNpcStrains = JsonHelper.Json2Object_NT<List<Strain>>( GetGameDataPath( "npc_strains.json" ) );
+            var strainJson = JsonHelper.Json2Object_NT<List<StrainJsonModel>>( GetGameDataPath( "npc_strains.json" ) );
+
+            AllNpcStrains.Clear();
+            foreach (var s in strainJson)
+            {
+                AllNpcStrains.Add(new Strain
+                {
+                    Name = s.Name,
+                    Owner = s.Owner,
+                    BasicRace = FindRaceByName(s.BasicRaceName),
+                    Population = s.Population,
+                    PlayerSelectedGenes = SemanticObjectController.GenerateText2RegGeneObjects(s.PlayerSelectedGenesName),
+                    PrivateChemicals = string.IsNullOrEmpty( s.PrivateChemicalInfos ) ? new List<Chemical>() : SemanticObjectController.GenerateText2ChemicalsWithCountInfo(s.PrivateChemicalInfos) 
+                });
+            }
             return AllNpcStrains;
         }
 
@@ -183,10 +136,8 @@ namespace CellWar.GameData {
                     Name = s.Name,
                     Owner = s.Owner,
                     BasicRaceName = s.BasicRace.Name,
-                    // Fix issue 18 
-                    // https://github.com/bennycui99/Cellwar.Game/issues/18
-                    Population = 100,
-                    PlayerSelectedGenesName = Local.GenerateRegGeneObjects2Text( s.PlayerSelectedGenes ),
+                    Population = s.Population,
+                    PlayerSelectedGenesName = SemanticObjectController.GenerateRegGeneObjects2Text( s.PlayerSelectedGenes ),
                 } );
             }
 
@@ -203,12 +154,13 @@ namespace CellWar.GameData {
                     Owner = s.Owner,
                     BasicRace = Local.FindRaceByName( s.BasicRaceName ),
                     Population = s.Population,
-                    PlayerSelectedGenes = Local.GenerateText2RegGeneObjects( s.PlayerSelectedGenesName ),
+                    PlayerSelectedGenes = SemanticObjectController.GenerateText2RegGeneObjects( s.PlayerSelectedGenesName ),
                     PrivateChemicals = new List<Chemical>()
                 } );
             }
             return Strains;
         }
+
     }
 
     /// <summary>

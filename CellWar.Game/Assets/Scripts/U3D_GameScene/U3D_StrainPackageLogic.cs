@@ -19,6 +19,8 @@ namespace CellWar.View
             MainGameCurrent.HoldingChemical = null;
 
             MainGameCurrent.HoldingStrain = Strain;
+            //Debug.Log(MainGameCurrent.HoldingStrain.Name + MainGameCurrent.HoldingStrain.Population.ToString());
+
         }
 
         // Start is called before the first frame update

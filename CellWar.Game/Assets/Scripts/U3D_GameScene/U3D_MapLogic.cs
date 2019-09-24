@@ -34,29 +34,28 @@ namespace CellWar.View
 
         private void Awake()
         {
-            MainGameCurrent.StageMap = GenerateBlockContainer();
+            StageMap = MainGameCurrent.StageMap;
+            GenerateBlockContainer();
         }
         private void Start()
         {
             BuildNeighborNetwork();
         }
-        
-        Map GenerateBlockContainer()
-        {
-            StageMap = JsonHelper.Json2Object_NT<Map>( Local.GetGameDataPath("map.json"));
 
+        void GenerateBlockContainer()
+        {
             for (int i = 0; i < StageMap.Blocks.Count; ++i)
             {
                 Block HexBlockModel = StageMap.Blocks[i];
                 //生成object
                 var blockObject = Instantiate(BlockPrefab, gameObject.transform) as GameObject;
                 //赋值block
-                blockObject.GetComponent<U3D_BlockLogic>().HexBlockModel = HexBlockModel;
+                HexBlockModel.BlockLogic = blockObject.GetComponent<U3D_BlockLogic>();
+                HexBlockModel.BlockLogic.HexBlockModel = HexBlockModel;
                 //移动到正确位置
                 blockObject.transform.position = new Vector3(HexBlockModel.StandardCoor.X, 0, HexBlockModel.StandardCoor.Z);
                 blockObject.SetActive(true);
             }
-            return StageMap;
         }
 
         /// <summary>

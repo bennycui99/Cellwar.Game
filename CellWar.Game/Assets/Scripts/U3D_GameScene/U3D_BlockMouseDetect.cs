@@ -16,6 +16,8 @@ namespace CellWar.View
         Renderer m_BlockRenderer;
 
         static Color INIT_COLOR = new Color(188f / 255f, 238f / 255f, 104f / 255f, 1f);
+        static Color MOUSE_STRAIN_COLOR = Color.green;
+        static Color MOUSE_EMPTY_COLOR = Color.blue;
 
         /// <summary>
         /// 方块人口对应颜色
@@ -122,6 +124,7 @@ namespace CellWar.View
                 if (MainGameCurrent.HoldingStrain != null)
                 {
                     MainGameCurrent.HoldingStrain = null;
+                    m_DestColor = MOUSE_EMPTY_COLOR;
                 }
             }
             /*
@@ -140,28 +143,25 @@ namespace CellWar.View
 
         public void ProcessSelectedStrain()
         {
-            Debug.Log("Process");
-            //Debug.Log(MainGameCurrent.HoldingStrain);
             ChangeBlockColor(Color.yellow);
             // 防止反复增加同一种细菌
             if (!HexBlockModel.Strains.Exists(m => m.Name == MainGameCurrent.HoldingStrain.Name))
             {
-                Debug.Log( "Put" );
                 HexBlockModel.Strains.Add((Strain)MainGameCurrent.HoldingStrain.Clone());
             }
             GameObject.Find(MainGameCurrent.HoldingStrain.Name).SetActive(false);
             MainGameCurrent.HoldingStrain = null;
 
+            // 放置一种细菌游戏才会开始
             if (!GameManager.Instance.IsGameStarted && !GameManager.Instance.IsGameCompleted)
             {
-                Debug.Log( "Game Start" );
                 GameManager.Instance.IsGameStarted = true;
             }
         }
 
         private void OnMouseEnter()
         {
-            if (UIManager.Instance.CheckGuiRaycastObjects() ) return;
+            if (UIManager.Instance.CheckGuiRaycastObjects()) return;
             //Debug.Log("Mouse Enter");
             m_IsMouseEnter = true;
             MainGameCurrent.FocusedHexBlock = HexBlockModel;
@@ -169,12 +169,12 @@ namespace CellWar.View
             if (MainGameCurrent.HoldingStrain != null)
             {
                 /// 当手里拿着细菌准备放置时的代码
-                m_DestColor = Color.green;
+                m_DestColor = MOUSE_STRAIN_COLOR;
             }
             else
             {
                 /// 手里什么都没有拿时鼠标移动到格子上的代码
-                m_DestColor = Color.blue;
+                m_DestColor = MOUSE_EMPTY_COLOR;
             }
             
         }

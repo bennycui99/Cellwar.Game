@@ -4,19 +4,54 @@
       "Name": null,
       "Guid": "00000000-0000-0000-0000-000000000000"
     },
-    "Name": "demo_strain",
-    "Population": 0,
-    "BasicRaceName": "A",
-    "PlayerSelectedGenesName": "GOD;Ether"
+    "Name": "demo_strain_Ether",
+    "Population": 10,
+    "BasicRaceName": "Empty",
+    "PlayerSelectedGenesName": "GOD;Ether",
+    "PrivateChemicalInfos": null
   },
   {
     "Owner": {
       "Name": null,
       "Guid": "00000000-0000-0000-0000-000000000000"
     },
-    "Name": "demo_strain2",
-    "Population": 0,
+    "Name": "demo_strain_Ether_reg",
+    "Population": 10,
+    "BasicRaceName": "Empty",
+    "PlayerSelectedGenesName": "Amp_Kana_Chl_Cu_VH_A;Ether",
+    "PrivateChemicalInfos": null
+  },
+  {
+    "Owner": {
+      "Name": null,
+      "Guid": "00000000-0000-0000-0000-000000000000"
+    },
+    "Name": "A100",
+    "Population": 100,
     "BasicRaceName": "A",
-    "PlayerSelectedGenesName": "Amp_Kana_Chl_Cu_VH_A;Grow_Nat_ATP_N_1;Grow_Nat_ATP_L_1;Grow_Nat_ATP_L_A;Amp_Kana_Chl_H_1;Grow_Nat_ATP_L_1;Grow_Nat_ATP_L_A;Grow_Nat_ATP_H_A"
+    "PlayerSelectedGenesName": "GOD;NullGene",
+    "PrivateChemicalInfos": ""
+  },
+  {
+    "Owner": {
+      "Name": null,
+      "Guid": "00000000-0000-0000-0000-000000000000"
+    },
+    "Name": "A800",
+    "Population": 800,
+    "BasicRaceName": "A",
+    "PlayerSelectedGenesName": "GOD;NullGene",
+    "PrivateChemicalInfos": null
+  },
+  {
+    "Owner": {
+      "Name": null,
+      "Guid": "00000000-0000-0000-0000-000000000000"
+    },
+    "Name": "B100",
+    "Population": 100,
+    "BasicRaceName": "B",
+    "PlayerSelectedGenesName": "GOD;NullGene",
+    "PrivateChemicalInfos": null
   }
 ]

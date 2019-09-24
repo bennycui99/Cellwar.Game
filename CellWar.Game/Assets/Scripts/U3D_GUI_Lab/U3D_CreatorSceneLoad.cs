@@ -123,6 +123,7 @@ namespace CellWar.View {
                 Save.SaveAllStrains();
                 RefreshStrainList();
             }
+            LabCurrent.Strain = LabCurrent.Strain == null?new Strain( GameData.Local.AllRaces[0] ) : LabCurrent.Strain.Clone() as Strain;
         }
 
         public void ClearSelection() {
