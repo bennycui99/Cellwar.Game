@@ -5,6 +5,28 @@ See [issue](https://github.com/bennycui99/Cellwar.Game/issues) page and fuck all
 
 ## Where the hell we are?
 
+### 9.24 Internal Gene 
+
+我们必须知道我们所说的玩家不能使用的gene仅仅是在lab中不可以使用。
+
+如果该基因为内部基因，则需要填写为形如，
+
+```json
+[
+    ...
+    {
+        ...
+        "IsInternal": "true",
+        ...
+    }
+    ...
+]
+```
+
+默认不填写时为false。即在lab中可见。
+
+
+
 ### 9.15 Fix all effect bugs and some descriptions
 
 
@@ -12,7 +34,7 @@ See [issue](https://github.com/bennycui99/Cellwar.Game/issues) page and fuck all
 #### Essential Items（必填项）
 
 ```json
-  {
+{
     "Name": "No_Consume",
     "Length": "0",
     "PopulationCoefficient": "0",

@@ -31,7 +31,7 @@ namespace CellWar.Controller
                 return true;
             }
             return false;
-            ////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////// 
         }
 
         #region SINGLETON
@@ -80,7 +80,9 @@ namespace CellWar.Controller
             // 更新所有格子
             foreach (var block in MainGameCurrent.StageMap.Blocks)
             {
-                block.BlockLogic.BlockBacteriaUpdate();
+                BlockController blockController = new BlockController( block );
+                blockController.BlockBacteriaUpdate();
+                // block.BlockLogic.BlockBacteriaUpdBlocate();
             }
             
             // 判断游戏胜利

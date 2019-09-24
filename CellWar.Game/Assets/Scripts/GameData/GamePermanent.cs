@@ -136,12 +136,14 @@ namespace CellWar.GameData {
                     Name = s.Name,
                     Owner = s.Owner,
                     BasicRaceName = s.BasicRace.Name,
-                    Population = s.Population,
+                    // Fix #issue 18
+                    // https://github.com/bennycui99/Cellwar.Game/issues/18
+                    Population = 100,
                     PlayerSelectedGenesName = SemanticObjectController.GenerateRegGeneObjects2Text( s.PlayerSelectedGenes ),
                 } );
             }
 
-            File.WriteAllText( Save.GetGameSavePath( "strains.json" ), JsonHelper.Object2Json( strainJson ) );
+            File.WriteAllText( GetGameSavePath( "strains.json" ), JsonHelper.Object2Json( strainJson ) );
         }
 
         public static List<Strain> LoadAllStrains() {

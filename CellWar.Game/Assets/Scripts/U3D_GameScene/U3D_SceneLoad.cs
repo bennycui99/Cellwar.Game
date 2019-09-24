@@ -8,6 +8,7 @@ using CellWar.View;
 using UnityEngine;
 using UnityEngine.UI;
 using CellWar.Utils.Object;
+using CellWar.Model.Map;
 
 namespace CellWar.View {
     /// <summary>
@@ -15,7 +16,6 @@ namespace CellWar.View {
     /// </summary>
     public class U3D_SceneLoad : MonoBehaviour {
         private void Awake() {
-
             MainGameCurrent.LoadMap();
 
             MainGameCurrent.StrainList = ObjectHelper.CloneList2( Save.Strains );
@@ -29,6 +29,7 @@ namespace CellWar.View {
                     g.GetComponent<U3D_StrainPackageLogic>().Strain = obj;
                     g.name = obj.Name;
                 } );
+            // Map GameObject见 GenerateBlockContainer
         }
     }
 }

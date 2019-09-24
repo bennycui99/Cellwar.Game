@@ -11,6 +11,7 @@ using static CellWar.Model.Substance.Strain;
 using CellWar.Utils.Object;
 using System.IO;
 using CellWar.Model.Substance;
+using CellWar.Controller.Gene;
 
 namespace CellWar.View {
     public class U3D_CreatorSceneLoad : MonoBehaviour {
@@ -37,18 +38,23 @@ namespace CellWar.View {
                     g.name = obj.Name;
                 } );
 
-            UIHelper.InitUIList( "UI_CodList", "UI_Ele_Cod", Local.AllCodingGenes,
+            GeneController geneController = new GeneController();
+
+            List<CodingGene> allCods = ObjectHelper.Clone( Local.AllCodingGenes );
+            geneController.RemoveAllInternalGene( ref allCods );
+            UIHelper.InitUIList( "UI_CodList", "UI_Ele_Cod", allCods,
                 ( GameObject g, CodingGene obj ) => {
                     g.GetComponent<U3D_CodElement>().CodingGene = ObjectHelper.Clone( obj );
                     g.name = obj.Name;
                 } );
 
-            UIHelper.InitUIList( "UI_RegList", "UI_Ele_Reg", Local.AllRegulartoryGenes,
+            List<RegulatoryGene> allRegs = ObjectHelper.Clone( Local.AllRegulartoryGenes );
+            geneController.RemoveAllInternalGene( ref allRegs );
+            UIHelper.InitUIList( "UI_RegList", "UI_Ele_Reg", allRegs,
                 ( GameObject g, RegulatoryGene obj ) => {
                     g.GetComponent<U3D_RegElement>().RegulatoryGene = ObjectHelper.Clone( obj, obj.GetType() );
                     g.name = obj.Name;
                 } );
-
 
             UIHelper.InitUIList( "UI_StrainList", "UI_Ele_Strain", Save.Strains,
                 ( GameObject g, Strain obj ) => {
