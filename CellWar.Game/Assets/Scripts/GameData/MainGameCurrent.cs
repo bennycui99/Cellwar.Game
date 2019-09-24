@@ -27,7 +27,7 @@ namespace CellWar.GameData {
         public static void LoadMap()
         {
             StageMap = JsonHelper.Json2Object_NT<Map>(Local.GetGameDataPath("map.json"));
-            StageMap.Init();
+            StageMap.PlayerOwnedChemicals = SemanticObjectController.GenerateText2ChemicalsWithCountInfo( StageMap.PlayerOwnedChemicalsDescription );
         }
 
         /// <summary>
