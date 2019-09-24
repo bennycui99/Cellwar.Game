@@ -2,9 +2,16 @@
   {
     "Name": "Amp_Kana_Chl_VH_B",
     "Length": "180",
-    "ChemicalConditions": "Ampicillin:10;Kana:10;Chl:10;Growth:1000",
-    "Type": "NO",
+    "ChemicalConditions": "Ampicillin:-10;Kana:-10;Chl:-10;Cu:5;Growth:1000",
+    "Type": "PA",
     "Description": "对抗生素非常敏感，对重金属不敏感的开关"
+  },
+  {
+    "Name": "Amp_Kana_Chl_L_B",
+    "Length": "180",
+    "ChemicalConditions": "Ampicillin:-9;Kana:-10;Chl:-10;Cu:-5;Growth:1000",
+    "Type": "PA",
+    "Description": "对抗生素非常敏感，对重金属敏感的开关"
   },
   {
     "Name": "Amp_Kana_Chl_Cu_VH_A",
