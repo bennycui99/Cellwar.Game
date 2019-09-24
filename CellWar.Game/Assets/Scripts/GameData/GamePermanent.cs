@@ -183,7 +183,9 @@ namespace CellWar.GameData {
                     Name = s.Name,
                     Owner = s.Owner,
                     BasicRaceName = s.BasicRace.Name,
-                    Population = s.Population,
+                    // Fix issue 18 
+                    // https://github.com/bennycui99/Cellwar.Game/issues/18
+                    Population = 100,
                     PlayerSelectedGenesName = Local.GenerateRegGeneObjects2Text( s.PlayerSelectedGenes ),
                 } );
             }
