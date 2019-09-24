@@ -51,6 +51,7 @@ namespace CellWar.Model.Substance {
             public string Name { get; set; }
             public int Length { get; set; }
             public string Description { get; set; }
+            public bool IsInternal { get; set ; }
         }
 
         /// <summary>

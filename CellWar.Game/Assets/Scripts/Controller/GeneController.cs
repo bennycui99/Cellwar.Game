@@ -7,6 +7,14 @@ using static CellWar.Model.Substance.Strain;
 
 namespace CellWar.Controller.Gene
 {
+    public class GeneController {
+        public void RemoveAllInternalGene( ref List<CodingGene> genes ) {
+            genes.RemoveAll( g => g.IsInternal );
+        }
+        public void RemoveAllInternalGene( ref List<RegulatoryGene> genes ) {
+            genes.RemoveAll( g => g.IsInternal );
+        }
+    }
     public class CodingGeneController {
         public CodingGeneController() {
             EffectEvents.Add( Consume );
