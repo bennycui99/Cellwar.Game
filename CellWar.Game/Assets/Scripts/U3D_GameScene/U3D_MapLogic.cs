@@ -38,11 +38,8 @@ namespace CellWar.View
             MainGameCurrent.LoadMap();
             StageMap = MainGameCurrent.StageMap;
             GenerateBlockContainer();
-        }
-        private void Start()
-        {
-            BuildNeighborNetwork();
             SetStartPlayerResources();
+            BuildNeighborNetwork();
         }
 
         void GenerateBlockContainer()

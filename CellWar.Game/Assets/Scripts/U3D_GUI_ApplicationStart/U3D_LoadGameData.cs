@@ -44,7 +44,7 @@ namespace CellWar.View {
 
                 yield return new WaitForSeconds( fakeTimeWaitSecond );
                 try {
-                    Save.LoadAllStrains();
+                    Save.Strains = Save.LoadStrainsWithFilePath("Save/Strains.json");
 
                     Info( "User Saved Game Data loaded successfully..." );
 

@@ -42,6 +42,9 @@ namespace CellWar.GameData {
             return 1 / BlockColorInterval;
         }
         public static List<Strain> StrainList = new List<Strain>();
+
+        public static List<Strain> EditorNpcStrainList = new List<Strain>();
+
         public static string GetCurrentBlockDetailInfo() {
             if( CellWar.GameData.MainGameCurrent.FocusedHexBlock == null ) {
                 return "";

@@ -146,21 +146,29 @@ namespace CellWar.GameData {
             File.WriteAllText( GetGameSavePath( "strains.json" ), JsonHelper.Object2Json( strainJson ) );
         }
 
-        public static List<Strain> LoadAllStrains() {
-            var strainJson = JsonHelper.Json2Object_NT<List<StrainJsonModel>>( GetGameSavePath( "strains.json" ) );
+        /// <summary>
+        /// 通过路径调用；省略Resources: "Save/strains.json"
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static List<Strain> LoadStrainsWithFilePath(string path) {
+            string filePath = Path.Combine(Application.dataPath, "Resources/" + path);
+            var strainJson = JsonHelper.Json2Object_NT<List<StrainJsonModel>>( filePath );
 
-            Strains.Clear();
+            List<Strain> newStrains = new List<Strain>();
+            newStrains.Clear();
             foreach( var s in strainJson ) {
-                Strains.Add( new Strain {
+                newStrains.Add(new Strain
+                {
                     Name = s.Name,
                     Owner = s.Owner,
-                    BasicRace = Local.FindRaceByName( s.BasicRaceName ),
+                    BasicRace = Local.FindRaceByName(s.BasicRaceName),
                     Population = s.Population,
-                    PlayerSelectedGenes = SemanticObjectController.GenerateText2RegGeneObjects( s.PlayerSelectedGenesName ),
+                    PlayerSelectedGenes = SemanticObjectController.GenerateText2RegGeneObjects(s.PlayerSelectedGenesName),
                     PrivateChemicals = new List<Chemical>()
-                } );
+                });
             }
-            return Strains;
+            return newStrains;
         }
 
     }
