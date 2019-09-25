@@ -28,10 +28,5 @@ namespace CellWar.View
             gameObject.GetComponent<Text>().text = Strain.Name;
         }
 
-        /*
-        // Update is called once per frame
-        void Update() {
-        }
-        */
     }
 }

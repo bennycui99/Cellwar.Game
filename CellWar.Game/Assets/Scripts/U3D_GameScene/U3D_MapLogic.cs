@@ -17,6 +17,7 @@ using CellWar.Model.Map;
 using UnityEngine;
 using CellWar.Utils;
 using CellWar.GameData;
+using CellWar.Utils.Object;
 
 namespace CellWar.View
 {
@@ -34,12 +35,14 @@ namespace CellWar.View
 
         private void Awake()
         {
+            MainGameCurrent.LoadMap();
             StageMap = MainGameCurrent.StageMap;
             GenerateBlockContainer();
         }
         private void Start()
         {
             BuildNeighborNetwork();
+            SetStartPlayerResources();
         }
 
         void GenerateBlockContainer()
@@ -79,6 +82,21 @@ namespace CellWar.View
                     }
                 }
             }
+        }
+
+        void SetStartPlayerResources()
+        {
+            MainGameCurrent.StrainList = ObjectHelper.CloneList2(Save.Strains);
+
+            /// 将所有玩家制作的strain的privatechemicals设置成地图给出的默认值
+            /// 每个strain一份
+            MainGameCurrent.StrainList.ForEach(strain => strain.PrivateChemicals = ObjectHelper.CloneList2(MainGameCurrent.StageMap.PlayerOwnedChemicals));
+
+            UIHelper.InitUIList("UI_StrainList", "UI_Strain", MainGameCurrent.StrainList,
+                (GameObject g, Model.Substance.Strain obj) => {
+                    g.GetComponent<U3D_StrainPackageLogic>().Strain = obj;
+                    g.name = obj.Name;
+                });
         }
         
     }
