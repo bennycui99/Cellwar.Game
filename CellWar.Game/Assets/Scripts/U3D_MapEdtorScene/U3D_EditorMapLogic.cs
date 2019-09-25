@@ -3,23 +3,25 @@ using CellWar.Model.Map;
 using UnityEngine;
 using CellWar.Utils;
 using CellWar.GameData;
-using Cellwar.GameData;
 
 namespace CellWar.View
 {
     public class U3D_EditorMapLogic : MonoBehaviour
     {
-        public Map NewMap = new Map();
+        public Map StageMap = new Map();
         [SerializeField]
         public GameObject BlockPrefab;
 
         private void Awake()
         {
             GenerateBlockContainer();
-        }
 
-        private void Start()
-        {
+            MainGameCurrent.StrainList = Utils.Object.ObjectHelper.CloneList2(Save.Strains);
+            Utils.UIHelper.InitUIList("UI_StrainList", "UI_Strain", MainGameCurrent.StrainList,
+                (GameObject g, Model.Substance.Strain obj) => {
+                    g.GetComponent<U3D_StrainPackageLogic>().Strain = obj;
+                    g.name = obj.Name;
+                });
         }
 
         /// <summary>
@@ -40,7 +42,7 @@ namespace CellWar.View
                     HexBlockModel.Capacity = 1000;
                     HexBlockModel.BlockType = Block.Type.Normal;
 
-                    NewMap.Blocks.Add(HexBlockModel);
+                    StageMap.Blocks.Add(HexBlockModel);
 
                     //生成object
                     GameObject blockObject = Instantiate(BlockPrefab, gameObject.transform) as GameObject;
@@ -52,7 +54,7 @@ namespace CellWar.View
                 }
             }
 
-            MapEditorCurrent.NewMap = NewMap;
+            MainGameCurrent.StageMap = StageMap;
         }
 
     }

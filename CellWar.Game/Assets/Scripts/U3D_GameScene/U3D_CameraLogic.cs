@@ -25,7 +25,7 @@ namespace CellWar.View
         {
             StageMap = MainGameCurrent.StageMap;
             // 取得地图边界
-            for (int i=0;i< StageMap.Blocks.Count; ++i)
+            for (int i = 0; i < StageMap.Blocks.Count; ++i)
             {
                 if (m_CameraXMin > StageMap.Blocks[i].StandardCoor.X)
                 {
