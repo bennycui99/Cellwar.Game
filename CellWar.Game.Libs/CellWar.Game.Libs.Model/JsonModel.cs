@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using CellWar.Model.Map;
+using System.Collections.Generic;
 
 
 namespace CellWar.Model.Json {
@@ -36,5 +37,15 @@ namespace CellWar.Model.Json {
         public string BasicRaceName { get; set; }
         public string PlayerSelectedGenesName { get; set; }
         public string PrivateChemicalInfos { get; set; }
+    }
+    public class MapJsonModel {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string PlayerOwnedChemicalsDescription { get; set; }
+        public List<BlockJsonModel> Blocks { get; set; } = new List<BlockJsonModel>();
+    }
+    public class BlockJsonModel : Block {
+        public string StrainsInfo { get; set; } = "";
+        public string ChemicalNamesInfo { get; set; } = "";
     }
 }

@@ -38,13 +38,13 @@ namespace CellWar.GameData {
 
         public static List<CodingGene> AllCodingGenes { get; set; }
         public static List<CodingGene> LoadAllCodingGenes() {
-            Local.AllCodingGenes = CellWar.Utils.JsonHelper.Json2Object_NT<List<CodingGene>>( GetGameDataPath( "coding_gene.json" ) );
+            AllCodingGenes = JsonHelper.Json2Object_NT<List<CodingGene>>( GetGameDataPath( "coding_gene.json" ) );
             return AllCodingGenes;
         }
 
         public static List<Chemical> AllChemicals { get; set; }
         public static List<Chemical> LoadAllChemicals() {
-            Local.AllChemicals = CellWar.Utils.JsonHelper.Json2Object_NT<List<Chemical>>( GetGameDataPath( "chemicals.json" ) );
+            AllChemicals = JsonHelper.Json2Object_NT<List<Chemical>>( GetGameDataPath( "chemicals.json" ) );
             return AllChemicals;
         }
 
@@ -52,7 +52,7 @@ namespace CellWar.GameData {
         public static List<RegulatoryGene> LoadAllRegulartoryGenes() {
             try
             {
-                var allRegulatoryGeneJson = CellWar.Utils.JsonHelper.Json2Object_NT<List<RegulartoryGeneJsonModel>>( GetGameDataPath( "reg_gene.json" ) );
+                var allRegulatoryGeneJson = JsonHelper.Json2Object_NT<List<RegulartoryGeneJsonModel>>( GetGameDataPath( "reg_gene.json" ) );
                 List<RegulatoryGene> regulatoryGenes = new List<RegulatoryGene>();
                 foreach( var geneJson in allRegulatoryGeneJson ) {
                     RegulatoryGene gene = new RegulatoryGene();
@@ -91,19 +91,11 @@ namespace CellWar.GameData {
         public static List<Strain> AllNpcStrains { get; set; } = new List<Strain>();
         public static List<Strain> LoadAllNpcStrains() {
             var strainJson = JsonHelper.Json2Object_NT<List<StrainJsonModel>>( GetGameDataPath( "npc_strains.json" ) );
-
+            StrainController strainController = new StrainController();
             AllNpcStrains.Clear();
             foreach (var s in strainJson)
             {
-                AllNpcStrains.Add(new Strain
-                {
-                    Name = s.Name,
-                    Owner = s.Owner,
-                    BasicRace = FindRaceByName(s.BasicRaceName),
-                    Population = s.Population,
-                    PlayerSelectedGenes = SemanticObjectController.GenerateText2RegGeneObjects(s.PlayerSelectedGenesName),
-                    PrivateChemicals = string.IsNullOrEmpty( s.PrivateChemicalInfos ) ? new List<Chemical>() : SemanticObjectController.GenerateText2ChemicalsWithCountInfo(s.PrivateChemicalInfos) 
-                });
+                AllNpcStrains.Add( strainController.JsonModel2Strain_Npc(s) );
             }
             return AllNpcStrains;
         }
@@ -130,17 +122,10 @@ namespace CellWar.GameData {
         public static string GetGameSavePath( string fileName ) => Path.Combine( Application.dataPath, "Resources/Save/" + fileName );
         public static void SaveAllStrains() {
             List<StrainJsonModel> strainJson = new List<StrainJsonModel>();
+            StrainController strainController = new StrainController();
 
             foreach( var s in Strains ) {
-                strainJson.Add( new StrainJsonModel {
-                    Name = s.Name,
-                    Owner = s.Owner,
-                    BasicRaceName = s.BasicRace.Name,
-                    // Fix #issue 18
-                    // https://github.com/bennycui99/Cellwar.Game/issues/18
-                    Population = 100,
-                    PlayerSelectedGenesName = SemanticObjectController.GenerateRegGeneObjects2Text( s.PlayerSelectedGenes ),
-                } );
+                strainJson.Add( strainController.Strain2JsonModel( s ) );
             }
 
             File.WriteAllText( GetGameSavePath( "strains.json" ), JsonHelper.Object2Json( strainJson ) );
@@ -154,19 +139,12 @@ namespace CellWar.GameData {
         public static List<Strain> LoadStrainsWithFilePath(string path) {
             string filePath = Path.Combine(Application.dataPath, "Resources/" + path);
             var strainJson = JsonHelper.Json2Object_NT<List<StrainJsonModel>>( filePath );
+            StrainController strainController = new StrainController();
 
             List<Strain> newStrains = new List<Strain>();
             newStrains.Clear();
             foreach( var s in strainJson ) {
-                newStrains.Add(new Strain
-                {
-                    Name = s.Name,
-                    Owner = s.Owner,
-                    BasicRace = Local.FindRaceByName(s.BasicRaceName),
-                    Population = s.Population,
-                    PlayerSelectedGenes = SemanticObjectController.GenerateText2RegGeneObjects(s.PlayerSelectedGenesName),
-                    PrivateChemicals = new List<Chemical>()
-                });
+                newStrains.Add( strainController.JsonModel2Strain_Player( s ) );
             }
             return newStrains;
         }

@@ -99,13 +99,13 @@ namespace CellWar.Model.Substance {
             /// <summary>
             /// 从外部拿来的化学物质的名字
             /// </summary>
-            /// <seealso cref="CellWar.Model.Map.Block.PublicChemicals"/>
+            /// <seealso cref="CellWar.Model.Map.HexBlock.PublicChemicals"/>
             public string ImportChemicalName { get; set; }
             /// <summary>
             /// 拿来化学物质的量
             /// Count可正可负
             /// </summary>
-            /// <seealso cref="CellWar.Model.Map.Block.PublicChemicals"/>
+            /// <seealso cref="CellWar.Model.Map.HexBlock.PublicChemicals"/>
             public int ImportChemicalCount { get; set; }
             public float ImportChemicalCoeffeicient { get; set; }
             public int ImportChemicalIntercept { get; set; }
@@ -172,7 +172,7 @@ namespace CellWar.Model.Substance {
         /// 夺取的化学物质
         /// 从 PublicChemicals
         /// </summary>
-        /// <seealso cref="CellWar.Model.Map.Block.PublicChemicals"/>
+        /// <seealso cref="CellWar.Model.Map.HexBlock.PublicChemicals"/>
         public List<Substance.Chemical> PrivateChemicals { get; set; } = new List<Chemical>();
 
         /// <summary>

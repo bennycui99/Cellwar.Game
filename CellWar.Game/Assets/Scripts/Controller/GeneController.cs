@@ -124,14 +124,10 @@ namespace CellWar.Controller.Gene
 
         public bool ModifyPopulation( ref Strain parentStrain, ref Block currentBlock, ref CodingGene gene ) {
             var delta = ( int )GetPopulationDelta( ref parentStrain, ref gene );
-            if ( delta == 0 )
-            {
-                return false;
-            }
-            if( currentBlock.IsPopulationBeingFull( delta )
-                && !currentBlock.IsPopulationFull() ) { // 最后一次人口增加，即将变满
+            if ( delta == 0 ) { return false; }
+            if( currentBlock.IsPopulationBeingFull( delta ) && !currentBlock.IsPopulationFull() ) { // 最后一次人口增加，即将变满
                 parentStrain.Population += currentBlock.Capacity - currentBlock.TotalPopulation;
-            } else if( currentBlock.IsPopulationFull() ) { // 人口已满，无法增加
+            } else if( currentBlock.IsPopulationFull() && delta > 0 ) { // 人口已满，无法增加，且任然增加人口
                 return false;
             } else {
                 parentStrain.Population += delta;
@@ -163,9 +159,9 @@ namespace CellWar.Controller.Gene
                 if ( publicChemical.Count >= importCount ) {
                     privateChemical.Count += importCount;
                     publicChemical.Count -= importCount;
-                    Debug.Log("imported by " + gene.Name);
-                    Debug.Log("privateChemical " + privateChemical.Count );
-                    Debug.Log("publicChemical " + publicChemical.Count );
+                    //Debug.Log("imported by " + gene.Name);
+                    //Debug.Log("privateChemical " + privateChemical.Count );
+                    //Debug.Log("publicChemical " + publicChemical.Count );
                 }
             }
             return true;
@@ -208,7 +204,7 @@ namespace CellWar.Controller.Gene
         public void Effect( ref Strain parentStrain, ref Block currentBlock, ref CodingGene gene ) {
             foreach( var eve in EffectEvents ) {
                 if( !eve( ref parentStrain, ref currentBlock, ref gene ) ) { 
-                    Debug.Log("Stop at" + EffectEvents.FindIndex( m => m == eve ) + "\n Name: " + eve.Method.Name );
+                    //Debug.Log("Stop at" + EffectEvents.FindIndex( m => m == eve ) + "\n Name: " + eve.Method.Name );
                     return;
                 }
             }

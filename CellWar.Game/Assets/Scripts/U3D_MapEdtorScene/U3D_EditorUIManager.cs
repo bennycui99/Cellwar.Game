@@ -5,6 +5,7 @@ using CellWar.Model.Map;
 using CellWar.Utils;
 using System.IO;
 using CellWar.Model.Substance;
+using CellWar.Controller;
 
 namespace CellWar.View
 {
@@ -34,11 +35,7 @@ namespace CellWar.View
 
         public void OnExportClick()
         {
-            Map map = new Map();
-
-            map.Blocks.AddRange(MainGameCurrent.StageMap.Blocks.FindAll(block => block.IsActive));
-
-            File.WriteAllText(Save.GetGameSavePath("map_generate.json"), JsonHelper.Object2Json(map));
+            new MapController().SaveMapToLocal();
         }
 
     }

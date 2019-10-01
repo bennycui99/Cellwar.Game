@@ -5,6 +5,7 @@ using CellWar.Model.Substance;
 using CellWar.View;
 using CellWar.Model.Map;
 using CellWar.Utils;
+using CellWar.Model.Json;
 
 namespace CellWar.GameData {
     /// <summary>
@@ -16,10 +17,14 @@ namespace CellWar.GameData {
         /// 地图的Instance
         /// </summary>
         public static Map StageMap = null;
-        public static void LoadMap()
-        {
-            StageMap = JsonHelper.Json2Object_NT<Map>(Local.GetGameDataPath("map.json"));
-            StageMap.PlayerOwnedChemicals = SemanticObjectController.GenerateText2ChemicalsWithCountInfo( StageMap.PlayerOwnedChemicalsDescription );
+
+        public static void LoadMap(string name) {
+            var mapJson = JsonHelper.Json2Object_NT<MapJsonModel>(Local.GetGameDataPath(name));
+            StageMap = new MapController().JsonModel2Map( mapJson );
+        }
+
+        public static void LoadMap() {
+            LoadMap("map.json");
         }
 
         /// <summary>
@@ -70,7 +75,7 @@ namespace CellWar.GameData {
         }
 
         public static string GetCurrentBlockStrainDetailInfo() {
-            if(FocusedHexBlock == null ) {
+            if( FocusedHexBlock == null ) {
                 return "";
             }
             var currentHexBlock = FocusedHexBlock;

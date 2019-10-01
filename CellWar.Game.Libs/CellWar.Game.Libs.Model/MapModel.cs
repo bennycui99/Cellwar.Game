@@ -11,10 +11,9 @@ using System;
 namespace CellWar.Model.Map {
     public class Map {
         public string Name { get; set; }
-        
+        public string Description { get; set; }
         public List<Block> Blocks { get; set; } = new List<Block>();
         public List<Chemical> PlayerOwnedChemicals { get; set; } = new List<Chemical>();
-        public string PlayerOwnedChemicalsDescription { get; set; }
     }
 
     public class StandardCoordinate
@@ -70,7 +69,7 @@ namespace CellWar.Model.Map {
         }
     }
 
-    public class Block {
+    public class HexBlock {
         public const string Tag = "HexBlock";
 
         public bool IsActive = false;
@@ -96,11 +95,6 @@ namespace CellWar.Model.Map {
         public List<Block> NeighborBlocks { get; set; } = new List<Block>();
 
         /// <summary>
-        /// 各自内存在的所有细菌
-        /// </summary>
-        public List<Substance.Strain> Strains { get; set; } = new List<Strain>();
-
-        /// <summary>
         /// 公共资源库
         /// </summary>
         public List<Substance.Chemical> PublicChemicals { get; set; } = new List<Chemical>();
@@ -110,22 +104,26 @@ namespace CellWar.Model.Map {
         public int TotalPopulation = 0;
 
         /// <summary>
-        /// 统计所有菌类数量
-        /// </summary>
-        public int GetTotalPopulation()
-        {
-            int totalPopulation = 0;
-            foreach (var s in Strains) { totalPopulation += s.Population; }
-            return totalPopulation;
-        }
-
-        /// <summary>
         /// 检查这次添加是否已满
         /// </summary>
         /// <param name="delta"></param>
         /// <returns></returns>
         public bool IsPopulationBeingFull(int delta) { return (TotalPopulation + delta) > Capacity; }
+    }
 
-       
+    public class Block : HexBlock {
+        /// <summary>
+        /// 各自内存在的所有细菌
+        /// </summary>
+        public List<Substance.Strain> Strains { get; set; } = new List<Strain>();
+
+        /// <summary>
+        /// 统计所有菌类数量
+        /// </summary>
+        public int GetTotalPopulation() {
+            int totalPopulation = 0;
+            foreach( var s in Strains ) { totalPopulation += s.Population; }
+            return totalPopulation;
+        }
     }
 }
