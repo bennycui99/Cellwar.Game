@@ -7,6 +7,7 @@ namespace CellWar.Controller
     {
         public bool IsGameStarted;
         public bool IsGameCompleted;
+        public bool IsPaused=false;
 
         const float defaultUpdateCount = 1.0f;
 
@@ -65,6 +66,8 @@ namespace CellWar.Controller
         {
             // 游戏还没开始就不更新
             if (!Instance.IsGameStarted) { return; }
+            // If paused,do not update anything
+            if(IsPaused) { return; }
 
             // 每隔一秒更新一次
             if (CurrentUpdateCount > 0)
