@@ -17,6 +17,7 @@ namespace CellWar.Controller
         private GraphicRaycaster m_GraphicRaycaster;
 
         private GameObject m_GameOverFrameObject;
+        private GameObject m_IntroductionFrameObject;
 
         private void Awake()
         {
@@ -33,6 +34,7 @@ namespace CellWar.Controller
             m_GraphicRaycaster = GameObject.Find("BlockingCanvas").GetComponent<GraphicRaycaster>();
 
             m_GameOverFrameObject = GameObject.Find("GameOverFrame");
+            m_IntroductionFrameObject = GameObject.Find("IntroductionFrame");
         }
 
         /// <summary>
@@ -77,6 +79,11 @@ namespace CellWar.Controller
             MainGameCurrent.FocusedHexBlock = null;
 
             SceneManager.LoadScene("MainMenuScene");
+        }
+
+        public void OnIntroductionContinueClick()
+        {
+            m_IntroductionFrameObject.SetActive(false);
         }
     }
 
