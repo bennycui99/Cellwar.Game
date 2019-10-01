@@ -15,12 +15,6 @@ namespace CellWar.View
         private void Awake()
         {
             GenerateBlockContainer();
-            MainGameCurrent.EditorNpcStrainList = Save.LoadStrainsWithFilePath("GameData/npc_strains.json");
-            Utils.UIHelper.InitUIList("UI_StrainList", "UI_Strain", MainGameCurrent.EditorNpcStrainList,
-                (GameObject g, Model.Substance.Strain obj) => {
-                    g.GetComponent<U3D_StrainPackageLogic>().Strain = obj;
-                    g.name = obj.Name;
-                });
         }
 
         /// <summary>
