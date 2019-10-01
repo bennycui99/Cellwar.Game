@@ -10,8 +10,6 @@ namespace CellWar.View
 {
     public class U3D_EditorUIManager : MonoBehaviour
     {
-        public Map StageMap;
-
         [SerializeField]
         Text m_ExportText;
 
@@ -19,11 +17,17 @@ namespace CellWar.View
         // Start is called before the first frame update
         void Awake()
         {
-            StageMap = MainGameCurrent.StageMap;
-
             UIHelper.InitUIList<Chemical>("UI_ChemicalList", "UI_Chemical", Local.AllChemicals,
                 (GameObject g, Chemical obj) => {
                     g.GetComponent<U3D_EditorChemicalPackageLogic>().UIChemical = obj;
+                    g.name = obj.Name;
+                });
+
+            MainGameCurrent.EditorNpcStrainList = Save.LoadStrainsWithFilePath("GameData/npc_strains.json");
+
+            Utils.UIHelper.InitUIList("UI_StrainList", "UI_Strain", MainGameCurrent.EditorNpcStrainList,
+                (GameObject g, Model.Substance.Strain obj) => {
+                    g.GetComponent<U3D_StrainPackageLogic>().Strain = obj;
                     g.name = obj.Name;
                 });
         }
@@ -32,7 +36,7 @@ namespace CellWar.View
         {
             Map map = new Map();
 
-            map.Blocks.AddRange(StageMap.Blocks.FindAll(block => block.IsActive));
+            map.Blocks.AddRange(MainGameCurrent.StageMap.Blocks.FindAll(block => block.IsActive));
 
             File.WriteAllText(Save.GetGameSavePath("map_generate.json"), JsonHelper.Object2Json(map));
         }
