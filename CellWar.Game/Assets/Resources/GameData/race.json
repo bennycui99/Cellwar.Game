@@ -2,17 +2,17 @@
   {
     "Name": "Test1",
     "MaxLength": "20000",
-    "CodingGeneNames": "Cu_H_1;GLUT_L_1;TCAL1;AminoAcid_L_1;Grow_Nat_ATP_L_1;Grow_Nat_AA_L_1;Cu_L_1;GLUT_H_1;AminoAcid_H_1;TCAL1;Grow_Nat_ATP_N_1;Grow_Nat_AA_N_1;GOD;Death_Nat_1;SignalAConsume"
+    "CodingGeneNames": "GOD;GLUT_default_A;TCA_default_A;Grow_default_A;AminoAcid_default_A;GOD;Death_default_A"
   },
   {
     "Name": "A",
     "MaxLength": "20000",
-    "CodingGeneNames": "Amp_Kana_Chl_Cu_VH_A;GLUT_default_A;TCA_default_A;Grow_default_A;AminoAcid_default_A;GOD;Death_default_A"
+    "CodingGeneNames": "Amp_Kana_Chl_Cu_VH_A;GLUT_default_A;TCA_default_A;Grow_default_A;GOD;Death_default_A"
   },
   {
     "Name": "B",
     "MaxLength": "20000",
-    "CodingGeneNames": "Amp_Kana_Chl_VH_B;Grow_default_B;GLUT_default_B;TCA_default_B;Amp_Kana_Chl_L_B;Grow_default_B;Grow_default_B_2;TCA_default_B;GOD;Death_default_B"
+    "CodingGeneNames": "Amp_Kana_Chl_VH_B;GLUT_default_A;TCA_default_A;Grow_default_A;GOD;Death_default_A"
   },
   {
     "Name": "Empty",

@@ -2,8 +2,8 @@
   {
     "Name": "Amp_Kana_Chl_VH_B",
     "Length": "180",
-    "ChemicalConditions": "Ampicillin:-10;Kana:-10;Chl:-10;Cu:5;Growth:1000",
-    "Type": "PA",
+    "ChemicalConditions": "Ampicillin:9;Kana:9;Chl:9;Cu:19;Growth:2000",
+    "Type": "NO",
     "Description": "对抗生素非常敏感，对重金属不敏感的开关"
   },
   {
@@ -64,9 +64,9 @@
   },
   {
     "Name": "Cu_test_1",
-    "Length": "360",
-    "ChemicalConditions": "Cu:9;Growth:1000",
-    "Type": "NO",
+    "Length": "0",
+    "ChemicalConditions": "Cu:1",
+    "Type": "PA",
     "Description": "对Cu高敏感的开关,受到Cu抑制"
   },
   {
@@ -101,7 +101,7 @@
     "Name": "GOD",
     "Length": "0",
     "ChemicalConditions": "",
-    "Type": "PA",
+    "Type": "PO",
     "Description": "永远不会被关闭的调控基因"
   },
   {
