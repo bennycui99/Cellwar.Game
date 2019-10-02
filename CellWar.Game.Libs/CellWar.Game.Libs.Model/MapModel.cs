@@ -16,8 +16,7 @@ namespace CellWar.Model.Map {
         public List<Chemical> PlayerOwnedChemicals { get; set; } = new List<Chemical>();
     }
 
-    public class StandardCoordinate
-    {
+    public class StandardCoordinate {
         const float RADIUS = 1.73205f;
         public float X { get; set; }
         public float Z { get; set; }
@@ -26,25 +25,22 @@ namespace CellWar.Model.Map {
         /// 将unity坐标转化为hex坐标
         /// </summary> 
         /// <returns></returns>
-        public HexCoordinate StandardToHexCoordiante()
-        {
+        public HexCoordinate StandardToHexCoordiante() {
             HexCoordinate hex = new HexCoordinate();
-            hex.Z = (int)(Math.Round(Z / 1.5f));
-            hex.X = (int)(Math.Round((X - hex.Z * (RADIUS / 2)) / RADIUS));
+            hex.Z = ( int )( Math.Round( Z / 1.5f ) );
+            hex.X = ( int )( Math.Round( ( X - hex.Z * ( RADIUS / 2 ) ) / RADIUS ) );
             return hex;
         }
 
-        public float StandardDistance(StandardCoordinate a, StandardCoordinate b)
-        {
-            return (a.X - b.X) * (a.X - b.X) + (a.Z - b.Z) * (a.Z - b.Z);
+        public float StandardDistance( StandardCoordinate a, StandardCoordinate b ) {
+            return ( a.X - b.X ) * ( a.X - b.X ) + ( a.Z - b.Z ) * ( a.Z - b.Z );
         }
     }
 
     /// <summary>
     /// X/Z 轴双轴六边形坐标
     /// </summary>
-    public class HexCoordinate
-    {
+    public class HexCoordinate {
         const float RADIUS = 1.73205f;
         /// <summary>
         /// Hex仿射坐标 X
@@ -55,27 +51,25 @@ namespace CellWar.Model.Map {
         /// </summary>
         public int Z { get; set; }
 
-        public StandardCoordinate HexToStandardCoordiante()
-        {
+        public StandardCoordinate HexToStandardCoordiante() {
             StandardCoordinate standard = new StandardCoordinate();
             standard.Z = Z * 1.5f;
-            standard.X = Z * (RADIUS / 2f) + X * RADIUS;
+            standard.X = Z * ( RADIUS / 2f ) + X * RADIUS;
             return standard;
         }
 
-        public int HexDistance(HexCoordinate a, HexCoordinate b)
-        {
-            return (a.X - b.X) * (a.X - b.X) + (a.Z - b.Z) * (a.Z - b.Z);
+        public int HexDistance( HexCoordinate a, HexCoordinate b ) {
+            return ( a.X - b.X ) * ( a.X - b.X ) + ( a.Z - b.Z ) * ( a.Z - b.Z );
         }
     }
 
     public class HexBlock {
         public const string Tag = "HexBlock";
 
-        public bool IsActive = false;
+        public bool IsActive { get; set; } = false;
 
-        public HexCoordinate HexCoor = new HexCoordinate();
-        public StandardCoordinate StandardCoor = new StandardCoordinate();
+        public HexCoordinate HexCoor { get; set; } = new HexCoordinate();
+        public StandardCoordinate StandardCoor { get; set; } = new StandardCoordinate();
 
         public enum Type {
             Normal,
@@ -108,7 +102,7 @@ namespace CellWar.Model.Map {
         /// </summary>
         /// <param name="delta"></param>
         /// <returns></returns>
-        public bool IsPopulationBeingFull(int delta) { return (TotalPopulation + delta) > Capacity; }
+        public bool IsPopulationBeingFull( int delta ) { return ( TotalPopulation + delta ) > Capacity; }
     }
 
     public class Block : HexBlock {
