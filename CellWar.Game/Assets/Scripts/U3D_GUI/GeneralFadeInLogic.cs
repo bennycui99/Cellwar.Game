@@ -10,6 +10,8 @@ namespace CellWar.View
         // Start is called before the first frame update
         [SerializeField]
         RawImage m_blackOut;
+        [SerializeField]
+        Animator m_InGameUIAnimator;
         // Update is called once per frame
         void Update()
         {
@@ -38,6 +40,10 @@ namespace CellWar.View
                 yield return null;
             }
             //Wait until the videoplayer is disabled.
+            if (m_InGameUIAnimator)
+            {
+                m_InGameUIAnimator.SetTrigger("InitializeUI");
+            }
             enabled = false;
             yield return null;
         }

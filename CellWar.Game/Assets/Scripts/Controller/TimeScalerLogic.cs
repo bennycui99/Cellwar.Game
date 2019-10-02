@@ -69,6 +69,7 @@ namespace CellWar.Controller {
         public void OnPauseClicked()
         {
             m_TimeScaler.value = 0;
+            m_TimeScale = 0;
             GameManager.Instance.IsPaused = true;
         }
         public void OnFastestClicked()
