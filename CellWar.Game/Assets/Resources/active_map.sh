@@ -1,0 +1,1 @@
+cp ./Save/map_generate.json ./GameData/map.json

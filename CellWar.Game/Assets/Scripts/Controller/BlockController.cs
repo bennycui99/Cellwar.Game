@@ -34,20 +34,19 @@ namespace CellWar.Controller {
             mjson.Name = map.Name;
             mjson.Description = map.Description;
             mjson.PlayerOwnedChemicalsDescription = SemanticObjectController.GenerateChemicals2Text( map.PlayerOwnedChemicals );
-            foreach( var b in map.Blocks ) {
+            foreach( var b in map.Blocks.FindAll( m => m.IsActive ) ) {
                 BlockJsonModel bbj = new BlockJsonModel();
-                var bj = ObjectHelper.Clone( b );
                 bbj.StrainsInfo = b.Strains == null ? "" : new StrainController().Strains2Text( b.Strains );
-                bj.Strains = null;
+                // b.Strains = null;
                 bbj.ChemicalNamesInfo = SemanticObjectController.GenerateChemicals2Text( b.PublicChemicals );
-                bj.PublicChemicals = null;
+                // b.PublicChemicals = null;
 
-                bbj.BlockType = bj.BlockType;
-                bbj.Capacity = bj.Capacity;
-                bbj.HexCoor = bj.HexCoor;
-                bbj.IsActive = bj.IsActive;
-                bbj.StandardCoor = bj.StandardCoor;
-                bbj.TotalPopulation = bj.TotalPopulation;
+                bbj.BlockType = b.BlockType;
+                bbj.Capacity = b.Capacity;
+                bbj.HexCoor = ObjectHelper.Clone( b.HexCoor );
+                bbj.IsActive = b.IsActive;
+                bbj.StandardCoor = ObjectHelper.Clone( b.StandardCoor );
+                bbj.TotalPopulation = b.TotalPopulation;
                 mjson.Blocks.Add( bbj );
             }
             return mjson;
@@ -56,12 +55,10 @@ namespace CellWar.Controller {
             SaveMapToLocal( "map_generate.json" );
         }
         public void SaveMapToLocal( string fileName ) {
-            Map map = new Map();
-
             // ?有待商榷
-            map.Blocks.AddRange( MainGameCurrent.StageMap.Blocks.FindAll( block => block.IsActive ) );
+            // map.Blocks.AddRange( MainGameCurrent.StageMap.Blocks.FindAll( block => block.IsActive ) );
 
-            File.WriteAllText( Save.GetGameSavePath( fileName ), JsonHelper.Object2Json( Map2JsonModel( map ) as MapJsonModel ) );
+            File.WriteAllText( Save.GetGameSavePath( fileName ), JsonHelper.Object2Json( Map2JsonModel( MainGameCurrent.StageMap ) ) );
         }
     }
 
