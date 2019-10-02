@@ -67,7 +67,11 @@ namespace CellWar.Controller
             // 游戏还没开始就不更新
             if (!Instance.IsGameStarted) { return; }
             // If paused,do not update anything
-            if(IsPaused) { return; }
+            if (IsPaused)
+            {
+                CurrentUpdateCount = MaxUpdateCount;
+                return;
+            }
 
             // 每隔一秒更新一次
             if (CurrentUpdateCount > 0)
