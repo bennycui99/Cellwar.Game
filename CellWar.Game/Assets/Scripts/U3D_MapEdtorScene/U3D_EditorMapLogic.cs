@@ -14,6 +14,8 @@ namespace CellWar.View
 
         private void Awake()
         {
+            // 为editor加载地图
+            MainGameCurrent.LoadMap();
             GenerateBlockContainer();
         }
 
@@ -22,23 +24,29 @@ namespace CellWar.View
         /// </summary>
         void GenerateBlockContainer()
         {
+            List<Block> blocks = new List<Block>();
             for(int x = -10; x < 10; ++x)
             {
                 for(int z = -10; z < 10; ++z)
                 {
-                    Block HexBlockModel = new Block();
+                    // 生成blocks
+                    Block HexBlockModel = null;
+                    var currentBlock = MainGameCurrent.StageMap.Blocks.Find( m => m.HexCoor.X == x && m.HexCoor.Z == z );
+                    if( currentBlock == null ) {
+                        HexBlockModel = new Block();
+                        HexBlockModel.HexCoor.X = x;
+                        HexBlockModel.HexCoor.Z = z;
+                        HexBlockModel.StandardCoor = HexBlockModel.HexCoor.HexToStandardCoordiante();
 
-                    HexBlockModel.HexCoor.X = x;
-                    HexBlockModel.HexCoor.Z = z;
-                    HexBlockModel.StandardCoor = HexBlockModel.HexCoor.HexToStandardCoordiante();
-
-                    HexBlockModel.Capacity = 1000;
-                    HexBlockModel.BlockType = Block.Type.Normal;
-
-                    StageMap.Blocks.Add(HexBlockModel);
+                        HexBlockModel.Capacity = 1000;
+                        HexBlockModel.BlockType = Block.Type.Normal;
+                    } else {
+                        HexBlockModel = currentBlock;
+                    }
+                    blocks.Add(HexBlockModel);
 
                     //生成object
-                    GameObject blockObject = Instantiate(BlockPrefab, gameObject.transform) as GameObject;
+                    var blockObject = Instantiate(BlockPrefab, gameObject.transform) as GameObject;
                     //赋值BlockMouseDetect
                     blockObject.transform.Find("Block").transform.Find("挤压").transform.Find("封顶_2").GetComponent<U3D_EditorBlockMouseDetect>().HexBlockModel = HexBlockModel;
                     //移动到正确位置
@@ -46,8 +54,7 @@ namespace CellWar.View
                     blockObject.SetActive(true);
                 }
             }
-
-            MainGameCurrent.StageMap = StageMap;
+            MainGameCurrent.StageMap.Blocks = blocks;
         }
 
     }

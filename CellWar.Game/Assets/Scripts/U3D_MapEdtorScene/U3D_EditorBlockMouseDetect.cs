@@ -54,7 +54,7 @@ namespace CellWar.View
             //更新这块方块颜色和数量
             HexBlockModel.TotalPopulation = HexBlockModel.GetTotalPopulation();
             m_PopulationColor = GetColorAccordingToPopulation(HexBlockModel.TotalPopulation);
-
+            Debug.Log( m_PopulationColor );
             if (!m_IsMouseEnter)
             {
                 m_DestColor = m_PopulationColor;
