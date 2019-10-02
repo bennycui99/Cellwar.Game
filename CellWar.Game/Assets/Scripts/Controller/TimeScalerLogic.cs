@@ -10,6 +10,8 @@ namespace CellWar.Controller {
         float m_TimeScale=1.0f;
         [SerializeField]
         Button m_Slower, m_Faster, m_Pause, m_Fastest;
+        [SerializeField]
+        Text m_PauseIndicator;
         Slider m_TimeScaler;
         float m_ScaleMin,m_ScaleMax;
         // Start is called before the first frame update
@@ -19,6 +21,7 @@ namespace CellWar.Controller {
             m_TimeScaler.value = 1.0f;
             m_ScaleMax = m_TimeScaler.maxValue;
             m_ScaleMin = m_TimeScaler.minValue;
+            m_PauseIndicator.enabled = false;
         }
         public void OnSlowerClicked()
         {
@@ -29,7 +32,7 @@ namespace CellWar.Controller {
             }
             else
             {
-                m_TimeScale -= 0.1f;
+                m_TimeScale -= 0.5f;
             }
             if(m_TimeScale < m_ScaleMin)
             {
@@ -43,6 +46,7 @@ namespace CellWar.Controller {
             {
                 // Timescale == 0 -> pause
                 GameManager.Instance.IsPaused = true;
+                m_PauseIndicator.enabled = true;
             }
             m_TimeScaler.value = m_TimeScale;
         }
@@ -53,7 +57,7 @@ namespace CellWar.Controller {
                 m_TimeScale += 1.0f;
             }else
             {
-                m_TimeScale += 0.1f;
+                m_TimeScale += 0.5f;
             }
             if(m_TimeScale != 0)
             {
@@ -65,12 +69,14 @@ namespace CellWar.Controller {
             }
             m_TimeScaler.value = m_TimeScale;
             GameManager.Instance.IsPaused = false;
+            m_PauseIndicator.enabled = false;
         }
         public void OnPauseClicked()
         {
             m_TimeScaler.value = 0;
             m_TimeScale = 0;
             GameManager.Instance.IsPaused = true;
+            m_PauseIndicator.enabled = true;
         }
         public void OnFastestClicked()
         {
@@ -78,7 +84,7 @@ namespace CellWar.Controller {
             m_TimeScaler.value = m_TimeScale;
             GameManager.Instance.MaxUpdateCount = 1 / m_TimeScale;
             GameManager.Instance.IsPaused = false;
-
+            m_PauseIndicator.enabled = false;
         }
     }
 }
