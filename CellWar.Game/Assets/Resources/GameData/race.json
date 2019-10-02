@@ -2,7 +2,7 @@
   {
     "Name": "Test1",
     "MaxLength": "20000",
-    "CodingGeneNames": "GOD;GLUT_default_A;TCA_default_A;Grow_default_A;AminoAcid_default_A;GOD;Death_default_A"
+    "CodingGeneNames": "GOD;GLUT_default_A;TCA_default_A;Grow_default_A;GOD;Death_default_A"
   },
   {
     "Name": "A",

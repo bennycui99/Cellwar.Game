@@ -5,9 +5,9 @@
       "Guid": "00000000-0000-0000-0000-000000000000"
     },
     "Name": "test",
-    "Population": 1000,
+    "Population": 100,
     "BasicRaceName": "Empty",
-    "PlayerSelectedGenesName": "GOD;NullGene",
+    "PlayerSelectedGenesName": "GOD;AminoAcid_default_A;MT",
     "PrivateChemicalInfos": null
   },
   {
@@ -18,7 +18,7 @@
     "Name": "Player",
     "Population": 100,
     "BasicRaceName": "Test1",
-    "PlayerSelectedGenesName": "Cu_test_1;MT",
+    "PlayerSelectedGenesName": "GOD;AminoAcid_default_A;MT",
     "PrivateChemicalInfos": null
   }
 ]
