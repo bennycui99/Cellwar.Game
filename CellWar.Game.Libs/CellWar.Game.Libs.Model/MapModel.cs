@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using CellWar.Model.Substance;
 using System;
+using CellWar.Utils.Object;
 
 /// <summary>
 /// 存放地图相关的Model
