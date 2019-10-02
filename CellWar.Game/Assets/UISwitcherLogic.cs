@@ -13,10 +13,8 @@ namespace Cellwar.View
         // Start is called before the first frame update
         void Awake()
         {
-            UI_Lab.SetActive(false);
             UI_GameInformation.SetActive(false);
             SwitchTarget = UI_Lab;
-            
         }
 
         // Update is called once per frame

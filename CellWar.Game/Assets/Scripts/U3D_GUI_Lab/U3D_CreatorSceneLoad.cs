@@ -56,7 +56,7 @@ namespace CellWar.View {
                     g.name = obj.Name;
                 } );
 
-            UIHelper.InitUIList( "UI_StrainList", "UI_Ele_Strain", Save.Strains,
+            UIHelper.InitUIList( "UI_LabStrainList", "UI_Ele_LabStrain", Save.Strains,
                 ( GameObject g, Strain obj ) => {
                     g.GetComponent<U3D_StrainElement>().Strain = obj;
                     g.name = obj.Name;

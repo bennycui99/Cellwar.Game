@@ -1618,7 +1618,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1851015648}
   m_HandleRect: {fileID: 1851015647}
   m_Direction: 2
-  m_Value: 1.0000015
+  m_Value: 1.0000007
   m_Size: 0.7333334
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2425,7 +2425,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1545759082}
   m_HandleRect: {fileID: 1545759081}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -3084,7 +3084,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1973909304}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3141,7 +3141,7 @@ GameObject:
   - component: {fileID: 666680197}
   - component: {fileID: 666680196}
   m_Layer: 5
-  m_Name: UI_StrainList
+  m_Name: UI_LabStrainList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6849,7 +6849,7 @@ GameObject:
   - component: {fileID: 1536633043}
   - component: {fileID: 1536633042}
   m_Layer: 5
-  m_Name: UI_Ele_Strain
+  m_Name: UI_Ele_LabStrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
