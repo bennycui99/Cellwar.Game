@@ -40,7 +40,14 @@ namespace CellWar.View
         void Start()
         {
             m_BlockRenderer = GetComponent<MeshRenderer>();
-            m_BlockRenderer.enabled = false;
+            if (HexBlockModel.IsActive)
+            {
+                m_BlockRenderer.enabled = true;
+            }
+            else
+            {
+                m_BlockRenderer.enabled = false;
+            }
 
             CoorTextObject.GetComponent<TextMesh>().text = HexBlockModel.HexCoor.X.ToString() + "   " + HexBlockModel.HexCoor.Z.ToString();
         }
@@ -54,7 +61,6 @@ namespace CellWar.View
             //更新这块方块颜色和数量
             HexBlockModel.TotalPopulation = HexBlockModel.GetTotalPopulation();
             m_PopulationColor = GetColorAccordingToPopulation(HexBlockModel.TotalPopulation);
-            Debug.Log( m_PopulationColor );
             if (!m_IsMouseEnter)
             {
                 m_DestColor = m_PopulationColor;
