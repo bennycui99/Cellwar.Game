@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using CellWar.Controller;
 
-namespace Cellwar.View {
+namespace CellWar.View {
     public class GameOverLogic : MonoBehaviour
     {
         [SerializeField]

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Cellwar.View
+namespace CellWar.View
 {
     public class UISwitcherLogic : MonoBehaviour
     {

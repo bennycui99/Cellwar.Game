@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.IO;
+using CellWar.GameData;
 
-namespace Cellwar.View
+namespace CellWar.View
 {
     public class StageSelectLogic : MonoBehaviour
     {
@@ -15,6 +16,8 @@ namespace Cellwar.View
         Text m_IntroductionText;
         [SerializeField]
         RawImage m_IntroductionImage;
+
+        public string CurrentMapfile;
         private string[] m_Mapfiles; 
         void Awake()
         {
@@ -29,7 +32,14 @@ namespace Cellwar.View
                 //It's a file name with out extension, so when try to load it, be sure to add .json on the path string!
 
             }
+            if (m_Mapfiles.Length == 0)
+            {
+                Debug.LogError("No map files found!");
+            }
             SetIntroductionImage(Application.dataPath + "/Resources/Textures/Artworks/Example.png");
+            SetIntroductionText("Here is Introduction Text");
+            MainGameCurrent.LoadMap();//Load the default map.
+            
         }
         string[] getMapFiles()
         {
@@ -52,6 +62,11 @@ namespace Cellwar.View
             //Warning: this will override the original tex size, the image we need will be constant size!
             tex.LoadImage(bytes);
             m_IntroductionImage.texture = tex;
+        }
+        public void OnStartClicked()
+        {
+            //Detect current map, load it.
+            MainGameCurrent.LoadMap(Path.GetFileName(m_Mapfiles[m_Dropdown.value]));
         }
     }
 }

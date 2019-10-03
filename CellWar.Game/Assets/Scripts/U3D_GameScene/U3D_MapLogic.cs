@@ -35,7 +35,7 @@ namespace CellWar.View
 
         private void Awake()
         {
-            MainGameCurrent.LoadMap();
+            //MainGameCurrent.LoadMap();
             StageMap = MainGameCurrent.StageMap;
             GenerateBlockContainer();
             SetStartPlayerResources();
