@@ -38,6 +38,7 @@ namespace CellWar.View {
         }
 
         private void SwitchTo( MenuStates states ) {
+            //Debug.Log("Menu/" + states.ToString());
             transform.Find( "Menu/" + states.ToString() ).gameObject.SetActive( true );
         }
 
@@ -50,12 +51,16 @@ namespace CellWar.View {
 
         #region EVENTS
         public void OnStageClicked() {
+            
+            Switch(MenuStates.Stage);
+        }
+        public void OnStartClicked()
+        {
             StartCoroutine(VideoManager.Instance().PlayFadeoutVideo());
             VideoManager.Instance().m_videoPlayer.loopPointReached += EndReachedGeneral;
             StartCoroutine(SceneLoadWait("GameScene"));
         }
 
- 
 
         public void OnOptionClicked() {
             Switch( MenuStates.Options );
