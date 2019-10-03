@@ -63,7 +63,7 @@ namespace CellWar.View
             tex.LoadImage(bytes);
             m_IntroductionImage.texture = tex;
         }
-        public void OnStartClicked()
+        public void OnValueChange()
         {
             //Detect current map, load it.
             MainGameCurrent.LoadMap(Path.GetFileName(m_Mapfiles[m_Dropdown.value]));
