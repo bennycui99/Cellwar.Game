@@ -8840,6 +8840,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Dropdown: {fileID: 1407278402}
+  m_defaultUISprite: {fileID: 0}
+  m_IntroductionText: {fileID: 0}
+  m_IntroductionImage: {fileID: 0}
 --- !u!1 &1021987129
 GameObject:
   m_ObjectHideFlags: 0

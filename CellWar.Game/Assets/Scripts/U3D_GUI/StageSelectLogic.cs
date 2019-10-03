@@ -11,7 +11,10 @@ namespace Cellwar.View
     {
         [SerializeField]
         Dropdown m_Dropdown;
-
+        [SerializeField]
+        Text m_IntroductionText;
+        [SerializeField]
+        RawImage m_IntroductionImage;
         private string[] m_Mapfiles; 
         void Awake()
         {
@@ -22,9 +25,11 @@ namespace Cellwar.View
             m_Mapfiles = getMapFiles();
             foreach (string f in m_Mapfiles)
             {
-                m_Dropdown.options.Add(new Dropdown.OptionData() {text = Path.GetFileNameWithoutExtension(f) });
+                m_Dropdown.options.Add(new Dropdown.OptionData() { text = Path.GetFileNameWithoutExtension(f) });
                 //It's a file name with out extension, so when try to load it, be sure to add .json on the path string!
+
             }
+            SetIntroductionImage(Application.dataPath + "/Resources/Textures/Artworks/Example.png");
         }
         string[] getMapFiles()
         {
@@ -35,6 +40,18 @@ namespace Cellwar.View
                 Debug.Log(file);
             }
             return filePaths;
+        }
+        public void SetIntroductionText(string intro)
+        {
+            m_IntroductionText.text = intro;
+        }
+        public void SetIntroductionImage(string imgFilePath)
+        {
+            var tex = new Texture2D(1, 1);
+            var bytes = File.ReadAllBytes(imgFilePath);
+            //Warning: this will override the original tex size, the image we need will be constant size!
+            tex.LoadImage(bytes);
+            m_IntroductionImage.texture = tex;
         }
     }
 }
