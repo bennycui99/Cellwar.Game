@@ -2,7 +2,7 @@
   {
     "Name": "Amp_Kana_Chl_VH_B",
     "Length": "180",
-    "ChemicalConditions": "Ampicillin:9;Kana:9;Chl:9;Cu:19;Growth:500",
+    "ChemicalConditions": "Ampicillin:9;Kana:9;Chl:9;Cu:30;Growth:500",
     "Type": "NO",
     "Description": "对抗生素非常敏感，对重金属不敏感的开关"
   },
