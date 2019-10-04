@@ -41,6 +41,7 @@ namespace CellWar.Model.Json {
     public class MapJsonModel {
         public string Name { get; set; }
         public string Description { get; set; }
+        public string ImageName { get; set; }
         public string PlayerOwnedChemicalsDescription { get; set; }
         public List<BlockJsonModel> Blocks { get; set; } = new List<BlockJsonModel>();
     }

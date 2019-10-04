@@ -164,4 +164,11 @@ namespace CellWar.GameData {
             }
         }
     }
+
+    public static class Textures {
+        public static string GetArtworkPath( string path ) {
+            return Application.dataPath + "/Resources/Textures/Artworks/" + path;
+        }
+        public static readonly string DefaultArtworkPath = GetArtworkPath( "default.png" );
+    }
 }

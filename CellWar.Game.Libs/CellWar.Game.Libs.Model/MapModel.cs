@@ -13,6 +13,7 @@ namespace CellWar.Model.Map {
     public class Map {
         public string Name { get; set; }
         public string Description { get; set; }
+        public string ImageName { get; set; }
         public List<Block> Blocks { get; set; } = new List<Block>();
         public List<Chemical> PlayerOwnedChemicals { get; set; } = new List<Chemical>();
     }

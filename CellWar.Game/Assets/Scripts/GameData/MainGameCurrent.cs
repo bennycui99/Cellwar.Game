@@ -19,13 +19,17 @@ namespace CellWar.GameData {
         public static Map StageMap = null;
 
         public static void LoadMap(string name) {
-            
             var mapJson = JsonHelper.Json2Object_NT<MapJsonModel>(Local.GetGameDataPath(name));
-            StageMap = new MapController().JsonModel2Map( mapJson );
+
+            LoadMap( mapJson );
         }
 
         public static void LoadMap() {
             LoadMap("map.json");
+        }
+
+        public static void LoadMap( MapJsonModel model ) {
+            StageMap = new MapController().JsonModel2Map( model );
         }
 
         /// <summary>

@@ -1,6 +1,6 @@
 {
-  "Name": null,
-  "Description": null,
+  "Name": "Map Default",
+  "Description": "Apples are good for our health.",
   "PlayerOwnedChemicalsDescription": "ATP:100;",
   "Blocks": [
     {
