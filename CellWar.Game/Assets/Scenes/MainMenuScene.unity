@@ -8715,7 +8715,7 @@ MonoBehaviour:
   m_Dropdown: {fileID: 9999087}
   m_IntroductionText: {fileID: 554339024}
   m_IntroductionImage: {fileID: 688861883}
-  CurrentMapfile: 
+  CurrentMapFilePath: 
 --- !u!1 &1021987129
 GameObject:
   m_ObjectHideFlags: 0
