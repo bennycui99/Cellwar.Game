@@ -1,6 +1,7 @@
 {
-  "Name": "Map Default",
-  "Description": "Apples are good for our health.",
+  "Name": "Demo_Level_1",
+  "imagename": "CoverImageLevel1.png",
+  "Description": "  Your mission is to purify the copper metals in this region. You are given the coding gene MT, which can consume Cu ions, but it needs Amino Acid to function. You are also provided gene which controls Amino Acid intake. You need to utilize two genes to complete the mission. The level is completed when total Cu number is less than 100.",
   "PlayerOwnedChemicalsDescription": "ATP:100;",
   "Blocks": [
     {
