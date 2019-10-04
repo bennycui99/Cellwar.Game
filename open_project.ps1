@@ -1,0 +1,1 @@
+Start-Process ./CellWar.Game/Assets/Scenes/MainMenuScene.unity
