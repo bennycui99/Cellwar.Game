@@ -4,21 +4,14 @@
     "Length": "180",
     "ChemicalConditions": "Ampicillin:9;Kana:9;Chl:9;Cu:30;Growth:500",
     "Type": "NO",
-    "Description": "对抗生素非常敏感，对重金属不敏感的开关"
-  },
-  {
-    "Name": "Amp_Kana_Chl_L_B",
-    "Length": "180",
-    "ChemicalConditions": "Ampicillin:-9;Kana:-10;Chl:-10;Cu:-5;Growth:1000",
-    "Type": "PA",
-    "Description": "对抗生素非常敏感，对重金属敏感的开关"
+    "Description": "The coding genes after this regulator are turned OFF under this condition: Ampicillin>9 or Kana>9 or Chl>9 or Cu>30 or Growth >500"
   },
   {
     "Name": "Amp_Kana_Chl_Cu_VH_A",
     "Length": "180",
     "ChemicalConditions": "Ampicillin:9;Kana:9;Chl:9;Cu:9;Growth:500",
     "Type": "NO",
-    "Description": "对抗生素和重金属非常敏感的开关"
+    "Description": "The coding genes after this regulator are turned OFF under this condition: Ampicillin>9 or Kana>9 or Chl>9 or Cu>9 or Growth >500"
   },
   {
     "Name": "Amp_Kana_Chl_H_1",
@@ -63,13 +56,6 @@
     "Description": "对Cu高敏感的开关,受到Cu抑制"
   },
   {
-    "Name": "Cu_test_1",
-    "Length": "0",
-    "ChemicalConditions": "Cu:1",
-    "Type": "PA",
-    "Description": "对Cu高敏感的开关,受到Cu抑制"
-  },
-  {
     "Name": "SignalA_1",
     "Length": "360",
     "ChemicalConditions": "SignalA:10;Growth:1000",
@@ -99,6 +85,7 @@
   },
   {
     "Name": "GOD",
+    "IsInternal": "true",
     "Length": "0",
     "ChemicalConditions": "",
     "Type": "PA",
