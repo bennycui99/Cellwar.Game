@@ -12,21 +12,19 @@ namespace CellWar.View {
         public static BaseEvent CancelEvent { get; set; } = () => { };
 
         public static void EmitAlert( string message ) {
-            GameObject.Find( "Canvas" ).transform.Find( "UI_AlertPanel" ).gameObject.SetActive( true );
+            GameObject.Find( "BlockingCanvas" ).transform.Find( "UI_AlertPanel" ).gameObject.SetActive( true );
+            GameObject.Find( "BlockingCanvas" ).transform.Find( "UI_AlertPanel" ).gameObject.transform.SetSiblingIndex( 999 );
             UIHelper.ChangeText( GameObject.Find( "UI_AlertMsg" ), message );
         }
 
         public static void EmitAlert( string message, BaseEvent ok, BaseEvent cancel ) {
-            GameObject.Find( "Canvas" ).transform.Find( "UI_AlertPanel" ).gameObject.SetActive( true );
-            UIHelper.ChangeText( GameObject.Find( "UI_AlertMsg" ), message );
-
+            EmitAlert( message );
             OkEvent = ok; CancelEvent = cancel;
         }
 
         public void OnPointerClick( PointerEventData eventData ) {
-//            gameObject.SetActive( false );
         }
-
+        
         public void Ok() {
             OkEvent();
             gameObject.SetActive( false );

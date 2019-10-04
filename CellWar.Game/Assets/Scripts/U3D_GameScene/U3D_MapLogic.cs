@@ -80,7 +80,7 @@ namespace CellWar.View
                 }
             }
         }
-
+        
         void SetStartPlayerResources()
         {
             MainGameCurrent.StrainList = ObjectHelper.CloneList2(Save.Strains);
@@ -93,7 +93,7 @@ namespace CellWar.View
                 (GameObject g, Model.Substance.Strain obj) => {
                     g.GetComponent<U3D_StrainPackageLogic>().Strain = obj;
                     g.name = obj.Name;
-                });
+                }, ref MainGameCurrent.UI_StrainElement );
         }
         
     }

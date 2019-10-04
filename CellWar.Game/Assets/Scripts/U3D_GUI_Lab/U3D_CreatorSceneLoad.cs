@@ -18,12 +18,19 @@ namespace CellWar.View {
 
         static GameObject UITextMaxLength;
         static GameObject UIStrainElement;
-
+        /// <summary>
+        /// 同时刷新lab和maingame的strainlist
+        /// </summary>
         public static void RefreshStrainList() {
-            UIHelper.RefreshUIList( "UI_StrainList", UIStrainElement, Save.Strains, ( GameObject g, Strain obj ) => {
+            UIHelper.RefreshUIList( "UI_LabStrainList", UIStrainElement, Save.Strains, ( GameObject g, Strain obj ) => {
                 g.GetComponent<U3D_StrainElement>().Strain = obj;
                 g.name = obj.Name;
             } );
+            UIHelper.RefreshUIList( "UI_StrainList", MainGameCurrent.UI_StrainElement, Save.Strains,
+                ( GameObject g, Model.Substance.Strain obj ) => {
+                    g.GetComponent<U3D_StrainPackageLogic>().Strain = obj;
+                    g.name = obj.Name;
+                } );
         }
 
         void Awake() {
@@ -101,6 +108,7 @@ namespace CellWar.View {
         /// </summary>
         public void FinishCreating() {
             var strainName = UIHelper.GetInputText( "UI_Strain_Name" );
+            Debug.Log( strainName );
             if( strainName == "" ) {
                 U3D_AlertPanel.EmitAlert( "Please Enter Strain Name" );
                 return;
@@ -123,13 +131,14 @@ namespace CellWar.View {
                         RefreshStrainList();
                     },
                     () => { } );
-            } else { // 添加新创建的基因
+            }
+            else { // 添加新创建的基因
                 LabCurrent.Strain.Name = strainName;
                 Save.Strains.Add( LabCurrent.Strain );
                 Save.SaveAllStrains();
                 RefreshStrainList();
             }
-            LabCurrent.Strain = LabCurrent.Strain == null?new Strain( GameData.Local.AllRaces[0] ) : LabCurrent.Strain.Clone() as Strain;
+            LabCurrent.Strain = LabCurrent.Strain == null ? new Strain( GameData.Local.AllRaces[0] ) : LabCurrent.Strain.Clone() as Strain;
         }
 
         public void ClearSelection() {
@@ -143,7 +152,7 @@ namespace CellWar.View {
                     LabCurrent.RegulatoryGene = null;
                     // 勾选所有的reg
                     UIHelper.SwitchOffAllToggle( "UI_RegList" );
-                    UIHelper.SwitchOffAllToggle( "UI_StrainList" );
+                    UIHelper.SwitchOffAllToggle( "UI_LabStrainList" );
 
                     // 刷新长度提示
                     U3D_CreatorSceneLoad.FreshLength();
@@ -161,7 +170,7 @@ namespace CellWar.View {
             LabCurrent.RegulatoryGene = null;
             // 勾选所有的reg
             UIHelper.SwitchOffAllToggle( "UI_RegList" );
-            UIHelper.SwitchOffAllToggle( "UI_StrainList" );
+            UIHelper.SwitchOffAllToggle( "UI_LabStrainList" );
             // 刷新长度提示
             U3D_CreatorSceneLoad.FreshLength();
             // 替换input名字

@@ -6,6 +6,7 @@ using CellWar.View;
 using CellWar.Model.Map;
 using CellWar.Utils;
 using CellWar.Model.Json;
+using UnityEngine;
 
 namespace CellWar.GameData {
     /// <summary>
@@ -23,6 +24,11 @@ namespace CellWar.GameData {
 
             LoadMap( mapJson );
         }
+
+        /// <summary>
+        /// 用于储存strain的对象
+        /// </summary>
+        public static GameObject UI_StrainElement;
 
         public static void LoadMap() {
             LoadMap("map.json");
