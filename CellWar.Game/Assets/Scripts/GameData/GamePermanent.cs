@@ -28,6 +28,7 @@ namespace CellWar.GameData {
                 if( raceJson.CodingGeneNames == "" ) continue;
 
                 AllRaces.Add( new Race {
+                    Description = raceJson.Description,
                     Name = raceJson.Name,
                     MaxLength = raceJson.MaxLength,
                     RegulatoryGenes = SemanticObjectController.GenerateText2RegGeneObjects( raceJson.CodingGeneNames )
@@ -60,7 +61,7 @@ namespace CellWar.GameData {
                     gene.Name = geneJson.Name;
                     gene.Description = geneJson.Description;
                     gene.Length = geneJson.Length;
-
+                    gene.IsInternal = geneJson.IsInternal;
                     gene.Conditions = SemanticObjectController.GenerateText2ChemicalsWithCountInfo(geneJson.ChemicalConditions);
 
                     regulatoryGenes.Add( gene );

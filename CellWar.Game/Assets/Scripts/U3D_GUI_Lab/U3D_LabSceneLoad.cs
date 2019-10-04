@@ -14,7 +14,7 @@ using CellWar.Model.Substance;
 using CellWar.Controller.Gene;
 
 namespace CellWar.View {
-    public class U3D_CreatorSceneLoad : MonoBehaviour {
+    public class U3D_LabSceneLoad : MonoBehaviour {
 
         static GameObject UITextMaxLength;
         static GameObject UIStrainElement;
@@ -155,7 +155,7 @@ namespace CellWar.View {
                     UIHelper.SwitchOffAllToggle( "UI_LabStrainList" );
 
                     // 刷新长度提示
-                    U3D_CreatorSceneLoad.FreshLength();
+                    U3D_LabSceneLoad.FreshLength();
                     // 替换input名字
                     UIHelper.SetInputText( "UI_Strain_Name", "" );
                 },
@@ -172,7 +172,7 @@ namespace CellWar.View {
             UIHelper.SwitchOffAllToggle( "UI_RegList" );
             UIHelper.SwitchOffAllToggle( "UI_LabStrainList" );
             // 刷新长度提示
-            U3D_CreatorSceneLoad.FreshLength();
+            U3D_LabSceneLoad.FreshLength();
             // 替换input名字
             UIHelper.SetInputText( "UI_Strain_Name", "" );
         }

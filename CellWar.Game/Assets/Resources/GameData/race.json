@@ -12,6 +12,7 @@
   {
     "Name": "B",
     "MaxLength": "20000",
+    "Description": "This is B",
     "CodingGeneNames": "Amp_Kana_Chl_VH_B;GLUT_default_A;TCA_default_A;Grow_default_A;GOD;Death_default_A"
   },
   {

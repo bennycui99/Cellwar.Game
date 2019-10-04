@@ -23,11 +23,11 @@ namespace CellWar.View
                 return;
             }
             LabCurrent.Strain.BasicRace = Race.Clone();
-            U3D_CreatorSceneLoad.FreshLength();
+            U3D_LabSceneLoad.FreshLength();
         }
 
         public void OnPointerEnter( PointerEventData eventData ) {
-            U3D_CreatorSceneLoad.ChangeMaxLengthText(
+            U3D_LabSceneLoad.ChangeMaxLengthText(
                 string.Format(
                     "Name: {0}\n" +
                     "Description: {1}\n"
@@ -36,7 +36,7 @@ namespace CellWar.View
         }
 
         public void OnPointerExit( PointerEventData eventData ) {
-            U3D_CreatorSceneLoad.FreshLength();
+            U3D_LabSceneLoad.FreshLength();
         }
     }
 }

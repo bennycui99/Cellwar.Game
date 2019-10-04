@@ -26,7 +26,7 @@ namespace CellWar.View {
                 reg.gameObject.GetComponent<Toggle>().isOn = LabCurrent.Strain.PlayerSelectedGenes.Exists( m => m.Name == reg.gameObject.name );
             }
             // 刷新长度提示
-            U3D_CreatorSceneLoad.FreshLength();
+            U3D_LabSceneLoad.FreshLength();
             // 替换input名字
             UIHelper.SetInputText( "UI_Strain_Name", LabCurrent.Strain.Name );
         }
@@ -37,7 +37,7 @@ namespace CellWar.View {
 
 
         public void OnPointerEnter( PointerEventData eventData ) {
-            U3D_CreatorSceneLoad.ChangeMaxLengthText(
+            U3D_LabSceneLoad.ChangeMaxLengthText(
                 string.Format(
                     "Name: {0}\n" +
                     "Description: {1}\n"
@@ -46,7 +46,7 @@ namespace CellWar.View {
         }
 
         public void OnPointerExit( PointerEventData eventData ) {
-            U3D_CreatorSceneLoad.FreshLength();
+            U3D_LabSceneLoad.FreshLength();
         }
 
         public void OnPointerDown( PointerEventData eventData ) {
@@ -56,7 +56,7 @@ namespace CellWar.View {
                         Save.Strains.Remove( Strain );
                         gameObject.SetActive( false );
                         Save.SaveAllStrains();
-                        U3D_CreatorSceneLoad.RefreshStrainList();
+                        U3D_LabSceneLoad.RefreshStrainList();
                     },
                     () => { } );
             }

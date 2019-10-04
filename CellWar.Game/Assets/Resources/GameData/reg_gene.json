@@ -110,5 +110,13 @@
     "ChemicalConditions": "BlueLight:100;Kana:-10;Ampicillin:-10;Chl:-10",
     "Type": "PA",
     "Description": "高敏感蓝光启动子"
+  },
+  {
+    "Name": "InternalReg1",
+    "IsInternal": "True",
+    "Length": "237",
+    "ChemicalConditions": "BlueLight:100;Kana:-10;Ampicillin:-10;Chl:-10",
+    "Type": "PA",
+    "Description": "Internal Reg test."
   }
 ]

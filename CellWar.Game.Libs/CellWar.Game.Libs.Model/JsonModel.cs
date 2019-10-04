@@ -5,6 +5,7 @@ using System.Collections.Generic;
 namespace CellWar.Model.Json {
     public class RegulartoryGeneJsonModel {
         public string Name { get; set; }
+        public bool IsInternal { get; set; }
         public string Type { get; set; }
         public int Length { get; set; }
         public string ChemicalConditions { get; set; }
@@ -29,6 +30,8 @@ namespace CellWar.Model.Json {
         /// 该种族携带的基因组
         /// </summary>
         public string CodingGeneNames { get; set; }
+
+        public string Description { get; set; }
     }
     public class StrainJsonModel {
         public Gamer.Player Owner { get; set; } = new Gamer.Player();

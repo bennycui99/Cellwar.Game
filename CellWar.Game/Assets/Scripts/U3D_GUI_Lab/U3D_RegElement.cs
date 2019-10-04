@@ -43,11 +43,11 @@ namespace CellWar.View
             if( Input.GetMouseButtonDown( 1 ) && GetComponent<Toggle>().isOn ) { // Right
                 SwitchCodingGeneList( reg );
             }
-            U3D_CreatorSceneLoad.FreshLength();
+            U3D_LabSceneLoad.FreshLength();
         }
 
         public void OnPointerEnter( PointerEventData eventData ) {
-            U3D_CreatorSceneLoad.ChangeMaxLengthText(
+            U3D_LabSceneLoad.ChangeMaxLengthText(
                 string.Format(
                     "Name: {0}\n" +
                     "Description: {1}\n"
@@ -56,7 +56,7 @@ namespace CellWar.View
         }
 
         public void OnPointerExit( PointerEventData eventData ) {
-            U3D_CreatorSceneLoad.FreshLength();
+            U3D_LabSceneLoad.FreshLength();
         }
     }
 }
