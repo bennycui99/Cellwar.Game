@@ -4,10 +4,10 @@
       "Name": null,
       "Guid": "00000000-0000-0000-0000-000000000000"
     },
-    "Name": "Player",
+    "Name": "DemonstrationStrain",
     "Population": 100,
     "BasicRaceName": "Test1",
-    "PlayerSelectedGenesName": "GOD;AminoAcid_default_A;MT;NullGene",
+    "PlayerSelectedGenesName": "Cu_H_1;AminoAcid_default_A;MT",
     "PrivateChemicalInfos": null
   }
 ]

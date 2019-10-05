@@ -2,63 +2,43 @@
   {
     "Name": "Amp_Kana_Chl_VH_B",
     "Length": "180",
-    "ChemicalConditions": "Ampicillin:9;Kana:9;Chl:9;Cu:30;Growth:500",
+    "ChemicalConditions": "Ampicillin:9;Kana:9;Chl:9;Cu:30;Growth:450",
     "Type": "NO",
-    "Description": "The coding genes after this regulator are turned OFF under this condition: Ampicillin>9 or Kana>9 or Chl>9 or Cu>30 or Growth >500"
+    "Description": "The coding genes after this regulator are turned OFF ONLY under this condition: Ampicillin>9 or Kana>9 or Chl>9 or Cu>30 or Growth >450"
   },
   {
     "Name": "Amp_Kana_Chl_Cu_VH_A",
     "Length": "180",
     "ChemicalConditions": "Ampicillin:9;Kana:9;Chl:9;Cu:9;Growth:500",
     "Type": "NO",
-    "Description": "The coding genes after this regulator are turned OFF under this condition: Ampicillin>9 or Kana>9 or Chl>9 or Cu>9 or Growth >500"
+    "Description": "The coding genes after this regulator are turned OFF ONLY under this condition: Ampicillin>9 or Kana>9 or Chl>9 or Cu>9 or Growth >500"
   },
   {
     "Name": "Amp_Kana_Chl_H_1",
     "Length": "360",
-    "ChemicalConditions": "Ampicillin:19;Kana:19;Chl:19;Cu:19;Growth:5000",
+    "ChemicalConditions": "Ampicillin:19;Kana:19;Chl:19;Cu:19;Growth:450",
     "Type": "NO",
-    "Description": "对ampcillin，Kana，Chl敏感的开关"
+    "Description": "The coding genes after this regulator are turned OFF ONLY under this condition: Ampicillin>19 or Kana>19 or Chl>19 or Cu>19 or Growth >450"
   },
-  {
-    "Name": "Amp_Kana_Chl_H_1",
-    "Length": "360",
-    "ChemicalConditions": "Ampicillin:100;Kana:100;Chl:100",
-    "Type": "NO",
-    "Description": "对ampcillin，Kana，Chl敏感的开关"
-  },
-  {
-    "Name": "Amp_Kana_Chl_H_3",
-    "Length": "360",
-    "ChemicalConditions": "Ampicillin:100;Kana:100;Chl:100",
-    "Type": "NO",
-    "Description": "对ampcillin，Kana，Chl敏感的开关"
-  },
-  {
-    "Name": "Amp_Kana_Chl_L_1",
-    "Length": "720",
-    "ChemicalConditions": "Ampicillin:300;Kana:300;Chl:300",
-    "Type": "NO",
-    "Description": "对ampcillin，Kana，Chl低敏感的开关"
-  },
+
   {
     "Name": "Cu_H_1",
     "Length": "360",
-    "ChemicalConditions": "Cu:29;Growth:800",
+    "ChemicalConditions": "Cu:29;Growth:400",
     "Type": "NO",
-    "Description": "对Cu低敏感的开关,受到Cu抑制"
+    "Description": "The coding genes after this regulator are turned OFF ONLY under this condition: Cu>29 or Growth >400"
   },
   {
     "Name": "Cu_L_1",
     "Length": "360",
-    "ChemicalConditions": "Cu:9;Growth:1000",
+    "ChemicalConditions": "Cu:9;Growth:450",
     "Type": "NO",
-    "Description": "对Cu高敏感的开关,受到Cu抑制"
+    "Description": "The coding genes after this regulator are turned OFF ONLY under this condition: Cu>29 or Growth >450"
   },
   {
     "Name": "SignalA_1",
     "Length": "360",
-    "ChemicalConditions": "SignalA:10;Growth:1000",
+    "ChemicalConditions": "SignalA:10;Growth:800",
     "Type": "NO",
     "Description": "受到信号A抑制"
   },
