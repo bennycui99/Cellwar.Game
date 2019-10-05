@@ -128,6 +128,7 @@ namespace CellWar.GameData {
             foreach( var block in map.Blocks ) {
                 var quantity = block.PublicChemicals.Find(m => m.Name == chemicalName);
                 if( quantity != null ) {
+                    Debug.Log(string.Format("Detected {0}",chemicalName));
                     total += quantity.Count;
                 }
             }

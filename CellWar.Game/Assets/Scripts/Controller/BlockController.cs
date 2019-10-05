@@ -18,6 +18,7 @@ namespace CellWar.Controller {
             Map StageMap = new Map();
             StageMap.Name = mapJson.Name;
             StageMap.Description = mapJson.Description;
+            StageMap.GameOverCondition = mapJson.GameOverCondition;
             StageMap.Blocks = new List<Block>();
             // 填充blocks的strains数据
             foreach( var b in mapJson.Blocks ) {
@@ -31,6 +32,7 @@ namespace CellWar.Controller {
         }
         public MapJsonModel Map2JsonModel( Map map ) {
             MapJsonModel mjson = new MapJsonModel();
+            mjson.GameOverCondition = map.GameOverCondition;
             mjson.Name = map.Name;
             mjson.Description = map.Description;
             mjson.PlayerOwnedChemicalsDescription = SemanticObjectController.GenerateChemicals2Text( map.PlayerOwnedChemicals );
