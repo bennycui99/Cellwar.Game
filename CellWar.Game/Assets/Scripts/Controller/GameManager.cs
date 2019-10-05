@@ -17,22 +17,7 @@ namespace CellWar.Controller
 
         bool IsStageCompleted()
         {
-            ////////////////////////////////////////////////////////////
-            int total = 0;
-            foreach( var block in MainGameCurrent.StageMap.Blocks ) {
-                var quantity = block.PublicChemicals.Find(m => m.Name == "Cu");
-                if ( quantity != null)
-                {
-                    total += quantity.Count;
-                }
-            }
-            if (total <= 100)
-            {
-                Debug.Log("Game Over");
-                return true;
-            }
-            return false;
-            //////////////////////////////////////////////////////////// 
+            return MainGameCurrent.IsGameOver( MainGameCurrent.StageMap );
         }
 
         #region SINGLETON

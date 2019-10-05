@@ -14,7 +14,10 @@ public class test : MonoBehaviour
         Debug.Log("Finished Test. Reg gene condition");
         Unit.TestPrivateChemical_Usable();
         Unit.TestDeathGeneImportChemical_Usable();
-        Debug.Log("Finished Test. Priavte chemical usable");
+        Debug.Log( "Finished Test. Priavte chemical usable" );
+
+        Unit.TestGameOver();
+        Debug.Log( "Finished Game Over" );
     }
 
     // Update is called once per frame
