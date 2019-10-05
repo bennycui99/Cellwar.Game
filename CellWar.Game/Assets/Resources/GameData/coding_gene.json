@@ -81,7 +81,6 @@
   },
   {
     "Name": "AminoAcid_default_A",
-    "IsInternal": "true",
     "Length": "0",
     "PopulationCoefficient": "0",
     "PopulationIntercept": "0",
