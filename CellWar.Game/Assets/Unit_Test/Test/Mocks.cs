@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using CellWar.Controller.Gene;
+using CellWar.GameData;
 using CellWar.Model.Gamer;
 using CellWar.Model.Map;
 using CellWar.Model.Substance;
@@ -156,6 +157,29 @@ namespace CellWar.Test.Mock {
             Debug.Log(s.PrivateChemicals.Find(ss => ss.Name == "c").Count);
             ctor.Consume(ref s, ref b, ref g);
             Debug.Assert(s.PrivateChemicals.Find(ss => ss.Name == "c").Count < 100);
+        }
+
+        public static void TestGameOver() {
+            Map map = new Map {
+                Blocks = new List<Block>{
+                    new Block{
+                        PublicChemicals = new List<Chemical>{
+                            new Chemical {
+                                Name = "Cu", Count = 100
+                            }
+                        }
+                    }
+                },
+                GameOverCondition = "Cu:10"
+            };
+
+            Debug.Assert( MainGameCurrent.IsGameOver( map ) );
+            map.GameOverCondition = "Cu:1000";
+            Debug.Assert( !MainGameCurrent.IsGameOver( map ) );
+            map.GameOverCondition = "Cu:-1000";
+            Debug.Assert( MainGameCurrent.IsGameOver( map ) );
+            map.GameOverCondition = "Cu:-100";
+            Debug.Assert( !MainGameCurrent.IsGameOver( map ) );
         }
 
         /// <summary>

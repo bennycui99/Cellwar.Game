@@ -11,6 +11,7 @@ using CellWar.Utils.Object;
 /// </summary>
 namespace CellWar.Model.Map {
     public class Map {
+        public string GameOverCondition { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string ImageName { get; set; }

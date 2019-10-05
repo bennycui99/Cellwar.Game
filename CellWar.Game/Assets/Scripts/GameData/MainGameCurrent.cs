@@ -7,6 +7,7 @@ using CellWar.Model.Map;
 using CellWar.Utils;
 using CellWar.Model.Json;
 using UnityEngine;
+using System;
 
 namespace CellWar.GameData {
     /// <summary>
@@ -105,6 +106,44 @@ namespace CellWar.GameData {
         /// 当前鼠标下的block的MonoBehavior实例
         /// </summary>
         public static CellWar.Model.Map.Block FocusedHexBlock = null;
+
+        /// <summary>
+        /// 如果GameOverCondition为空或null则为沙盒模式
+        /// 不为空 则形如 chemical:count
+        /// count 为负 则为 小于这个值时胜利
+        /// count 为正 则为 大于这个值时胜利
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsGameOver( Map map ) {
+            // 沙盒模式 永不gameover
+            if( string.IsNullOrEmpty( map.GameOverCondition ) ) {
+                return false;
+            }
+            // 
+            var conditionPair = map.GameOverCondition.Split(':');
+            var chemicalName = conditionPair[0];
+            var chemicalCount = Convert.ToInt32( conditionPair[1] );
+
+            int total = 0;
+            foreach( var block in map.Blocks ) {
+                var quantity = block.PublicChemicals.Find(m => m.Name == chemicalName);
+                if( quantity != null ) {
+                    total += quantity.Count;
+                }
+            }
+            if( chemicalCount > 0 ) {
+                if( total > chemicalCount ) {
+                    Debug.Log( "Game Over" );
+                    return true;
+                }
+            } else {
+                if( total < -chemicalCount ) {
+                    Debug.Log( "Game Over" );
+                    return true;
+                }
+            }
+            return false;
+        }
 
         public static RegulatoryGeneController RegCtor = new RegulatoryGeneController();
         public static CodingGeneController CodCtor = new CodingGeneController();
