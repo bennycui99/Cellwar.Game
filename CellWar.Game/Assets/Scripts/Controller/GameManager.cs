@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using CellWar.GameData;
 
-namespace CellWar.Controller
-{
-    public class GameManager : MonoBehaviour
-    {
+namespace CellWar.Controller {
+    public class GameManager : MonoBehaviour {
         public bool IsGameStarted;
         public bool IsGameCompleted;
         public bool IsPaused=false;
@@ -14,12 +12,7 @@ namespace CellWar.Controller
         public float MaxUpdateCount { get; set; } = defaultUpdateCount;
 
         private float CurrentUpdateCount = defaultUpdateCount;
-
-        bool IsStageCompleted()
-        {
-            return MainGameCurrent.IsGameOver( MainGameCurrent.StageMap );
-        }
-
+       
         #region SINGLETON
 
         private static GameManager _instance;
@@ -29,14 +22,11 @@ namespace CellWar.Controller
 
         #region U3D
 
-        private void Awake()
-        {
-            if (_instance != null && _instance != this)
-            {
-                Destroy(this.gameObject);
+        private void Awake() {
+            if( _instance != null && _instance != this ) {
+                Destroy( this.gameObject );
             }
-            else
-            {
+            else {
                 _instance = this;
             }
 
@@ -47,44 +37,37 @@ namespace CellWar.Controller
         /// <summary>
         /// 游戏最重要函数
         /// </summary>
-        private void Update()
-        {
+        private void Update() {
             // 游戏还没开始就不更新
-            if (!Instance.IsGameStarted) { return; }
+            if( !Instance.IsGameStarted ) { return; }
             // If paused,do not update anything
-            if (IsPaused)
-            {
+            if( IsPaused ) {
                 CurrentUpdateCount = MaxUpdateCount;
                 return;
             }
 
             // 每隔一秒更新一次
-            if (CurrentUpdateCount > 0)
-            {
+            if( CurrentUpdateCount > 0 ) {
                 CurrentUpdateCount -= Time.deltaTime;
                 return;
             }
-            else
-            {
+            else {
                 CurrentUpdateCount = MaxUpdateCount;
             }
 
             // 更新所有格子
-            foreach (var block in MainGameCurrent.StageMap.Blocks)
-            {
+            foreach( var block in MainGameCurrent.StageMap.Blocks ) {
                 BlockController blockController = new BlockController( block );
                 blockController.BlockBacteriaUpdate();
                 // block.BlockLogic.BlockBacteriaUpdBlocate();
             }
-            
+
             // 判断游戏胜利
-            if (IsStageCompleted())
-            {
+            if( MainGameCurrent.IsGameOver( MainGameCurrent.StageMap ) ) {
                 IsGameCompleted = true;
                 IsGameStarted = false;
-                //send information here
             }
-            
+
         }
         #endregion
     }
