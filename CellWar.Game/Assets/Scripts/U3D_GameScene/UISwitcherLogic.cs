@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using CellWar.GameData;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,8 @@ namespace CellWar.View
         {
             UI_GameInformation.SetActive(false);
             SwitchTarget = UI_Lab;
+            SwitchTarget.SetActive( true );
+            SwitchTarget.SetActive( false );
         }
 
         // Update is called once per frame
@@ -62,7 +65,6 @@ namespace CellWar.View
                 // else do nothing
                 SwitchTarget.SetActive(true);
             }
-            
         }
     }
 }

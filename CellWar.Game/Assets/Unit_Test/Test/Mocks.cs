@@ -69,8 +69,6 @@ namespace CellWar.Test.Mock {
             Debug.Assert(true == triggered("5", 190, reg));
 
         }
-
-
         public static void TestRegGeneCondition_PA()
         {
             var condition = new List<Chemical>

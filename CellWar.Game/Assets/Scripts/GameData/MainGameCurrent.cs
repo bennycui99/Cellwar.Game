@@ -20,7 +20,7 @@ namespace CellWar.GameData {
         /// </summary>
         public static Map StageMap = null;
 
-        public static void LoadMap(string name) {
+        public static void LoadMap( string name ) {
             var mapJson = JsonHelper.Json2Object_NT<MapJsonModel>(Local.GetGameDataPath(name));
 
             LoadMap( mapJson );
@@ -32,7 +32,7 @@ namespace CellWar.GameData {
         public static GameObject UI_StrainElement;
 
         public static void LoadMap() {
-            LoadMap("map.json");
+            LoadMap( "map.json" );
         }
 
         public static void LoadMap( MapJsonModel model ) {
@@ -61,6 +61,45 @@ namespace CellWar.GameData {
         public static List<Strain> StrainList = new List<Strain>();
 
         public static List<Strain> EditorNpcStrainList = new List<Strain>();
+
+        /// <summary>
+        /// e.g.
+        /// GetGameInfomationByStrainList( StrainList ) // 获取玩家strain信息
+        /// 则当该函数返回“”字符串时表明没有细菌，游戏失败
+        /// GetGameInfomationByStrainList( Local.AllNpcStrains ) // 获取所有npc strain信息
+        /// </summary>
+        /// <param name="strains"></param>
+        /// <returns></returns>
+        public static string GetGameInfomationByStrainList( List<Strain> strains ) {
+            string result = "";
+            foreach( var myStrain in strains ) {
+                string strainInfo = "";
+                var allBlockContainsStrain = StageMap.Blocks.FindAll( b => b.Strains.Find( m=> m.Name == myStrain.Name ) != null );
+                if( allBlockContainsStrain.Count == 0 ) {
+                    continue;
+                }
+
+                int totalPopulation = 0;
+                Strain anyStrain = null;
+                foreach( var block in allBlockContainsStrain ) {
+                    var strain = block.Strains.Find( m => m.Name == myStrain.Name );
+                    totalPopulation += strain.Population;
+                    anyStrain = strain;
+                }
+                strainInfo = string.Format(
+                    "Strain: {0}\n" +
+                    "Total Population: {1}\n" +
+                    "Private Chemicals: \n",
+                    myStrain.Name, totalPopulation );
+                // 任何同名strain含有相同的privatechemical
+
+                foreach( var chem in anyStrain.PrivateChemicals ) {
+                    strainInfo += string.Format( "\t{0} : {1}\n", chem.Name, chem.Count );
+                }
+                result += strainInfo + "\n";
+            }
+            return result;
+        }
 
         public static string GetCurrentBlockDetailInfo() {
             if( CellWar.GameData.MainGameCurrent.FocusedHexBlock == null ) {
@@ -128,7 +167,7 @@ namespace CellWar.GameData {
             foreach( var block in map.Blocks ) {
                 var quantity = block.PublicChemicals.Find(m => m.Name == chemicalName);
                 if( quantity != null ) {
-                    Debug.Log(string.Format("Detected {0}",chemicalName));
+                    Debug.Log( string.Format( "Detected {0}", chemicalName ) );
                     total += quantity.Count;
                 }
             }
@@ -137,7 +176,8 @@ namespace CellWar.GameData {
                     Debug.Log( "Game Over" );
                     return true;
                 }
-            } else {
+            }
+            else {
                 if( total < -chemicalCount ) {
                     Debug.Log( "Game Over" );
                     return true;

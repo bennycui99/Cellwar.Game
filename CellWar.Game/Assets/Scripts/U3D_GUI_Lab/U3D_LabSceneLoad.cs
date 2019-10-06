@@ -22,6 +22,7 @@ namespace CellWar.View {
         /// 同时刷新lab和maingame的strainlist
         /// </summary>
         public static void RefreshStrainList() {
+            MainGameCurrent.StrainList = ObjectHelper.CloneList2<Strain>( Save.Strains );
             UIHelper.RefreshUIList( "UI_LabStrainList", UIStrainElement, Save.Strains, ( GameObject g, Strain obj ) => {
                 g.GetComponent<U3D_StrainElement>().Strain = obj;
                 g.name = obj.Name;
@@ -140,6 +141,8 @@ namespace CellWar.View {
             }
             LabCurrent.Strain = LabCurrent.Strain == null ? new Strain( GameData.Local.AllRaces[0] ) : LabCurrent.Strain.Clone() as Strain;
         }
+
+
 
         public void ClearSelection() {
             U3D_AlertPanel.EmitAlert(

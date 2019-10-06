@@ -20,6 +20,7 @@ namespace CellWar.View
         /// </summary>       
         public void ChangeText() {
             if( Race == null || LabCurrent.Strain == null ) {
+                LabCurrent.MakeStrainNotBeNull();
                 return;
             }
             try {
