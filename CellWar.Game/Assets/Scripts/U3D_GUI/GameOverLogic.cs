@@ -8,12 +8,22 @@ namespace CellWar.View {
     public class GameOverLogic : MonoBehaviour {
         [SerializeField]
         Text m_GameOverText, m_Time, m_Population;
+        private static GameOverLogic _instance;
+        public static GameOverLogic Instance { get { return _instance; } }
 
+        private void Awake()
+        {
 
-        void Awake() {
             //GetComponent<Canvas>().enabled = false;
+            if (_instance != null && _instance != this)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                _instance = this;
+            }
         }
-
 
         public void SetGameOverCondition( float TimeinSecond, int Population, bool Win ) {
             m_GameOverText.text = Win ? "You Win!" : "You Lose!";

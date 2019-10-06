@@ -11,8 +11,10 @@ namespace CellWar.Controller {
 
         public float MaxUpdateCount { get; set; } = defaultUpdateCount;
 
+        public float TimePast;
+
         private float CurrentUpdateCount = defaultUpdateCount;
-       
+
         #region SINGLETON
 
         private static GameManager _instance;
@@ -32,6 +34,7 @@ namespace CellWar.Controller {
 
             IsGameStarted = false;
             IsGameCompleted = false;
+            TimePast = 0;
         }
 
         /// <summary>
@@ -53,6 +56,7 @@ namespace CellWar.Controller {
             }
             else {
                 CurrentUpdateCount = MaxUpdateCount;
+                TimePast += 1.0f; //One tick one second (in game time, not real time)
             }
 
             // 更新所有格子
@@ -66,6 +70,7 @@ namespace CellWar.Controller {
             if( MainGameCurrent.IsGameOver( MainGameCurrent.StageMap ) ) {
                 IsGameCompleted = true;
                 IsGameStarted = false;
+                View.GameOverLogic.Instance.SetGameOverCondition(TimePast, 114514, true);
             }
 
         }
