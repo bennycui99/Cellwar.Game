@@ -7,11 +7,6 @@
     "Name": "DemonstrationStrain",
     "Population": 100,
     "BasicRaceName": "Test1",
-<<<<<<< HEAD
-    "PlayerSelectedGenesName": "GOD;AminoAcid_default_A;MT",
-=======
-    "PlayerSelectedGenesName": "Cu_H_1;AminoAcid_default_A;MT",
->>>>>>> parent of c734b4c... Implement Game information section
     "PrivateChemicalInfos": null
   }
 ]
