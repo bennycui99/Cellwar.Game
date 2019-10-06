@@ -127,6 +127,7 @@ namespace CellWar.View {
                         // 储存基因
                         var strain = Save.Strains.Find( m => m.Name == LabCurrent.Strain.Name );
                         Save.Strains.Remove( strain );
+                        LabCurrent.Strain.Population = 100;
                         Save.Strains.Add( LabCurrent.Strain );
                         Save.SaveAllStrains();
                         RefreshStrainList();
@@ -135,6 +136,7 @@ namespace CellWar.View {
             }
             else { // 添加新创建的基因
                 LabCurrent.Strain.Name = strainName;
+                LabCurrent.Strain.Population = 100;
                 Save.Strains.Add( LabCurrent.Strain );
                 Save.SaveAllStrains();
                 RefreshStrainList();
