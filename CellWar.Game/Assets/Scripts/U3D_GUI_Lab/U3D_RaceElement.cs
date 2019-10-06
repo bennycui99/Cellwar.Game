@@ -19,11 +19,16 @@ namespace CellWar.View
         /// 当value on change时调用
         /// </summary>       
         public void ChangeText() {
-            if( Race == null ) {
+            if( Race == null || LabCurrent.Strain == null ) {
                 return;
             }
-            LabCurrent.Strain.BasicRace = Race.Clone();
-            U3D_LabSceneLoad.FreshLength();
+            try {
+                LabCurrent.Strain.BasicRace = Race.Clone();
+                U3D_LabSceneLoad.FreshLength();
+            }
+            catch( System.Exception ex ) {
+                Debug.Log(ex);
+            }
         }
 
         public void OnPointerEnter( PointerEventData eventData ) {
