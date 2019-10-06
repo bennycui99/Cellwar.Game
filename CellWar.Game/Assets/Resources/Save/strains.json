@@ -1,13 +1,1 @@
-[
-  {
-    "Owner": {
-      "Name": null,
-      "Guid": "00000000-0000-0000-0000-000000000000"
-    },
-    "Name": "DemonstrationStrain",
-    "Population": 100,
-    "BasicRaceName": "Test1",
-    "PlayerSelectedGenesName": "Cu_H_1;AminoAcid_default_A;MT",
-    "PrivateChemicalInfos": null
-  }
-]
+[{"Owner":{"Name":null,"Guid":"00000000-0000-0000-0000-000000000000"},"Name":"DemonstrationStrain","Population":100,"BasicRaceName":"Test1","PlayerSelectedGenesName":"Cu_H_1;AminoAcid_default_A;MT","PrivateChemicalInfos":null},{"Owner":{"Name":null,"Guid":"00000000-0000-0000-0000-000000000000"},"Name":"Demo_Strain1","Population":100,"BasicRaceName":"Test1","PlayerSelectedGenesName":"Lactose;MT","PrivateChemicalInfos":null},{"Owner":{"Name":null,"Guid":"00000000-0000-0000-0000-000000000000"},"Name":"Demo_Strain2","Population":100,"BasicRaceName":"Test1","PlayerSelectedGenesName":"Amp_Kana_Chl_H_1;Growth_1000;SignalA_1;AminoAcid_default_A;MT","PrivateChemicalInfos":null},{"Owner":{"Name":null,"Guid":"00000000-0000-0000-0000-000000000000"},"Name":"Demo_Strain3","Population":100,"BasicRaceName":"Test1","PlayerSelectedGenesName":"IPTG;MT;Lactose;MT;Cu_L_1;MT;Amp_Kana_Chl_H_1","PrivateChemicalInfos":null}]
