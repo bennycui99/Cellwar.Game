@@ -43,15 +43,6 @@ namespace CellWar.View
         }
         void SwitchUI()
         {
-            if (UI_GameInformation)
-            {
-                GameInformationLogic tmp = UI_GameInformation.GetComponent<GameInformationLogic>();
-                if (tmp)
-                {
-                    tmp.GetInfo();
-                    //each time tend to switch, update the info.
-                }
-            }
             if (CellWar.Controller.GameManager.Instance.IsGameCompleted)//Do nothing if we are already finished
             {
                 return;

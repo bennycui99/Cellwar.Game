@@ -20,5 +20,16 @@
     "BasicRaceName": "B",
     "PlayerSelectedGenesName": "GOD;NullGene",
     "PrivateChemicalInfos": "ATP:100;"
+  },
+  {
+    "Owner": {
+      "Name": null,
+      "Guid": "00000000-0000-0000-0000-000000000000"
+    },
+    "Name": "BlueLightGenerator",
+    "Population": 100,
+    "BasicRaceName": "Empty",
+    "PlayerSelectedGenesName": "BlueLightActivator;BlueLight;GOD;BlueLightConsumer",
+    "PrivateChemicalInfos": null
   }
 ]

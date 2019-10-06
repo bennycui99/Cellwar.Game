@@ -103,5 +103,20 @@
     "Detailed": "",
     "Count": "0",
     "SpreadRate": "0"
+  },
+  {
+    "Name": "SignalB",
+    "Description": "信号分子B",
+    "Detailed": "",
+    "Count": "0",
+    "SpreadRate": "0"
+  },
+  {
+    "Name": "SignalC",
+    "Description": "信号分子C",
+    "Detailed": "",
+    "Count": "0",
+    "SpreadRate": "0"
   }
+
 ]

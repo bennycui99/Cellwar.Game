@@ -4,21 +4,21 @@
     "Length": "180",
     "ChemicalConditions": "Ampicillin:9;Kana:9;Chl:9;Cu:30;Growth:450",
     "Type": "NO",
-    "Description": "The coding genes after this regulator are turned OFF ONLY under this condition: Ampicillin>9 or Kana>9 or Chl>9 or Cu>30 or Growth >450"
+    "Description": "\n The coding genes after this regulator are turned OFF ONLY under this condition: Ampicillin>9 or Kana>9 or Chl>9 or Cu>30 or Growth >450"
   },
   {
     "Name": "Amp_Kana_Chl_Cu_VH_A",
     "Length": "180",
     "ChemicalConditions": "Ampicillin:9;Kana:9;Chl:9;Cu:9;Growth:500",
     "Type": "NO",
-    "Description": "The coding genes after this regulator are turned OFF ONLY under this condition: Ampicillin>9 or Kana>9 or Chl>9 or Cu>9 or Growth >500"
+    "Description": "\n The coding genes after this regulator are turned OFF ONLY under this condition: Ampicillin>9 or Kana>9 or Chl>9 or Cu>9 or Growth >500"
   },
   {
     "Name": "Amp_Kana_Chl_H_1",
     "Length": "360",
     "ChemicalConditions": "Ampicillin:19;Kana:19;Chl:19;Cu:19;Growth:450",
     "Type": "NO",
-    "Description": "The coding genes after this regulator are turned OFF ONLY under this condition: Ampicillin>19 or Kana>19 or Chl>19 or Cu>19 or Growth >450"
+    "Description": "\n The coding genes after this regulator are turned OFF ONLY under this condition: Ampicillin>19 or Kana>19 or Chl>19 or Cu>19 or Growth >450"
   },
 
   {
@@ -26,14 +26,14 @@
     "Length": "360",
     "ChemicalConditions": "Cu:29;Growth:400",
     "Type": "NO",
-    "Description": "The coding genes after this regulator are turned OFF ONLY under this condition: Cu>29 or Growth >400"
+    "Description": "\n The coding genes after this regulator are turned OFF ONLY under this condition: Cu>29 or Growth >400"
   },
   {
     "Name": "Cu_L_1",
     "Length": "360",
     "ChemicalConditions": "Cu:9;Growth:450",
     "Type": "NO",
-    "Description": "The coding genes after this regulator are turned OFF ONLY under this condition: Cu>29 or Growth >450"
+    "Description": "\n The coding genes after this regulator are turned OFF ONLY under this condition: Cu>29 or Growth >450"
   },
   {
     "Name": "SignalA_1",
@@ -57,11 +57,11 @@
     "Description": "受lactose激活的开关，对抗生素高敏感"
   },
   {
-    "Name": "IPTG",
+    "Name": "T7 promoter",
     "Length": "237",
-    "ChemicalConditions": "IPTG:100;Kana:-10;Ampicillin:-10;Chl:-10",
+    "ChemicalConditions": "IPTG:10;Kana:-10;Ampicillin:-10;Chl:-10",
     "Type": "PA",
-    "Description": "受IPTG激活的开关，对抗生素高敏感"
+    "Description": "activated by IPTG. \n The coding genes after this regulator are turned On ONLY under this condition: IPTG>10 and Kana<10 and Ampicillin<10 and Chl<10"
   },
   {
     "Name": "GOD",
@@ -72,11 +72,12 @@
     "Description": "永远不会被关闭的调控基因"
   },
   {
-    "Name": "BlueLight",
-    "Length": "237",
-    "ChemicalConditions": "BlueLight:100;Kana:-10;Ampicillin:-10;Chl:-10",
-    "Type": "PA",
-    "Description": "高敏感蓝光启动子"
+    "Name": "BlueLightActivator",
+    "IsInternal": "True",
+    "Length": "0",
+    "ChemicalConditions": "BlueLight:10",
+    "Type": "NO",
+    "Description": ""
   },
   {
     "Name": "InternalReg1",

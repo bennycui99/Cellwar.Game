@@ -1,7 +1,7 @@
 [
   {
     "Name": "Test1",
-    "Description": "The basic strain used for demonstration.Can grow on antibiotics and metals.",
+    "Description": "The basic strain used for demonstration.\n Can grow on antibiotics and metals.",
     "MaxLength": "20000",
     "CodingGeneNames": "GOD;GLUT_default_A;TCA_default_A;Grow_default_A;GOD;Death_default_A"
   },
