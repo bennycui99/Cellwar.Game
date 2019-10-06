@@ -153,8 +153,8 @@
     "ImportChemicalName": "",
     "ImportChemicalCoeffeicient": "0",
     "ImportChemicalIntercept": "0",
-    "FirstSpreadMountRate": "",
-    "SpreadConditionRate": "",
+    "FirstSpreadMountRate": "0",
+    "SpreadConditionRate": "0",
     "Description": "GeneE expresses a lysis enzyme originated from phage"
   },
 
